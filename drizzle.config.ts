@@ -5,8 +5,11 @@ import { env } from "~/env";
 export default {
   schema: "./src/server/db/schema.ts",
   dialect: "sqlite",
+  driver: "turso",
+  breakpoints: true,
+  verbose: true,
   dbCredentials: {
     url: env.DATABASE_URL,
+    authToken: env.AUTH_TOKEN,
   },
-  tablesFilter: ["nfc-portal_*"],
 } satisfies Config;
