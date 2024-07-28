@@ -6,15 +6,58 @@ import {
   sqliteTable,
   text,
 } from "drizzle-orm/sqlite-core";
+import { createInsertSchema } from "drizzle-zod";
 import { type AdapterAccount } from "next-auth/adapters";
+import { z } from "zod";
 
-export const linkType = ["contact", "social"];
+export const linkTypes = ["social", "deployable", "basic"] as const;
+export type LinkType = (typeof linkTypes)[number];
+export const linkLayoutTypes = ["basic", "featured"] as const;
+export type LinkLayoutType = (typeof linkLayoutTypes)[number];
+
+export const pageLayoutTypes = ["basic", "grid", "hero"] as const;
+export type PageLayoutType = (typeof pageLayoutTypes)[number];
+
+export type ThemeType = {
+  colorScheme: "light" | "dark";
+  foregroundColor: string;
+  background: {
+    type: "flat" | "pattern";
+    background: string;
+  };
+  buttons: {
+    type: "solid" | "outline" | "ghost" | "link";
+    variant: "pill" | "rounded";
+    textColor: string;
+    background: string;
+    border?: string;
+  };
+};
+
+export const DEFAULT_THEME: ThemeType = {
+  colorScheme: "light",
+  foregroundColor: "#FFFFFF",
+  background: {
+    type: "flat",
+    background: "#000222",
+  },
+  buttons: {
+    type: "solid",
+    variant: "pill",
+    textColor: "#FFFFFF",
+    background: "#007AFF",
+  },
+};
 
 export const links = sqliteTable("links", {
   id: int("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
   displayText: text("display_text"),
   url: text("url"),
-  thumbnailLink: text("thumbnail_link"),
+  thumbnail: text("thumbnail"),
+  isActive: int("active", { mode: "boolean" }).default(true),
+  type: text("type", { enum: linkTypes }).notNull().default("basic"),
+  layout: text("layout", { enum: linkLayoutTypes }).notNull().default("basic"),
+  position: int("position", { mode: "number" }).notNull().default(0),
   createdAt: int("created_at", { mode: "timestamp" })
     .default(sql`(unixepoch())`)
     .notNull(),
@@ -25,6 +68,8 @@ export const links = sqliteTable("links", {
     .notNull()
     .references(() => users.id),
 });
+
+export const newLinkSchema = createInsertSchema(links);
 
 export const linksRelations = relations(links, ({ one }) => ({
   user: one(users, { fields: [links.userId], references: [users.id] }),
@@ -42,10 +87,25 @@ export const users = sqliteTable("user", {
     mode: "timestamp",
   }).default(sql`(unixepoch())`),
   image: text("image", { length: 255 }),
+  bio: text("bio"),
   isPageActive: int("page_active", { mode: "boolean" }).default(true),
+  pageLayout: text("page_layout", { enum: pageLayoutTypes }).default("basic"),
+  contactVCard: text("contact_v_card"),
+  isContactInfoLocked: int("is_contact_info_locked", {
+    mode: "boolean",
+  }).default(true),
+  pageHashKey: text("page_hash_key"),
   metaTitle: text("meta_title", { length: 255 }),
   metaDescription: text("meta_description"),
   metaImage: text("meta_image"),
+  theme: text("theme", { mode: "json" })
+    .notNull()
+    .$type<ThemeType>()
+    .default(DEFAULT_THEME),
+});
+
+export const userProfileSchema = createInsertSchema(users, {
+  theme: z.custom<ThemeType>(),
 });
 
 export const usersRelations = relations(users, ({ many }) => ({
