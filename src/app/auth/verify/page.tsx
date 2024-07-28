@@ -1,7 +1,5 @@
 import { CheckCircledIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
-import { CloseWindow } from "~/components/shared/CloseWindow";
-import { Alert, AlertDescription } from "~/components/ui/alert";
 import { Button } from "~/components/ui/button";
 import {
   Card,
@@ -27,7 +25,7 @@ export default function VerifyPage() {
           </CardDescription>
 
           <p className="text-sm underline">
-            If you don't see the email, please check your spam folder.
+            If you don&apos;t see the email, please check your spam folder.
           </p>
 
           <Button className="mt-6 rounded-full" asChild>

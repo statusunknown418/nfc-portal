@@ -1,8 +1,4 @@
-import {
-  CrossCircledIcon,
-  PlusCircledIcon,
-  UpdateIcon,
-} from "@radix-ui/react-icons";
+import { UpdateIcon } from "@radix-ui/react-icons";
 import { cn } from "~/lib/utils";
 
 export const Spinner = ({ className }: { className?: string }) => {
