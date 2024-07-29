@@ -20,11 +20,7 @@ export function arrayMoveMutable<T extends unknown[]>(
   }
 }
 
-export function arrayMove<T extends unknown[]>(
-  array: T,
-  fromIndex: number,
-  toIndex: number,
-) {
+export function arrayMove<T extends unknown[]>(array: T, fromIndex: number, toIndex: number) {
   const newArray = [...array];
   arrayMoveMutable(newArray, fromIndex, toIndex);
   return newArray;

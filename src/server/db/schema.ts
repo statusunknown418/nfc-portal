@@ -1,11 +1,5 @@
 import { relations, sql } from "drizzle-orm";
-import {
-  index,
-  int,
-  primaryKey,
-  sqliteTable,
-  text,
-} from "drizzle-orm/sqlite-core";
+import { index, int, primaryKey, sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { createInsertSchema } from "drizzle-zod";
 import { type AdapterAccount } from "next-auth/adapters";
 import { z } from "zod";
@@ -61,9 +55,7 @@ export const links = sqliteTable("links", {
   createdAt: int("created_at", { mode: "timestamp" })
     .default(sql`(unixepoch())`)
     .notNull(),
-  updatedAt: int("updated_at", { mode: "timestamp" }).$onUpdate(
-    () => new Date(),
-  ),
+  updatedAt: int("updated_at", { mode: "timestamp" }).$onUpdate(() => new Date()),
   userId: text("user_id", { length: 255 })
     .notNull()
     .references(() => users.id),
@@ -98,10 +90,7 @@ export const users = sqliteTable("user", {
   metaTitle: text("meta_title", { length: 255 }),
   metaDescription: text("meta_description"),
   metaImage: text("meta_image"),
-  theme: text("theme", { mode: "json" })
-    .notNull()
-    .$type<ThemeType>()
-    .default(DEFAULT_THEME),
+  theme: text("theme", { mode: "json" }).notNull().$type<ThemeType>().default(DEFAULT_THEME),
 });
 
 export const userProfileSchema = createInsertSchema(users, {
@@ -119,9 +108,7 @@ export const accounts = sqliteTable(
     userId: text("user_id", { length: 255 })
       .notNull()
       .references(() => users.id),
-    type: text("type", { length: 255 })
-      .$type<AdapterAccount["type"]>()
-      .notNull(),
+    type: text("type", { length: 255 }).$type<AdapterAccount["type"]>().notNull(),
     provider: text("provider", { length: 255 }).notNull(),
     providerAccountId: text("provider_account_id", { length: 255 }).notNull(),
     refresh_token: text("refresh_token"),

@@ -62,18 +62,15 @@ export default function LoginForm() {
               <FormMessage />
 
               <FormDescription>
-                Use the same email you registered when getting your custom NFC
-                card and get a magic link to enter the admin panel.
+                Use the same email you registered when getting your custom NFC card and get a magic
+                link to enter the admin panel.
               </FormDescription>
             </FormItem>
           )}
         />
 
         <div className="space-y-2">
-          <Button
-            className="w-full rounded-full"
-            disabled={form.formState.isSubmitting}
-          >
+          <Button className="w-full rounded-full" disabled={form.formState.isSubmitting}>
             {form.formState.isSubmitting && <Spinner className="mr-2" />}
             Get magic link
           </Button>

@@ -8,31 +8,22 @@ import { createTRPCRouter, protectedProcedure } from "../trpc";
 export const linksRouter = createTRPCRouter({
   all: protectedProcedure.query(async ({ ctx }) => {
     return ctx.db.query.links.findMany({
-      where: (t, op) =>
-        op.and(op.eq(t.isActive, true), op.eq(t.userId, ctx.session.user.id)),
+      where: (t, op) => op.and(op.eq(t.isActive, true), op.eq(t.userId, ctx.session.user.id)),
       orderBy: (t, op) => op.asc(t.position),
     });
   }),
 
-  new: protectedProcedure
-    .input(newLinkSchema)
-    .mutation(async ({ ctx, input }) => {
-      return ctx.db.insert(links).values(input).returning();
-    }),
+  new: protectedProcedure.input(newLinkSchema).mutation(async ({ ctx, input }) => {
+    return ctx.db.insert(links).values(input).returning();
+  }),
 
-  edit: protectedProcedure
-    .input(newLinkSchema)
-    .mutation(async ({ ctx, input }) => {
-      if (!input.id) {
-        throw new TRPCError({ code: "BAD_REQUEST", message: "No id provided" });
-      }
+  edit: protectedProcedure.input(newLinkSchema).mutation(async ({ ctx, input }) => {
+    if (!input.id) {
+      throw new TRPCError({ code: "BAD_REQUEST", message: "No id provided" });
+    }
 
-      return ctx.db
-        .update(links)
-        .set(input)
-        .where(eq(links.id, input.id))
-        .returning();
-    }),
+    return ctx.db.update(links).set(input).where(eq(links.id, input.id)).returning();
+  }),
 
   reorder: protectedProcedure
     .input(
@@ -48,11 +39,7 @@ export const linksRouter = createTRPCRouter({
       }
 
       const currentPosition = input.prevPositionsIds.indexOf(input.id);
-      const newPositions = arrayMove(
-        input.prevPositionsIds,
-        currentPosition,
-        input.newPosition,
-      );
+      const newPositions = arrayMove(input.prevPositionsIds, currentPosition, input.newPosition);
 
       const newItems = newPositions.map((id, index) => ({
         id,

@@ -9,8 +9,7 @@ export const ContactInfo = ({ unlocked }: { unlocked?: boolean }) => {
         <section className="absolute inset-0 flex h-full w-full flex-col items-center justify-center gap-1 rounded-lg bg-black/50 p-6 backdrop-blur backdrop-filter">
           <h3>🔒 Contact info is locked.</h3>
           <p className="text-sm text-muted-foreground">
-            This is automatically unlocked when the owner&apos;s NFC card is
-            scanned.
+            This is automatically unlocked when the owner&apos;s NFC card is scanned.
           </p>
         </section>
         <CardHeader>
@@ -18,10 +17,9 @@ export const ContactInfo = ({ unlocked }: { unlocked?: boolean }) => {
         </CardHeader>
 
         <CardContent>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet modi,
-          libero neque esse veniam excepturi nemo ipsa eos, culpa tenetur
-          praesentium corporis sapiente obcaecati delectus fugit, dolore
-          exercitationem quisquam sequi!
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet modi, libero neque esse
+          veniam excepturi nemo ipsa eos, culpa tenetur praesentium corporis sapiente obcaecati
+          delectus fugit, dolore exercitationem quisquam sequi!
         </CardContent>
       </Card>
     );
@@ -31,11 +29,7 @@ export const ContactInfo = ({ unlocked }: { unlocked?: boolean }) => {
     <div className="rounded-lg border p-6">
       <h3>Contact info</h3>
 
-      {unlocked ? (
-        "🔓 SENSITIVE INFO UNLOCKED"
-      ) : (
-        <p>This portal is locked. 🔒</p>
-      )}
+      {unlocked ? "🔓 SENSITIVE INFO UNLOCKED" : <p>This portal is locked. 🔒</p>}
     </div>
   );
 };

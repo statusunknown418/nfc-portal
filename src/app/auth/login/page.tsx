@@ -1,11 +1,5 @@
 import LoginForm from "~/components/layouts/LoginForm";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/components/ui/card";
 
 export default async function LoginPage() {
   return (
@@ -18,9 +12,7 @@ export default async function LoginPage() {
         <Card className="w-full max-w-lg dark:bg-muted/20 lg:border-none lg:shadow-none">
           <CardHeader>
             <CardTitle className="text-2xl">Start the journey</CardTitle>
-            <CardDescription>
-              Sign up or log into your account to continue.
-            </CardDescription>
+            <CardDescription>Sign up or log into your account to continue.</CardDescription>
           </CardHeader>
 
           <CardContent>

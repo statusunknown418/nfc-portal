@@ -8,10 +8,7 @@ export default auth(async function middleware(req, _ctx) {
   const headers = new Headers(req.headers);
   headers.set("x-current-url", req.nextUrl.pathname);
 
-  if (
-    req.nextUrl.pathname.startsWith("/admin") ||
-    req.nextUrl.pathname.startsWith("/business")
-  ) {
+  if (req.nextUrl.pathname.startsWith("/admin") || req.nextUrl.pathname.startsWith("/business")) {
     if (req.auth) {
       return NextResponse.next({ headers });
     } else {
@@ -26,10 +23,7 @@ export default auth(async function middleware(req, _ctx) {
   }
 
   const portalPassword = req.nextUrl.searchParams.get(PORTAL_QUERY);
-  headers.set(
-    "set-cookie",
-    `${PORTAL_KEY}=${portalPassword}; SameSite=Strict; HttpOnly`,
-  );
+  headers.set("set-cookie", `${PORTAL_KEY}=${portalPassword}; SameSite=Strict; HttpOnly`);
 
   const nextUrl = req.nextUrl;
   nextUrl.searchParams.delete(PORTAL_QUERY);
