@@ -6,7 +6,7 @@ export const ContactInfo = ({ unlocked }: { unlocked?: boolean }) => {
   if (!unlocked) {
     return (
       <Card className="relative border-2 border-dashed">
-        <section className="absolute inset-0 flex h-full w-full flex-col items-center justify-center gap-1 rounded-lg bg-black/50 p-6 backdrop-blur backdrop-filter">
+        <section className="absolute inset-0 flex h-full w-full flex-col items-center justify-center gap-1 rounded-lg bg-background/50 p-6 backdrop-blur backdrop-filter">
           <h3>🔒 Contact info is locked.</h3>
           <p className="text-sm text-muted-foreground">
             This is automatically unlocked when the owner&apos;s NFC card is scanned.

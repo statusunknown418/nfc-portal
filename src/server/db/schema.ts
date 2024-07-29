@@ -1,3 +1,4 @@
+import { createId } from "@paralleldrive/cuid2";
 import { relations, sql } from "drizzle-orm";
 import { index, int, primaryKey, sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { createInsertSchema } from "drizzle-zod";
@@ -71,7 +72,7 @@ export const users = sqliteTable("user", {
   id: text("id", { length: 255 })
     .notNull()
     .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
+    .$defaultFn(() => `usr_${createId()}`),
   username: text("user_name", { length: 255 }).unique(),
   name: text("name", { length: 255 }),
   email: text("email", { length: 255 }).notNull(),

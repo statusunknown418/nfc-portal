@@ -30,10 +30,17 @@ export default function LoginForm() {
   });
 
   const handleSubmit = form.handleSubmit(async (data) => {
-    await signIn("resend", {
-      callbackUrl: "/admin",
-      email: data.email,
-    });
+    await signIn(
+      "resend",
+      {
+        callbackUrl: "/admin",
+        email: data.email,
+        username: `custom-username`,
+      },
+      {
+        username: `custom-username`,
+      },
+    );
   });
 
   return (
