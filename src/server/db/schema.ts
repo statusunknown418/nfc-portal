@@ -68,6 +68,58 @@ export const linksRelations = relations(links, ({ one }) => ({
   user: one(users, { fields: [links.userId], references: [users.id] }),
 }));
 
+export type ContactVCardType = {
+  url?: string;
+  jobTitle?: string;
+  notes: string;
+  company?: {
+    name: string;
+    department?: string;
+  };
+  social?: {
+    link: string;
+    type: "TWITTER" | "FACEBOOK" | "INSTAGRAM" | "LINKEDIN" | "GITHUB" | "YOUTUBE";
+    handle?: string;
+  }[];
+  phoneNumbers?: {
+    number: string;
+    type?:
+      | "PREF"
+      | "WORK"
+      | "HOME"
+      | "VOICE"
+      | "FAX"
+      | "MSG"
+      | "CELL"
+      | "PAGER"
+      | "BBS"
+      | "CAR"
+      | "MODEM"
+      | "VIDEO";
+  }[];
+  name: {
+    last?: string;
+    first?: string;
+    additional?: string;
+    prefix?: string;
+    suffix?: string;
+  };
+  address?: {
+    label?: string;
+    extended?: string;
+    street?: string;
+    city?: string;
+    region?: string;
+    postalCode?: string;
+    country?: string;
+    type?: "DOM" | "INTL" | "POSTAL" | "PARCEL" | "HOME" | "WORK";
+  }[];
+  email?: {
+    link: string;
+    type: "PREF" | "WORK" | "HOME";
+  }[];
+};
+
 export const users = sqliteTable("user", {
   id: text("id", { length: 255 })
     .notNull()
@@ -84,6 +136,7 @@ export const users = sqliteTable("user", {
   isPageActive: int("page_active", { mode: "boolean" }).default(true),
   pageLayout: text("page_layout", { enum: pageLayoutTypes }).default("basic"),
   contactVCard: text("contact_v_card"),
+  contactJSON: text("contact_json", { mode: "json" }).$type<ContactVCardType>(),
   isContactInfoLocked: int("is_contact_info_locked", {
     mode: "boolean",
   }).default(true),

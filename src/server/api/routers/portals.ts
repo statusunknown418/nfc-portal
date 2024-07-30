@@ -41,4 +41,10 @@ export const portalsRouter = createTRPCRouter({
       unlocked: false,
     };
   }),
+  removeJoinBanner: protectedProcedure.mutation(async ({}) => {
+    cookies().set("nfc-portal-join-page", "false");
+    return {
+      success: true,
+    };
+  }),
 });
