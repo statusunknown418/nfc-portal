@@ -16,6 +16,7 @@ import {
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
 import { Spinner } from "../shared/Spinner";
+import { DiscordLogoIcon } from "@radix-ui/react-icons";
 
 const loginSchema = z.object({
   email: z.string().email(),
@@ -56,7 +57,7 @@ export default function LoginForm() {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>Your email</FormLabel>
 
               <FormControl>
                 <Input
@@ -90,3 +91,20 @@ export default function LoginForm() {
     </Form>
   );
 }
+
+export const SignInWithSocial = ({ provider }: { provider: "google" | "discord" }) => {
+  return (
+    <Button
+      className="w-full rounded-full"
+      variant="outline"
+      onClick={() =>
+        signIn(provider, {
+          callbackUrl: "/admin",
+        })
+      }
+    >
+      {provider === "discord" && <DiscordLogoIcon className="mr-2 h-5 w-5 text-indigo-600" />}
+      Sign in with {provider}
+    </Button>
+  );
+};

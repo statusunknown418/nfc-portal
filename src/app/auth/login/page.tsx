@@ -1,9 +1,13 @@
-import LoginForm from "~/components/layouts/LoginForm";
+import LoginForm, { SignInWithSocial } from "~/components/layouts/LoginForm";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/components/ui/card";
+import { Divider } from "~/components/ui/separator";
 
 export default async function LoginPage() {
+  const commonRedirect = new FormData();
+  commonRedirect.append("redirectTo", "/admin");
+
   return (
-    <section className="grid h-screen grid-cols-1 lg:grid-cols-2">
+    <section className="grid h-full grid-cols-1 lg:grid-cols-2">
       <article className="hidden border-r bg-muted/50 lg:block">
         <p className="sr-only">Graphic</p>
       </article>
@@ -17,6 +21,13 @@ export default async function LoginPage() {
 
           <CardContent>
             <LoginForm />
+
+            <Divider>or</Divider>
+
+            <div className="mt-4 space-y-2">
+              <SignInWithSocial provider="google" />
+              <SignInWithSocial provider="discord" />
+            </div>
           </CardContent>
         </Card>
       </article>
