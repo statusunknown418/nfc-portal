@@ -81,31 +81,33 @@ export default async function AdminPage() {
   }
 
   return (
-    <section className="flex flex-col gap-10 md:flex-row">
-      <article className="flex h-full flex-grow flex-col gap-6">
-        <article>
+    <section className="flex flex-col gap-4 md:gap-8 lg:flex-row">
+      <article className="flex h-full flex-grow flex-col items-center gap-6">
+        <article className="w-full max-w-prose">
           <h1 className="text-xl font-bold">Welcome {jwt?.user.name}</h1>
           <p className="mt-1 text-sm text-muted-foreground">
             Here you can manage everything that shows up on your NFC portal page.
           </p>
         </article>
 
-        <article className="flex flex-grow flex-col gap-4">
+        <article className="flex w-full flex-grow flex-col gap-4 md:max-w-prose">
           {seeds.map((seed) => (
-            <Card key={seed.id}>
-              <CardHeader>
-                <CardTitle>{seed.name}</CardTitle>
-              </CardHeader>
+            <div key={seed.id} className="flex w-full items-center">
+              <Card className="flex-grow">
+                <CardHeader>
+                  <CardTitle>{seed.name}</CardTitle>
+                </CardHeader>
 
-              <CardContent>
-                <p className="text-sm text-muted-foreground">{seed.url}</p>
-              </CardContent>
-            </Card>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground">{seed.url}</p>
+                </CardContent>
+              </Card>
+            </div>
           ))}
         </article>
       </article>
 
-      <article className="inset-0 hidden h-[calc(100vh-82px)] min-w-[400px] max-w-[400px] rounded-2xl border p-6 shadow-md ring-0 md:sticky md:block">
+      <article className="inset-0 hidden h-[calc(100vh-82px)] min-w-[400px] max-w-[400px] rounded-2xl border p-6 shadow-md ring-0 lg:sticky lg:block">
         <div></div>
         <h3 className="text-muted-foreground">Preview</h3>
       </article>

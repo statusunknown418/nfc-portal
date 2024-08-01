@@ -9,10 +9,16 @@ export const Sidebar = () => {
   const selectedSegment = useSelectedLayoutSegment();
 
   return (
-    <aside className="flex h-full w-56 max-w-56 flex-col justify-between p-5">
-      <h2 className="text-sm font-bold">NearU.tech</h2>
+    <aside className="flex h-14 max-h-14 min-h-14 items-center justify-between overflow-x-auto px-2 pb-2 sm:px-4 md:h-full md:max-h-full md:max-w-56 md:flex-col md:items-start md:py-4 lg:w-56">
+      <Button
+        className="w-10 justify-start p-2 text-xs sm:w-auto md:w-full md:text-sm"
+        variant="ghost"
+      >
+        <span className="md:hidden">NU</span>
+        <span className="hidden md:block">NearU.tech</span>
+      </Button>
 
-      <ul className="flex flex-col gap-2 *:justify-start *:gap-3 *:opacity-70">
+      <ul className="flex flex-grow justify-center *:justify-start *:gap-3 *:opacity-70 md:flex-grow-0 md:flex-col md:justify-start md:gap-2">
         <Button
           asChild
           variant={!selectedSegment ? "white" : "ghost"}
@@ -21,7 +27,7 @@ export const Sidebar = () => {
         >
           <Link href="/admin">
             <Link2Icon />
-            Links
+            <span className="hidden sm:block">Links</span>
           </Link>
         </Button>
 
@@ -33,7 +39,7 @@ export const Sidebar = () => {
         >
           <Link href="/admin/contact">
             <BoxModelIcon />
-            Contact
+            <span className="hidden sm:block">Contact</span>
           </Link>
         </Button>
 
@@ -45,7 +51,7 @@ export const Sidebar = () => {
         >
           <Link href="/admin/visual">
             <FaceIcon />
-            Appearance
+            <span className="hidden sm:block">Appearance</span>
           </Link>
         </Button>
 
@@ -57,12 +63,15 @@ export const Sidebar = () => {
         >
           <Link href="/admin/settings">
             <GearIcon className="" />
-            Settings
+            <span className="hidden sm:block">Settings</span>
           </Link>
         </Button>
       </ul>
 
-      <Button>User</Button>
+      <Button className="w-10 text-xs sm:w-auto md:w-full md:text-sm" size="sm">
+        <span>AA</span>
+        <span className="hidden sm:block">User</span>
+      </Button>
     </aside>
   );
 };

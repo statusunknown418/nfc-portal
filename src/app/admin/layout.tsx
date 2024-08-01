@@ -1,11 +1,11 @@
 import { Sidebar } from "~/components/layouts/Sidebar";
 
-export default async function AdminLayout({ children }: { children: React.ReactNode }) {
+export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
-    <section className="flex h-full bg-muted/50 dark:bg-background">
+    <section className="flex h-full flex-col-reverse bg-muted/50 dark:bg-background md:flex-row">
       <Sidebar />
 
-      <main className="my-2 mr-2 flex-grow overflow-y-auto rounded-2xl border bg-background p-8">
+      <main className="mx-1 my-1 max-h-full flex-grow overflow-y-auto rounded-2xl border bg-background p-8 sm:mx-2 sm:my-2 md:ml-0">
         {children}
       </main>
     </section>
