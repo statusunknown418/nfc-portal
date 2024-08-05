@@ -149,6 +149,7 @@ export const users = sqliteTable("user", {
 
 export const userProfileSchema = createInsertSchema(users, {
   theme: z.custom<ThemeType>(),
+  contactJSON: z.custom<ContactVCardType>(),
 });
 
 export const usersRelations = relations(users, ({ many }) => ({

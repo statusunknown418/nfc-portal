@@ -8,7 +8,7 @@ import { createTRPCRouter, protectedProcedure } from "../trpc";
 export const linksRouter = createTRPCRouter({
   all: protectedProcedure.query(async ({ ctx }) => {
     return ctx.db.query.links.findMany({
-      where: (t, op) => op.and(op.eq(t.isActive, true), op.eq(t.userId, ctx.session.user.id)),
+      where: (t, op) => op.eq(t.userId, ctx.session.user.id),
       orderBy: (t, op) => op.asc(t.position),
     });
   }),
@@ -47,10 +47,12 @@ export const linksRouter = createTRPCRouter({
       }));
 
       const sqlChunks: SQL[] = [];
-      sqlChunks.push(sql`case(`);
-      newItems.forEach((item, index) => {
-        sqlChunks.push(sql`when ${links.id} = ${item.id} then ${index}`);
-      });
+      sqlChunks.push(sql`(case`);
+
+      for (const cases of newItems) {
+        sqlChunks.push(sql`when ${links.id} = ${cases.id} then ${cases.position}`);
+      }
+
       sqlChunks.push(sql`end)`);
 
       const finalSql: SQL = sql.join(sqlChunks, sql.raw(" "));
