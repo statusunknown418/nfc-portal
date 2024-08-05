@@ -16,10 +16,6 @@ export function SortableItem(props: {
 }) {
   const { setNodeRef, transform, transition, isDragging, ...rest } = useSortable({
     id: props.id,
-    transition: {
-      duration: 500,
-      easing: "cubic-bezier(0.25, 1, 0.5, 1)",
-    },
   });
 
   const style: CSSProperties = {

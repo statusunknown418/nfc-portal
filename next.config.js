@@ -9,6 +9,18 @@ const config = {
   experimental: {
     typedRoutes: true,
   },
+  images: {
+    remotePatterns: [
+      {
+        hostname: "cdn.discordapp.com",
+        protocol: "https",
+      },
+      {
+        hostname: "lh3.googleusercontent.com",
+        protocol: "https",
+      },
+    ],
+  },
 };
 
 export default config;

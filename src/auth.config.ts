@@ -55,7 +55,7 @@ export const AuthConfig = {
 
       await db
         .insert(users)
-        .values({ id: user.id, image, name, email: user.email })
+        .values({ id: user.id, image, name, email: user.email, pageHashKey: createId() })
         .onConflictDoUpdate({
           set: {
             image,

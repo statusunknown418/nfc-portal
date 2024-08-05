@@ -1,75 +1,15 @@
-import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
+import { CopyIcon, Link2Icon, PlusIcon, RocketIcon } from "@radix-ui/react-icons";
+import Link from "next/link";
+import { Suspense } from "react";
+import { LinksWrapperLoader, LinksWrapperRSC } from "~/components/admin/links-list/links-wrapper";
+import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
+import { Button } from "~/components/ui/button";
 import { auth } from "~/server/auth";
-import { api } from "~/trpc/server";
-
-const seeds = [
-  {
-    id: "1",
-    name: "NearU.tech",
-    url: "https://nearu.tech",
-    image: "https://nearu.tech/logo.png",
-  },
-  {
-    id: "2",
-    name: "NearU.tech",
-    url: "https://nearu.tech",
-    image: "https://nearu.tech/logo.png",
-  },
-  {
-    id: "3",
-    name: "NearU.tech",
-    url: "https://nearu.tech",
-    image: "https://nearu.tech/logo.png",
-  },
-  {
-    id: "4",
-    name: "NearU.tech",
-    url: "https://nearu.tech",
-    image: "https://nearu.tech/logo.png",
-  },
-  {
-    id: "5",
-    name: "NFC Portal",
-    url: "https://nfc-portal.vercel.app",
-    image: "https://nfc-portal.vercel.app/opengraph-image.png",
-  },
-  {
-    id: "6",
-    name: "NFC Portal",
-    url: "https://nfc-portal.vercel.app",
-    image: "https://nfc-portal.vercel.app/opengraph-image.png",
-  },
-  {
-    id: "7",
-    name: "NFC Portal",
-    url: "https://nfc-portal.vercel.app",
-    image: "https://nfc-portal.vercel.app/opengraph-image.png",
-  },
-  {
-    id: "8",
-    name: "NFC Portal",
-    url: "https://nfc-portal.vercel.app",
-    image: "https://nfc-portal.vercel.app/opengraph-image.png",
-  },
-  {
-    id: "9",
-    name: "NFC Portal",
-    url: "https://nfc-portal.vercel.app",
-    image: "https://nfc-portal.vercel.app/opengraph-image.png",
-  },
-  {
-    id: "10",
-    name: "NFC Portal",
-    url: "https://nfc-portal.vercel.app",
-    image: "https://nfc-portal.vercel.app/opengraph-image.png",
-  },
-];
 
 export default async function AdminPage() {
-  const session = await api.viewer.get();
   const jwt = await auth();
 
-  if (!session) {
+  if (!jwt) {
     return (
       <section>
         <h1>Something weird happened...</h1>
@@ -81,33 +21,55 @@ export default async function AdminPage() {
   }
 
   return (
-    <section className="flex flex-col gap-4 md:gap-8 lg:flex-row">
-      <article className="flex h-full flex-grow flex-col items-center gap-6">
-        <article className="w-full max-w-prose">
+    <section className="flex h-full flex-col gap-4 md:gap-8 lg:flex-row">
+      <div className="flex h-full flex-grow flex-col items-center gap-6">
+        <article className="flex w-full max-w-prose flex-col">
           <h1 className="text-xl font-bold">Welcome {jwt?.user.name}</h1>
           <p className="mt-1 text-sm text-muted-foreground">
             Here you can manage everything that shows up on your NFC portal page.
           </p>
+
+          <Alert variant="indigo" className="relative mt-4">
+            <RocketIcon className="text-indigo-600" />
+            <AlertTitle className="text-foreground"> Your page is LIVE!</AlertTitle>
+            <AlertDescription className="flex items-center gap-1">
+              <Link
+                href="https://nfc.nearu.tech"
+                className="text-sm text-indigo-600 underline hover:text-indigo-500"
+              >
+                https://nfc.nearu.tech
+              </Link>
+
+              <Button variant="ghost" size="icon" className="h-8 w-8 text-foreground">
+                <CopyIcon />
+              </Button>
+            </AlertDescription>
+          </Alert>
         </article>
 
-        <article className="flex w-full flex-grow flex-col gap-4 md:max-w-prose">
-          {seeds.map((seed) => (
-            <div key={seed.id} className="flex w-full items-center">
-              <Card className="flex-grow">
-                <CardHeader>
-                  <CardTitle>{seed.name}</CardTitle>
-                </CardHeader>
+        <div className="mt-2 flex w-full max-w-prose flex-col items-center justify-start gap-2 sm:flex-row">
+          <Button
+            size="lg"
+            className="w-full shadow-xl shadow-indigo-100 transition-all duration-300 hover:shadow-indigo-400 sm:w-max"
+          >
+            <PlusIcon />
+            Add link
+          </Button>
 
-                <CardContent>
-                  <p className="text-sm text-muted-foreground">{seed.url}</p>
-                </CardContent>
-              </Card>
-            </div>
-          ))}
+          <Button size="lg" variant="outline" className="w-full sm:w-max">
+            <PlusIcon />
+            Import links
+          </Button>
+        </div>
+
+        <article className="flex h-full w-full flex-grow flex-col gap-4 md:max-w-prose">
+          <Suspense fallback={<LinksWrapperLoader />}>
+            <LinksWrapperRSC />
+          </Suspense>
         </article>
-      </article>
+      </div>
 
-      <article className="inset-0 hidden h-[calc(100vh-82px)] min-w-[400px] max-w-[400px] rounded-2xl border p-6 shadow-md ring-0 lg:sticky lg:block">
+      <article className="inset-0 hidden h-full min-w-[350px] max-w-[350px] rounded-2xl border p-6 shadow-md ring-0 lg:sticky lg:block">
         <div></div>
         <h3 className="text-muted-foreground">Preview</h3>
       </article>

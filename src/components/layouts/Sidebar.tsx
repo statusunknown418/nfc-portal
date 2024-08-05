@@ -18,12 +18,12 @@ export const Sidebar = () => {
         <span className="hidden md:block">NearU.tech</span>
       </Button>
 
-      <ul className="flex flex-grow justify-center *:justify-start *:gap-3 *:opacity-70 md:flex-grow-0 md:flex-col md:justify-start md:gap-2">
+      <ul className="flex w-full flex-grow justify-center *:gap-3 *:opacity-70 md:flex-grow-0 md:flex-col md:justify-start md:gap-2 *:md:justify-start">
         <Button
           asChild
           variant={!selectedSegment ? "white" : "ghost"}
           aria-selected={!selectedSegment}
-          className="aria-selected:opacity-100"
+          className="w-full aria-selected:opacity-100"
         >
           <Link href="/admin">
             <Link2Icon />
@@ -35,7 +35,7 @@ export const Sidebar = () => {
           asChild
           variant={selectedSegment === "contact" ? "white" : "ghost"}
           aria-selected={selectedSegment === "contact"}
-          className="aria-selected:opacity-100"
+          className="w-full aria-selected:opacity-100"
         >
           <Link href="/admin/contact">
             <BoxModelIcon />
@@ -47,7 +47,7 @@ export const Sidebar = () => {
           asChild
           variant={selectedSegment === "visual" ? "white" : "ghost"}
           aria-selected={selectedSegment === "visual"}
-          className="aria-selected:opacity-100"
+          className="w-full aria-selected:opacity-100"
         >
           <Link href="/admin/visual">
             <FaceIcon />
@@ -59,7 +59,7 @@ export const Sidebar = () => {
           asChild
           variant={selectedSegment === "settings" ? "white" : "ghost"}
           aria-selected={selectedSegment === "settings"}
-          className="aria-selected:opacity-100"
+          className="w-full aria-selected:opacity-100"
         >
           <Link href="/admin/settings">
             <GearIcon className="" />

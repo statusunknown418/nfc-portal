@@ -1,8 +1,15 @@
 "use client";
 
+import { type ContactVCardType } from "~/server/db/schema";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 
-export const ContactInfo = ({ unlocked }: { unlocked?: boolean }) => {
+export const ContactInfo = ({
+  unlocked,
+  data,
+}: {
+  unlocked?: boolean;
+  data: ContactVCardType | null;
+}) => {
   if (!unlocked) {
     return (
       <Card className="relative border-2 border-dashed">
@@ -16,11 +23,7 @@ export const ContactInfo = ({ unlocked }: { unlocked?: boolean }) => {
           <CardTitle>Contact</CardTitle>
         </CardHeader>
 
-        <CardContent>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet modi, libero neque esse
-          veniam excepturi nemo ipsa eos, culpa tenetur praesentium corporis sapiente obcaecati
-          delectus fugit, dolore exercitationem quisquam sequi!
-        </CardContent>
+        <CardContent>What are you looking for huh?</CardContent>
       </Card>
     );
   }
@@ -28,8 +31,10 @@ export const ContactInfo = ({ unlocked }: { unlocked?: boolean }) => {
   return (
     <div className="rounded-lg border p-6">
       <h3>Contact info</h3>
-
-      {unlocked ? "🔓 SENSITIVE INFO UNLOCKED" : <p>This portal is locked. 🔒</p>}
+      🔓 SENSITIVE INFO UNLOCKED
+      <p>
+        {data?.name.first} {data?.name.last}
+      </p>
     </div>
   );
 };

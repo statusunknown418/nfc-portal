@@ -2,10 +2,12 @@ import React from "react";
 
 import { cn } from "~/lib/utils";
 
-type DividerProps = React.ComponentPropsWithoutRef<"div">;
+type DividerProps = React.ComponentPropsWithoutRef<"div"> & {
+  colorClassName?: string;
+};
 
 const Divider = React.forwardRef<HTMLDivElement, DividerProps>(
-  ({ className, children, ...props }, forwardedRef) => (
+  ({ className, children, colorClassName, ...props }, forwardedRef) => (
     <div
       ref={forwardedRef}
       className={cn(
@@ -25,6 +27,7 @@ const Divider = React.forwardRef<HTMLDivElement, DividerProps>(
               "h-[1px] w-full",
               // background color
               "bg-border",
+              colorClassName,
             )}
           />
           <div className="whitespace-nowrap text-inherit">{children}</div>
@@ -34,6 +37,7 @@ const Divider = React.forwardRef<HTMLDivElement, DividerProps>(
               "h-[1px] w-full",
               // background color
               "bg-border",
+              colorClassName,
             )}
           />
         </>
@@ -44,6 +48,7 @@ const Divider = React.forwardRef<HTMLDivElement, DividerProps>(
             "h-[1px] w-full",
             // backround color
             "bg-border",
+            colorClassName,
           )}
         />
       )}
