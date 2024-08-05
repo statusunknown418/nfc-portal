@@ -24,7 +24,11 @@ import { SortableItem } from "../SortableItem";
 import { LinkItem } from "./LinkItem";
 
 export const LinksSortableList = ({ data }: { data: RouterOutputs["links"]["all"] }) => {
-  const [allLinks, pragmaticUpdate] = useState(data);
+  const { data: cacheData } = api.links.all.useQuery(undefined, {
+    initialData: data,
+  });
+
+  const [allLinks, pragmaticUpdate] = useState(cacheData);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [overIndex, setOverIndex] = useState<number | null>(null);
 
@@ -92,21 +96,14 @@ export const LinksSortableList = ({ data }: { data: RouterOutputs["links"]["all"
         {allLinks.map((item) => (
           <SortableItem key={item.id} id={item.id}>
             {({ active, attributes, listeners }) => (
-              <div
+              <LinkItem
                 key={item.id}
-                className={cn("relative w-full")}
-                {...attributes}
-                {...listeners}
+                data={item}
+                className={cn("w-full", active?.id === item.id && "opacity-0")}
+                attributes={attributes}
+                listeners={listeners}
                 aria-describedby={`link-handle-${item.id}-describedby`}
-              >
-                <LinkItem
-                  data={item}
-                  className={cn(
-                    active?.id === item.id &&
-                      "border-dashed border-indigo-600 bg-indigo-50 opacity-20 transition-all duration-200",
-                  )}
-                />
-              </div>
+              />
             )}
           </SortableItem>
         ))}
