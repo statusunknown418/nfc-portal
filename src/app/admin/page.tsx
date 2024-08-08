@@ -1,7 +1,8 @@
-import { CopyIcon, Link2Icon, PlusIcon, RocketIcon } from "@radix-ui/react-icons";
+import { CopyIcon, PlusIcon, RocketIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import { Suspense } from "react";
 import { LinksWrapperLoader, LinksWrapperRSC } from "~/components/admin/links-list/links-wrapper";
+import { NewLinkDrawer } from "~/components/admin/new-link";
 import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
 import { Button } from "~/components/ui/button";
 import { auth } from "~/server/auth";
@@ -24,12 +25,12 @@ export default async function AdminPage() {
     <section className="flex h-full flex-col gap-4 md:gap-8 lg:flex-row">
       <div className="flex h-full flex-grow flex-col items-center gap-6">
         <article className="flex w-full max-w-prose flex-col">
-          <h1 className="text-xl font-bold">Welcome {jwt?.user.name}</h1>
+          <h1 className="text-2xl font-bold">Welcome {jwt?.user.name}</h1>
           <p className="mt-1 text-sm text-muted-foreground">
             Here you can manage everything that shows up on your NFC portal page.
           </p>
 
-          <Alert variant="indigo" className="relative mt-4">
+          <Alert variant="indigo" className="relative mt-3">
             <RocketIcon className="text-indigo-600" />
             <AlertTitle className="text-foreground"> Your page is LIVE!</AlertTitle>
             <AlertDescription className="flex items-center gap-1">
@@ -48,13 +49,7 @@ export default async function AdminPage() {
         </article>
 
         <div className="mt-2 flex w-full max-w-prose flex-col items-center justify-start gap-2 sm:flex-row">
-          <Button
-            size="lg"
-            className="w-full shadow-xl shadow-indigo-100 transition-all duration-300 hover:shadow-indigo-400 sm:w-max"
-          >
-            <PlusIcon />
-            Add link
-          </Button>
+          <NewLinkDrawer />
 
           <Button size="lg" variant="outline" className="w-full sm:w-max">
             <PlusIcon />
@@ -62,7 +57,7 @@ export default async function AdminPage() {
           </Button>
         </div>
 
-        <article className="flex h-full w-full flex-grow flex-col gap-4 md:max-w-prose">
+        <article className="flex h-full w-full max-w-prose flex-grow flex-col gap-4">
           <Suspense fallback={<LinksWrapperLoader />}>
             <LinksWrapperRSC />
           </Suspense>

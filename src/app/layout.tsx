@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${GeistSans.variable} h-full`}>
+    <html lang="en" className={`${GeistSans.variable} h-full text-sm`}>
       <body className="h-full">
         <TRPCReactProvider>{children}</TRPCReactProvider>
       </body>
