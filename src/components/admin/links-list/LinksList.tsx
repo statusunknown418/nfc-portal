@@ -82,6 +82,7 @@ export const LinksSortableList = ({ data }: { data: RouterOutputs["links"]["all"
 
   return (
     <DndContext
+      id="links-sortable-context"
       sensors={sensors}
       collisionDetection={closestCenter}
       onDragStart={handleDragStart}
