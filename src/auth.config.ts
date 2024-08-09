@@ -7,6 +7,7 @@ import Resend from "next-auth/providers/resend";
 import { env } from "./env";
 import { db } from "./server/db";
 import { accounts, sessions, users, verificationTokens } from "./server/db/schema";
+import { cookies } from "next/headers";
 
 export const AuthConfig = {
   adapter: DrizzleAdapter(db, {
@@ -25,6 +26,8 @@ export const AuthConfig = {
         token.id = user.id;
         token.name = user.name;
         token.picture = user.image;
+        // @ts-expect-error weird TS bug
+        token.username = user.username;
       }
 
       return token;
@@ -36,6 +39,7 @@ export const AuthConfig = {
           ...session.user,
           image: token.picture ?? session.user.image,
           name: token.name ?? session.user.name,
+          username: token.username ?? session.user.username,
           id: token.id as string,
         },
       };
@@ -50,16 +54,21 @@ export const AuthConfig = {
         return;
       }
 
+      const cookieUsername = cookies().get("decided-username");
       const name = user.name ?? user.email?.split("@")[0];
       const image = user.image ?? `https://api.dicebear.com/7.x/initials/svg?seed=${user.name}`;
+      const pageHashKey = createId();
+      const username = cookieUsername?.value ?? user.email?.split("@")[0];
 
       await db
         .insert(users)
-        .values({ id: user.id, image, name, email: user.email, pageHashKey: createId() })
+        .values({ id: user.id, image, name, email: user.email, pageHashKey, username })
         .onConflictDoUpdate({
           set: {
             image,
             name,
+            pageHashKey,
+            username,
           },
           target: users.id,
         });

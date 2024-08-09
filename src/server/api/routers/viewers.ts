@@ -1,7 +1,7 @@
-import { z } from "zod";
-import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
-import { users } from "~/server/db/schema";
 import { createId } from "@paralleldrive/cuid2";
+import { z } from "zod";
+import { users } from "~/server/db/schema";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 
 export const viewersRouter = createTRPCRouter({
   /**
