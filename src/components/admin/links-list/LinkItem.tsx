@@ -3,12 +3,13 @@ import { DragHandleDots1Icon, TrashIcon } from "@radix-ui/react-icons";
 import { forwardRef } from "react";
 import { Button } from "~/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/components/ui/card";
+import { Label } from "~/components/ui/label";
 import { Divider } from "~/components/ui/separator";
 import { Switch } from "~/components/ui/switch";
 import { cn } from "~/lib/utils";
-import { type RouterOutputs } from "~/trpc/react";
+import { api, type RouterOutputs } from "~/trpc/react";
 import { EditLinkDrawer } from "../edit-link";
-import { Label } from "~/components/ui/label";
+import { toast } from "sonner";
 
 export const LinkItem = forwardRef<
   HTMLDivElement,
@@ -18,6 +19,31 @@ export const LinkItem = forwardRef<
     listeners?: Record<string, unknown>;
   }
 >(({ data, className, listeners, attributes, ...props }, ref) => {
+  const utils = api.useUtils();
+
+  const deleteLink = api.links.delete.useMutation({
+    onMutate: (vars) => {
+      const prevData = utils.links.all.getData();
+      const newData = prevData?.filter((item) => item.id !== vars.id);
+
+      utils.links.all.setData(undefined, newData);
+
+      return prevData;
+    },
+    onSuccess: async () => {
+      toast.success("Link deleted!");
+      void utils.links.all.invalidate();
+    },
+    onError: (err, _vars, context) => {
+      toast.error(err.message);
+      utils.links.all.setData(undefined, context);
+    },
+  });
+
+  const handleDelete = () => {
+    deleteLink.mutate({ id: data.id });
+  };
+
   return (
     <Card
       ref={ref}
@@ -53,7 +79,7 @@ export const LinkItem = forwardRef<
             {data.isActive ? "Disable" : "Enable"}
           </Label>
 
-          <Switch className="data-[state=checked]:bg-indigo-600" id={`activate-${data.id}`} />
+          <Switch id={`activate-${data.id}`} />
         </div>
       </section>
 
@@ -68,12 +94,13 @@ export const LinkItem = forwardRef<
           "absolute bottom-0 right-0 flex h-full w-10 flex-col items-center justify-center border-l border-border bg-muted/50",
         )}
       >
-        <EditLinkDrawer />
+        <EditLinkDrawer data={data} />
 
         <Divider className={cn("my-0 w-full")} />
 
         <Button
-          variant="destructiveGhost"
+          onClick={handleDelete}
+          variant="destructive_ghost"
           className="w-full flex-grow rounded-none rounded-br-xl border-transparent p-0 hover:border-destructive"
         >
           <TrashIcon />

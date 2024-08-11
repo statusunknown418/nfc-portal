@@ -17,18 +17,24 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { EmptyState } from "~/components/shared/EmptyState";
 import { arrayMove, cn } from "~/lib/utils";
 import { api, type RouterOutputs } from "~/trpc/react";
 import { SortableItem } from "../SortableItem";
 import { LinkItem } from "./LinkItem";
+import { LinksWrapperLoader } from "./links-wrapper";
 
-export const LinksSortableList = ({ data }: { data: RouterOutputs["links"]["all"] }) => {
-  const { data: cacheData } = api.links.all.useQuery(undefined, {
-    initialData: data,
+export const LinksSortableList = ({
+  initialData,
+}: {
+  initialData?: RouterOutputs["links"]["all"];
+}) => {
+  const { data: cacheData, isLoading } = api.links.all.useQuery(undefined, {
+    initialData,
   });
 
-  const [allLinks, pragmaticUpdate] = useState(cacheData);
+  const [allLinks, pragmaticUpdate] = useState(cacheData ?? []);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [overIndex, setOverIndex] = useState<number | null>(null);
 
@@ -79,6 +85,16 @@ export const LinksSortableList = ({ data }: { data: RouterOutputs["links"]["all"
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     setOverIndex(Number(event.over?.data.current?.sortable?.index));
   };
+
+  useEffect(() => {
+    if (cacheData) {
+      pragmaticUpdate(cacheData);
+    }
+  }, [cacheData]);
+
+  if (!allLinks.length) {
+    return <EmptyState />;
+  }
 
   return (
     <DndContext

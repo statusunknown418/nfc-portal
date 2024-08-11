@@ -2,8 +2,14 @@ import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 import { cn } from "~/lib/utils";
+import { type RouterOutputs } from "~/trpc/react";
 
-export function EditLinkForm({ className }: React.ComponentProps<"form">) {
+export function EditLinkForm({
+  className,
+  link,
+}: React.ComponentProps<"form"> & {
+  link: RouterOutputs["links"]["all"][number];
+}) {
   return (
     <form className={cn("grid items-start gap-4", className)}>
       <div className="grid gap-2">

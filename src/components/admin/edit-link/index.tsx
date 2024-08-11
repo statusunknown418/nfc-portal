@@ -23,8 +23,9 @@ import {
 } from "~/components/ui/drawer";
 import { useMediaQuery } from "~/lib/hooks/use-media-query";
 import { EditLinkForm } from "./EditLinkForm";
+import { type RouterOutputs } from "~/trpc/react";
 
-export function EditLinkDrawer() {
+export function EditLinkDrawer({ data }: { data: RouterOutputs["links"]["all"][number] }) {
   const [open, setOpen] = useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
@@ -39,13 +40,13 @@ export function EditLinkDrawer() {
 
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
-            <DialogTitle>Edit profile</DialogTitle>
+            <DialogTitle>Edit link</DialogTitle>
             <DialogDescription>
               Make changes to your profile here. Click save when you&apos;re done.
             </DialogDescription>
           </DialogHeader>
 
-          <EditLinkForm />
+          <EditLinkForm link={data} />
         </DialogContent>
       </Dialog>
     );
@@ -66,7 +67,7 @@ export function EditLinkDrawer() {
           </DrawerDescription>
         </DrawerHeader>
 
-        <EditLinkForm className="px-4" />
+        <EditLinkForm className="px-4" link={data} />
 
         <DrawerFooter className="pt-2">
           <DrawerClose asChild>

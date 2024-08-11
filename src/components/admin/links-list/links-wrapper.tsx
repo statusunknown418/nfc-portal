@@ -1,11 +1,15 @@
-import { api } from "~/trpc/server";
+import { api, HydrateClient } from "~/trpc/server";
 import { LinksSortableList } from "./LinksList";
 import { Skeleton } from "~/components/ui/skeleton";
 
 export async function LinksWrapperRSC() {
-  const links = await api.links.all();
+  const data = await api.links.all();
 
-  return <LinksSortableList data={links} />;
+  return (
+    <HydrateClient>
+      <LinksSortableList initialData={data} />
+    </HydrateClient>
+  );
 }
 
 export const LinksWrapperLoader = () => {

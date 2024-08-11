@@ -34,7 +34,7 @@ export function NewLinkDrawer() {
         <DialogTrigger asChild>
           <Button
             size="lg"
-            className="w-full shadow-xl shadow-indigo-100 transition-all duration-300 hover:shadow-indigo-400 sm:w-max"
+            className="w-full shadow-xl shadow-indigo-100 transition-all duration-300 hover:shadow-indigo-400"
           >
             <PlusIcon />
             Add link
@@ -49,7 +49,7 @@ export function NewLinkDrawer() {
             </DialogDescription>
           </DialogHeader>
 
-          <NewLinkForm />
+          <NewLinkForm onClose={() => setOpen(false)} />
         </DialogContent>
       </Dialog>
     );
@@ -60,7 +60,7 @@ export function NewLinkDrawer() {
       <DrawerTrigger asChild>
         <Button
           size="lg"
-          className="w-full shadow-xl shadow-indigo-100 transition-all duration-300 hover:shadow-indigo-400 sm:w-max"
+          className="w-full shadow-xl shadow-indigo-100 transition-all duration-300 hover:shadow-indigo-400"
         >
           <PlusIcon />
           Add link
@@ -75,7 +75,7 @@ export function NewLinkDrawer() {
           </DrawerDescription>
         </DrawerHeader>
 
-        <NewLinkForm className="px-4" />
+        <NewLinkForm className="px-4" onClose={() => setOpen(false)} />
 
         <DrawerFooter className="pt-2">
           <DrawerClose asChild>
