@@ -3,7 +3,7 @@ import { z } from "zod";
 import { links, userProfileSchema, users } from "~/server/db/schema";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { cookies } from "next/headers";
-import { PORTAL_KEY } from "~/middleware";
+import { INCOMING_URL, PORTAL_KEY } from "~/middleware";
 
 export const portalsRouter = createTRPCRouter({
   edit: protectedProcedure.input(userProfileSchema).mutation(async ({ ctx, input }) => {
@@ -28,6 +28,17 @@ export const portalsRouter = createTRPCRouter({
         unlocked: false,
       };
     }
+
+    /** Used for overriding the password on the admin page preview */
+    const incomingPath = ctx.headers.get(INCOMING_URL);
+
+    if (incomingPath?.startsWith("/admin")) {
+      return {
+        data,
+        unlocked: true,
+      };
+    }
+    /** ----------------------------------------------------------- */
 
     if (!!cookiePassword && data?.pageHashKey === cookiePassword.value) {
       return {

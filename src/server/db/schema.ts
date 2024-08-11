@@ -62,7 +62,16 @@ export const links = sqliteTable("links", {
     .references(() => users.id),
 });
 
-export const newLinkSchema = createInsertSchema(links);
+export const newLinkSchema = createInsertSchema(links, {
+  url: z.string().url().nullable(),
+  type: z.custom<LinkType>().default("basic"),
+  userId: z.undefined(),
+}).refine((data) => data.type === "basic" && data.url, {
+  message: "A URL is required for redirectable links!",
+  path: ["url"],
+});
+
+export type NewLinkSchema = z.infer<typeof newLinkSchema>;
 
 export const linksRelations = relations(links, ({ one }) => ({
   user: one(users, { fields: [links.userId], references: [users.id] }),

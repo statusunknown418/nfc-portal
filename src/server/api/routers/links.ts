@@ -14,7 +14,15 @@ export const linksRouter = createTRPCRouter({
   }),
 
   new: protectedProcedure.input(newLinkSchema).mutation(async ({ ctx, input }) => {
-    return ctx.db.insert(links).values(input).returning();
+    const userId = ctx.session.user.id;
+
+    return ctx.db
+      .insert(links)
+      .values({
+        ...input,
+        userId,
+      })
+      .returning();
   }),
 
   edit: protectedProcedure.input(newLinkSchema).mutation(async ({ ctx, input }) => {
