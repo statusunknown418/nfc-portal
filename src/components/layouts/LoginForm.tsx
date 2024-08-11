@@ -1,6 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { DiscordLogoIcon } from "@radix-ui/react-icons";
 import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -16,10 +17,13 @@ import {
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
 import { Spinner } from "../shared/Spinner";
-import { DiscordLogoIcon } from "@radix-ui/react-icons";
+import { setDecidedUsername } from "../shared/cookies.actions";
 
-const loginSchema = z.object({
-  email: z.string().email(),
+export const loginSchema = z.object({
+  email: z.string().email({
+    message: "A valid email address is required",
+  }),
+  username: z.string().trim().optional(),
 });
 
 export default function LoginForm() {
@@ -27,31 +31,48 @@ export default function LoginForm() {
     resolver: zodResolver(loginSchema),
     defaultValues: {
       email: "",
+      username: "",
     },
   });
 
   const handleSubmit = form.handleSubmit(async (data) => {
-    await signIn(
-      "resend",
-      {
-        callbackUrl: "/admin",
-        email: data.email,
-        username: `custom-username`,
-      },
-      {
-        username: `custom-username`,
-      },
-    );
+    !!data.username && (await setDecidedUsername(data.username));
+
+    await signIn("resend", {
+      callbackUrl: "/admin",
+      email: data.email,
+    });
   });
 
   return (
     <Form {...form}>
-      <form
-        className="grid grid-cols-1 gap-8"
-        method="POST"
-        action="/api/auth/signin/email"
-        onSubmit={handleSubmit}
-      >
+      <form className="grid grid-cols-1 gap-6" method="POST" onSubmit={handleSubmit}>
+        <FormField
+          control={form.control}
+          name="username"
+          render={({ field }) => (
+            <FormItem>
+              <div className="flex items-center gap-0 rounded-md shadow-lg shadow-indigo-100 transition-shadow duration-100 has-[input:focus]:shadow-indigo-400">
+                <p className="flex h-[36px] w-56 items-center rounded-l-md border bg-primary px-3 text-sm text-primary-foreground">
+                  https://neau.tech/
+                </p>
+                <FormControl>
+                  <Input
+                    {...field}
+                    className="rounded-l-none border-l-0 focus-visible:ring-0 focus-visible:ring-offset-0"
+                    placeholder="@the.architect"
+                    disabled={form.formState.isSubmitting}
+                  />
+                </FormControl>
+              </div>
+
+              <FormMessage />
+
+              <FormDescription>Leave blank for a random username.</FormDescription>
+            </FormItem>
+          )}
+        />
+
         <FormField
           control={form.control}
           name="email"
@@ -70,8 +91,8 @@ export default function LoginForm() {
               <FormMessage />
 
               <FormDescription>
-                Use the same email you registered when getting your custom NFC card and get a magic
-                link to enter the admin panel.
+                Use the same email you registered when getting your custom NFC card to enter the
+                admin panel.
               </FormDescription>
             </FormItem>
           )}

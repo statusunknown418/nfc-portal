@@ -1,76 +1,75 @@
 "use client";
 
+import { BoxModelIcon, ColorWheelIcon, GearIcon, Link2Icon } from "@radix-ui/react-icons";
 import Link from "next/link";
-import { Button } from "../ui/button";
-import { BoxModelIcon, FaceIcon, GearIcon, Link2Icon } from "@radix-ui/react-icons";
 import { useSelectedLayoutSegment } from "next/navigation";
+import { Button } from "../ui/button";
 
 export const Sidebar = () => {
   const selectedSegment = useSelectedLayoutSegment();
 
   return (
-    <aside className="flex h-14 max-h-14 min-h-14 items-center justify-between overflow-x-auto px-2 pb-2 sm:px-4 md:h-full md:max-h-full md:max-w-56 md:flex-col md:items-start md:py-4 lg:w-56">
-      <Button
-        className="w-10 justify-start p-2 text-xs sm:w-auto md:w-full md:text-sm"
-        variant="ghost"
-      >
-        <span className="md:hidden">NU</span>
-        <span className="hidden md:block">NearU.tech</span>
+    <aside className="flex h-16 max-h-16 min-h-16 items-center justify-between overflow-x-auto border-t px-2 md:h-full md:max-h-full md:min-w-20 md:max-w-20 md:flex-col md:items-center md:border-r md:border-t-0 md:py-4">
+      <Button size="icon" className="h-[44px] w-[44px]">
+        <span>NU</span>
       </Button>
 
-      <ul className="flex w-full flex-grow justify-center *:gap-3 *:opacity-70 md:flex-grow-0 md:flex-col md:justify-start md:gap-2 *:md:justify-start">
+      <ul className="flex w-full flex-grow justify-center gap-2 opacity-70 md:flex-grow-0 md:flex-col md:items-center md:gap-4">
         <Button
           asChild
-          variant={!selectedSegment ? "white" : "ghost"}
+          variant={!selectedSegment ? "primary_ghost" : "ghost"}
+          size="icon"
           aria-selected={!selectedSegment}
-          className="w-full aria-selected:opacity-100"
+          className="h-[44px] w-[44px] aria-selected:opacity-100"
         >
           <Link href="/admin">
-            <Link2Icon />
-            <span className="hidden sm:block">Links</span>
+            <Link2Icon className="h-5 w-5" />
+            <span className="sr-only">Links</span>
           </Link>
         </Button>
 
         <Button
           asChild
-          variant={selectedSegment === "contact" ? "white" : "ghost"}
+          variant={selectedSegment === "contact" ? "primary_ghost" : "ghost"}
+          size="icon"
           aria-selected={selectedSegment === "contact"}
-          className="w-full aria-selected:opacity-100"
+          className="h-[44px] w-[44px] aria-selected:opacity-100"
         >
           <Link href="/admin/contact">
-            <BoxModelIcon />
-            <span className="hidden sm:block">Contact</span>
+            <BoxModelIcon className="h-5 w-5" />
           </Link>
         </Button>
 
         <Button
           asChild
-          variant={selectedSegment === "visual" ? "white" : "ghost"}
+          variant={selectedSegment === "visual" ? "primary_ghost" : "ghost"}
+          size="icon"
           aria-selected={selectedSegment === "visual"}
-          className="w-full aria-selected:opacity-100"
+          className="h-[44px] w-[44px] aria-selected:opacity-100"
         >
           <Link href="/admin/visual">
-            <FaceIcon />
-            <span className="hidden sm:block">Appearance</span>
+            <ColorWheelIcon className="h-5 w-5" />
+            <span className="sr-only">Theming</span>
           </Link>
         </Button>
 
         <Button
           asChild
-          variant={selectedSegment === "settings" ? "white" : "ghost"}
+          variant={selectedSegment === "settings" ? "primary_ghost" : "ghost"}
+          size="icon"
           aria-selected={selectedSegment === "settings"}
-          className="w-full aria-selected:opacity-100"
+          className="h-[44px] w-[44px] aria-selected:opacity-100"
         >
           <Link href="/admin/settings">
-            <GearIcon className="" />
-            <span className="hidden sm:block">Settings</span>
+            <GearIcon className="h-5 w-5" />
+            <span className="sr-only">Settings</span>
           </Link>
         </Button>
       </ul>
 
-      <Button className="w-10 text-xs sm:w-auto md:w-full md:text-sm" size="sm">
+      <Button className="h-[44px] w-[44px] text-xs md:text-sm" size="icon">
         <span>AA</span>
-        <span className="hidden sm:block">User</span>
+        <span className="sr-only">User</span>
       </Button>
     </aside>
   );
