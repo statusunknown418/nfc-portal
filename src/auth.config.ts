@@ -58,7 +58,7 @@ export const AuthConfig = {
       const name = user.name ?? user.email?.split("@")[0];
       const image = user.image ?? `https://api.dicebear.com/7.x/initials/svg?seed=${user.name}`;
       const pageHashKey = createId();
-      const username = cookieUsername?.value ?? user.email?.split("@")[0];
+      const username = cookieUsername?.value ?? user.email?.split("@")[0] + "_" + pageHashKey;
 
       await db
         .insert(users)

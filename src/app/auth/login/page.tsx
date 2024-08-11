@@ -13,7 +13,7 @@ export default async function LoginPage() {
       </article>
 
       <article className="flex flex-col items-center justify-center bg-muted/50 p-2 dark:bg-background lg:bg-transparent lg:p-0 lg:pl-8">
-        <Card className="w-full max-w-lg dark:bg-muted/20 lg:border-none lg:shadow-none">
+        <Card className="w-full max-w-xl dark:bg-muted/20 lg:border-none lg:shadow-none">
           <CardHeader>
             <CardTitle className="text-2xl">Start the journey</CardTitle>
             <CardDescription>Sign up or log into your account to continue.</CardDescription>
@@ -24,7 +24,7 @@ export default async function LoginPage() {
 
             <Divider>or</Divider>
 
-            <div className="mt-4 space-y-2">
+            <div className="space-y-2">
               <SignInWithSocial provider="google" />
               <SignInWithSocial provider="discord" />
             </div>

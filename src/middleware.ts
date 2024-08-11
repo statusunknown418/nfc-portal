@@ -3,10 +3,11 @@ import { auth } from "./server/auth";
 
 export const PORTAL_KEY = "portal-password";
 export const PORTAL_QUERY = "ktp";
+export const INCOMING_URL = "x-current-url";
 
 export default auth(async function middleware(req, _ctx) {
   const headers = new Headers(req.headers);
-  headers.set("x-current-url", req.nextUrl.pathname);
+  headers.set(INCOMING_URL, req.nextUrl.pathname);
 
   if (req.nextUrl.pathname.startsWith("/admin") || req.nextUrl.pathname.startsWith("/business")) {
     if (req.auth) {
