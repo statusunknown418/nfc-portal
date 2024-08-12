@@ -18,6 +18,7 @@ export const portalsRouter = createTRPCRouter({
       with: {
         links: {
           where: and(eq(links.isActive, true)),
+          orderBy: (t, op) => op.asc(t.position),
         },
       },
     });
