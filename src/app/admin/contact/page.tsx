@@ -20,8 +20,8 @@ import { cn } from "~/lib/utils";
 
 export default async function ContactPage() {
   return (
-    <section className="flex h-full w-full flex-col gap-8 lg:flex-row lg:gap-10">
-      <section className="flex flex-col gap-4 lg:max-w-prose">
+    <section className="grid h-full w-full grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-10">
+      <section className="flex flex-col gap-4">
         <Breadcrumb className="self-start">
           <BreadcrumbList>
             <BreadcrumbItem>Dashboard</BreadcrumbItem>
@@ -45,7 +45,7 @@ export default async function ContactPage() {
           </Label>
         </Alert>
 
-        <form className="grid grid-cols-1 gap-4 rounded-lg border p-6">
+        <form className="mt-4 grid grid-cols-1 gap-4 rounded-lg border bg-white/30 p-6">
           <div className="flex flex-col gap-6">
             <div className="flex flex-col items-center gap-4 md:gap-10 lg:flex-row">
               <Avatar className="h-32 w-32 max-w-32">
@@ -159,7 +159,7 @@ export default async function ContactPage() {
         </form>
       </section>
 
-      <article className="relative mt-4 flex h-full flex-grow items-start justify-center rounded-lg lg:mt-0">
+      <article className="relative mt-4 flex h-full w-full items-start justify-center rounded-lg lg:mt-0">
         <CardContainer className="h-full w-full" containerClassName={cn("h-full w-full z-10")}>
           <CardBody className="group/card flex w-full items-start justify-center">
             <CardItem
@@ -181,18 +181,8 @@ export default async function ContactPage() {
           </CardBody>
         </CardContainer>
 
-        {/* <section
-          id="nfc-preview-card"
-          className="z-10 h-max min-h-60 w-full max-w-[400px] rounded-xl bg-primary/90 p-6 text-primary-foreground shadow-xl shadow-black/50 backdrop-blur backdrop-filter"
-        >
-          <p>Card #0000001</p>
-          <p>Alvaro Aquije</p>
-        </section> */}
-
         <DotPattern
-          className={cn(
-            "z-0 p-1 [mask-image:linear-gradient(to_bottom,white,transparent,transparent)]",
-          )}
+          className={cn("z-0 w-full p-1 opacity-70 [mask-image:linear-gradient(to_bottom)]")}
         />
       </article>
     </section>

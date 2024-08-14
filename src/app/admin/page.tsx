@@ -1,7 +1,10 @@
 import { Share2Icon } from "@radix-ui/react-icons";
 import { Suspense } from "react";
 import { LinksViewRSC } from "~/components/admin/links-view";
-import { PortalPreviewWrapperRSC } from "~/components/admin/portal-preview";
+import {
+  PortalPreviewWrapperLoader,
+  PortalPreviewWrapperRSC,
+} from "~/components/admin/portal-preview";
 import { Alert, AlertTitle } from "~/components/ui/alert";
 import { Button } from "~/components/ui/button";
 import { auth } from "~/server/auth";
@@ -25,7 +28,7 @@ export default async function AdminPage() {
   }
 
   return (
-    <section className="flex min-h-screen flex-col gap-4 lg:flex-row lg:justify-between lg:gap-8">
+    <section className="flex h-max flex-col gap-4 lg:grid lg:grid-cols-2 lg:justify-between lg:gap-8">
       <LinksViewRSC jwt={jwt} />
 
       <aside className="hidden flex-grow gap-4 pl-6 ring-0 lg:sticky lg:inset-0 lg:block lg:h-[calc(100vh-64px)]">
@@ -36,7 +39,11 @@ export default async function AdminPage() {
           </Button>
 
           <Suspense>
-            {!!jwt.user.username && <PortalPreviewWrapperRSC username={jwt.user.username} />}
+            {!!jwt.user.username && (
+              <Suspense fallback={<PortalPreviewWrapperLoader />}>
+                <PortalPreviewWrapperRSC username={jwt.user.username} />
+              </Suspense>
+            )}
 
             {!jwt.user.username && (
               <Alert variant="destructive">

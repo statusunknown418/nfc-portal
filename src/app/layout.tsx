@@ -3,6 +3,7 @@ import "~/styles/globals.css";
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 
+import NextTopLoader from "nextjs-toploader";
 import { TRPCReactProvider } from "~/trpc/react";
 import { Toaster } from "~/components/ui/sonner";
 
@@ -28,6 +29,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" className={`${GeistSans.variable} text-sm`}>
       <body className="h-full">
+        <NextTopLoader showSpinner={false} color="#22c55e" />
+
         <TRPCReactProvider>{children}</TRPCReactProvider>
 
         <Toaster />
