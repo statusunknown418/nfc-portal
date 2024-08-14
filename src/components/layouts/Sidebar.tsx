@@ -4,67 +4,94 @@ import { BoxModelIcon, ColorWheelIcon, GearIcon, Link2Icon } from "@radix-ui/rea
 import Link from "next/link";
 import { useSelectedLayoutSegment } from "next/navigation";
 import { Button } from "../ui/button";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
 
 export const Sidebar = () => {
   const selectedSegment = useSelectedLayoutSegment();
 
   return (
-    <aside className="flex h-16 max-h-16 min-h-16 items-center justify-between overflow-x-auto border-t px-2 md:h-full md:max-h-full md:min-w-20 md:max-w-20 md:flex-col md:items-center md:border-r md:border-t-0 md:py-4">
+    <aside className="flex h-16 max-h-16 min-h-16 items-center justify-between overflow-x-auto border-t px-2 md:h-full md:max-h-full md:min-w-20 md:max-w-20 md:flex-col md:items-center md:rounded-r-2xl md:border-y md:border-r md:py-4">
       <Button size="icon" className="h-[44px] w-[44px]">
         <span>NU</span>
       </Button>
 
-      <ul className="flex w-full flex-grow justify-center gap-2 opacity-70 md:flex-grow-0 md:flex-col md:items-center md:gap-4">
-        <Button
-          asChild
-          variant={!selectedSegment ? "primary_ghost" : "ghost"}
-          size="icon"
-          aria-selected={!selectedSegment}
-          className="h-[44px] w-[44px] aria-selected:opacity-100"
-        >
-          <Link href="/admin">
-            <Link2Icon className="h-5 w-5" />
-            <span className="sr-only">Links</span>
-          </Link>
-        </Button>
+      <ul className="flex w-full flex-grow justify-center gap-2 md:flex-grow-0 md:flex-col md:items-center md:gap-4">
+        <TooltipProvider delayDuration={0}>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                asChild
+                variant={!selectedSegment ? "primary_ghost" : "ghost"}
+                size="icon"
+                aria-selected={!selectedSegment}
+                className="h-[44px] w-[44px]"
+              >
+                <Link href="/admin">
+                  <Link2Icon className="h-5 w-5" />
+                  <span className="sr-only">Links</span>
+                </Link>
+              </Button>
+            </TooltipTrigger>
 
-        <Button
-          asChild
-          variant={selectedSegment === "contact" ? "primary_ghost" : "ghost"}
-          size="icon"
-          aria-selected={selectedSegment === "contact"}
-          className="h-[44px] w-[44px] aria-selected:opacity-100"
-        >
-          <Link href="/admin/contact">
-            <BoxModelIcon className="h-5 w-5" />
-          </Link>
-        </Button>
+            <TooltipContent side="right">Manage links</TooltipContent>
+          </Tooltip>
 
-        <Button
-          asChild
-          variant={selectedSegment === "visual" ? "primary_ghost" : "ghost"}
-          size="icon"
-          aria-selected={selectedSegment === "visual"}
-          className="h-[44px] w-[44px] aria-selected:opacity-100"
-        >
-          <Link href="/admin/visual">
-            <ColorWheelIcon className="h-5 w-5" />
-            <span className="sr-only">Theming</span>
-          </Link>
-        </Button>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                asChild
+                variant={selectedSegment === "contact" ? "primary_ghost" : "ghost"}
+                size="icon"
+                aria-selected={selectedSegment === "contact"}
+                className="h-[44px] w-[44px]"
+              >
+                <Link href="/admin/contact">
+                  <BoxModelIcon className="h-5 w-5" />
+                </Link>
+              </Button>
+            </TooltipTrigger>
 
-        <Button
-          asChild
-          variant={selectedSegment === "settings" ? "primary_ghost" : "ghost"}
-          size="icon"
-          aria-selected={selectedSegment === "settings"}
-          className="h-[44px] w-[44px] aria-selected:opacity-100"
-        >
-          <Link href="/admin/settings">
-            <GearIcon className="h-5 w-5" />
-            <span className="sr-only">Settings</span>
-          </Link>
-        </Button>
+            <TooltipContent side="right">Contact information</TooltipContent>
+          </Tooltip>
+
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                asChild
+                variant={selectedSegment === "visual" ? "primary_ghost" : "ghost"}
+                size="icon"
+                aria-selected={selectedSegment === "visual"}
+                className="h-[44px] w-[44px]"
+              >
+                <Link href="/admin/visual">
+                  <ColorWheelIcon className="h-5 w-5" />
+                  <span className="sr-only">Theming</span>
+                </Link>
+              </Button>
+            </TooltipTrigger>
+
+            <TooltipContent side="right">Portal customization</TooltipContent>
+          </Tooltip>
+
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                asChild
+                variant={selectedSegment === "settings" ? "primary_ghost" : "ghost"}
+                size="icon"
+                aria-selected={selectedSegment === "settings"}
+                className="h-[44px] w-[44px]"
+              >
+                <Link href="/admin/settings">
+                  <GearIcon className="h-5 w-5" />
+                  <span className="sr-only">Settings</span>
+                </Link>
+              </Button>
+            </TooltipTrigger>
+
+            <TooltipContent side="right">Account settings</TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       </ul>
 
       <Button className="h-[44px] w-[44px] text-xs md:text-sm" size="icon">

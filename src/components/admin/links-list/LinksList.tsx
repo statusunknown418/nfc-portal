@@ -17,20 +17,21 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { useEffect, useState } from "react";
+import { cache, useEffect, useMemo, useRef, useState } from "react";
 import { EmptyState } from "~/components/shared/EmptyState";
 import { arrayMove, cn } from "~/lib/utils";
 import { api, type RouterOutputs } from "~/trpc/react";
 import { SortableItem } from "../SortableItem";
 import { LinkItem } from "./LinkItem";
-import { LinksWrapperLoader } from "./links-wrapper";
 
 export const LinksSortableList = ({
   initialData,
+  username,
 }: {
   initialData?: RouterOutputs["links"]["all"];
+  username: string;
 }) => {
-  const { data: cacheData, isLoading } = api.links.all.useQuery(undefined, {
+  const { data: cacheData } = api.links.all.useQuery(undefined, {
     initialData,
   });
 
@@ -48,7 +49,9 @@ export const LinksSortableList = ({
   const utils = api.useUtils();
   const reorder = api.links.reorder.useMutation({
     onSuccess: async () => {
-      await utils.links.all.refetch();
+      const prevData = utils.portals.get.getData({ username });
+      console.log({ prevData });
+      await Promise.all([utils.portals.get.refetch({ username })]);
     },
   });
 

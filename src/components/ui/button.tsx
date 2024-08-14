@@ -21,7 +21,7 @@ const buttonVariants = cva(
         destructive_ghost:
           "bg-transparent hover:border-destructive hover:bg-destructive/10 text-destructive",
         primary: "bg-indigo-600 text-indigo-50 shadow hover:bg-indigo-500",
-        primary_ghost: "bg-indigo-50 hover:bg-indigo-100 text-indigo-600 border-indigo-400",
+        primary_ghost: "bg-indigo-50 hover:bg-indigo-100 text-indigo-600 border-indigo-500",
       },
       size: {
         default: "h-9 px-4 py-2",

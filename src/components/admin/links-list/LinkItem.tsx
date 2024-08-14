@@ -48,7 +48,7 @@ export const LinkItem = forwardRef<
     <Card
       ref={ref}
       className={cn(
-        "relative flex-grow overflow-hidden border-border px-9 shadow-muted",
+        "relative flex-grow overflow-hidden border-border px-9 shadow-none dark:shadow-muted",
         !data.isActive && "border-dashed border-yellow-600/70 bg-accent/50",
         className,
       )}
