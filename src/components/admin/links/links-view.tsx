@@ -1,18 +1,18 @@
 import { RocketIcon, CopyIcon, PlusIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import { Suspense } from "react";
-import { Button } from "../ui/button";
-import { Alert, AlertTitle, AlertDescription } from "../ui/alert";
+import { Button } from "~/components/ui/button";
+import { Alert, AlertTitle, AlertDescription } from "~/components/ui/alert";
 import {
   Breadcrumb,
   BreadcrumbList,
   BreadcrumbItem,
   BreadcrumbSeparator,
   BreadcrumbPage,
-} from "../ui/breadcrumb";
-import { LinksWrapperLoader, LinksWrapperRSC } from "./links-list/links-wrapper";
-import { NewLinkDrawer } from "./new-link";
+} from "~/components/ui/breadcrumb";
 import { type Session } from "next-auth";
+import { NewLinkDrawer } from "./new-link";
+import { LinksWrapperLoader, LinksWrapperRSC } from "./links-list/links-wrapper";
 
 export const LinksViewRSC = ({ jwt }: { jwt: Session }) => {
   return (
@@ -50,7 +50,7 @@ export const LinksViewRSC = ({ jwt }: { jwt: Session }) => {
       </article>
 
       <div className="mt-2 flex w-full flex-col items-center justify-start gap-2 sm:flex-row">
-        <NewLinkDrawer />
+        <NewLinkDrawer username={jwt?.user.username ?? ""} />
 
         <Button size="lg" variant="outline" className="w-full">
           <PlusIcon />

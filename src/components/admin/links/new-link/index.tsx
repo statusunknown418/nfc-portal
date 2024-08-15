@@ -1,6 +1,6 @@
 "use client";
 
-import { Pencil2Icon } from "@radix-ui/react-icons";
+import { PlusIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
 import { Button } from "~/components/ui/button";
 import {
@@ -22,10 +22,9 @@ import {
   DrawerTrigger,
 } from "~/components/ui/drawer";
 import { useMediaQuery } from "~/lib/hooks/use-media-query";
-import { EditLinkForm } from "./EditLinkForm";
-import { type RouterOutputs } from "~/trpc/react";
+import { AddEditLinkForm } from "./AddEditLinkForm";
 
-export function EditLinkDrawer({ data }: { data: RouterOutputs["links"]["all"][number] }) {
+export function NewLinkDrawer({ username }: { username: string }) {
   const [open, setOpen] = useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
@@ -33,20 +32,24 @@ export function EditLinkDrawer({ data }: { data: RouterOutputs["links"]["all"][n
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button variant="ghost" className="w-full flex-grow rounded-none border-none p-0">
-            <Pencil2Icon />
+          <Button
+            size="lg"
+            className="w-full shadow-xl shadow-indigo-100 transition-all duration-300 hover:shadow-indigo-400"
+          >
+            <PlusIcon />
+            Add link
           </Button>
         </DialogTrigger>
 
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="sm:max-w-lg">
           <DialogHeader>
-            <DialogTitle>Edit link</DialogTitle>
+            <DialogTitle className="text-xl">New link</DialogTitle>
             <DialogDescription>
-              Make changes to your profile here. Click save when you&apos;re done.
+              Choose from the list of available layouts and customize the link to your liking.
             </DialogDescription>
           </DialogHeader>
 
-          <EditLinkForm link={data} />
+          <AddEditLinkForm onClose={() => setOpen(false)} username={username} />
         </DialogContent>
       </Dialog>
     );
@@ -55,19 +58,24 @@ export function EditLinkDrawer({ data }: { data: RouterOutputs["links"]["all"][n
   return (
     <Drawer open={open} onOpenChange={setOpen} shouldScaleBackground={false}>
       <DrawerTrigger asChild>
-        <Button variant="ghost" className="w-full flex-grow rounded-none border-none p-0">
-          <Pencil2Icon />
+        <Button
+          size="lg"
+          className="w-full shadow-xl shadow-indigo-100 transition-all duration-300 hover:shadow-indigo-400"
+        >
+          <PlusIcon />
+          Add link
         </Button>
       </DrawerTrigger>
+
       <DrawerContent>
         <DrawerHeader className="text-left">
-          <DrawerTitle>Edit profile</DrawerTitle>
+          <DrawerTitle>New link</DrawerTitle>
           <DrawerDescription>
-            Make changes to your profile here. Click save when you&apos;re done.
+            Choose from the list of available layouts and customize the link to your liking.
           </DrawerDescription>
         </DrawerHeader>
 
-        <EditLinkForm className="px-4" link={data} />
+        <AddEditLinkForm className="px-4" onClose={() => setOpen(false)} username={username} />
 
         <DrawerFooter className="pt-2">
           <DrawerClose asChild>

@@ -17,12 +17,14 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { cache, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import { EmptyState } from "~/components/shared/EmptyState";
 import { arrayMove, cn } from "~/lib/utils";
 import { api, type RouterOutputs } from "~/trpc/react";
-import { SortableItem } from "../SortableItem";
-import { LinkItem } from "./LinkItem";
+import { SortableItem } from "../../SortableItem";
+import { positionsStore } from "~/lib/stores/positions";
+import { LinkItem } from "../LinkItem";
 
 export const LinksSortableList = ({
   initialData,
@@ -34,6 +36,8 @@ export const LinksSortableList = ({
   const { data: cacheData } = api.links.all.useQuery(undefined, {
     initialData,
   });
+
+  const updatePositionViaStore = positionsStore((s) => s.setPosition);
 
   const [allLinks, pragmaticUpdate] = useState(cacheData ?? []);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -48,10 +52,19 @@ export const LinksSortableList = ({
 
   const utils = api.useUtils();
   const reorder = api.links.reorder.useMutation({
+    onMutate: async (vars) => {
+      const prevData = utils.links.all.getData();
+
+      updatePositionViaStore(vars.id, vars.newPosition);
+
+      return { prevData };
+    },
     onSuccess: async () => {
-      const prevData = utils.portals.get.getData({ username });
-      console.log({ prevData });
-      await Promise.all([utils.portals.get.refetch({ username })]);
+      await Promise.all([utils.portals.get.invalidate({ username }), utils.links.all.invalidate()]);
+    },
+    onError: (_input, _data, context) => {
+      utils.links.all.setData(undefined, context?.prevData);
+      toast.error("Failed to reorder links");
     },
   });
 
@@ -91,9 +104,11 @@ export const LinksSortableList = ({
 
   useEffect(() => {
     if (cacheData) {
+      /** Used to set the positions in the store, this is way faster than using react-query's `setData()` */
+      cacheData.map((item) => updatePositionViaStore(item.id, item.position));
       pragmaticUpdate(cacheData);
     }
-  }, [cacheData]);
+  }, [cacheData, updatePositionViaStore]);
 
   if (!allLinks.length) {
     return <EmptyState />;
@@ -117,6 +132,7 @@ export const LinksSortableList = ({
           <SortableItem key={item.id} id={item.id}>
             {({ active, attributes, listeners }) => (
               <LinkItem
+                username={username}
                 key={item.id}
                 data={item}
                 className={cn("w-full", active?.id === item.id && "opacity-0")}
@@ -132,7 +148,7 @@ export const LinksSortableList = ({
       <DragOverlay>
         {activeIndex !== null && (
           /** We know the element will exist so using `!` is safe */
-          <LinkItem data={allLinks[activeIndex]!} />
+          <LinkItem data={allLinks[activeIndex]!} username={username} />
         )}
       </DragOverlay>
     </DndContext>
