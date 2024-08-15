@@ -1,6 +1,6 @@
 import { Share2Icon } from "@radix-ui/react-icons";
 import { Suspense } from "react";
-import { LinksViewRSC } from "~/components/admin/links-view";
+import { LinksViewRSC } from "~/components/admin/links/links-view";
 import {
   PortalPreviewWrapperLoader,
   PortalPreviewWrapperRSC,
@@ -28,7 +28,7 @@ export default async function AdminPage() {
   }
 
   return (
-    <section className="flex h-max flex-col gap-4 lg:grid lg:grid-cols-2 lg:justify-between lg:gap-8">
+    <section className="flex h-max flex-col gap-4 lg:grid lg:grid-cols-2 lg:justify-between">
       <LinksViewRSC jwt={jwt} />
 
       <aside className="hidden flex-grow gap-4 pl-6 ring-0 lg:sticky lg:inset-0 lg:block lg:h-[calc(100vh-64px)]">

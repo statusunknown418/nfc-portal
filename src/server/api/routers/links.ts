@@ -16,21 +16,37 @@ export const linksRouter = createTRPCRouter({
   new: protectedProcedure.input(newLinkSchema).mutation(async ({ ctx, input }) => {
     const userId = ctx.session.user.id;
 
-    return ctx.db
+    const [newLInk] = await ctx.db
       .insert(links)
       .values({
         ...input,
         userId,
       })
       .returning();
+
+    return newLInk;
   }),
+
+  toggleActive: protectedProcedure
+    .input(z.object({ id: z.number(), active: z.boolean() }))
+    .mutation(async ({ ctx, input }) => {
+      if (!input.id) {
+        throw new TRPCError({ code: "BAD_REQUEST", message: "No id provided" });
+      }
+
+      return ctx.db.update(links).set({ isActive: input.active }).where(eq(links.id, input.id));
+    }),
 
   edit: protectedProcedure.input(newLinkSchema).mutation(async ({ ctx, input }) => {
     if (!input.id) {
       throw new TRPCError({ code: "BAD_REQUEST", message: "No id provided" });
     }
 
-    return ctx.db.update(links).set(input).where(eq(links.id, input.id)).returning();
+    await ctx.db.update(links).set(input).where(eq(links.id, input.id));
+
+    return {
+      success: true,
+    };
   }),
 
   reorder: protectedProcedure
