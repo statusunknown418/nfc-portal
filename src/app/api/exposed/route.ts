@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 import { type NextRequest, NextResponse } from "next/server";
 
 export const POST = async (req: NextRequest) => {
-  const body = (await req.json()) as { data: unknown; key: string; type: "read" | "write" };
+  const body = (await req.json()) as { data: string | number; key: string; type: "read" | "write" };
 
   if (!body.type) {
     return NextResponse.json({ success: false, error: "type_required" });
