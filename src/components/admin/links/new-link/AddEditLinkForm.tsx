@@ -4,10 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { LightningBoltIcon } from "@radix-ui/react-icons";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import {
-  getAvailableLinkPosition,
-  setAvailableLinkPosition,
-} from "~/components/shared/cookies.actions";
+import { getAvailableLinkPosition, setAvailableLinkPosition } from "~/lib/cookies.actions";
 import { Spinner } from "~/components/shared/Spinner";
 import { Button } from "~/components/ui/button";
 import {

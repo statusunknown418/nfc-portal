@@ -17,7 +17,7 @@ import {
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
 import { Spinner } from "../shared/Spinner";
-import { setDecidedUsername } from "../shared/cookies.actions";
+import { setDecidedUsername } from "../../lib/cookies.actions";
 
 export const loginSchema = z.object({
   email: z.string().email({
