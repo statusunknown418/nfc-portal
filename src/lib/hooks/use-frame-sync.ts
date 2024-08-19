@@ -1,11 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 /**
  * @description use this to sync an iframe with its parent window without reloading the iframe and causing flicker
  * @param action any function to run when the message is received
  * @returns
  */
-export const useFrameSync = <T extends { type: string }>(action: () => void) => {
+export const useFrameSyncReceiver = <T extends { type: string }>(action: () => void) => {
   useEffect(() => {
     const handleMessageListener = (event: MessageEvent) => {
       const message = event.data as T;
@@ -23,4 +23,21 @@ export const useFrameSync = <T extends { type: string }>(action: () => void) => 
   }, [action]);
 
   return;
+};
+
+/**
+ * Complementary to `useFrameSyncReceiver`, this hook is used to send a message FROM the parent window to the iframe
+ * @param listenToKey any string that will be used to resend a message when updated
+ * @returns ref to the iframe
+ */
+export const useFrameSyncSender = (listenToKey: string) => {
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+
+  useEffect(() => {
+    if (iframeRef.current) {
+      iframeRef.current.contentWindow?.postMessage({ type: "reload" });
+    }
+  }, [listenToKey]);
+
+  return iframeRef;
 };

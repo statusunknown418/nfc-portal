@@ -10,6 +10,7 @@ const config = {
     typedRoutes: true,
   },
   images: {
+    dangerouslyAllowSVG: true,
     remotePatterns: [
       {
         hostname: "cdn.discordapp.com",
@@ -17,6 +18,18 @@ const config = {
       },
       {
         hostname: "lh3.googleusercontent.com",
+        protocol: "https",
+      },
+      {
+        hostname: "avatars.githubusercontent.com",
+        protocol: "https",
+      },
+      {
+        hostname: "utfs.io",
+        protocol: "https",
+      },
+      {
+        hostname: "api.dicebear.com",
         protocol: "https",
       },
     ],
