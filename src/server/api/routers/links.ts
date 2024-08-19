@@ -42,7 +42,17 @@ export const linksRouter = createTRPCRouter({
       throw new TRPCError({ code: "BAD_REQUEST", message: "No id provided" });
     }
 
-    await ctx.db.update(links).set(input).where(eq(links.id, input.id));
+    if (!!input.thumbnail && !input.userId) {
+      await ctx.db.update(links).set({ thumbnail: input.thumbnail }).where(eq(links.id, input.id));
+    }
+
+    await ctx.db
+      .update(links)
+      .set({
+        ...input,
+        userId: ctx.session.user.id,
+      })
+      .where(eq(links.id, input.id));
 
     return {
       success: true,

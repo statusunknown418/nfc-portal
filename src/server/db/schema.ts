@@ -47,6 +47,8 @@ export const DEFAULT_THEME: ThemeType = {
 export const links = sqliteTable("links", {
   id: int("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
   displayText: text("display_text"),
+  description: text("description"),
+  buttonLabel: text("button_label"),
   url: text("url"),
   thumbnail: text("thumbnail"),
   isActive: int("active", { mode: "boolean" }).default(true),
@@ -66,9 +68,6 @@ export const newLinkSchema = createInsertSchema(links, {
   url: z.string().url().nullable(),
   type: z.custom<LinkType>().default("basic"),
   userId: z.undefined(),
-}).refine((data) => data.type === "basic" && data.url, {
-  message: "A URL is required for redirectable links!",
-  path: ["url"],
 });
 
 export type NewLinkSchema = z.infer<typeof newLinkSchema>;
