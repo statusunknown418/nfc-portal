@@ -41,7 +41,7 @@ export function EditLinkDrawer({
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>{children}</DialogTrigger>
 
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="sm:max-w-xl">
           <DialogHeader>
             <DialogTitle>Edit link</DialogTitle>
             <DialogDescription>Remember to click save when you&apos;re done.</DialogDescription>

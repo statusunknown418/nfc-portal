@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { Spinner } from "~/components/shared/Spinner";
+import { useFrameSyncSender } from "~/lib/hooks/use-frame-sync";
 import { api, type RouterOutputs } from "~/trpc/react";
 
 export const PortalPreview = ({
@@ -11,20 +12,17 @@ export const PortalPreview = ({
   initialData: RouterOutputs["portals"]["get"];
   username: string;
 }) => {
-  const iframeRef = useRef<HTMLIFrameElement>(null);
-  const [loaded, setLoaded] = useState(false);
-
   const { data: portal } = api.portals.get.useQuery({ username }, { initialData });
 
   const reRenderKey = portal.data?.links
-    .map((link) => `${link.id}-${link.displayText}-${link.url}`)
+    .map(
+      (link) =>
+        `${link.id}-${link.displayText}-${link.url}-${link.layout}-${link.type}-${link.thumbnail}`,
+    )
     .join(",");
 
-  useEffect(() => {
-    if (iframeRef.current) {
-      iframeRef.current.contentWindow?.postMessage({ type: "reload" });
-    }
-  }, [reRenderKey]);
+  const iframeRef = useFrameSyncSender(reRenderKey ?? "sync");
+  const [loaded, setLoaded] = useState(false);
 
   return (
     <>

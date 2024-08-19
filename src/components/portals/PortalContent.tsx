@@ -1,12 +1,13 @@
 "use client";
 
-import Link from "next/link";
-import { useFrameSync } from "~/lib/hooks/use-frame-sync";
+import { useFrameSyncReceiver } from "~/lib/hooks/use-frame-sync";
 import { cn } from "~/lib/utils";
 import { api, type RouterOutputs } from "~/trpc/react";
 import { Spinner } from "../shared/Spinner";
 import { ContactInfo } from "./ContactInfo";
 import { GetYours } from "./GetYours";
+import { LinkViewer } from "./LinkViewer";
+import Image from "next/image";
 
 export const PortalContent = ({
   initialData,
@@ -21,7 +22,7 @@ export const PortalContent = ({
     isRefetching,
   } = api.portals.get.useQuery({ username }, { initialData });
 
-  useFrameSync(() => void refetch());
+  useFrameSyncReceiver(() => void refetch());
 
   if (!portal.data) {
     return;
@@ -46,31 +47,28 @@ export const PortalContent = ({
 
   return (
     <section
-      className={cn("grid h-full grid-cols-1 place-items-center p-4")}
+      className={cn("grid h-full grid-cols-1 place-items-center overflow-y-auto px-4 pb-28 pt-4")}
       style={{
         backgroundColor: portal.data.theme.background.background,
         color: portal.data.theme.foregroundColor,
       }}
     >
       <article className="flex h-full w-full max-w-prose flex-col gap-4">
-        <h1>{username}</h1>
+        {portal.data.image && (
+          <Image
+            alt={`${username} profile image`}
+            width={256}
+            height={256}
+            className="rounded-full"
+            src={portal.data.image}
+          />
+        )}
+        <h1 className="text-2xl font-bold">{username}</h1>
+        <p>{portal.data.bio}</p>
 
-        <ul>
+        <ul className="flex flex-col gap-4">
           {portal.data.links.map((link) => (
-            <li key={link.id}>
-              {link.position} -{" "}
-              {!!link.url ? (
-                <Link
-                  href={{
-                    pathname: link.url,
-                  }}
-                >
-                  {link.displayText}
-                </Link>
-              ) : (
-                link.displayText
-              )}
-            </li>
+            <LinkViewer link={link} key={link.id} />
           ))}
         </ul>
 

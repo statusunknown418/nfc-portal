@@ -1,5 +1,10 @@
 import { type DraggableAttributes } from "@dnd-kit/core";
-import { DragHandleDots1Icon, ExternalLinkIcon, InstagramLogoIcon } from "@radix-ui/react-icons";
+import {
+  DragHandleDots1Icon,
+  ExternalLinkIcon,
+  InstagramLogoIcon,
+  ReaderIcon,
+} from "@radix-ui/react-icons";
 import Link from "next/link";
 import { forwardRef } from "react";
 import { Button } from "~/components/ui/button";
@@ -56,7 +61,13 @@ export const LinkItem = forwardRef<
                     <ExternalLinkIcon className="text-muted-foreground group-hover:text-primary" />
                   )}
 
-                  {data.type === "social" && <InstagramLogoIcon />}
+                  {data.type === "deployable" && (
+                    <ReaderIcon className="text-muted-foreground group-hover:text-primary" />
+                  )}
+
+                  {data.type === "social" && (
+                    <InstagramLogoIcon className="text-muted-foreground group-hover:text-indigo-600" />
+                  )}
                 </div>
               </TooltipTrigger>
 

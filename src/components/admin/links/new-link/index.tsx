@@ -41,7 +41,7 @@ export function NewLinkDrawer({ username }: { username: string }) {
           </Button>
         </DialogTrigger>
 
-        <DialogContent className="sm:max-w-lg">
+        <DialogContent className="sm:max-w-xl">
           <DialogHeader>
             <DialogTitle className="text-xl">New link</DialogTitle>
             <DialogDescription>
