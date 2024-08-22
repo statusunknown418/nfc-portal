@@ -22,7 +22,7 @@ export type ThemeType = {
   };
   buttons: {
     type: "solid" | "outline" | "ghost" | "link";
-    variant: "pill" | "rounded";
+    variant: "pill" | "rounded" | "square";
     textColor: string;
     background: string;
     border?: string;
@@ -141,11 +141,11 @@ export const users = sqliteTable("user", {
   }).default(sql`(unixepoch())`),
   image: text("image", { length: 255 }),
   bio: text("bio"),
-  isPageActive: int("page_active", { mode: "boolean" }).default(true),
+  hasPageActive: int("page_active", { mode: "boolean" }).default(true),
   pageLayout: text("page_layout", { enum: pageLayoutTypes }).default("basic"),
   contactVCard: text("contact_v_card"),
   contactJSON: text("contact_json", { mode: "json" }).$type<ContactVCardType>(),
-  isContactInfoLocked: int("is_contact_info_locked", {
+  hasContactInfoLocked: int("is_contact_info_locked", {
     mode: "boolean",
   }).default(true),
   pageHashKey: text("page_hash_key"),

@@ -14,7 +14,7 @@ export const portalsRouter = createTRPCRouter({
     const cookiePassword = cookies().get(PORTAL_KEY);
 
     const data = await ctx.db.query.users.findFirst({
-      where: and(eq(users.username, input.username), eq(users.isPageActive, true)),
+      where: and(eq(users.username, input.username), eq(users.hasPageActive, true)),
       with: {
         links: {
           where: and(eq(links.isActive, true)),
