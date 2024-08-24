@@ -45,6 +45,7 @@ export const editViewerContactSchema = z.object({
             .optional(),
         }),
       )
+      .max(5)
       .optional(),
     name: z.object({
       last: z.string().optional(),
@@ -66,6 +67,7 @@ export const editViewerContactSchema = z.object({
           type: z.enum(["DOM", "INTL", "POSTAL", "PARCEL", "HOME", "WORK"]).optional(),
         }),
       )
+      .max(5)
       .optional(),
     email: z
       .array(
