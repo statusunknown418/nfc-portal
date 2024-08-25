@@ -68,7 +68,7 @@ export const PortalContent = ({
 
         <ul className="flex flex-col gap-4">
           {portal.data.links.map((link) => (
-            <LinkViewer link={link} key={link.id} />
+            <LinkViewer link={link} key={link.id} buttonStyles={portal.data.theme.buttons} />
           ))}
         </ul>
 

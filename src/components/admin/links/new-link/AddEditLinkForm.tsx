@@ -78,6 +78,13 @@ export function AddEditLinkForm({
   const utils = api.useUtils();
 
   const editLink = api.links.edit.useMutation({
+    onMutate: async (vars) => {
+      void utils.links.all.cancel();
+
+      form.reset({
+        ...vars,
+      });
+    },
     onSuccess: async () => {
       form.reset();
 
@@ -184,7 +191,7 @@ export function AddEditLinkForm({
                 <FormItem
                   className={cn(
                     "flex items-center justify-between gap-4 space-y-0 rounded-lg border border-dashed px-4 py-3",
-                    !!field.value && "border-indigo-500",
+                    !!field.value && "border-indigo-500 bg-white shadow-lg shadow-indigo-100",
                   )}
                 >
                   <FormLabel className="flex items-center gap-1">
