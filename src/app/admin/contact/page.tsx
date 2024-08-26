@@ -1,8 +1,10 @@
-import { DiscIcon, PlusCircledIcon } from "@radix-ui/react-icons";
+import { Suspense } from "react";
+import {
+  ContactDataLoading,
+  ContactDataWrapper,
+} from "~/components/admin/contact/contact-data/contact-data-wrapper";
 import DotPattern from "~/components/magicui/dot-pattern";
 import { CardBody, CardContainer, CardItem } from "~/components/ui/3d-card";
-import { Alert } from "~/components/ui/alert";
-import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -10,15 +12,17 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "~/components/ui/breadcrumb";
-import { Button } from "~/components/ui/button";
-import { FormItem } from "~/components/ui/form";
-import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
-import { Select, SelectTrigger, SelectValue } from "~/components/ui/select";
 import { Switch } from "~/components/ui/switch";
 import { cn } from "~/lib/utils";
+import { api } from "~/trpc/server";
 
 export default async function ContactPage() {
+  const [contactPermissions, contactData] = await Promise.all([
+    api.vCard.hasContactEnabled(),
+    api.vCard.get(),
+  ]);
+
   return (
     <section className="grid h-full w-full grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-10">
       <section className="flex flex-col gap-4">
@@ -38,125 +42,16 @@ export default async function ContactPage() {
           </p>
         </header>
 
-        <Alert variant="indigo" className="border-dashed">
+        <div className={cn("rounded-lg border border-dashed bg-white p-4")}>
           <Label className="flex items-center gap-2">
             <Switch />
             Enable contact information visibility
           </Label>
-        </Alert>
+        </div>
 
-        <form className="mt-4 grid grid-cols-1 gap-4 rounded-lg border bg-white/30 p-6">
-          <div className="flex flex-col gap-6">
-            <div className="flex flex-col items-center gap-4 md:gap-10 lg:flex-row">
-              <Avatar className="h-32 w-32 max-w-32">
-                <AvatarFallback />
-                <AvatarImage src="https://picsum.photos/id/1005/200/200" />
-              </Avatar>
-            </div>
-
-            <article className="flex w-full flex-col gap-4">
-              <div className="flex gap-2">
-                <FormItem className="">
-                  <Label>Company</Label>
-                  <Input placeholder="Meow Studios" />
-                </FormItem>
-
-                <FormItem>
-                  <Label>Position</Label>
-                  <Input placeholder="CEO" />
-                </FormItem>
-              </div>
-
-              <div className="flex gap-2">
-                <FormItem className="flex-grow">
-                  <Label>Name</Label>
-                  <Input placeholder="Alvaro" />
-                </FormItem>
-
-                <FormItem className="flex-grow">
-                  <Label>Last name</Label>
-                  <Input placeholder="Aquije" />
-                </FormItem>
-              </div>
-            </article>
-          </div>
-
-          <div className="flex gap-2">
-            <FormItem className="flex-grow">
-              <Label>Email</Label>
-              <Input placeholder="alvaro@example.com" autoComplete="email" />
-            </FormItem>
-
-            <FormItem className="self-end">
-              <Select>
-                <SelectTrigger className="h-[36px] min-w-32">
-                  <SelectValue placeholder="Primary" />
-                </SelectTrigger>
-              </Select>
-            </FormItem>
-
-            <Button variant="ghost" size="icon" type="button" className="mb-0.5 self-end">
-              <PlusCircledIcon />
-            </Button>
-          </div>
-
-          <div className="flex gap-2">
-            <FormItem className="flex-grow">
-              <Label>Phone number</Label>
-              <Input placeholder="+51 993606898" />
-            </FormItem>
-
-            <FormItem className="self-end">
-              <Select>
-                <SelectTrigger className="h-[36px] min-w-32">
-                  <SelectValue placeholder="Telephone" />
-                </SelectTrigger>
-              </Select>
-            </FormItem>
-
-            <Button variant="ghost" size="icon" type="button" className="mb-0.5 self-end">
-              <PlusCircledIcon />
-            </Button>
-          </div>
-
-          <div className="flex flex-col gap-2 md:flex-row">
-            <FormItem>
-              <Label>Address type</Label>
-              <Select>
-                <SelectTrigger className="h-[36px] min-w-32">
-                  <SelectValue placeholder="Home" />
-                </SelectTrigger>
-              </Select>
-            </FormItem>
-
-            <FormItem className="flex-grow md:self-end">
-              <Input placeholder="Street address" />
-            </FormItem>
-          </div>
-
-          <div className="flex flex-col gap-2 md:flex-row">
-            <FormItem>
-              <Input placeholder="City" autoComplete="address-level1" />
-            </FormItem>
-
-            <FormItem>
-              <Input placeholder="State" />
-            </FormItem>
-
-            <FormItem>
-              <Input placeholder="Zip code" autoComplete="postal-code" />
-            </FormItem>
-
-            <FormItem>
-              <Input placeholder="Country" autoComplete="country" />
-            </FormItem>
-          </div>
-
-          <Button className="mt-4" variant="primary">
-            <DiscIcon />
-            Save
-          </Button>
-        </form>
+        <Suspense fallback={<ContactDataLoading />}>
+          <ContactDataWrapper />
+        </Suspense>
       </section>
 
       <article className="relative mt-4 flex h-full w-full items-start justify-center rounded-lg lg:mt-0">

@@ -29,7 +29,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" className={`${GeistSans.variable} text-sm`}>
       <body className="h-full">
-        <NextTopLoader showSpinner={false} color="#22c55e" height={5} />
+        <NextTopLoader showSpinner={false} color="#4338ca" height={5} />
 
         <TRPCReactProvider>{children}</TRPCReactProvider>
 
