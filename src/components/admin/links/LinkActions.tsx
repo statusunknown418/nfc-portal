@@ -24,6 +24,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "~/components/ui/tooltip";
 import { useMediaQuery } from "~/lib/hooks/use-media-query";
 import { api, type RouterOutputs } from "~/trpc/react";
 
@@ -106,11 +107,19 @@ export const LinkActions = ({
   if (isDesktop) {
     return (
       <DropdownMenu open={open} onOpenChange={setOpen}>
-        <DropdownMenuTrigger asChild>
-          <Button variant="ghost" size="icon" className="group-hover:border-border/50">
-            <HamburgerMenuIcon className="text-muted-foreground group-hover:text-primary" />
-          </Button>
-        </DropdownMenuTrigger>
+        <TooltipProvider delayDuration={0}>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon" className="group-hover:border-border/50">
+                  <HamburgerMenuIcon className="text-muted-foreground group-hover:text-primary" />
+                </Button>
+              </DropdownMenuTrigger>
+            </TooltipTrigger>
+
+            <TooltipContent>Actions</TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
 
         <DropdownMenuContent align="start">
           <DropdownMenuItem onClick={handleToggleActive}>
