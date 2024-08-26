@@ -3,6 +3,7 @@ import { linksRouter } from "./routers/links";
 import { portalsRouter } from "./routers/portals";
 import { viewersRouter } from "./routers/viewers";
 import { vCardsRouter } from "./routers/v-card";
+import { visualCustomizationRouter } from "./routers/visual";
 
 /**
  * This is the primary router for your server.
@@ -14,6 +15,7 @@ export const appRouter = createTRPCRouter({
   portals: portalsRouter,
   viewer: viewersRouter,
   vCard: vCardsRouter,
+  visuals: visualCustomizationRouter,
 });
 
 // export type definition of API

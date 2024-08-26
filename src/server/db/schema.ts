@@ -17,7 +17,7 @@ export type ThemeType = {
   colorScheme: "light" | "dark";
   foregroundColor: string;
   background: {
-    type: "flat" | "pattern";
+    type: "flat" | "pattern" | "image";
     background: string;
   };
   buttons: {

@@ -19,7 +19,7 @@ const SelectTrigger = React.forwardRef<
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      "flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background transition-colors duration-200 placeholder:text-muted-foreground hover:border-primary hover:bg-accent focus:border-ring focus:outline-1 focus:ring-4 focus:ring-ring/30 focus-visible:outline-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
+      "flex h-[36px] w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-white px-3 py-2 text-sm ring-offset-background transition-colors duration-200 placeholder:text-muted-foreground hover:border-primary hover:bg-accent focus:border-ring focus:outline-1 focus:ring-4 focus:ring-ring/30 focus-visible:outline-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
       className,
     )}
     {...props}
@@ -121,7 +121,10 @@ const SelectItem = React.forwardRef<
         <CheckIcon className="h-4 w-4" />
       </SelectPrimitive.ItemIndicator>
     </span>
-    <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
+
+    <SelectPrimitive.ItemText asChild>
+      <div className="flex items-center gap-2">{children}</div>
+    </SelectPrimitive.ItemText>
   </SelectPrimitive.Item>
 ));
 SelectItem.displayName = SelectPrimitive.Item.displayName;
