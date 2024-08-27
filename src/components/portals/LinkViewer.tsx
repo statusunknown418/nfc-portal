@@ -47,7 +47,7 @@ export const LinkViewer = ({
           alt={`link-thumbnail`}
           width={120}
           height={80}
-          className={cn("aspect-square h-14 max-w-14 rounded-md md:h-16")}
+          className={cn("h-14 max-w-14 rounded-md object-cover md:h-16")}
           sizes="(max-width: 768px) 120px, 200px"
         />
       )}

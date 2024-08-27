@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { DEFAULT_THEME } from "../db/schema";
 
 export const editViewerContactSchema = z.object({
   contactJSON: z.object({
@@ -80,30 +79,20 @@ export const editViewerContactSchema = z.object({
 
 export type EditViewerContactSchema = z.infer<typeof editViewerContactSchema>;
 
-export const editVisualCustomizationSchema = z
-  .object({
-    bio: z.string().optional(),
-    pageLayout: z.enum(["basic", "grid", "hero"]),
-    theme: z.object({
-      colorScheme: z.enum(["light", "dark"]),
-      foregroundColor: z.string(),
-      background: z.object({
-        type: z.enum(["flat", "pattern", "image"]),
-        background: z.string(),
-      }),
-      buttons: z.object({
-        type: z.enum(["solid", "outline", "ghost", "link"]),
-        variant: z.enum(["pill", "rounded", "square"]),
-        textColor: z.string(),
-        background: z.string(),
-        border: z.string().optional(),
-      }),
+export const themeSchema = z.object({
+  theme: z.object({
+    colorScheme: z.enum(["light", "dark"]),
+    foregroundColor: z.string(),
+    background: z.object({
+      type: z.enum(["flat", "pattern", "image"]),
+      background: z.string(),
     }),
-  })
-  .default({
-    theme: DEFAULT_THEME,
-    pageLayout: "basic",
-    bio: "",
-  });
-
-export type EditVisualCustomizationSchema = z.infer<typeof editVisualCustomizationSchema>;
+    buttons: z.object({
+      type: z.enum(["solid", "outline", "ghost", "link"]),
+      variant: z.enum(["pill", "rounded", "square"]),
+      textColor: z.string(),
+      background: z.string(),
+      border: z.string().optional(),
+    }),
+  }),
+});

@@ -10,7 +10,7 @@ import {
 
 export default async function VisualCustomizationPage() {
   return (
-    <section className="grid h-full w-full grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-10">
+    <section className="relative grid w-full grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-10">
       <section className="flex flex-col gap-4">
         <Breadcrumb className="self-start">
           <BreadcrumbList>

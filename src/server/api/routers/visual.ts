@@ -1,7 +1,6 @@
 import { eq } from "drizzle-orm";
-import { editVisualCustomizationSchema } from "../schemas.zod";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
-import { users } from "~/server/db/schema";
+import { editVisualCustomizationSchema, users } from "~/server/db/schema";
 
 export const visualCustomizationRouter = createTRPCRouter({
   get: protectedProcedure.query(async ({ ctx }) => {

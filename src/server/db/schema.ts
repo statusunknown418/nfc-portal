@@ -4,6 +4,7 @@ import { index, int, primaryKey, sqliteTable, text } from "drizzle-orm/sqlite-co
 import { createInsertSchema } from "drizzle-zod";
 import { type AdapterAccount } from "next-auth/adapters";
 import { z } from "zod";
+import { themeSchema } from "../api/schemas.zod";
 
 export const linkTypes = ["social", "deployable", "basic"] as const;
 export type LinkType = (typeof linkTypes)[number];
@@ -16,6 +17,7 @@ export type PageLayoutType = (typeof pageLayoutTypes)[number];
 export type ThemeType = {
   colorScheme: "light" | "dark";
   foregroundColor: string;
+  avatarShape: "circle" | "rounded" | "square";
   background: {
     type: "flat" | "pattern" | "image";
     background: string;
@@ -32,15 +34,16 @@ export type ThemeType = {
 export const DEFAULT_THEME: ThemeType = {
   colorScheme: "light",
   foregroundColor: "#FFFFFF",
+  avatarShape: "rounded",
   background: {
     type: "flat",
-    background: "#000222",
+    background: "#f8f8fc",
   },
   buttons: {
     type: "solid",
     variant: "pill",
-    textColor: "#FFFFFF",
-    background: "#007AFF",
+    textColor: "#f8f8fc",
+    background: "#4f46e5",
   },
 };
 
@@ -141,6 +144,7 @@ export const users = sqliteTable("user", {
   }).default(sql`(unixepoch())`),
   image: text("image", { length: 255 }),
   bio: text("bio"),
+  profileHeader: text("profile_header"),
   hasPageActive: int("page_active", { mode: "boolean" }).default(true),
   pageLayout: text("page_layout", { enum: pageLayoutTypes }).default("basic"),
   contactVCard: text("contact_v_card"),
@@ -159,6 +163,15 @@ export const userProfileSchema = createInsertSchema(users, {
   theme: z.custom<ThemeType>(),
   contactJSON: z.custom<ContactVCardType>(),
 });
+
+export const editVisualCustomizationSchema = createInsertSchema(users, {
+  theme: themeSchema.and(z.custom<ThemeType>()),
+  bio: z.string().optional(),
+  profileHeader: z.string().optional(),
+  pageLayout: z.enum(["basic", "grid", "hero"]),
+}).pick({ theme: true, bio: true, profileHeader: true, pageLayout: true });
+
+export type EditVisualCustomizationSchema = z.infer<typeof editVisualCustomizationSchema>;
 
 export const usersRelations = relations(users, ({ many }) => ({
   accounts: many(accounts),
