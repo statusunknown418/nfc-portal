@@ -1,14 +1,18 @@
 "use client";
 
+import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 import type * as LabelPrimitive from "@radix-ui/react-label";
 import { Slot } from "@radix-ui/react-slot";
 import * as React from "react";
 import {
   Controller,
   type ControllerProps,
+  FieldError,
+  FieldErrorsImpl,
   type FieldPath,
   type FieldValues,
   FormProvider,
+  Merge,
   useFormContext,
 } from "react-hook-form";
 
@@ -84,16 +88,19 @@ FormItem.displayName = "FormItem";
 const FormLabel = React.forwardRef<
   React.ElementRef<typeof LabelPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>
->(({ className, ...props }, ref) => {
+>(({ className, children, ...props }, ref) => {
   const { error, formItemId } = useFormField();
 
   return (
     <Label
       ref={ref}
-      className={cn(error && "text-destructive", className)}
+      className={cn("flex items-center gap-1", className)}
       htmlFor={formItemId}
       {...props}
-    />
+    >
+      {children}
+      {error && <ExclamationTriangleIcon className="h-[14px] w-[14px] text-destructive" />}
+    </Label>
   );
 });
 FormLabel.displayName = "FormLabel";
@@ -133,12 +140,36 @@ const FormDescription = React.forwardRef<
 });
 FormDescription.displayName = "FormDescription";
 
+type ArrayFieldError = Merge<
+  FieldError,
+  FieldErrorsImpl<{
+    value: string;
+    id: string;
+  }>
+>;
+
+const isFormArrayField = (arg: FieldError | ArrayFieldError): arg is ArrayFieldError => {
+  return (arg as ArrayFieldError).value !== undefined;
+};
+
+type FormFieldError = FieldError | ArrayFieldError | undefined;
+
 const FormMessage = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, children, ...props }, ref) => {
   const { error, formMessageId } = useFormField();
-  const body = error ? String(error?.message) : children;
+
+  const extendedError = error as FormFieldError;
+
+  let body;
+  if (extendedError === undefined) {
+    body = children;
+  } else if (isFormArrayField(extendedError)) {
+    body = String(extendedError.value?.message);
+  } else {
+    body = String(extendedError.message);
+  }
 
   if (!body) {
     return null;
@@ -148,7 +179,7 @@ const FormMessage = React.forwardRef<
     <p
       ref={ref}
       id={formMessageId}
-      className={cn("text-[0.8rem] font-medium text-destructive", className)}
+      className={cn("text-sm text-destructive", className)}
       {...props}
     >
       {body}
