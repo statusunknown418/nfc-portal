@@ -69,10 +69,11 @@ export const editViewerContactSchema = z.object({
     email: z
       .array(
         z.object({
-          link: z.string(),
+          link: z.string().email(),
           type: z.enum(["PREF", "WORK", "HOME"]),
         }),
       )
+      .max(3)
       .optional(),
   }),
 });

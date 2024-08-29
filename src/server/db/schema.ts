@@ -33,7 +33,7 @@ export type ThemeType = {
 
 export const DEFAULT_THEME: ThemeType = {
   colorScheme: "light",
-  foregroundColor: "#FFFFFF",
+  foregroundColor: "#000000",
   avatarShape: "rounded",
   background: {
     type: "flat",
@@ -152,6 +152,7 @@ export const users = sqliteTable("user", {
   hasContactInfoLocked: int("is_contact_info_locked", {
     mode: "boolean",
   }).default(true),
+  hasPurchasedCard: int("has_purchased_card", { mode: "boolean" }).default(false),
   pageHashKey: text("page_hash_key"),
   metaTitle: text("meta_title", { length: 255 }),
   metaDescription: text("meta_description"),
@@ -176,6 +177,103 @@ export type EditVisualCustomizationSchema = z.infer<typeof editVisualCustomizati
 export const usersRelations = relations(users, ({ many }) => ({
   accounts: many(accounts),
   links: many(links),
+  enterprisesThrough: many(usersToEnterprises),
+}));
+
+export const enterprises = sqliteTable("enterprise", {
+  id: text("id", { length: 255 })
+    .notNull()
+    .primaryKey()
+    .$defaultFn(() => `ent_${createId()}`),
+  name: text("name", { length: 255 }).notNull(),
+  domain: text("domain", { length: 255 }),
+  logo: text("logo", { length: 255 }),
+  description: text("description"),
+  createdAt: int("created_at", { mode: "timestamp" })
+    .default(sql`(unixepoch())`)
+    .notNull(),
+  updatedAt: int("updated_at", { mode: "timestamp" }).$onUpdate(() => new Date()),
+});
+
+export const enterpriseRoleTypes = ["admin", "user"] as const;
+export type EnterpriseRole = (typeof enterpriseRoleTypes)[number];
+
+export const enterpriseUserStatusTypes = ["active", "suspended"] as const;
+export type EnterpriseUserStatus = (typeof enterpriseUserStatusTypes)[number];
+
+export const enterprisesRelations = relations(enterprises, ({ many, one }) => ({
+  usersThrough: many(usersToEnterprises),
+  subscription: one(subscriptions, {
+    fields: [enterprises.id],
+    references: [subscriptions.enterpriseId],
+  }),
+}));
+
+export const usersToEnterprises = sqliteTable("users_to_enterprises", {
+  userId: text("user_id", { length: 255 })
+    .notNull()
+    .references(() => users.id),
+  enterpriseId: text("enterprise_id", { length: 255 })
+    .notNull()
+    .references(() => enterprises.id),
+  role: text("role", { length: 255, enum: enterpriseRoleTypes }).notNull().default("user"),
+  status: text("status", { length: 255, enum: enterpriseUserStatusTypes })
+    .notNull()
+    .default("active"),
+});
+
+export const usersToEnterprisesRelations = relations(usersToEnterprises, ({ one }) => ({
+  user: one(users, { fields: [usersToEnterprises.userId], references: [users.id] }),
+  enterprise: one(enterprises, {
+    fields: [usersToEnterprises.enterpriseId],
+    references: [enterprises.id],
+  }),
+}));
+
+const subscriptionStatusTypes = [
+  "active",
+  "on_trial",
+  "paused",
+  "past_due",
+  "unpaid",
+  "cancelled",
+  "expired",
+] as const;
+export type SubscriptionStatus = (typeof subscriptionStatusTypes)[number];
+
+export const subscriptionPlans = [
+  "basic_monthly",
+  "basic_annual",
+  "pro_monthly",
+  "pro_annual",
+] as const;
+export type SubscriptionPlan = (typeof subscriptionPlans)[number];
+
+export const subscriptions = sqliteTable("subscription", {
+  id: text("id", { length: 255 })
+    .notNull()
+    .primaryKey()
+    .$defaultFn(() => `sub_${createId()}`),
+  enterpriseId: text("enterprise_id", { length: 255 })
+    .notNull()
+    .references(() => enterprises.id),
+  planId: text("plan_id", { length: 255, enum: subscriptionPlans })
+    .notNull()
+    .default("basic_annual"),
+  status: text("status", { length: 255, enum: subscriptionStatusTypes })
+    .notNull()
+    .default("active"),
+  expiresAt: int("expires_at", { mode: "timestamp" }),
+  canceledAt: int("canceled_at", { mode: "timestamp" }),
+  updatedAt: int("updated_at", { mode: "timestamp" }).$onUpdate(() => new Date()),
+  createdAt: int("created_at", { mode: "timestamp" }).default(sql`(unixepoch())`),
+});
+
+export const subscriptionsRelations = relations(subscriptions, ({ one }) => ({
+  enterprise: one(enterprises, {
+    fields: [subscriptions.enterpriseId],
+    references: [enterprises.id],
+  }),
 }));
 
 export const accounts = sqliteTable(

@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/com
 
 export default function VerifyPage() {
   return (
-    <section className="grid h-full place-items-center bg-muted/50">
+    <section className="grid h-screen place-items-center bg-muted/50">
       <Card className="max-w-lg border-dashed border-emerald-500 bg-background text-center">
         <CardHeader className="flex flex-col items-center justify-center">
           <CheckCircledIcon className="h-12 w-12 text-emerald-500" />

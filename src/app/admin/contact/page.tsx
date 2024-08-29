@@ -15,14 +15,8 @@ import {
 import { Label } from "~/components/ui/label";
 import { Switch } from "~/components/ui/switch";
 import { cn } from "~/lib/utils";
-import { api } from "~/trpc/server";
 
 export default async function ContactPage() {
-  const [contactPermissions, contactData] = await Promise.all([
-    api.vCard.hasContactEnabled(),
-    api.vCard.get(),
-  ]);
-
   return (
     <section className="grid h-full w-full grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-10">
       <section className="flex flex-col gap-4">
