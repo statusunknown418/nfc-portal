@@ -1,4 +1,5 @@
 import { Share2Icon } from "@radix-ui/react-icons";
+import { cookies } from "next/headers";
 import { Suspense } from "react";
 import { LinksViewRSC } from "~/components/admin/links/links-view";
 import {
@@ -11,6 +12,7 @@ import { auth } from "~/server/auth";
 
 export default async function AdminPage() {
   const jwt = await auth();
+  const username = jwt?.user.username || cookies().get("decided-username")?.value || "";
 
   if (!jwt) {
     return (
@@ -39,13 +41,13 @@ export default async function AdminPage() {
           </Button>
 
           <Suspense>
-            {!!jwt.user.username && (
+            {!!username && (
               <Suspense fallback={<PortalPreviewWrapperLoader />}>
-                <PortalPreviewWrapperRSC username={jwt.user.username} />
+                <PortalPreviewWrapperRSC username={username} />
               </Suspense>
             )}
 
-            {!jwt.user.username && (
+            {!username && (
               <Alert variant="destructive">
                 <AlertTitle>This is weird, we couldn&apos;t find your username</AlertTitle>
               </Alert>

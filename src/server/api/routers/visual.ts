@@ -111,6 +111,7 @@ export const visualCustomizationRouter = createTRPCRouter({
         theme: true,
         pageLayout: true,
         avatarShape: true,
+        profileHeader: true,
       },
     });
   }),

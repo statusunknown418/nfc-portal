@@ -41,9 +41,9 @@ export const DEFAULT_THEME: ThemeType = {
   },
   buttons: {
     variant: "pill",
-    textColor: "#f8f8fc",
-    background: "#4f46e5",
-    border: "1px solid transparent",
+    textColor: "#000000",
+    background: "#818cf8",
+    border: "1px solid black",
     rounding: "9999px",
   },
 };

@@ -64,7 +64,7 @@ export default async function ContactPage() {
 
               <div className="flex justify-between">
                 <p>Alvaro @status.unknown418</p>
-                <p>Stacked Studio</p>
+                <p>stackkstudios.com</p>
               </div>
             </CardItem>
           </CardBody>
