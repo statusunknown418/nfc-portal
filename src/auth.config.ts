@@ -11,9 +11,13 @@ import { cookies } from "next/headers";
 
 export const AuthConfig = {
   adapter: DrizzleAdapter(db, {
+    // @ts-expect-error what the hell
     usersTable: users,
+    // @ts-expect-error what the hell
     accountsTable: accounts,
+    // @ts-expect-error what the hell
     sessionsTable: sessions,
+    // @ts-expect-error what the hell
     verificationTokensTable: verificationTokens,
   }),
   pages: {
@@ -55,10 +59,10 @@ export const AuthConfig = {
       }
 
       const cookieUsername = cookies().get("decided-username");
-      const name = user.name ?? user.email?.split("@")[0];
-      const image = user.image ?? `https://api.dicebear.com/7.x/initials/svg?seed=${user.name}`;
       const pageHashKey = createId();
       const username = cookieUsername?.value ?? user.email?.split("@")[0] + "_" + pageHashKey;
+      const name = user.email?.split("@")[0];
+      const image = user.image ?? `https://api.dicebear.com/7.x/initials/svg?seed=${username}`;
 
       await db
         .insert(users)

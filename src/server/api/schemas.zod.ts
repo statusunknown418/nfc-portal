@@ -81,19 +81,17 @@ export const editViewerContactSchema = z.object({
 export type EditViewerContactSchema = z.infer<typeof editViewerContactSchema>;
 
 export const themeSchema = z.object({
-  theme: z.object({
-    colorScheme: z.enum(["light", "dark"]),
-    foregroundColor: z.string(),
-    background: z.object({
-      type: z.enum(["flat", "pattern", "image"]),
-      background: z.string(),
-    }),
-    buttons: z.object({
-      type: z.enum(["solid", "outline", "ghost", "link"]),
-      variant: z.enum(["pill", "rounded", "square"]),
-      textColor: z.string(),
-      background: z.string(),
-      border: z.string().optional(),
-    }),
+  themeKey: z.enum(["default", "dark", "minimal", "crazy", "blurry", "stripes", "custom"]),
+  colorScheme: z.enum(["light", "dark"]),
+  foregroundColor: z.string(),
+  background: z.object({
+    type: z.enum(["flat", "pattern", "image"]),
+    background: z.string(),
+  }),
+  buttons: z.object({
+    variant: z.enum(["pill", "rounded", "square"]),
+    textColor: z.string(),
+    background: z.string(),
+    border: z.string().optional(),
   }),
 });

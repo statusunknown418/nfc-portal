@@ -15,35 +15,36 @@ export const pageLayoutTypes = ["basic", "grid", "hero"] as const;
 export type PageLayoutType = (typeof pageLayoutTypes)[number];
 
 export type ThemeType = {
+  themeKey: "default" | "dark" | "minimal" | "crazy" | "blurry" | "stripes" | "custom";
   colorScheme: "light" | "dark";
   foregroundColor: string;
-  avatarShape: "circle" | "rounded" | "square";
   background: {
     type: "flat" | "pattern" | "image";
     background: string;
   };
   buttons: {
-    type: "solid" | "outline" | "ghost" | "link";
     variant: "pill" | "rounded" | "square";
     textColor: string;
     background: string;
-    border?: string;
+    rounding: `${number}px`;
+    border: string;
   };
 };
 
 export const DEFAULT_THEME: ThemeType = {
+  themeKey: "default",
   colorScheme: "light",
   foregroundColor: "#000000",
-  avatarShape: "rounded",
   background: {
     type: "flat",
     background: "#f8f8fc",
   },
   buttons: {
-    type: "solid",
     variant: "pill",
     textColor: "#f8f8fc",
     background: "#4f46e5",
+    border: "1px solid transparent",
+    rounding: "9999px",
   },
 };
 
@@ -51,7 +52,7 @@ export const links = sqliteTable("links", {
   id: int("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
   displayText: text("display_text"),
   description: text("description"),
-  buttonLabel: text("button_label"),
+  buttonLabel: text("button_label").default("Go to link"),
   url: text("url"),
   thumbnail: text("thumbnail"),
   isActive: int("active", { mode: "boolean" }).default(true),
@@ -70,6 +71,7 @@ export const links = sqliteTable("links", {
 export const newLinkSchema = createInsertSchema(links, {
   url: z.string().url().nullable(),
   type: z.custom<LinkType>().default("basic"),
+  buttonLabel: z.string().default("Go to link"),
   userId: z.undefined(),
 });
 
@@ -131,6 +133,9 @@ export type ContactVCardType = {
   }[];
 };
 
+export const avatarShapes = ["circle", "rounded", "square"] as const;
+export type AvatarShape = (typeof avatarShapes)[number];
+
 export const users = sqliteTable("user", {
   id: text("id", { length: 255 })
     .notNull()
@@ -157,6 +162,7 @@ export const users = sqliteTable("user", {
   metaTitle: text("meta_title", { length: 255 }),
   metaDescription: text("meta_description"),
   metaImage: text("meta_image"),
+  avatarShape: text("avatar_shape", { enum: avatarShapes }).notNull().default("rounded"),
   theme: text("theme", { mode: "json" }).notNull().$type<ThemeType>().default(DEFAULT_THEME),
 });
 
@@ -170,7 +176,7 @@ export const editVisualCustomizationSchema = createInsertSchema(users, {
   bio: z.string().optional(),
   profileHeader: z.string().optional(),
   pageLayout: z.enum(["basic", "grid", "hero"]),
-}).pick({ theme: true, bio: true, profileHeader: true, pageLayout: true });
+}).pick({ theme: true, bio: true, profileHeader: true, pageLayout: true, avatarShape: true });
 
 export type EditVisualCustomizationSchema = z.infer<typeof editVisualCustomizationSchema>;
 
@@ -180,7 +186,7 @@ export const usersRelations = relations(users, ({ many }) => ({
   enterprisesThrough: many(usersToEnterprises),
 }));
 
-export const enterprises = sqliteTable("enterprise", {
+export const enterprises = sqliteTable("enterprises", {
   id: text("id", { length: 255 })
     .notNull()
     .primaryKey()
