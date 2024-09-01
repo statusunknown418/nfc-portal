@@ -58,11 +58,11 @@ export const LinkItem = forwardRef<
               <TooltipTrigger asChild>
                 <div className="group ml-4 mt-6 flex">
                   {data.type === "basic" && (
-                    <ExternalLinkIcon className="text-muted-foreground group-hover:text-primary" />
+                    <ExternalLinkIcon className="h-5 w-5 text-muted-foreground group-hover:text-primary" />
                   )}
 
                   {data.type === "deployable" && (
-                    <ReaderIcon className="text-muted-foreground group-hover:text-primary" />
+                    <ReaderIcon className="h-5 w-5 text-muted-foreground group-hover:text-primary" />
                   )}
 
                   {data.type === "social" && (

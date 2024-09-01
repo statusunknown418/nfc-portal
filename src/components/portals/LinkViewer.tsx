@@ -6,11 +6,15 @@ import {
   TwitterLogoIcon,
 } from "@radix-ui/react-icons";
 import Image from "next/image";
+import Link from "next/link";
+import { ComponentProps, useState } from "react";
 import { cn } from "~/lib/utils";
+import { type ThemeType } from "~/server/db/schema";
 import { type RouterOutputs } from "~/trpc/react";
 import { Button } from "../ui/button";
 import {
   Drawer,
+  DrawerClose,
   DrawerContent,
   DrawerDescription,
   DrawerFooter,
@@ -19,7 +23,25 @@ import {
   DrawerTrigger,
 } from "../ui/drawer";
 import { Divider } from "../ui/separator";
-import { type ThemeType } from "~/server/db/schema";
+
+const newShade = (hexColor: string, magnitude: number) => {
+  hexColor = hexColor.replace(`#`, ``);
+  if (hexColor.length === 6) {
+    const decimalColor = parseInt(hexColor, 16);
+    let r = (decimalColor >> 16) + magnitude;
+    r > 255 && (r = 255);
+    r < 0 && (r = 0);
+    let g = (decimalColor & 0x0000ff) + magnitude;
+    g > 255 && (g = 255);
+    g < 0 && (g = 0);
+    let b = ((decimalColor >> 8) & 0x00ff) + magnitude;
+    b > 255 && (b = 255);
+    b < 0 && (b = 0);
+    return `#${(g | (b << 8) | (r << 16)).toString(16)}`;
+  } else {
+    return hexColor;
+  }
+};
 
 export const LinkViewer = ({
   link,
@@ -28,31 +50,77 @@ export const LinkViewer = ({
   link: RouterOutputs["links"]["all"][number];
   buttonStyles: ThemeType["buttons"];
 }) => {
-  return (
-    <article
-      style={{
-        border: buttonStyles.border,
-        background: buttonStyles.background,
-      }}
-      className={cn(
-        "flex h-[4.5rem] w-full items-center justify-between gap-2 text-sm sm:text-base md:h-20 md:px-4 lg:px-6",
-        buttonStyles.variant === "square" && "rounded-none px-2",
-        buttonStyles.variant === "pill" && "rounded-3xl px-2.5",
-        buttonStyles.variant === "rounded" && "rounded-lg px-2",
-      )}
-    >
-      {!!link.thumbnail && (
-        <Image
-          src={link.thumbnail}
-          alt={`link-thumbnail`}
-          width={120}
-          height={80}
-          className={cn("h-14 max-w-14 rounded-md object-cover md:h-16")}
-          sizes="(max-width: 768px) 120px, 200px"
-        />
-      )}
+  const [hover, setHover] = useState(false);
 
-      {!link.thumbnail && <div className="h-14 w-9" />}
+  const commonProps: Pick<ComponentProps<"div">, "className" | "style"> = {
+    style: {
+      border: buttonStyles.border,
+      background: hover ? newShade(buttonStyles.background, 20) : buttonStyles.background,
+    },
+    className: cn(
+      "flex h-16 w-full transition-all hover:scale-105  items-center cursor-pointer justify-between gap-2 text-sm active:ring active:ring-ring active:ring-offset-1 sm:text-base md:h-20 md:px-4 lg:px-6",
+      buttonStyles.variant === "square" && "rounded-none px-2",
+      buttonStyles.variant === "pill" && "rounded-3xl px-2.5",
+      buttonStyles.variant === "rounded" && "rounded-lg px-2",
+    ),
+  };
+
+  const Component = ({ children }: { children: React.ReactNode }) => {
+    if (link.url && link.type !== "deployable") {
+      return (
+        <Link
+          href={{ pathname: link.url }}
+          onMouseEnter={() => setHover(true)}
+          onMouseLeave={() => setHover(false)}
+          {...commonProps}
+        >
+          {children}
+        </Link>
+      );
+    }
+
+    return (
+      <Drawer>
+        <DrawerTrigger
+          asChild
+          onMouseEnter={() => setHover(true)}
+          onMouseLeave={() => setHover(false)}
+        >
+          <section {...commonProps}>{children}</section>
+        </DrawerTrigger>
+
+        <DrawerContent className="mx-auto sm:max-w-4xl md:rounded-t-[40px]">
+          <DrawerHeader>
+            <DrawerTitle className="text-xl">{link.displayText}</DrawerTitle>
+          </DrawerHeader>
+
+          <p className="px-5">{link.description}</p>
+
+          <DrawerFooter>
+            <DrawerClose asChild>
+              <Button asChild>
+                <Link href={{ pathname: link.url }}>{link.buttonLabel}</Link>
+              </Button>
+            </DrawerClose>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
+    );
+  };
+
+  return (
+    <Component>
+      <div className="h-12 w-9">
+        {!!link.thumbnail && (
+          <Image
+            width={56}
+            height={56}
+            src={link.thumbnail}
+            alt={`link-thumbnail`}
+            className={cn("rounded-md object-cover")}
+          />
+        )}
+      </div>
 
       <div
         className="flex flex-grow justify-center text-center"
@@ -66,6 +134,11 @@ export const LinkViewer = ({
       <Drawer>
         <DrawerTrigger asChild>
           <Button
+            onClick={(e) => {
+              e.nativeEvent.stopImmediatePropagation();
+              e.nativeEvent.preventDefault();
+              e.stopPropagation();
+            }}
             variant="ghost"
             size="icon"
             className={cn("min-w-9 hover:border-primary hover:bg-black/20 hover:text-white")}
@@ -124,6 +197,6 @@ export const LinkViewer = ({
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
-    </article>
+    </Component>
   );
 };

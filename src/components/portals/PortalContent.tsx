@@ -20,7 +20,7 @@ export const PortalContent = ({
     data: portal,
     refetch,
     isRefetching,
-  } = api.portals.get.useQuery({ username }, { initialData });
+  } = api.portals.get.useQuery({ username }, { initialData, refetchOnWindowFocus: false });
 
   useFrameSyncReceiver(() => void refetch());
 
@@ -47,26 +47,37 @@ export const PortalContent = ({
 
   return (
     <section
-      className={cn("grid h-full grid-cols-1 place-items-center overflow-y-auto px-4 pb-28 pt-4")}
+      className={cn("grid h-full grid-cols-1 place-items-center overflow-y-auto px-4 pb-28 pt-10")}
       style={{
-        backgroundColor: portal.data.theme.background.background,
+        background: portal.data.theme.background.background,
         color: portal.data.theme.foregroundColor,
       }}
     >
-      <article className="flex h-full w-full max-w-prose flex-col gap-4">
+      <article className="flex h-full w-full max-w-prose flex-col items-center gap-4">
         {portal.data.image && (
           <Image
             alt={`${username} profile image`}
-            width={256}
-            height={256}
-            className="rounded-full"
+            width={100}
+            height={100}
+            className={cn({
+              "rounded-full": portal.data.avatarShape === "circle",
+              "rounded-none": portal.data.avatarShape === "square",
+              "rounded-lg": portal.data.avatarShape === "rounded",
+            })}
             src={portal.data.image}
           />
         )}
-        <h1 className="text-2xl font-bold">{username}</h1>
-        <p>{portal.data.bio}</p>
 
-        <ul className="flex flex-col gap-4">
+        <header className="w-full space-y-1 text-center">
+          <h1 className="text-lg font-semibold">
+            {username} &middot; {portal.data.name}
+          </h1>
+
+          <h2 className="text-base">{portal.data.profileHeader}</h2>
+          <p className="text-sm">{portal.data.bio}</p>
+        </header>
+
+        <ul className="flex w-full flex-col gap-2">
           {portal.data.links.map((link) => (
             <LinkViewer link={link} key={link.id} buttonStyles={portal.data.theme.buttons} />
           ))}

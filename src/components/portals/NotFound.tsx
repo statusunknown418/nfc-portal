@@ -8,11 +8,11 @@ export const NotFound = async () => {
   const session = await auth();
 
   return (
-    <main className="grid h-full grid-cols-1 place-items-center bg-muted/50 dark:bg-background">
+    <main className="grid h-full grid-cols-1 place-items-center bg-muted/50 p-4 dark:bg-background md:p-0">
       <Card className="max-w-sm text-center dark:bg-muted/20">
         <CardHeader>
           <ExclamationTriangleIcon className="h-9 w-9 self-center text-destructive" />
-          <CardTitle className="text-2xl">Username not found</CardTitle>
+          <CardTitle className="text-xl md:text-2xl">Username not found</CardTitle>
           <CardDescription>
             Try approaching the NFC card again or double check the URL.
           </CardDescription>

@@ -15,13 +15,17 @@ export const PortalPreview = ({
   const { data: portal } = api.portals.get.useQuery({ username }, { initialData });
 
   const reRenderKey = portal.data?.links
-    .map(
-      (link) =>
-        `${link.id}-${link.displayText}-${link.url}-${link.layout}-${link.type}-${link.thumbnail}`,
+    .map((link) =>
+      `${link.id}-${link.displayText}-${link.url}-${link.layout}-${link.type}-${link.thumbnail}-${link.description}-${link.buttonLabel}`.replaceAll(
+        " ",
+        "|",
+      ),
     )
     .join(",");
 
-  const iframeRef = useFrameSyncSender(reRenderKey ?? "sync");
+  console.log({ reRenderKey });
+
+  const iframeRef = useFrameSyncSender(reRenderKey ?? `${username}-${portal.data?.pageHashKey}`);
   const [loaded, setLoaded] = useState(false);
 
   return (
@@ -35,9 +39,9 @@ export const PortalPreview = ({
       <iframe
         ref={iframeRef}
         onLoad={() => setLoaded(true)}
+        src={`/${username}?ktp=${portal.data?.pageHashKey}`}
         loading="lazy"
         className="h-full min-h-full w-full"
-        src={`/${username}?ktp=${portal.data?.pageHashKey}`}
       />
     </>
   );

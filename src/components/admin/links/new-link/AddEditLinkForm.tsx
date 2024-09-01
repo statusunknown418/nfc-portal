@@ -291,6 +291,9 @@ export function AddEditLinkForm({
                   <Input placeholder="https://example.com" {...field} value={field.value ?? ""} />
                 </FormControl>
 
+                <FormDescription>
+                  Any valid URL, if set to deployable, this will be the button inside the modal
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}

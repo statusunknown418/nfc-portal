@@ -98,7 +98,7 @@ export const ContactDataForm = ({
 
   return (
     <Form {...form}>
-      <form className="mt-4 grid h-max grid-cols-1 gap-6 rounded-lg border bg-white/30 p-6">
+      <form className="grid h-max grid-cols-1 gap-6 rounded-lg border bg-white/30 p-6">
         <div className="flex flex-col gap-6">
           <div className="flex flex-col items-center gap-4 md:gap-10 lg:flex-row">
             <Avatar className="h-32 w-32 max-w-32">
