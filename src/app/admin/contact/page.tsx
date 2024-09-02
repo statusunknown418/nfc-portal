@@ -12,8 +12,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "~/components/ui/breadcrumb";
-import { Label } from "~/components/ui/label";
-import { Switch } from "~/components/ui/switch";
 import { cn } from "~/lib/utils";
 
 export default async function ContactPage() {
@@ -36,20 +34,13 @@ export default async function ContactPage() {
           </p>
         </header>
 
-        <div className={cn("rounded-lg border border-dashed bg-white p-4")}>
-          <Label className="flex items-center gap-2">
-            <Switch />
-            Enable contact information visibility
-          </Label>
-        </div>
-
         <Suspense fallback={<ContactDataLoading />}>
           <ContactDataWrapper />
         </Suspense>
       </section>
 
-      <article className="relative mt-4 flex h-full w-full items-start justify-center rounded-lg lg:mt-0">
-        <CardContainer className="h-full w-full" containerClassName={cn("h-full w-full z-10")}>
+      <article className="relative mt-4 flex min-h-full w-full items-start justify-center rounded-lg lg:mt-0">
+        <CardContainer className="min-h-full w-full" containerClassName={cn("h-full w-full z-10")}>
           <CardBody className="group/card flex w-full items-start justify-center">
             <CardItem
               translateZ="100"

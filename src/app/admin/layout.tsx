@@ -8,7 +8,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     <section className="mx-auto flex h-screen flex-col-reverse dark:bg-background md:flex-row">
       <Sidebar />
 
-      <main className="relative flex-grow overflow-y-auto px-4 py-6 sm:px-8 md:ml-0 lg:px-14">
+      <main className="relative min-h-full flex-grow overflow-y-auto px-4 py-6 sm:px-8 md:ml-0 lg:px-14">
         {children}
       </main>
 

@@ -6,6 +6,7 @@ import { type Metadata } from "next";
 import NextTopLoader from "nextjs-toploader";
 import { TRPCReactProvider } from "~/trpc/react";
 import { Toaster } from "~/components/ui/sonner";
+import { type Viewport } from "next";
 
 export const metadata: Metadata = {
   title: "NFC Portal",
@@ -25,10 +26,16 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  initialScale: 1,
+  maximumScale: 1,
+  width: "device-width",
+};
+
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${GeistSans.variable} text-sm`}>
-      <body className="h-full">
+    <html lang="en" className={`${GeistSans.variable} md:text-sm`}>
+      <body className="h-screen">
         <NextTopLoader showSpinner={false} color="#4338ca" height={5} />
 
         <TRPCReactProvider>{children}</TRPCReactProvider>
