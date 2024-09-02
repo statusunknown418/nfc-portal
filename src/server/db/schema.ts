@@ -42,7 +42,7 @@ export const DEFAULT_THEME: ThemeType = {
   buttons: {
     variant: "pill",
     textColor: "#000000",
-    background: "#818cf8",
+    background: "#a5b4fc",
     border: "1px solid black",
     rounding: "9999px",
   },
@@ -84,14 +84,14 @@ export const linksRelations = relations(links, ({ one }) => ({
 export type ContactVCardType = {
   url?: string;
   jobTitle?: string;
-  notes: string;
+  notes?: string;
   company?: {
-    name: string;
+    name?: string;
     department?: string;
   };
   social?: {
-    link: string;
-    type: "TWITTER" | "FACEBOOK" | "INSTAGRAM" | "LINKEDIN" | "GITHUB" | "YOUTUBE";
+    link?: string;
+    type?: "TWITTER" | "FACEBOOK" | "INSTAGRAM" | "LINKEDIN" | "GITHUB" | "YOUTUBE";
     handle?: string;
   }[];
   phoneNumbers?: {
@@ -156,7 +156,7 @@ export const users = sqliteTable("user", {
   contactJSON: text("contact_json", { mode: "json" }).$type<ContactVCardType>(),
   hasContactInfoLocked: int("is_contact_info_locked", {
     mode: "boolean",
-  }).default(true),
+  }).default(false),
   hasPurchasedCard: int("has_purchased_card", { mode: "boolean" }).default(false),
   pageHashKey: text("page_hash_key"),
   metaTitle: text("meta_title", { length: 255 }),

@@ -15,12 +15,12 @@ export const vCardsRouter = createTRPCRouter({
     });
   }),
   toggleVisibility: protectedProcedure
-    .input(z.object({ enable: z.boolean() }))
+    .input(z.object({ hide: z.boolean() }))
     .mutation(async ({ ctx, input }) => {
       return ctx.db
         .update(users)
         .set({
-          hasContactInfoLocked: input.enable,
+          hasContactInfoLocked: input.hide,
         })
         .where(eq(users.id, ctx.session.user.id))
         .returning();
@@ -29,8 +29,9 @@ export const vCardsRouter = createTRPCRouter({
     return ctx.db.query.users.findFirst({
       where: (t, op) => op.and(op.eq(t.id, ctx.session.user.id)),
       columns: {
-        contactJSON: true,
         id: true,
+        contactJSON: true,
+        hasContactInfoLocked: true,
       },
     });
   }),
@@ -38,7 +39,7 @@ export const vCardsRouter = createTRPCRouter({
     return ctx.db
       .update(users)
       .set({
-        contactJSON: input.contactJSON,
+        contactJSON: input,
       })
       .where(eq(users.id, ctx.session.user.id))
       .returning();
