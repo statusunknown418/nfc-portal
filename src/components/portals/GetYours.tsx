@@ -21,15 +21,21 @@ export const GetYours = ({ shouldShow = true }: { shouldShow?: boolean }) => {
   return (
     <div className="absolute bottom-10 left-0 flex w-full items-center justify-center">
       <section>
-        <Button asChild className="rounded-full pr-4 shadow-lg" size="lg">
+        <Button
+          asChild
+          className="rounded-full bg-primary/60 pr-4 shadow-lg backdrop-blur backdrop-filter hover:bg-primary/50"
+          size="lg"
+        >
           <div>
-            <Link href="/">🚀 Get your own page!</Link>
+            <Link href="/" className="text-xs">
+              🚀 Get your own page!
+            </Link>
 
             <Button
               asChild
               variant="ghost"
               size="icon"
-              className="ml-1"
+              className="ml-1 hover:bg-primary/30 hover:text-primary-foreground"
               onClick={() => action.mutate()}
             >
               <span>

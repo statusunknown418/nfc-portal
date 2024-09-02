@@ -1,10 +1,12 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Cross2Icon, DiscIcon, PlusIcon } from "@radix-ui/react-icons";
+import { Cross2Icon, PlusIcon } from "@radix-ui/react-icons";
+import { SaveIcon } from "lucide-react";
 import { type User } from "next-auth";
 import { useFieldArray, useForm } from "react-hook-form";
-import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
+import { toast } from "sonner";
+import { Spinner } from "~/components/shared/Spinner";
 import { Button } from "~/components/ui/button";
 import {
   Form,
@@ -34,6 +36,8 @@ export const ContactDataForm = ({
   user: User;
 }) => {
   const { data } = api.vCard.get.useQuery(undefined, { initialData });
+  const { mutateAsync } = api.vCard.edit.useMutation();
+
   const form = useForm({
     resolver: zodResolver(editViewerContactSchema),
     defaultValues: data?.contactJSON
@@ -93,96 +97,105 @@ export const ContactDataForm = ({
   });
 
   const handleSubmit = form.handleSubmit(async (data) => {
-    console.log(data);
+    toast.promise(mutateAsync(data), {
+      loading: "Saving...",
+      success: "Contact information saved",
+      error: "Something went wrong",
+    });
   });
 
   return (
     <Form {...form}>
-      <form className="grid h-max grid-cols-1 gap-6 rounded-lg border bg-white/30 p-6">
-        <div className="flex flex-col gap-6">
-          <div className="flex flex-col items-center gap-4 md:gap-10 lg:flex-row">
+      <form
+        onSubmit={handleSubmit}
+        className="grid h-max grid-cols-1 gap-6 rounded-lg border bg-white/30 p-6"
+      >
+        {/* <div className="flex flex-col items-center gap-4 md:gap-10 lg:flex-row">
             <Avatar className="h-32 w-32 max-w-32">
               <AvatarFallback />
               {!!user.image && <AvatarImage src={user.image} />}
             </Avatar>
+          </div> */}
+
+        <article className="flex w-full flex-col gap-4">
+          <div className="flex gap-2">
+            <FormField
+              control={form.control}
+              name="name.first"
+              render={({ field }) => (
+                <FormItem className="flex-grow">
+                  <FormLabel>First name</FormLabel>
+
+                  <FormControl>
+                    <Input placeholder="Someone" autoComplete="given-name" {...field} />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="name.last"
+              render={({ field }) => (
+                <FormItem className="flex-grow">
+                  <FormLabel>Last name</FormLabel>
+
+                  <FormControl>
+                    <Input placeholder="Doe" autoComplete="family-name" {...field} />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
           </div>
 
-          <article className="flex w-full flex-col gap-4">
-            <div className="flex gap-2">
-              <FormField
-                name="jobTitle"
-                control={form.control}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Position</FormLabel>
+          <div className="flex gap-2">
+            <FormField
+              name="jobTitle"
+              control={form.control}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Position</FormLabel>
 
-                    <FormControl>
-                      <Input placeholder="CEO & co-founder" {...field} />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
+                  <FormControl>
+                    <Input
+                      placeholder="CEO & co-founder"
+                      autoComplete="organization-title"
+                      {...field}
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
 
-              <FormField
-                control={form.control}
-                name="company.name"
-                render={({ field }) => (
-                  <FormItem className="flex-grow">
-                    <FormLabel>Company</FormLabel>
+            <FormField
+              control={form.control}
+              name="company.name"
+              render={({ field }) => (
+                <FormItem className="flex-grow">
+                  <FormLabel>Company</FormLabel>
 
-                    <FormControl>
-                      <Input placeholder="Stackk Studios" {...field} />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
+                  <FormControl>
+                    <Input placeholder="Stackk Studios" {...field} />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
 
-              <FormField
-                control={form.control}
-                name="url"
-                render={({ field }) => (
-                  <FormItem className="flex-grow">
-                    <FormLabel>Company website</FormLabel>
+            <FormField
+              control={form.control}
+              name="url"
+              render={({ field }) => (
+                <FormItem className="flex-grow">
+                  <FormLabel>Company website</FormLabel>
 
-                    <FormControl>
-                      <Input placeholder="stackkstudios.com" {...field} />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-            </div>
-
-            <div className="flex gap-2">
-              <FormField
-                control={form.control}
-                name="name.first"
-                render={({ field }) => (
-                  <FormItem className="flex-grow">
-                    <FormLabel>First name</FormLabel>
-
-                    <FormControl>
-                      <Input placeholder="Someone" {...field} />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="name.last"
-                render={({ field }) => (
-                  <FormItem className="flex-grow">
-                    <FormLabel>Last name</FormLabel>
-
-                    <FormControl>
-                      <Input placeholder="Doe" {...field} />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-            </div>
-          </article>
-        </div>
+                  <FormControl>
+                    <Input placeholder="stackkstudios.com" {...field} />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+          </div>
+        </article>
 
         <section className="grid w-full grid-cols-1 gap-2">
           <Label asChild>
@@ -340,44 +353,92 @@ export const ContactDataForm = ({
                   name={`address.${idx}.type`}
                   render={({ field }) => (
                     <FormItem>
-                      <Select>
+                      <Select value={field.value} onValueChange={field.onChange}>
                         <SelectTrigger className="h-[36px] min-w-32">
                           <SelectValue placeholder="Home" />
                         </SelectTrigger>
+
+                        <SelectContent>
+                          <SelectItem value="DOM">Primary</SelectItem>
+                          <SelectItem value="HOME">Home</SelectItem>
+                          <SelectItem value="WORK">Work</SelectItem>
+                          <SelectItem value="POSTAL">Postal</SelectItem>
+                        </SelectContent>
                       </Select>
                     </FormItem>
                   )}
                 />
 
-                <FormItem className="flex-grow md:self-end">
-                  <Input placeholder="Street address" />
-                </FormItem>
+                <FormField
+                  name={`address.${idx}.street`}
+                  control={form.control}
+                  render={({ field }) => (
+                    <FormItem className="flex-grow md:self-end">
+                      <Input placeholder="Street address" {...field} />
+                    </FormItem>
+                  )}
+                />
               </div>
 
               <div className="flex w-full flex-col gap-2 md:flex-row md:gap-0">
-                <FormItem className="flex-grow">
-                  <Input
-                    placeholder="City"
-                    autoComplete="address-level1"
-                    className="flex-grow rounded-r-none border-r-0"
-                  />
-                </FormItem>
+                <FormField
+                  control={form.control}
+                  name={`address.${idx}.city`}
+                  render={({ field }) => (
+                    <FormItem className="flex-grow">
+                      <Input
+                        placeholder="City"
+                        autoComplete="address-level1"
+                        className="flex-grow rounded-r-none border-r-0"
+                        {...field}
+                      />
+                    </FormItem>
+                  )}
+                />
 
-                <FormItem className="flex-grow">
-                  <Input placeholder="State" className="flex-grow rounded-none border-r-0" />
-                </FormItem>
+                <FormField
+                  control={form.control}
+                  name={`address.${idx}.region`}
+                  render={({ field }) => (
+                    <FormItem className="flex-grow">
+                      <Input
+                        placeholder="State"
+                        className="flex-grow rounded-none border-r-0"
+                        {...field}
+                      />
+                    </FormItem>
+                  )}
+                />
 
-                <FormItem className="flex-grow">
-                  <Input
-                    placeholder="Zip code"
-                    autoComplete="postal-code"
-                    className="rounded-none border-r-0"
-                  />
-                </FormItem>
+                <FormField
+                  control={form.control}
+                  name={`address.${idx}.postalCode`}
+                  render={({ field }) => (
+                    <FormItem className="flex-grow">
+                      <Input
+                        placeholder="Zip code"
+                        autoComplete="postal-code"
+                        className="rounded-none border-r-0"
+                        {...field}
+                      />
+                    </FormItem>
+                  )}
+                />
 
-                <FormItem className="flex-grow">
-                  <Input placeholder="Country" autoComplete="country" className="rounded-l-none" />
-                </FormItem>
+                <FormField
+                  control={form.control}
+                  name={`address.${idx}.country`}
+                  render={({ field }) => (
+                    <FormItem className="flex-grow">
+                      <Input
+                        placeholder="Country"
+                        autoComplete="country"
+                        className="rounded-l-none"
+                        {...field}
+                      />
+                    </FormItem>
+                  )}
+                />
               </div>
 
               <div className="mt-1 flex justify-end">
@@ -417,7 +478,7 @@ export const ContactDataForm = ({
         </section>
 
         <Button className="mt-4" variant="primary">
-          <DiscIcon />
+          {form.formState.isSubmitting ? <Spinner /> : <SaveIcon size={15} />}
           Save
         </Button>
       </form>

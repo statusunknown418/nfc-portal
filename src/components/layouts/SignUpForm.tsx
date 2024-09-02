@@ -1,5 +1,4 @@
 "use client";
-import { useMaskito } from "@maskito/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DiscordLogoIcon } from "@radix-ui/react-icons";
 import { signIn } from "next-auth/react";
@@ -16,19 +15,14 @@ import {
   FormMessage,
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
-import { Spinner } from "../shared/Spinner";
 import { setDecidedUsername } from "../../lib/cookies.actions";
+import { Spinner } from "../shared/Spinner";
 
 export const signUpSchema = z.object({
   email: z.string().email({
     message: "A valid email address is required",
   }),
-  username: z
-    .string()
-    .regex(/^[a-zA-Z0-9_.]+$/)
-    .trim()
-    .optional()
-    .transform((val) => `@${val}`),
+  username: z.string().trim().optional(),
 });
 
 export default function SignUpForm() {
@@ -66,6 +60,9 @@ export default function SignUpForm() {
                     {...field}
                     className="rounded-l-none border-l-0 focus-visible:ring-0 focus-visible:ring-offset-0"
                     placeholder="@the.architect"
+                    autoCapitalize="off"
+                    autoCorrect="off"
+                    autoComplete="username"
                     disabled={form.formState.isSubmitting}
                   />
                 </FormControl>

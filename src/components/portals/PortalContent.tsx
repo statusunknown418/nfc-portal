@@ -8,6 +8,7 @@ import { ContactInfo } from "./ContactInfo";
 import { GetYours } from "./GetYours";
 import { LinkViewer } from "./LinkViewer";
 import Image from "next/image";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 
 export const PortalContent = ({
   initialData,
@@ -70,20 +71,42 @@ export const PortalContent = ({
 
         <header className="w-full space-y-1 text-center">
           <h1 className="text-lg font-semibold">
-            {username} &middot; {portal.data.name}
+            {username} &middot; <span className="font-normal">{portal.data.name}</span>
           </h1>
 
           <h2 className="text-base">{portal.data.profileHeader}</h2>
           <p className="text-sm">{portal.data.bio}</p>
         </header>
 
-        <ul className="flex w-full flex-col gap-2">
-          {portal.data.links.map((link) => (
-            <LinkViewer link={link} key={link.id} buttonStyles={portal.data.theme.buttons} />
-          ))}
-        </ul>
+        <Tabs
+          className="w-full"
+          defaultValue={portal.data.hasContactInfoLocked ? "links" : "contact"}
+        >
+          {!portal.data.hasContactInfoLocked && (
+            <TabsList className="mb-4 flex w-full border border-border/50">
+              <TabsTrigger value="contact" className="flex-grow">
+                Contact
+              </TabsTrigger>
+              <TabsTrigger value="links" className="flex-grow">
+                Links
+              </TabsTrigger>
+            </TabsList>
+          )}
 
-        <ContactInfo unlocked={portal.unlocked} data={portal.data?.contactJSON} />
+          {!portal.data.hasContactInfoLocked && (
+            <TabsContent value="contact">
+              <ContactInfo unlocked={portal.unlocked} data={portal.data?.contactJSON} />
+            </TabsContent>
+          )}
+
+          <TabsContent value="links">
+            <ul className="flex w-full flex-col gap-2">
+              {portal.data.links.map((link) => (
+                <LinkViewer link={link} key={link.id} buttonStyles={portal.data.theme.buttons} />
+              ))}
+            </ul>
+          </TabsContent>
+        </Tabs>
 
         <GetYours />
       </article>

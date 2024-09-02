@@ -72,6 +72,9 @@ export const LoginForm = () => {
                 <Input
                   {...field}
                   placeholder="the.architect@nearu.tech"
+                  autoCapitalize="off"
+                  autoCorrect="off"
+                  autoComplete="email"
                   disabled={form.formState.isSubmitting}
                 />
               </FormControl>

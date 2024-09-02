@@ -7,8 +7,8 @@ import {
 } from "@radix-ui/react-icons";
 import Image from "next/image";
 import Link from "next/link";
-import { ComponentProps, useState } from "react";
-import { cn } from "~/lib/utils";
+import { type ComponentProps, useState } from "react";
+import { cn, newShade, preventBackdropClick } from "~/lib/utils";
 import { type ThemeType } from "~/server/db/schema";
 import { type RouterOutputs } from "~/trpc/react";
 import { Button } from "../ui/button";
@@ -23,25 +23,6 @@ import {
   DrawerTrigger,
 } from "../ui/drawer";
 import { Divider } from "../ui/separator";
-
-const newShade = (hexColor: string, magnitude: number) => {
-  hexColor = hexColor.replace(`#`, ``);
-  if (hexColor.length === 6) {
-    const decimalColor = parseInt(hexColor, 16);
-    let r = (decimalColor >> 16) + magnitude;
-    r > 255 && (r = 255);
-    r < 0 && (r = 0);
-    let g = (decimalColor & 0x0000ff) + magnitude;
-    g > 255 && (g = 255);
-    g < 0 && (g = 0);
-    let b = ((decimalColor >> 8) & 0x00ff) + magnitude;
-    b > 255 && (b = 255);
-    b < 0 && (b = 0);
-    return `#${(g | (b << 8) | (r << 16)).toString(16)}`;
-  } else {
-    return hexColor;
-  }
-};
 
 export const LinkViewer = ({
   link,
@@ -81,17 +62,15 @@ export const LinkViewer = ({
 
     return (
       <Drawer>
-        <DrawerTrigger
-          asChild
-          onMouseEnter={() => setHover(true)}
-          onMouseLeave={() => setHover(false)}
-        >
+        <DrawerTrigger asChild>
           <section {...commonProps}>{children}</section>
         </DrawerTrigger>
 
-        <DrawerContent className="mx-auto sm:max-w-4xl md:rounded-t-[40px]">
+        <DrawerContent className="mx-auto w-full sm:max-w-4xl md:rounded-t-[40px]">
           <DrawerHeader>
-            <DrawerTitle className="text-xl">{link.displayText}</DrawerTitle>
+            <DrawerTitle className="text-xl" autoFocus>
+              {link.displayText}
+            </DrawerTitle>
           </DrawerHeader>
 
           <p className="px-5">{link.description}</p>
@@ -131,14 +110,10 @@ export const LinkViewer = ({
         {link.displayText}
       </div>
 
-      <Drawer>
+      <Drawer modal>
         <DrawerTrigger asChild>
           <Button
-            onClick={(e) => {
-              e.nativeEvent.stopImmediatePropagation();
-              e.nativeEvent.preventDefault();
-              e.stopPropagation();
-            }}
+            onClick={preventBackdropClick}
             variant="ghost"
             size="icon"
             className={cn("min-w-9 hover:border-primary hover:bg-black/20 hover:text-white")}
