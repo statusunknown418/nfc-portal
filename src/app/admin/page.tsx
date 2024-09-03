@@ -12,7 +12,7 @@ import { auth } from "~/server/auth";
 
 export default async function AdminPage() {
   const jwt = await auth();
-  const username = jwt?.user.username || cookies().get("decided-username")?.value || "";
+  const username = jwt?.user.username ?? cookies().get("decided-username")?.value ?? "";
 
   if (!jwt) {
     return (
