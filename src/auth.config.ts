@@ -26,13 +26,15 @@ export const AuthConfig = {
   },
   callbacks: {
     jwt: async ({ token, user }) => {
-      if (user) {
-        token.id = user.id;
-        token.name = user.name;
-        token.picture = user.image;
-        // @ts-expect-error weird TS bug
-        token.username = user.username;
+      if (!user) {
+        return token;
       }
+
+      token.id = user.id;
+      token.name = user.name;
+      token.picture = user.image;
+      // @ts-expect-error weird TS bug
+      token.username = cookies().get("decided-username")?.value ?? user.username;
 
       return token;
     },
@@ -63,6 +65,10 @@ export const AuthConfig = {
       const username = cookieUsername?.value ?? user.email?.split("@")[0] + "_" + pageHashKey;
       const name = user.email?.split("@")[0];
       const image = user.image ?? `https://api.dicebear.com/7.x/initials/svg?seed=${username}`;
+
+      if (!cookieUsername?.value) {
+        cookies().set("decided-username", username, { path: "/" });
+      }
 
       await db
         .insert(users)
