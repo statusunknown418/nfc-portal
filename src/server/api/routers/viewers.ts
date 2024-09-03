@@ -30,6 +30,15 @@ export const viewersRouter = createTRPCRouter({
   get: protectedProcedure.query(async ({ ctx }) => {
     return ctx.db.query.users.findFirst({
       where: (t, op) => op.and(op.eq(t.id, ctx.session.user.id)),
+      columns: {
+        id: true,
+        name: true,
+        email: true,
+        username: true,
+        pageHashKey: true,
+        image: true,
+        hasPurchasedCard: true,
+      },
     });
   }),
 });
