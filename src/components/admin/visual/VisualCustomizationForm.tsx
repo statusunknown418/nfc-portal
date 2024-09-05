@@ -42,7 +42,7 @@ import { useAutoSaveFormData } from "~/lib/hooks/use-auto-save";
 import { UploadDropzone } from "~/lib/uploadthing";
 import { cn } from "~/lib/utils";
 import {
-  AvatarShape,
+  type AvatarShape,
   editVisualCustomizationSchema,
   type EditVisualCustomizationSchema,
 } from "~/server/db/schema";
@@ -85,14 +85,14 @@ export const VisualCustomizationForm = ({
           <article className="flex flex-col gap-4 rounded-lg border p-6">
             <h2 className="text-lg font-semibold">Avatar</h2>
 
-            <section className="relative flex h-[320px] w-[200px] justify-center gap-2">
+            <section className="relative flex h-[200px] w-[200px] justify-center gap-2">
               {avatar && (
                 <div
                   className={cn(
-                    "absolute z-0 h-[320px] w-[200px] overflow-hidden rounded-lg border",
+                    "absolute z-0 h-[200px] w-[200px] overflow-hidden rounded-lg border",
                     {
-                      "h-[200px] self-center rounded-full": avatarShape === "circle",
-                      "h-[300px] w-[180px] self-center rounded-none": avatarShape === "square",
+                      "self-center rounded-full": avatarShape === "circle",
+                      "self-center rounded-none": avatarShape === "square",
                     },
                   )}
                 >

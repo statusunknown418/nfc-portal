@@ -1,14 +1,15 @@
 "use client";
 
+import Image from "next/image";
 import { useFrameSyncReceiver } from "~/lib/hooks/use-frame-sync";
 import { cn } from "~/lib/utils";
 import { api, type RouterOutputs } from "~/trpc/react";
 import { Spinner } from "../shared/Spinner";
+import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import { ContactInfo } from "./ContactInfo";
 import { GetYours } from "./GetYours";
 import { LinkViewer } from "./LinkViewer";
-import Image from "next/image";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 
 export const PortalContent = ({
   initialData,
@@ -32,7 +33,7 @@ export const PortalContent = ({
   if (isRefetching) {
     return (
       <section
-        className={cn("grid h-full grid-cols-1 place-items-center p-4")}
+        className={cn("grid h-screen grid-cols-1 place-items-center p-4")}
         style={{
           backgroundColor: portal.data.theme.background.background,
           color: portal.data.theme.foregroundColor,
@@ -48,7 +49,9 @@ export const PortalContent = ({
 
   return (
     <section
-      className={cn("grid h-full grid-cols-1 place-items-center overflow-y-auto px-4 pb-28 pt-10")}
+      className={cn(
+        "grid min-h-screen grid-cols-1 place-items-center overflow-y-auto px-4 pb-28 pt-10",
+      )}
       style={{
         background: portal.data.theme.background.background,
         color: portal.data.theme.foregroundColor,
@@ -58,9 +61,9 @@ export const PortalContent = ({
         {portal.data.image && (
           <Image
             alt={`${username} profile image`}
-            width={100}
-            height={100}
-            className={cn({
+            width={80}
+            height={80}
+            className={cn("h-[80px] w-[80px] object-cover", {
               "rounded-full": portal.data.avatarShape === "circle",
               "rounded-none": portal.data.avatarShape === "square",
               "rounded-lg": portal.data.avatarShape === "rounded",
@@ -69,29 +72,32 @@ export const PortalContent = ({
           />
         )}
 
-        <header className="w-full space-y-1 text-center">
-          <h1 className="text-lg font-semibold">
-            {username} &middot; <span className="font-normal">{portal.data.name}</span>
-          </h1>
+        <header className="flex w-full flex-col gap-0.5 text-center">
+          <h1 className="text-sm">{username}</h1>
+          <h2 className="text-base font-semibold">{portal.data.name}</h2>
 
-          <h2 className="text-base">{portal.data.profileHeader}</h2>
-          <p className="text-sm">{portal.data.bio}</p>
+          <div className="my-3 flex w-full flex-wrap items-center justify-center gap-1 border-y py-2.5">
+            <h2 className="text-base">{portal.data.profileHeader}</h2>
+            <span>&middot;</span>
+            <p className="text-sm font-light">{portal.data.bio}</p>
+          </div>
         </header>
 
         <Tabs
           className="w-full"
           defaultValue={portal.data.hasContactInfoLocked ? "links" : "contact"}
         >
-          {!portal.data.hasContactInfoLocked && (
-            <TabsList className="mb-4 flex w-full border border-border/50">
+          <TabsList className="mb-4 flex w-full border border-border/50">
+            {!portal.data.hasContactInfoLocked && (
               <TabsTrigger value="contact" className="flex-grow">
                 Contact
               </TabsTrigger>
-              <TabsTrigger value="links" className="flex-grow">
-                Links
-              </TabsTrigger>
-            </TabsList>
-          )}
+            )}
+
+            <TabsTrigger value="links" className="flex-grow">
+              Links
+            </TabsTrigger>
+          </TabsList>
 
           {!portal.data.hasContactInfoLocked && (
             <TabsContent value="contact">
@@ -101,15 +107,26 @@ export const PortalContent = ({
 
           <TabsContent value="links">
             <ul className="flex w-full flex-col gap-2">
+              {!portal.data.links.length && (
+                <Alert className="border-dashed">
+                  <AlertTitle className="text-center text-base font-semibold">
+                    No links added yet
+                  </AlertTitle>
+                  <AlertDescription className="text-center">
+                    If this is your first time here, you can add some links to your profile.
+                  </AlertDescription>
+                </Alert>
+              )}
+
               {portal.data.links.map((link) => (
                 <LinkViewer link={link} key={link.id} buttonStyles={portal.data.theme.buttons} />
               ))}
             </ul>
           </TabsContent>
         </Tabs>
-
-        <GetYours />
       </article>
+
+      <GetYours />
     </section>
   );
 };

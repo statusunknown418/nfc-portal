@@ -53,7 +53,7 @@ export default function SignUpForm() {
             <FormItem>
               <div className="flex items-center gap-0 rounded-md shadow-lg shadow-indigo-100 transition-shadow duration-100 has-[input:focus]:shadow-indigo-400">
                 <p className="flex h-[36px] w-56 items-center rounded-l-md border bg-primary px-3 text-sm text-primary-foreground">
-                  https://neau.tech/
+                  https://nearu.tech/
                 </p>
                 <FormControl>
                   <Input
@@ -86,6 +86,9 @@ export default function SignUpForm() {
                 <Input
                   {...field}
                   placeholder="the.architect@nearu.tech"
+                  autoCapitalize="off"
+                  autoCorrect="off"
+                  autoComplete="email"
                   disabled={form.formState.isSubmitting}
                 />
               </FormControl>

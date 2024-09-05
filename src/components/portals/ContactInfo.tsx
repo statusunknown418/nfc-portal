@@ -1,7 +1,11 @@
 "use client";
 
+import Link from "next/link";
 import { type ContactVCardType } from "~/server/db/schema";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
+import { Button } from "../ui/button";
+import { ExclamationTriangleIcon, IdCardIcon } from "@radix-ui/react-icons";
+import vCardBuilder from "vcard-creator";
 
 export const ContactInfo = ({
   unlocked,
@@ -12,29 +16,166 @@ export const ContactInfo = ({
 }) => {
   if (!unlocked) {
     return (
-      <Card className="relative border-2 border-dashed">
-        <section className="absolute inset-0 flex h-full w-full flex-col items-center justify-center gap-1 rounded-lg bg-background/50 p-6 backdrop-blur backdrop-filter">
-          <h3>🔒 Contact info is locked.</h3>
-          <p className="text-sm text-muted-foreground">
-            This is automatically unlocked when the owner&apos;s NFC card is scanned.
+      <Card className="relative border-dashed border-destructive py-4">
+        <section className="absolute inset-0 flex h-full w-full flex-col items-center justify-center gap-2 rounded-lg bg-destructive/5 p-4 text-center backdrop-blur backdrop-filter">
+          <h3 className="font-semibold">🔒 Contact info not visible</h3>
+
+          <p className="text-sm">
+            This will be automatically unlocked when the owner&apos;s card is approached to your
+            phone.
           </p>
         </section>
+
         <CardHeader>
-          <CardTitle>Contact</CardTitle>
+          <CardTitle />
         </CardHeader>
 
-        <CardContent>What are you looking for huh?</CardContent>
+        <CardContent />
       </Card>
     );
   }
 
+  if (!data) {
+    return (
+      <Card>
+        <CardContent>
+          <CardHeader>
+            <CardTitle>No contact info found</CardTitle>
+            <CardDescription>
+              The page owner hasn&apos;t added any contact info yet.
+            </CardDescription>
+          </CardHeader>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  const handleImport = () => {
+    const vCard = new vCardBuilder();
+    vCard.addName(data.name?.last, data.name?.first);
+    data.company?.name && vCard.addCompany(data.company?.name, data.company?.department);
+    data.jobTitle && vCard.addJobtitle(data.jobTitle);
+    data.phoneNumbers?.forEach((phone) => vCard.addPhoneNumber(phone.number, phone.type));
+    data.email?.forEach((email) => vCard.addEmail(email.link, email.type));
+    data.address?.forEach((address) =>
+      vCard.addAddress(
+        "",
+        undefined,
+        address.street,
+        address.city,
+        address.region,
+        address.postalCode,
+        address.country,
+        address.type,
+      ),
+    );
+
+    const blob = new Blob([vCard.buildVCard()], {
+      type: "text/vcard",
+    });
+
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `${data.name?.first ?? "user"}_${data.name?.last ?? "contact"}.vcf`;
+
+    link.click();
+  };
+
   return (
-    <div className="rounded-lg border p-6">
-      <h3>Contact info</h3>
-      🔓 SENSITIVE INFO UNLOCKED
-      <p>
-        {data?.name.first} {data?.name.last}
-      </p>
-    </div>
+    <>
+      <Button className="mb-4 w-full" size="lg" onClick={handleImport}>
+        <IdCardIcon className="h-5 w-5" />
+        Import contact
+      </Button>
+
+      <section className="flex flex-col gap-3 rounded-lg border border-dashed bg-muted py-4 shadow-lg">
+        <article className="flex flex-col gap-1 px-4">
+          {!data.name.first && (
+            <p className="mt-2 flex flex-col items-center gap-2 self-center text-center font-light">
+              <ExclamationTriangleIcon className="h-5 w-5 text-amber-600" />
+
+              <span className="text-sm">No contact info added yet</span>
+            </p>
+          )}
+
+          <h3 className="text-lg font-semibold">
+            {data?.name?.first} {data?.name?.last}
+          </h3>
+
+          {data?.jobTitle && <p className="text-sm font-light tracking-tight">{data.jobTitle}</p>}
+
+          {data?.company?.name && (
+            <p className="text-sm font-light tracking-tight">{data.company.name}</p>
+          )}
+        </article>
+
+        {!!data.phoneNumbers?.length && (
+          <article className="flex flex-col gap-2 border-b pt-2">
+            <p className="px-4 text-sm font-medium">Phone number(s)</p>
+
+            <ul className="flex w-full flex-col">
+              {data.phoneNumbers.map((phone) => (
+                <li
+                  key={phone.number}
+                  className="flex w-full items-center gap-2 border-b bg-background py-2 first:border-t last:border-b-0"
+                >
+                  <p className="ml-4 text-xs font-semibold text-blue-600">{phone.type}</p>
+                  <p className="pr-4 text-sm font-light tracking-tight">{phone.number}</p>
+                </li>
+              ))}
+            </ul>
+          </article>
+        )}
+
+        {!!data.email?.length && (
+          <article className="flex flex-col gap-2 border-b pt-2">
+            <p className="px-4 text-sm font-medium">Email(s)</p>
+
+            <ul className="flex w-full flex-col">
+              {data.email.map((email) => (
+                <Link
+                  className="flex w-full items-center gap-2 border-b bg-background px-4 py-2 first:border-t last:border-b-0"
+                  key={email.link}
+                  href={{
+                    pathname: `mailto:${email.link}`,
+                    query: { subject: `Hello ${data.name?.first}!` },
+                  }}
+                >
+                  <p className="text-sm font-light tracking-tight">{email.link}</p>
+                </Link>
+              ))}
+            </ul>
+          </article>
+        )}
+
+        {!!data.address?.length && (
+          <article className="flex flex-col gap-2 border-b pt-2">
+            <p className="px-4 text-sm font-medium">Address(es)</p>
+
+            <ul className="flex w-full flex-col">
+              {data.address.map((address, idx) => (
+                <li
+                  key={idx}
+                  className="flex w-full flex-col gap-0.5 border-b bg-background px-4 py-2 first:border-t last:border-b-0"
+                >
+                  <p className="text-sm tracking-tight">{address.street}</p>
+                  <p className="text-sm font-light tracking-tight">{address.region}</p>
+                  <p className="text-sm font-light tracking-tight">{address.city}</p>
+
+                  <div className="flex gap-1">
+                    <p className="text-sm font-light tracking-tight">{address.postalCode}</p>
+                    <p className="text-sm font-light tracking-tight">{address.country}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </article>
+        )}
+
+        <p></p>
+      </section>
+    </>
   );
 };

@@ -19,13 +19,9 @@ export const GetYours = ({ shouldShow = true }: { shouldShow?: boolean }) => {
   }
 
   return (
-    <div className="absolute bottom-10 left-0 flex w-full items-center justify-center">
+    <div className="mt-8 flex w-full items-center justify-center">
       <section>
-        <Button
-          asChild
-          className="rounded-full bg-primary/60 pr-4 shadow-lg backdrop-blur backdrop-filter hover:bg-primary/50"
-          size="lg"
-        >
+        <Button asChild className="rounded-full pr-4 shadow-lg" size="lg">
           <div>
             <Link href="/" className="text-xs">
               🚀 Get your own page!

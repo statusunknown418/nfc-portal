@@ -1,7 +1,6 @@
 "use client";
 
 import VCard from "vcard-creator";
-import Link from "next/link";
 import { Button } from "./ui/button";
 
 export const Example = () => {

@@ -7,6 +7,7 @@ import { type User } from "next-auth";
 import { useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { type z } from "zod";
 import { Spinner } from "~/components/shared/Spinner";
 import { Button } from "~/components/ui/button";
 import {
@@ -66,16 +67,20 @@ export const ContactDataForm = ({
 
     toast.promise(toggleVisibility({ hide: !isHidden }), {
       loading: "Saving...",
-      success: `Contact visibility ${!isHidden ? "enabled" : "disabled"}`,
+      success: `Contact visibility ${isHidden ? "enabled" : "disabled"}`,
       error: "Something went wrong",
     });
   };
 
-  const form = useForm({
+  const form = useForm<z.infer<typeof editViewerContactSchema>>({
     resolver: zodResolver(editViewerContactSchema),
     defaultValues: data?.contactJSON
       ? data?.contactJSON
       : {
+          name: {
+            first: user.name?.split(" ")[0] ?? "",
+            last: user.name?.split(" ")[1] ?? "",
+          },
           email: [
             {
               link: user.email ?? "",
@@ -130,6 +135,11 @@ export const ContactDataForm = ({
   });
 
   const handleSubmit = form.handleSubmit(async (data) => {
+    `2000 Ponce De Leon Blvd.
+Suite 600
+Coral Gables FLORIDA 33134
+United States`;
+
     toast.promise(mutateAsync(data), {
       loading: "Saving...",
       success: "Contact information saved",
@@ -415,7 +425,11 @@ export const ContactDataForm = ({
                     control={form.control}
                     render={({ field }) => (
                       <FormItem className="flex-grow md:self-end">
-                        <Input placeholder="Street address" {...field} />
+                        <Input
+                          placeholder="Street address"
+                          autoComplete="address-line1"
+                          {...field}
+                        />
                       </FormItem>
                     )}
                   />
@@ -424,12 +438,11 @@ export const ContactDataForm = ({
                 <div className="flex w-full flex-col gap-2 md:flex-row md:gap-0">
                   <FormField
                     control={form.control}
-                    name={`address.${idx}.city`}
+                    name={`address.${idx}.region`}
                     render={({ field }) => (
                       <FormItem className="flex-grow">
                         <Input
-                          placeholder="City"
-                          autoComplete="address-level1"
+                          placeholder="State"
                           className="flex-grow rounded-r-none border-r-0"
                           {...field}
                         />
@@ -439,11 +452,11 @@ export const ContactDataForm = ({
 
                   <FormField
                     control={form.control}
-                    name={`address.${idx}.region`}
+                    name={`address.${idx}.city`}
                     render={({ field }) => (
                       <FormItem className="flex-grow">
                         <Input
-                          placeholder="State"
+                          placeholder="City"
                           className="flex-grow rounded-none border-r-0"
                           {...field}
                         />
@@ -473,7 +486,7 @@ export const ContactDataForm = ({
                       <FormItem className="flex-grow">
                         <Input
                           placeholder="Country"
-                          autoComplete="country"
+                          autoComplete="country-name"
                           className="rounded-l-none"
                           {...field}
                         />
