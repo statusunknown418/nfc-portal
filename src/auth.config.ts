@@ -79,6 +79,35 @@ export const AuthConfig = {
             name,
             pageHashKey,
             username,
+            contactJSON: {
+              name: {
+                first: user.name?.split(" ")[0] ?? "",
+                last: user.name?.split(" ")[1] ?? "",
+              },
+              email: [
+                {
+                  link: user.email ?? "",
+                  type: "PREF",
+                },
+              ],
+              phoneNumbers: [
+                {
+                  number: "",
+                  type: "PREF",
+                },
+              ],
+              address: [
+                {
+                  label: "",
+                  extended: "",
+                  street: "",
+                  city: "",
+                  region: "",
+                  postalCode: "",
+                  country: "",
+                },
+              ],
+            },
           },
           target: users.id,
         });

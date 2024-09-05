@@ -24,6 +24,8 @@ export const env = createEnv({
     AUTH_GOOGLE_SECRET: z.string(),
     AUTH_RESEND_KEY: z.string(),
     UPLOADTHING_SECRET: z.string(),
+    MERCADOPAGO_TOKEN: z.string(),
+    MERCADOPAGO_PUBLIC_KEY: z.string(),
   },
 
   /**
@@ -51,6 +53,8 @@ export const env = createEnv({
     AUTH_GOOGLE_SECRET: process.env.AUTH_GOOGLE_SECRET,
     AUTH_RESEND_KEY: process.env.AUTH_RESEND_KEY,
     UPLOADTHING_SECRET: process.env.UPLOADTHING_SECRET,
+    MERCADOPAGO_TOKEN: process.env.MERCADOPAGO_TOKEN,
+    MERCADOPAGO_PUBLIC_KEY: process.env.MERCADOPAGO_PUBLIC_KEY,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

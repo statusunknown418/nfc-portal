@@ -47,7 +47,7 @@ export const editViewerContactSchema = z.object({
     .optional(),
   name: z.object({
     last: z.string().optional(),
-    first: z.string().optional(),
+    first: z.string(),
     additional: z.string().optional(),
     prefix: z.string().optional(),
     suffix: z.string().optional(),

@@ -1,4 +1,3 @@
-import { Share2Icon } from "@radix-ui/react-icons";
 import { cookies } from "next/headers";
 import { Suspense } from "react";
 import { LinksViewRSC } from "~/components/admin/links/links-view";
@@ -7,7 +6,6 @@ import {
   PortalPreviewWrapperRSC,
 } from "~/components/admin/portal-preview";
 import { Alert, AlertTitle } from "~/components/ui/alert";
-import { Button } from "~/components/ui/button";
 import { auth } from "~/server/auth";
 
 export default async function AdminPage() {
@@ -34,12 +32,7 @@ export default async function AdminPage() {
       <LinksViewRSC jwt={jwt} />
 
       <aside className="hidden flex-grow gap-4 pl-6 ring-0 lg:sticky lg:inset-0 lg:block lg:h-[calc(100vh-64px)]">
-        <section className="flex h-full flex-col items-center justify-center gap-10">
-          <Button className="max-w-max rounded-full" variant="primary" size="lg">
-            <Share2Icon />
-            Share
-          </Button>
-
+        <section className="flex h-full flex-col items-center justify-center gap-14">
           <Suspense>
             {!!username && (
               <Suspense fallback={<PortalPreviewWrapperLoader />}>

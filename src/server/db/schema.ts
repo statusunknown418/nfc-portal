@@ -136,6 +136,13 @@ export type ContactVCardType = {
 export const avatarShapes = ["circle", "rounded", "square"] as const;
 export type AvatarShape = (typeof avatarShapes)[number];
 
+export const cardShippingStatusTypes = [
+  "awaiting_purchase",
+  "in_progress",
+  "shipped",
+  "failed",
+] as const;
+
 export const users = sqliteTable("user", {
   id: text("id", { length: 255 })
     .notNull()
@@ -162,6 +169,9 @@ export const users = sqliteTable("user", {
   metaTitle: text("meta_title", { length: 255 }),
   metaDescription: text("meta_description"),
   metaImage: text("meta_image"),
+  cardShippingStatus: text("card_shipping_status", { enum: cardShippingStatusTypes }).default(
+    "awaiting_purchase",
+  ),
   avatarShape: text("avatar_shape", { enum: avatarShapes }).notNull().default("rounded"),
   theme: text("theme", { mode: "json" }).notNull().$type<ThemeType>().default(DEFAULT_THEME),
 });
