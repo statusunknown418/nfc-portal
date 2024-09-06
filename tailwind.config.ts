@@ -19,6 +19,12 @@ const config = {
       },
     },
     extend: {
+      perspective: {
+        1000: '1000px',
+      },
+      rotate: {
+        'y-180':'rotateY(180deg)',
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

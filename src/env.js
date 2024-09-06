@@ -24,6 +24,8 @@ export const env = createEnv({
     AUTH_GOOGLE_SECRET: z.string(),
     AUTH_RESEND_KEY: z.string(),
     UPLOADTHING_SECRET: z.string(),
+    MERCADOPAGO_TOKEN: z.string(),
+    MERCADOPAGO_PUBLIC_KEY: z.string(),
   },
 
   /**

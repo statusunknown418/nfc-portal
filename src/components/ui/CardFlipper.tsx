@@ -20,7 +20,7 @@ export default function CardFlipper() {
             isFlipped ? "rotate-y-180" : ""
           }`}
           style={{
-            transition: "transform 0.6s",
+            transition: "transform 3.6s",
             transformStyle: "preserve-3d",
             perspective: "1000px",
           }}
