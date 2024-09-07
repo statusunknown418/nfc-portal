@@ -14,18 +14,12 @@ export const PortalPreview = ({
 }) => {
   const { data: portal } = api.portals.get.useQuery({ username }, { initialData });
 
-  const reRenderKey = portal.data?.links
-    .map((link) =>
-      `${link.id}-${link.displayText}-${link.url}-${link.layout}-${link.type}-${link.thumbnail}-${link.description}-${link.buttonLabel}`.replaceAll(
-        " ",
-        "|",
-      ),
-    )
-    .join(",");
+  const mainKey = portal.data?.links.map((link) => `${JSON.stringify(link)}`).join(",");
+  const renderKey = `${mainKey}-${JSON.stringify(portal.data?.theme)}-${portal.data?.bio}-${portal.data?.profileHeader}`;
 
-  console.log({ reRenderKey });
+  const fallbackKey = `${username}-${portal.data?.pageHashKey}`;
 
-  const iframeRef = useFrameSyncSender(reRenderKey ?? `${username}-${portal.data?.pageHashKey}`);
+  const iframeRef = useFrameSyncSender(renderKey ?? fallbackKey);
   const [loaded, setLoaded] = useState(false);
 
   return (

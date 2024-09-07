@@ -249,7 +249,7 @@ export const VisualCustomizationForm = ({
             render={({ field }) => (
               <FormItem>
                 <RadixRadioGroup
-                  className="grid grid-cols-4 gap-4"
+                  className="flex flex-wrap gap-4"
                   value={field.value}
                   onValueChange={field.onChange}
                 >
@@ -257,7 +257,7 @@ export const VisualCustomizationForm = ({
                     <FormControl>
                       <RadixRadioGroupItem
                         value="minimal"
-                        className="flex h-64 w-[140px] items-center justify-center gap-2 rounded-md border border-border/50 text-sm ring-offset-2 transition-all duration-200 data-[state=checked]:shadow-lg data-[state=checked]:ring data-[state=checked]:ring-ring"
+                        className="flex h-64 w-[138px] items-center justify-center gap-2 rounded-md border border-border/50 text-sm ring-offset-2 transition-all duration-200 data-[state=checked]:shadow-lg data-[state=checked]:ring data-[state=checked]:ring-ring"
                       />
                     </FormControl>
 
@@ -268,18 +268,18 @@ export const VisualCustomizationForm = ({
                     <FormControl>
                       <RadixRadioGroupItem
                         value="crazy"
-                        className="flex h-64 w-[140px] items-center justify-center gap-2 rounded-md border border-border/50 text-sm ring-offset-2 transition-all duration-200 data-[state=checked]:shadow-lg data-[state=checked]:ring data-[state=checked]:ring-ring"
+                        className="flex h-64 w-[138px] items-center justify-center gap-2 rounded-md border border-border/50 text-sm ring-offset-2 transition-all duration-200 data-[state=checked]:shadow-lg data-[state=checked]:ring data-[state=checked]:ring-ring"
                       />
                     </FormControl>
 
-                    <Label>Crazy</Label>
+                    <Label>Cool</Label>
                   </div>
 
                   <div className="flex flex-col items-center gap-2">
                     <FormControl>
                       <RadixRadioGroupItem
                         value="blurry"
-                        className="flex h-64 w-[140px] items-center justify-center gap-2 rounded-md border border-border/50 text-sm ring-offset-2 transition-all duration-200 data-[state=checked]:shadow-lg data-[state=checked]:ring data-[state=checked]:ring-ring"
+                        className="flex h-64 w-[138px] items-center justify-center gap-2 rounded-md border border-border/50 text-sm ring-offset-2 transition-all duration-200 data-[state=checked]:shadow-lg data-[state=checked]:ring data-[state=checked]:ring-ring"
                       />
                     </FormControl>
 
@@ -290,11 +290,22 @@ export const VisualCustomizationForm = ({
                     <FormControl>
                       <RadixRadioGroupItem
                         value="stripes"
-                        className="flex h-64 w-[140px] items-center justify-center gap-2 rounded-md border border-border/50 text-sm ring-offset-2 transition-all duration-200 data-[state=checked]:shadow-lg data-[state=checked]:ring data-[state=checked]:ring-ring"
+                        className="flex h-64 w-[138px] items-center justify-center gap-2 rounded-md border border-border/50 text-sm ring-offset-2 transition-all duration-200 data-[state=checked]:shadow-lg data-[state=checked]:ring data-[state=checked]:ring-ring"
                       />
                     </FormControl>
 
                     <Label>Stripes</Label>
+                  </div>
+
+                  <div className="flex flex-col items-center gap-2">
+                    <FormControl>
+                      <RadixRadioGroupItem
+                        value="modern"
+                        className="flex h-64 w-[140px] items-center justify-center gap-2 rounded-md border border-border/50 text-sm ring-offset-2 transition-all duration-200 data-[state=checked]:shadow-lg data-[state=checked]:ring data-[state=checked]:ring-ring"
+                      />
+                    </FormControl>
+
+                    <Label>Modern</Label>
                   </div>
                 </RadixRadioGroup>
               </FormItem>

@@ -76,11 +76,13 @@ export const PortalContent = ({
           <h1 className="text-sm">{username}</h1>
           <h2 className="text-base font-semibold">{portal.data.name}</h2>
 
-          <div className="my-3 flex w-full flex-wrap items-center justify-center gap-1 border-y py-2.5">
-            <h2 className="text-base">{portal.data.profileHeader}</h2>
-            <span>&middot;</span>
-            <p className="text-sm font-light">{portal.data.bio}</p>
-          </div>
+          {(portal.data.profileHeader ?? portal.data.bio) && (
+            <div className="my-3 flex w-full flex-wrap items-center justify-center gap-1 border-y py-2.5">
+              <h2 className="text-base">{portal.data.profileHeader}</h2>
+              <span>&middot;</span>
+              <p className="text-sm font-light">{portal.data.bio}</p>
+            </div>
+          )}
         </header>
 
         <Tabs
