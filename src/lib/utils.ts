@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { type ThemeType } from "~/server/db/schema";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -49,4 +50,137 @@ export const preventBackdropClick = (e: React.MouseEvent<HTMLElement>) => {
   e.nativeEvent.stopImmediatePropagation();
   e.nativeEvent.preventDefault();
   e.stopPropagation();
+};
+
+export enum ThemeKeys {
+  default = "default",
+  dark = "dark",
+  minimal = "minimal",
+  crazy = "crazy",
+  blurry = "blurry",
+  stripes = "stripes",
+  modern = "modern",
+}
+
+export const BASE_THEMES: Record<ThemeKeys, ThemeType> = {
+  default: {
+    themeKey: "default",
+    colorScheme: "light",
+    colors: {
+      foreground: "#000000",
+      background: "#f8f8fc",
+      border: "#000000",
+      subtle: "#000000",
+    },
+    buttons: {
+      variant: "pill",
+      textColor: "#000000",
+      background: "#a5b4fc",
+      border: "1px solid black",
+      rounding: "9999px",
+    },
+  },
+  dark: {
+    themeKey: "dark",
+    colorScheme: "dark",
+    colors: {
+      background: "#000000",
+      foreground: "#ffffff",
+      border: "#ffffff",
+      subtle: "#ffffff",
+    },
+    buttons: {
+      variant: "pill",
+      textColor: "#ffffff",
+      background: "#4f46e5",
+      border: "1px solid #ffffff",
+      rounding: "9999px",
+    },
+  },
+  minimal: {
+    themeKey: "minimal",
+    colorScheme: "light",
+    colors: {
+      background: "#f8f8fc",
+      foreground: "#000000",
+      border: "#000000",
+      subtle: "#000000",
+    },
+    buttons: {
+      variant: "pill",
+      textColor: "#f8f8fc",
+      background: "#4f46e5",
+      border: "1px solid transparent",
+      rounding: "9999px",
+    },
+  },
+  crazy: {
+    themeKey: "crazy",
+    colorScheme: "light",
+
+    colors: {
+      background: "#f8f8fc",
+      foreground: "#000000",
+      border: "#000000",
+      subtle: "#000000",
+    },
+    buttons: {
+      variant: "pill",
+      textColor: "#f8f8fc",
+      background: "#4f46e5",
+      border: "1px solid transparent",
+      rounding: "9999px",
+    },
+  },
+  blurry: {
+    themeKey: "blurry",
+    colorScheme: "light",
+    colors: {
+      background: "linear-gradient(to top left,#accbee,#e7f0fd)",
+      foreground: "#000000",
+      border: "#000000",
+      subtle: "#e7f0fd",
+    },
+    buttons: {
+      variant: "pill",
+      textColor: "#f8f8fc",
+      background: "#4f46e5",
+      border: "1px solid transparent",
+      rounding: "9999px",
+    },
+  },
+  stripes: {
+    themeKey: "stripes",
+    colorScheme: "light",
+    colors: {
+      background: "linear-gradient(to top left,#d5d4d0,#d5d4d0,#eeeeec)",
+      foreground: "#000000",
+      border: "#000000",
+      subtle: "#000000",
+    },
+    buttons: {
+      variant: "pill",
+      textColor: "#f8f8fc",
+      background: "#4f46e5",
+      border: "1px solid transparent",
+      rounding: "9999px",
+    },
+  },
+  modern: {
+    themeKey: "modern",
+    colorScheme: "light",
+    colors: {
+      foreground: "#000000",
+      background: "#f8f8fc",
+      border: "#000000",
+      subtle: "#000000",
+    },
+    buttons: {
+      variant: "pill",
+      textColor: "#f8f8fc",
+      background: "#4f46e5",
+      border: "1px solid transparent",
+      rounding: "9999px",
+    },
+  },
 };

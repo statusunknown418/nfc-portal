@@ -35,8 +35,8 @@ export const PortalContent = ({
       <section
         className={cn("grid h-screen grid-cols-1 place-items-center p-4")}
         style={{
-          backgroundColor: portal.data.theme.background.background,
-          color: portal.data.theme.foregroundColor,
+          backgroundColor: portal.data.theme.colors.background,
+          color: portal.data.theme.colors.foreground,
         }}
       >
         <div className="flex animate-pulse items-center justify-center gap-2 p-4">
@@ -53,8 +53,8 @@ export const PortalContent = ({
         "grid min-h-screen grid-cols-1 place-items-center overflow-y-auto px-4 pb-28 pt-10",
       )}
       style={{
-        background: portal.data.theme.background.background,
-        color: portal.data.theme.foregroundColor,
+        background: portal.data.theme.colors.background,
+        color: portal.data.theme.colors.foreground,
       }}
     >
       <article className="flex h-full w-full max-w-prose flex-col items-center gap-4">
