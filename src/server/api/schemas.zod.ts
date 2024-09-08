@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { type ThemeType } from "../db/schema";
 
 export const editViewerContactSchema = z.object({
   url: z.string().optional(),
@@ -80,18 +81,29 @@ export const editViewerContactSchema = z.object({
 
 export type EditViewerContactSchema = z.infer<typeof editViewerContactSchema>;
 
-export const themeSchema = z.object({
-  themeKey: z.enum(["default", "dark", "minimal", "crazy", "blurry", "stripes", "custom"]),
+export const themeSchema: z.ZodType<ThemeType> = z.object({
+  themeKey: z.enum([
+    "default",
+    "dark",
+    "minimal",
+    "crazy",
+    "blurry",
+    "stripes",
+    "custom",
+    "modern",
+  ]),
   colorScheme: z.enum(["light", "dark"]),
-  foregroundColor: z.string(),
-  background: z.object({
-    type: z.enum(["flat", "pattern", "image"]),
+  colors: z.object({
+    foreground: z.string(),
     background: z.string(),
+    border: z.string(),
+    subtle: z.string(),
   }),
   buttons: z.object({
     variant: z.enum(["pill", "rounded", "square"]),
     textColor: z.string(),
     background: z.string(),
-    border: z.string().optional(),
+    border: z.string(),
+    rounding: z.custom<`${number}px`>(),
   }),
 });
