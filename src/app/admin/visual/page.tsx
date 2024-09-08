@@ -44,11 +44,17 @@ export default async function VisualCustomizationPage() {
         </Suspense>
       </section>
 
-      <article className="relative mt-4 flex h-full w-full items-start justify-center rounded-lg lg:mt-0">
-        <Suspense fallback={<PortalPreviewWrapperLoader />}>
-          <PortalPreviewWrapperRSC username={session.user.username!} />
-        </Suspense>
-      </article>
+      <aside className="hidden flex-grow gap-4 pl-6 ring-0 lg:sticky lg:inset-0 lg:block lg:h-[calc(100vh-64px)]">
+        <section className="flex h-full flex-col items-center justify-center gap-14">
+          <Suspense>
+            <Suspense fallback={<PortalPreviewWrapperLoader />}>
+              <PortalPreviewWrapperRSC username={session.user.username!} />
+            </Suspense>
+          </Suspense>
+
+          <h3 className="text-center text-muted-foreground">Visual editing preview</h3>
+        </section>
+      </aside>
     </section>
   );
 }
