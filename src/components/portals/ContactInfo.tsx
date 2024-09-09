@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { type ContactVCardType } from "~/server/db/schema";
+import { type ThemeType, type ContactVCardType } from "~/server/db/schema";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
 import { ExclamationTriangleIcon, IdCardIcon } from "@radix-ui/react-icons";
@@ -10,9 +10,11 @@ import vCardBuilder from "vcard-creator";
 export const ContactInfo = ({
   unlocked,
   data,
+  theme,
 }: {
   unlocked?: boolean;
   data: ContactVCardType | null;
+  theme: ThemeType;
 }) => {
   if (!unlocked) {
     return (
@@ -85,7 +87,14 @@ export const ContactInfo = ({
 
   return (
     <>
-      <Button className="mb-4 w-full" size="lg" onClick={handleImport}>
+      <Button
+        className="mb-4 w-full"
+        style={{
+          background: theme.buttons.background,
+        }}
+        size="lg"
+        onClick={handleImport}
+      >
         <IdCardIcon className="h-5 w-5" />
         Import contact
       </Button>

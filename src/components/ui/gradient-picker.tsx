@@ -1,5 +1,3 @@
-"use client";
-
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "~/components/ui/popover";
@@ -80,7 +78,7 @@ export function GradientPicker({
         <Button
           variant={"outline"}
           className={cn(
-            "w-[220px] justify-start text-left font-normal",
+            "h-[36px] w-[220px] justify-start text-left font-normal",
             !background && "text-muted-foreground",
             className,
           )}
@@ -88,16 +86,17 @@ export function GradientPicker({
           <div className="flex w-full items-center gap-2">
             {background ? (
               <div
-                className="h-4 w-4 rounded !bg-cover !bg-center transition-all"
+                className="h-5 w-5 rounded border !bg-cover !bg-center transition-all"
                 style={{ background }}
               ></div>
             ) : (
-              <Paintbrush className="h-4 w-4" />
+              <Paintbrush className="h-5 w-5" />
             )}
             <div className="flex-1 truncate">{background ? background : "Pick a color"}</div>
           </div>
         </Button>
       </PopoverTrigger>
+
       <PopoverContent className="w-64">
         <Tabs defaultValue={defaultTab} className="w-full">
           <TabsList className="mb-4 w-full">

@@ -39,7 +39,7 @@ export const LinkViewer = ({
       background: hover ? newShade(buttonStyles.background, 20) : buttonStyles.background,
     },
     className: cn(
-      "flex h-16 w-full transition-all hover:scale-105  items-center cursor-pointer justify-between gap-2 text-sm active:ring active:ring-ring active:ring-offset-1 sm:text-base md:h-20 md:px-4 lg:px-6",
+      "flex h-16 w-full transition-all hover:scale-105 items-center cursor-pointer justify-between gap-2 text-sm active:ring active:ring-ring active:ring-offset-1 sm:text-base md:h-20 md:px-4 lg:px-6",
       buttonStyles.variant === "square" && "rounded-none px-2",
       buttonStyles.variant === "pill" && "rounded-3xl px-2.5",
       buttonStyles.variant === "rounded" && "rounded-lg px-2",

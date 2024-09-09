@@ -50,43 +50,56 @@ export const PortalContent = ({
   return (
     <section
       className={cn(
-        "grid min-h-screen grid-cols-1 place-items-center overflow-y-auto px-4 pb-28 pt-10",
+        "grid min-h-screen grid-cols-1 place-items-center overflow-y-auto px-4 pb-28 pt-4",
       )}
       style={{
         background: portal.data.theme.colors.background,
         color: portal.data.theme.colors.foreground,
       }}
     >
-      <article className="flex h-full w-full max-w-prose flex-col items-center gap-4">
-        {portal.data.image && (
-          <Image
-            alt={`${username} profile image`}
-            width={80}
-            height={80}
-            className={cn("h-[80px] w-[80px] object-cover", {
+      <article className="flex h-full w-full max-w-[580px] flex-col items-center gap-4">
+        <section
+          className={cn(
+            "relative z-0 w-full max-w-[580px] overflow-hidden bg-cover bg-no-repeat",
+            "before:contents-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-[20%] before:bg-gradient-to-l before:from-transparent before:via-transparent before:to-black/50",
+            "after:contents-[''] after:absolute after:right-0 after:top-0 after:h-full after:w-[20%] after:bg-gradient-to-r after:from-transparent after:via-transparent after:to-black/50",
+            {
               "rounded-full": portal.data.avatarShape === "circle",
               "rounded-none": portal.data.avatarShape === "square",
-              "rounded-lg": portal.data.avatarShape === "rounded",
-            })}
-            src={portal.data.image}
-          />
-        )}
+              "rounded-[32px]": portal.data.avatarShape === "rounded",
+            },
+          )}
+        >
+          {portal.data.image && (
+            <Image
+              width={500}
+              height={500}
+              alt={`${username} profile image`}
+              className={cn("max-h-[350px] w-full self-center object-cover")}
+              src={portal.data.image}
+            />
+          )}
 
-        <header className="flex w-full flex-col gap-0.5 text-center">
-          <h1 className="text-sm">{username}</h1>
-          <h2 className="text-base font-semibold">{portal.data.name}</h2>
+          <div
+            className="absolute bottom-0 left-0 right-0 h-2/3 w-full blur-lg"
+            style={{
+              background: `linear-gradient(to bottom, rgba(0,0,0,0) 40%, rgba(0,0,0) 80%)`,
+            }}
+          />
+        </section>
+
+        <header className="z-10 -mt-32 flex w-full flex-col gap-0.5 px-4 text-center text-white">
+          <h2 className="text-lg font-semibold tracking-wide md:text-3xl">{portal.data.name}</h2>
 
           {(portal.data.profileHeader ?? portal.data.bio) && (
-            <div className="my-3 flex w-full flex-wrap items-center justify-center gap-1 border-y py-2.5">
-              <h2 className="text-base">{portal.data.profileHeader}</h2>
-              <span>&middot;</span>
-              <p className="text-sm font-light">{portal.data.bio}</p>
+            <div className="flex w-full flex-wrap items-center justify-center gap-1 px-4 py-3">
+              <p className="text-sm font-light text-neutral-300 md:text-base">{portal.data.bio}</p>
             </div>
           )}
         </header>
 
         <Tabs
-          className="w-full"
+          className="z-10 w-full"
           defaultValue={portal.data.hasContactInfoLocked ? "links" : "contact"}
         >
           <TabsList className="mb-4 flex w-full border border-border/50">
@@ -103,7 +116,11 @@ export const PortalContent = ({
 
           {!portal.data.hasContactInfoLocked && (
             <TabsContent value="contact">
-              <ContactInfo unlocked={portal.unlocked} data={portal.data?.contactJSON} />
+              <ContactInfo
+                unlocked={portal.unlocked}
+                data={portal.data?.contactJSON}
+                theme={portal.data?.theme}
+              />
             </TabsContent>
           )}
 
