@@ -376,7 +376,11 @@ export const VisualCustomizationForm = ({
           </div>
         </Divider>
 
-        <article className={cn({ "opacity-0": !enableCustom })}>
+        <article
+          className={cn("translate-y-0 transition-transform duration-300", {
+            "h-0 translate-y-10 opacity-0": !enableCustom,
+          })}
+        >
           <h3 className="text-xl font-medium">Custom theme</h3>
           <p className="mt-1 text-sm text-muted-foreground">
             We provide a few presets, but you can also build your own!
@@ -387,7 +391,7 @@ export const VisualCustomizationForm = ({
           className={cn(
             "flex translate-y-0 flex-col gap-2 rounded-lg border p-6 transition-transform duration-300",
             {
-              "translate-y-10 opacity-0": !enableCustom,
+              "h-0 translate-y-10 opacity-0": !enableCustom,
             },
           )}
         >
@@ -444,7 +448,14 @@ export const VisualCustomizationForm = ({
           </article>
         </section>
 
-        <section className="flex flex-col gap-2 rounded-lg border p-6">
+        <section
+          className={cn(
+            "flex translate-y-0 flex-col gap-2 rounded-lg border p-6 transition-transform duration-300",
+            {
+              "h-0 translate-y-10 opacity-0": !enableCustom,
+            },
+          )}
+        >
           <h2 className="text-lg font-semibold">Typography</h2>
 
           <article className="grid grid-cols-2 gap-4">
@@ -471,7 +482,14 @@ export const VisualCustomizationForm = ({
           </article>
         </section>
 
-        <section className="flex flex-col gap-2 rounded-lg border p-6">
+        <section
+          className={cn(
+            "flex translate-y-0 flex-col gap-2 rounded-lg border p-6 transition-transform duration-300",
+            {
+              "h-0 translate-y-10 opacity-0": !enableCustom,
+            },
+          )}
+        >
           <h2 className="text-lg font-semibold">Button style</h2>
 
           <FormField

@@ -44,8 +44,8 @@ export default async function VisualCustomizationPage() {
         </Suspense>
       </section>
 
-      <aside className="hidden flex-grow gap-4 pl-6 ring-0 lg:sticky lg:inset-0 lg:block lg:h-[calc(100vh-64px)]">
-        <section className="flex h-full flex-col items-center justify-center gap-14">
+      <aside className="hidden flex-grow gap-4 py-6 pl-6 ring-0 lg:sticky lg:inset-0 lg:block lg:h-[calc(100vh-64px)]">
+        <section className="flex h-full flex-col items-center justify-center gap-8">
           <Suspense>
             <Suspense fallback={<PortalPreviewWrapperLoader />}>
               <PortalPreviewWrapperRSC username={session.user.username!} />

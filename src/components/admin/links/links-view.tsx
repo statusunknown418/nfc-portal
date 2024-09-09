@@ -1,18 +1,19 @@
-import { RocketIcon, CopyIcon, PlusIcon } from "@radix-ui/react-icons";
+import { PlusIcon, RocketIcon } from "@radix-ui/react-icons";
+import { type Session } from "next-auth";
 import Link from "next/link";
 import { Suspense } from "react";
-import { Button } from "~/components/ui/button";
-import { Alert, AlertTitle, AlertDescription } from "~/components/ui/alert";
+import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
 import {
   Breadcrumb,
-  BreadcrumbList,
   BreadcrumbItem,
-  BreadcrumbSeparator,
+  BreadcrumbList,
   BreadcrumbPage,
+  BreadcrumbSeparator,
 } from "~/components/ui/breadcrumb";
-import { type Session } from "next-auth";
-import { NewLinkDrawer } from "./new-link";
+import { Button } from "~/components/ui/button";
+import { CopyButton } from "~/components/ui/copy-button";
 import { LinksWrapperLoader, LinksWrapperRSC } from "./links-list/links-wrapper";
+import { NewLinkDrawer } from "./new-link";
 
 export const LinksViewRSC = ({ jwt }: { jwt: Session }) => {
   return (
@@ -39,12 +40,10 @@ export const LinksViewRSC = ({ jwt }: { jwt: Session }) => {
               href="https://nfc.nearu.tech"
               className="text-sm text-indigo-600 underline hover:text-indigo-500"
             >
-              https://nfc.nearu.tech
+              https://nfc.nearu.tech/{jwt?.user.username}
             </Link>
 
-            <Button variant="ghost" size="icon" className="h-8 w-8 text-foreground">
-              <CopyIcon />
-            </Button>
+            <CopyButton text={`https://nfc.nearu.tech/${jwt?.user.username}`} />
           </AlertDescription>
         </Alert>
       </article>
