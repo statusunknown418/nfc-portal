@@ -28,7 +28,7 @@ export default function ContactPage() {
           <h1 className="text-2xl font-bold">Contact information</h1>
           <p className="mt-1 text-sm text-muted-foreground">
             Manage your contact information here, this is what every person you give your card to
-            will see, additionally it is possible to hide it from your public page if needed.
+            will see, additionally it is possible to hide it from your public page if needed. s
           </p>
         </header>
 
