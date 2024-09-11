@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Spinner } from "~/components/shared/Spinner";
 import { useFrameSyncSender } from "~/lib/hooks/use-frame-sync";
+import { cardPreviewsStore } from "~/lib/stores/cardPreviews";
 import { api, type RouterOutputs } from "~/trpc/react";
 
 export const PortalPreview = ({
@@ -19,8 +20,17 @@ export const PortalPreview = ({
 
   const fallbackKey = `${username}-${portal.data?.pageHashKey}`;
 
+  const setContactPreview = cardPreviewsStore((s) => s.setPreview);
   const iframeRef = useFrameSyncSender(renderKey ?? fallbackKey);
   const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    if (!portal.data?.contactJSON) {
+      return;
+    }
+
+    setContactPreview(portal.data?.contactJSON);
+  }, [portal.data?.contactJSON, setContactPreview]);
 
   return (
     <>

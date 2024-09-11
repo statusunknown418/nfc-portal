@@ -18,24 +18,38 @@ import { Input } from "~/components/ui/input";
 import { setDecidedUsername } from "../../lib/cookies.actions";
 import { Spinner } from "../shared/Spinner";
 
+const usernameRegex = /^[a-zA-Z0-9._]+$/;
+
 export const signUpSchema = z.object({
   email: z.string().email({
     message: "A valid email address is required",
   }),
-  username: z.string().trim().optional(),
+  username: z
+    .string()
+    .trim()
+    .transform((val) => val.toLowerCase())
+    .optional()
+    .refine((val) => !val || (val.length > 2 && usernameRegex.test(val)), {
+      message:
+        "Should be at least 3 characters and only contain letters, numbers, dots and underscores",
+    }),
 });
 
-export default function SignUpForm() {
+export default function SignUpForm({
+  defaultValues,
+}: {
+  defaultValues?: z.infer<typeof signUpSchema>;
+}) {
   const form = useForm<z.infer<typeof signUpSchema>>({
     resolver: zodResolver(signUpSchema),
-    defaultValues: {
+    defaultValues: defaultValues ?? {
       email: "",
       username: "",
     },
   });
 
   const handleSubmit = form.handleSubmit(async (data) => {
-    !!data.username && (await setDecidedUsername(data.username));
+    !!data.username && (await setDecidedUsername(data.username.toLowerCase()));
 
     await signIn("resend", {
       callbackUrl: "/admin",
@@ -52,8 +66,8 @@ export default function SignUpForm() {
           render={({ field }) => (
             <FormItem>
               <div className="flex items-center gap-0 rounded-md shadow-lg shadow-indigo-100 transition-shadow duration-100 has-[input:focus]:shadow-indigo-400">
-                <p className="flex h-[36px] w-56 items-center rounded-l-md border bg-primary px-3 text-sm text-primary-foreground">
-                  https://nearu.tech/
+                <p className="flex h-[36px] w-56 items-center rounded-l-md border bg-primary px-3 text-sm tracking-wide text-primary-foreground">
+                  https://nearu.tech/@
                 </p>
                 <FormControl>
                   <Input

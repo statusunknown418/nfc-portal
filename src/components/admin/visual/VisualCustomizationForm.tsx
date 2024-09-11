@@ -211,26 +211,6 @@ export const VisualCustomizationForm = ({
 
             <FormField
               control={form.control}
-              name="profileHeader"
-              render={({ field }) => (
-                <FormItem className="w-full">
-                  <FormLabel className="text-lg font-semibold">Profile header</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      rows={2}
-                      placeholder="Software engineer @ Stackk Studios."
-                      {...field}
-                      value={field.value ?? ""}
-                    />
-                  </FormControl>
-
-                  <FormDescription>Main heading on your public portal page.</FormDescription>
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
               name="bio"
               render={({ field }) => (
                 <FormItem className="w-full">

@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Cross2Icon, PlusIcon } from "@radix-ui/react-icons";
 import { SaveIcon } from "lucide-react";
 import { type User } from "next-auth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { type z } from "zod";
@@ -28,6 +28,7 @@ import {
   SelectValue,
 } from "~/components/ui/select";
 import { Switch } from "~/components/ui/switch";
+import { cardPreviewsStore } from "~/lib/stores/cardPreviews";
 import { cn } from "~/lib/utils";
 import { editViewerContactSchema } from "~/server/api/schemas.zod";
 import { api, type RouterOutputs } from "~/trpc/react";
@@ -134,18 +135,23 @@ export const ContactDataForm = ({
     control: form.control,
   });
 
-  const handleSubmit = form.handleSubmit(async (data) => {
-    `2000 Ponce De Leon Blvd.
-Suite 600
-Coral Gables FLORIDA 33134
-United States`;
+  const setContactPreview = cardPreviewsStore((s) => s.setPreview);
 
+  const handleSubmit = form.handleSubmit(async (data) => {
     toast.promise(mutateAsync(data), {
       loading: "Saving...",
       success: "Contact information saved",
       error: "Something went wrong",
     });
   });
+
+  useEffect(() => {
+    if (!data?.contactJSON) {
+      return;
+    }
+
+    setContactPreview(data?.contactJSON);
+  }, [data?.contactJSON, setContactPreview]);
 
   return (
     <>
@@ -176,7 +182,7 @@ United States`;
                     <FormLabel>First name</FormLabel>
 
                     <FormControl>
-                      <Input placeholder="Someone" autoComplete="given-name" {...field} />
+                      <Input autoComplete="given-name" {...field} />
                     </FormControl>
                   </FormItem>
                 )}
@@ -190,7 +196,7 @@ United States`;
                     <FormLabel>Last name</FormLabel>
 
                     <FormControl>
-                      <Input placeholder="Doe" autoComplete="family-name" {...field} />
+                      <Input autoComplete="family-name" {...field} />
                     </FormControl>
                   </FormItem>
                 )}

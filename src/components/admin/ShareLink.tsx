@@ -68,7 +68,7 @@ export const ShareLink = ({
       <DropdownMenuTrigger asChild>
         <Button className="max-w-max rounded-full" variant="primary" size="lg">
           <Share2Icon />
-          Share
+          Share portal
         </Button>
       </DropdownMenuTrigger>
 
