@@ -1,4 +1,4 @@
-import { type Metadata, type ResolvingMetadata } from "next";
+import { type Viewport, type Metadata, type ResolvingMetadata } from "next";
 import { NotFound } from "~/components/portals/NotFound";
 import { PortalContent } from "~/components/portals/PortalContent";
 import { api } from "~/trpc/server";
@@ -28,6 +28,27 @@ export async function generateMetadata(
         ...previousImages,
       ],
     },
+  };
+}
+
+export async function generateViewport({ params }: Props): Promise<Viewport> {
+  const username = decodeURIComponent(params.username);
+  const portal = await api.portals.get({ username });
+
+  if (!portal.data) {
+    return {
+      minimumScale: 1,
+      maximumScale: 1,
+    };
+  }
+
+  const isGradient =
+    portal.data.theme.colors.background.includes("gradient") ||
+    portal.data.theme.colors.background.includes("url");
+
+  return {
+    themeColor: !!isGradient ? "#000000" : portal.data?.theme.colors.background,
+    colorScheme: portal.data?.theme.colorScheme,
   };
 }
 
