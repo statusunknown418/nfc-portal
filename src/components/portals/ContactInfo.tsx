@@ -1,18 +1,21 @@
 "use client";
 
+import { IdCardIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
-import { type ContactVCardType } from "~/server/db/schema";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
-import { Button } from "../ui/button";
-import { ExclamationTriangleIcon, IdCardIcon } from "@radix-ui/react-icons";
 import vCardBuilder from "vcard-creator";
+import { type ContactVCardType, type ThemeType } from "~/server/db/schema";
+import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
+import { Button } from "../ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 
 export const ContactInfo = ({
   unlocked,
   data,
+  theme,
 }: {
   unlocked?: boolean;
   data: ContactVCardType | null;
+  theme: ThemeType;
 }) => {
   if (!unlocked) {
     return (
@@ -37,7 +40,7 @@ export const ContactInfo = ({
 
   if (!data) {
     return (
-      <Card>
+      <Card style={{ background: theme.colors.subtle }}>
         <CardContent>
           <CardHeader>
             <CardTitle>No contact info found</CardTitle>
@@ -83,23 +86,39 @@ export const ContactInfo = ({
     link.click();
   };
 
+  if (!data.name.first && !data.name.last) {
+    return (
+      <Alert className="border-dashed" style={{ borderColor: theme.colors.border }}>
+        <AlertTitle className="text-center text-base font-semibold">
+          No contact info added yet
+        </AlertTitle>
+        <AlertDescription className="text-center">
+          You can add your contact info from the <strong>Portal customization</strong>
+        </AlertDescription>
+      </Alert>
+    );
+  }
+
   return (
     <>
-      <Button className="mb-4 w-full" size="lg" onClick={handleImport}>
+      <Button
+        onClick={handleImport}
+        size="lg"
+        className="mb-4 w-full"
+        style={{
+          background: theme.buttons.background,
+          color: theme.buttons.textColor,
+        }}
+      >
         <IdCardIcon className="h-5 w-5" />
         Import contact
       </Button>
 
-      <section className="flex flex-col gap-3 rounded-lg border border-dashed bg-muted py-4 shadow-lg">
+      <section
+        className="flex flex-col gap-3 rounded-lg border border-dashed py-4 shadow-lg"
+        style={{ borderColor: theme.colors.border, background: theme.colors.subtle }}
+      >
         <article className="flex flex-col gap-1 px-4">
-          {!data.name.first && (
-            <p className="mt-2 flex flex-col items-center gap-2 self-center text-center font-light">
-              <ExclamationTriangleIcon className="h-5 w-5 text-amber-600" />
-
-              <span className="text-sm">No contact info added yet</span>
-            </p>
-          )}
-
           <h3 className="text-lg font-semibold">
             {data?.name?.first} {data?.name?.last}
           </h3>
@@ -111,7 +130,7 @@ export const ContactInfo = ({
           )}
         </article>
 
-        {!!data.phoneNumbers?.length && (
+        {!!data.phoneNumbers?.length && data.phoneNumbers.some((phone) => !!phone.number) && (
           <article className="flex flex-col gap-2 border-b pt-2">
             <p className="px-4 text-sm font-medium">Phone number(s)</p>
 
@@ -150,7 +169,7 @@ export const ContactInfo = ({
           </article>
         )}
 
-        {!!data.address?.length && (
+        {!!data.address?.length && data.address.some((address) => !!address.street) && (
           <article className="flex flex-col gap-2 border-b pt-2">
             <p className="px-4 text-sm font-medium">Address(es)</p>
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { DashboardIcon, GearIcon, ReaderIcon, RulerSquareIcon } from "@radix-ui/react-icons";
+import { DashboardIcon, GearIcon, PersonIcon, RulerSquareIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import { useSelectedLayoutSegment } from "next/navigation";
 import { Button } from "../ui/button";
@@ -46,7 +46,7 @@ export const Sidebar = () => {
                 className="h-[44px] w-[44px]"
               >
                 <Link href="/admin/contact">
-                  <ReaderIcon className="h-5 w-5" />
+                  <PersonIcon className="h-5 w-5" />
                 </Link>
               </Button>
             </TooltipTrigger>

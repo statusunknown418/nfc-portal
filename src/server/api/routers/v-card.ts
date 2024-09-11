@@ -36,12 +36,22 @@ export const vCardsRouter = createTRPCRouter({
     });
   }),
   edit: protectedProcedure.input(editViewerContactSchema).mutation(async ({ ctx, input }) => {
-    return ctx.db
-      .update(users)
-      .set({
-        contactJSON: input,
-      })
-      .where(eq(users.id, ctx.session.user.id))
-      .returning();
+    const [updatedContact] = await Promise.all([
+      ctx.db
+        .update(users)
+        .set({
+          contactJSON: input,
+        })
+        .where(eq(users.id, ctx.session.user.id))
+        .returning(),
+      ctx.db
+        .update(users)
+        .set({
+          name: `${input.name?.first} ${input.name?.last}`,
+        })
+        .where(eq(users.id, ctx.session.user.id)),
+    ]);
+
+    return updatedContact;
   }),
 });

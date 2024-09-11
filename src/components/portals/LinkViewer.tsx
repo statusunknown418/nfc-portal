@@ -1,4 +1,5 @@
 import {
+  CheckCircledIcon,
   CopyIcon,
   EnvelopeClosedIcon,
   HamburgerMenuIcon,
@@ -7,7 +8,8 @@ import {
 } from "@radix-ui/react-icons";
 import Image from "next/image";
 import Link from "next/link";
-import { type ComponentProps, useState } from "react";
+import { type ComponentProps, type MouseEventHandler, useState } from "react";
+import { toast } from "sonner";
 import { cn, newShade, preventBackdropClick } from "~/lib/utils";
 import { type ThemeType } from "~/server/db/schema";
 import { type RouterOutputs } from "~/trpc/react";
@@ -32,6 +34,7 @@ export const LinkViewer = ({
   buttonStyles: ThemeType["buttons"];
 }) => {
   const [hover, setHover] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const commonProps: Pick<ComponentProps<"div">, "className" | "style"> = {
     style: {
@@ -39,11 +42,25 @@ export const LinkViewer = ({
       background: hover ? newShade(buttonStyles.background, 20) : buttonStyles.background,
     },
     className: cn(
-      "flex h-16 w-full transition-all hover:scale-105  items-center cursor-pointer justify-between gap-2 text-sm active:ring active:ring-ring active:ring-offset-1 sm:text-base md:h-20 md:px-4 lg:px-6",
+      "flex h-16 w-full transition-all hover:scale-105 items-center cursor-pointer justify-between gap-2 text-sm active:ring active:ring-ring active:ring-offset-1 sm:text-base md:h-20 md:px-4 lg:px-6",
       buttonStyles.variant === "square" && "rounded-none px-2",
       buttonStyles.variant === "pill" && "rounded-3xl px-2.5",
       buttonStyles.variant === "rounded" && "rounded-lg px-2",
     ),
+  };
+
+  const handleLinkCopy: MouseEventHandler = (e) => {
+    void navigator.clipboard.writeText(link.url ?? "");
+    toast.success("Link copied to clipboard!");
+
+    setCopied(true);
+
+    setTimeout(() => {
+      setCopied(false);
+    }, 1000);
+
+    e.preventDefault();
+    e.nativeEvent.preventDefault();
   };
 
   const Component = ({ children }: { children: React.ReactNode }) => {
@@ -102,7 +119,7 @@ export const LinkViewer = ({
       </div>
 
       <div
-        className="flex flex-grow justify-center text-center"
+        className="flex flex-grow justify-center text-center font-medium"
         style={{
           color: buttonStyles.textColor,
         }}
@@ -132,11 +149,13 @@ export const LinkViewer = ({
 
           <ul className="m-4 flex flex-col overflow-hidden rounded-lg border bg-white p-0">
             <Button
+              onClick={handleLinkCopy}
               variant="ghost"
               className="justify-start rounded-l-none rounded-r-none rounded-t-lg border-0"
             >
               <CopyIcon />
               Copy link
+              {copied && <CheckCircledIcon className="ml-auto text-emerald-600" />}
             </Button>
 
             <Divider className="my-0" />

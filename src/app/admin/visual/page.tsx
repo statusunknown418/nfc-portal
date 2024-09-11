@@ -1,4 +1,9 @@
+import { notFound } from "next/navigation";
 import { Suspense } from "react";
+import {
+  PortalPreviewWrapperLoader,
+  PortalPreviewWrapperRSC,
+} from "~/components/admin/portal-preview";
 import { VisualWrapper, VisualWrapperLoader } from "~/components/admin/visual/visual-wrapper";
 import {
   Breadcrumb,
@@ -7,8 +12,15 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "~/components/ui/breadcrumb";
+import { auth } from "~/server/auth";
 
 export default async function VisualCustomizationPage() {
+  const session = await auth();
+
+  if (!session) {
+    return notFound();
+  }
+
   return (
     <section className="relative grid w-full grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-10">
       <section className="flex flex-col gap-4">
@@ -32,7 +44,17 @@ export default async function VisualCustomizationPage() {
         </Suspense>
       </section>
 
-      <article className="relative mt-4 flex h-full w-full items-start justify-center rounded-lg lg:mt-0"></article>
+      <aside className="hidden flex-grow gap-4 py-6 pl-6 ring-0 lg:sticky lg:inset-0 lg:block lg:h-[calc(100vh-64px)]">
+        <section className="flex h-full flex-col items-center justify-center gap-8">
+          <Suspense>
+            <Suspense fallback={<PortalPreviewWrapperLoader />}>
+              <PortalPreviewWrapperRSC username={session.user.username!} />
+            </Suspense>
+          </Suspense>
+
+          <h3 className="text-center text-muted-foreground">Visual editing preview</h3>
+        </section>
+      </aside>
     </section>
   );
 }

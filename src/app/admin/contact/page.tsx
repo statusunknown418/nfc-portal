@@ -1,9 +1,9 @@
 import { Suspense } from "react";
+import { CardPreview } from "~/components/admin/contact/CardPreview";
 import {
   ContactDataLoading,
   ContactDataWrapper,
 } from "~/components/admin/contact/contact-data/contact-data-wrapper";
-import DotPattern from "~/components/magicui/dot-pattern";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -11,10 +11,8 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "~/components/ui/breadcrumb";
-import { cn } from "~/lib/utils";
-import CardFlipper from "~/components/ui/CardFlipper"; // Importa tu componente de cliente aquí
 
-export default async function ContactPage() {
+export default function ContactPage() {
   return (
     <section className="grid h-full w-full grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-10">
       <section className="flex flex-col gap-4">
@@ -39,7 +37,7 @@ export default async function ContactPage() {
         </Suspense>
       </section>
 
-      <CardFlipper />
+      <CardPreview />
     </section>
   );
 }

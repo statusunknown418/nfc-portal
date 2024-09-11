@@ -69,9 +69,9 @@ export function AddEditLinkForm({
         },
   });
 
+  const isActive = !!form.watch("isActive");
   const isValidURL =
     !!form.watch("url")?.length && z.string().url().safeParse(form.watch("url")).success;
-
   const linkType = form.watch("type");
   const thumbnail = form.watch("thumbnail");
 
@@ -191,11 +191,12 @@ export function AddEditLinkForm({
                 <FormItem
                   className={cn(
                     "flex items-center justify-between gap-4 space-y-0 rounded-lg border border-dashed px-4 py-3",
-                    !!field.value && "border-indigo-500 bg-white shadow-lg shadow-indigo-100",
+                    !!field.value && "border-emerald-500 bg-emerald-50/50",
                   )}
                 >
                   <FormLabel className="flex items-center gap-1">
-                    Active! {<LightningBoltIcon className="text-amber-600" />}
+                    {isActive ? "Active!" : "Deactivated link"}{" "}
+                    {isActive && <LightningBoltIcon className="text-amber-600" />}
                   </FormLabel>
 
                   <FormControl>
