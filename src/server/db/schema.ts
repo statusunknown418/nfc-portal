@@ -15,6 +15,9 @@ export type LinkLayoutType = (typeof linkLayoutTypes)[number];
 export const pageLayoutTypes = ["basic", "grid", "hero"] as const;
 export type PageLayoutType = (typeof pageLayoutTypes)[number];
 
+export const cardVariants = ["basic", "custom"] as const;
+export type CardVariant = (typeof cardVariants)[number];
+
 export type ThemeType = {
   themeKey: "default" | "dark" | "minimal" | "crazy" | "blurry" | "stripes" | "modern" | "custom";
   colorScheme: "light" | "dark";
@@ -157,6 +160,7 @@ export const users = sqliteTable("user", {
   cardShippingStatus: text("card_shipping_status", { enum: cardShippingStatusTypes }).default(
     "awaiting_purchase",
   ),
+  cardVariant: text("card_variant", { enum: cardVariants }).notNull().default("basic"),
   avatarShape: text("avatar_shape", { enum: avatarShapes }).notNull().default("rounded"),
   theme: text("theme", { mode: "json" }).notNull().$type<ThemeType>().default(BASE_THEMES.default),
 });
