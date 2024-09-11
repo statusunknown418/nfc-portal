@@ -1,9 +1,4 @@
-import { Suspense } from "react";
 import { CardPreview } from "~/components/admin/contact/CardPreview";
-import {
-  ContactDataLoading,
-  ContactDataWrapper,
-} from "~/components/admin/contact/contact-data/contact-data-wrapper";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -20,21 +15,17 @@ export default function ContactPage() {
           <BreadcrumbList>
             <BreadcrumbItem>Dashboard</BreadcrumbItem>
             <BreadcrumbSeparator />
-            <BreadcrumbPage>Contact</BreadcrumbPage>
+            <BreadcrumbPage>Card customization</BreadcrumbPage>
           </BreadcrumbList>
         </Breadcrumb>
 
         <header>
-          <h1 className="text-2xl font-bold">Contact information</h1>
+          <h1 className="text-2xl font-bold">Card customization</h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            Manage your contact information here, this is what every person you give your card to
-            will see, additionally it is possible to hide it from your public page if needed.
+            Manage what will be shown on your physical card, this will be delivered to you as soon
+            as purchased
           </p>
         </header>
-
-        <Suspense fallback={<ContactDataLoading />}>
-          <ContactDataWrapper />
-        </Suspense>
       </section>
 
       <CardPreview />

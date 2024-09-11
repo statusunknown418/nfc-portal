@@ -14,17 +14,22 @@ import { LinkViewer } from "./LinkViewer";
 export const PortalContent = ({
   initialData,
   username,
+  selectedTab,
 }: {
   initialData: RouterOutputs["portals"]["get"];
   username: string;
+  selectedTab: "links" | "contact";
 }) => {
   const {
     data: portal,
     refetch,
     isRefetching,
-  } = api.portals.get.useQuery({ username }, { initialData, refetchOnWindowFocus: false });
+  } = api.portals.get.useQuery(
+    { username },
+    { initialData, refetchOnWindowFocus: false, refetchOnMount: false },
+  );
 
-  useFrameSyncReceiver(() => void refetch());
+  useFrameSyncReceiver(() => void refetch(), selectedTab) as string;
 
   if (!portal.data) {
     return;

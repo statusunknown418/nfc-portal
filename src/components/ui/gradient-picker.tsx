@@ -1,24 +1,11 @@
+import { Paintbrush } from "lucide-react";
+import Link from "next/link";
+import { useMemo } from "react";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "~/components/ui/popover";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
 import { cn } from "~/lib/utils";
-import { Paintbrush } from "lucide-react";
-import Link from "next/link";
-import { useMemo, useState } from "react";
-
-export function PickerExample() {
-  const [background, setBackground] = useState("#B4D455");
-
-  return (
-    <div
-      className="preview flex h-full min-h-[350px] w-full items-center justify-center rounded !bg-cover !bg-center p-10 transition-all"
-      style={{ background }}
-    >
-      <GradientPicker background={background} setBackground={setBackground} />
-    </div>
-  );
-}
 
 export function GradientPicker({
   background,

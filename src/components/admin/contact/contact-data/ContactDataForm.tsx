@@ -154,7 +154,12 @@ export const ContactDataForm = ({
   }, [data?.contactJSON, setContactPreview]);
 
   return (
-    <>
+    <section className="grid grid-cols-1 gap-4">
+      <p className="text-sm text-muted-foreground">
+        Manage your contact information here, this is what every person you give your card to will
+        see, additionally it is possible to hide it from your public page if needed.
+      </p>
+
       <div
         className={cn(
           "rounded-lg border border-dashed p-4",
@@ -543,6 +548,6 @@ export const ContactDataForm = ({
           </Button>
         </form>
       </Form>
-    </>
+    </section>
   );
 };

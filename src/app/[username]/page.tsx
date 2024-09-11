@@ -54,16 +54,25 @@ export async function generateViewport({ params }: Props): Promise<Viewport> {
 
 export default async function UsernamePage({
   params,
+  searchParams,
 }: {
-  searchParams: { ktp?: string };
+  searchParams: { ktp?: string; selectedTab?: string };
   params: { username: string };
 }) {
   const username = decodeURIComponent(params.username);
   const portal = await api.portals.get({ username });
 
+  const tab = searchParams.selectedTab as "contact" | "links";
+
   if (!portal.data) {
     return <NotFound />;
   }
 
-  return <PortalContent username={username} initialData={portal} />;
+  return (
+    <PortalContent
+      username={username}
+      initialData={portal}
+      selectedTab={(tab ?? portal.data.hasContactInfoLocked) ? "links" : "contact"}
+    />
+  );
 }
