@@ -336,6 +336,17 @@ export const VisualCustomizationForm = ({
 
                     <Label>Modern</Label>
                   </div>
+
+                  <div className="flex flex-col items-center gap-2">
+                    <FormControl>
+                      <RadixRadioGroupItem
+                        value="pro"
+                        className="flex h-64 w-[138px] items-center justify-center gap-2 rounded-md border border-border/50 text-sm ring-offset-2 transition-all duration-200 data-[state=checked]:shadow-lg data-[state=checked]:ring data-[state=checked]:ring-ring"
+                      />
+                    </FormControl>
+
+                    <Label>Pro</Label>
+                  </div>
                 </RadixRadioGroup>
               </FormItem>
             )}
