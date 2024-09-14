@@ -95,6 +95,11 @@ export const LinksViewRSC = ({ jwt }: { jwt: Session }) => {
         </TabsContent>
 
         <TabsContent value="contact">
+          <p className="mb-4 text-sm text-muted-foreground">
+            Manage your contact information here, this is what every person you give your card to
+            will see, additionally it is possible to hide it from your public page if needed.
+          </p>
+
           <Suspense fallback={<ContactDataLoading />}>
             <ContactDataWrapper />
           </Suspense>

@@ -20,11 +20,13 @@ const buttonVariants = cva(
           "bg-destructive/10 border-destructive/30 hover:border-destructive/50 hover:bg-destructive/20 text-destructive",
         primary: "bg-indigo-600 text-indigo-50 shadow hover:bg-indigo-500",
         primary_ghost: "bg-indigo-50 hover:bg-indigo-100 text-indigo-600 border-indigo-500",
+        unstyled:
+          "bg-transparent border-transparent items-start hover:bg-accent !h-fit w-fit hover:text-accent-foreground",
       },
       size: {
         default: "h-9 px-4 py-2",
         sm: "h-8 rounded-md px-3 text-xs",
-        lg: "h-11 rounded-lg px-8",
+        lg: "h-11 rounded-lg px-6 text-base",
         icon: "h-9 w-9 items-center justify-center flex p-0",
       },
     },

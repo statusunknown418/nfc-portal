@@ -24,7 +24,7 @@ export const GetYours = ({ shouldShow = true }: { shouldShow?: boolean }) => {
         <Button asChild className="rounded-full pr-4 shadow-lg" size="lg">
           <div>
             <Link href="/" className="text-xs">
-              🚀 Get your own page!
+              🚀 Powered by Near
             </Link>
 
             <Button

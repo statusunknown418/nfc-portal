@@ -27,11 +27,11 @@ export const signUpSchema = z.object({
   username: z
     .string()
     .trim()
-    .transform((val) => val.toLowerCase())
+    .transform((val) => `@${val.toLowerCase()}`)
     .optional()
     .refine((val) => !val || (val.length > 2 && usernameRegex.test(val)), {
       message:
-        "Should be at least 3 characters and only contain letters, numbers, dots and underscores",
+        "Should be at least 3 characters and contain only letters, numbers, dots and underscores",
     }),
 });
 

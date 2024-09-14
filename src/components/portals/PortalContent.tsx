@@ -55,7 +55,7 @@ export const PortalContent = ({
   return (
     <section
       className={cn(
-        "grid min-h-screen grid-cols-1 place-items-center overflow-y-auto pb-28 pt-4 *:px-4",
+        "grid min-h-screen grid-cols-1 place-items-center overflow-y-auto pb-28 sm:pt-4 md:*:px-4",
       )}
       style={{
         background: portal.data.theme.colors.background,
@@ -65,16 +65,15 @@ export const PortalContent = ({
       <article className="flex h-full w-full max-w-[580px] flex-col items-center gap-4">
         <section
           className={cn(
-            "relative z-0 w-full max-w-[580px] overflow-hidden bg-cover bg-no-repeat",
-            // Note: Maybe add this later on, or find a nicer UI
-            // "before:contents-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-[20%] before:bg-gradient-to-l before:from-transparent before:via-transparent before:to-black/50",
-            // "after:contents-[''] after:absolute after:right-0 after:top-0 after:h-full after:w-[20%] after:bg-gradient-to-r after:from-transparent after:via-transparent after:to-black/50",
+            "relative z-0 w-full max-w-[580px] overflow-hidden bg-cover bg-center bg-no-repeat",
             {
               "rounded-full": portal.data.avatarShape === "circle",
               "rounded-none": portal.data.avatarShape === "square",
-              "rounded-[32px]": portal.data.avatarShape === "rounded",
             },
           )}
+          style={{
+            maskImage: "radial-gradient(100% 100% at center top, #000 60%, transparent 100%)",
+          }}
         >
           {portal.data.image && (
             <Image
@@ -105,12 +104,12 @@ export const PortalContent = ({
         </header>
 
         <Tabs
-          className="z-10 w-full"
+          className="z-10 w-full px-4"
           // Note: To avoid adding too many checks I'll just disable eslint here. Don't worry it's actually fine
           // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
           defaultValue={portal.data?.hasContactInfoLocked || !portal.unlocked ? "links" : "contact"}
         >
-          <TabsList className="mx-auto mb-6 mt-2 flex h-11 min-w-max rounded-full border bg-muted px-0.5">
+          <TabsList className="mx-auto mb-6 mt-2 flex h-11 min-w-max rounded-full border px-0.5 mix-blend-difference">
             {!portal.data.hasContactInfoLocked && (
               <TabsTrigger
                 value="contact"

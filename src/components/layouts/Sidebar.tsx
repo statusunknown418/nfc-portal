@@ -1,6 +1,11 @@
 "use client";
 
-import { DashboardIcon, GearIcon, IdCardIcon, RulerSquareIcon } from "@radix-ui/react-icons";
+import {
+  DashboardIcon,
+  EnvelopeClosedIcon,
+  GearIcon,
+  RulerSquareIcon,
+} from "@radix-ui/react-icons";
 import Link from "next/link";
 import { useSelectedLayoutSegment } from "next/navigation";
 import { Button } from "../ui/button";
@@ -10,7 +15,7 @@ export const Sidebar = () => {
   const selectedSegment = useSelectedLayoutSegment();
 
   return (
-    <aside className="flex h-16 max-h-16 min-h-16 items-center justify-between overflow-x-auto border-t px-2 md:h-full md:max-h-full md:min-w-20 md:max-w-20 md:flex-col md:items-center md:rounded-r-2xl md:border-y md:border-r md:py-4">
+    <aside className="flex h-16 max-h-16 min-h-16 items-center justify-between overflow-x-auto border-t md:h-full md:max-h-full md:min-w-20 md:max-w-20 md:flex-col md:items-center md:rounded-r-2xl md:border-y md:border-r md:py-4">
       <Button size="icon" className="h-[44px] w-[44px]">
         <span>NU</span>
       </Button>
@@ -40,24 +45,6 @@ export const Sidebar = () => {
             <TooltipTrigger asChild>
               <Button
                 asChild
-                variant={selectedSegment === "contact" ? "primary_ghost" : "ghost"}
-                size="icon"
-                aria-selected={selectedSegment === "contact"}
-                className="h-[44px] w-[44px]"
-              >
-                <Link href="/admin/contact">
-                  <IdCardIcon className="h-5 w-5" />
-                </Link>
-              </Button>
-            </TooltipTrigger>
-
-            <TooltipContent side="right">Card customization</TooltipContent>
-          </Tooltip>
-
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                asChild
                 variant={selectedSegment === "visual" ? "primary_ghost" : "ghost"}
                 size="icon"
                 aria-selected={selectedSegment === "visual"}
@@ -71,6 +58,25 @@ export const Sidebar = () => {
             </TooltipTrigger>
 
             <TooltipContent side="right">Portal customization</TooltipContent>
+          </Tooltip>
+
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                asChild
+                variant={selectedSegment === "visual" ? "primary_ghost" : "ghost"}
+                size="icon"
+                aria-selected={selectedSegment === "signatures"}
+                className="h-[44px] w-[44px]"
+              >
+                <Link href="/admin/visual">
+                  <EnvelopeClosedIcon className="h-5 w-5" />
+                  <span className="sr-only">Email signatures</span>
+                </Link>
+              </Button>
+            </TooltipTrigger>
+
+            <TooltipContent side="right">Email signatures</TooltipContent>
           </Tooltip>
 
           <Tooltip>

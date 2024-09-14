@@ -155,20 +155,22 @@ export const ContactDataForm = ({
 
   return (
     <section className="grid grid-cols-1 gap-4">
-      <p className="text-sm text-muted-foreground">
-        Manage your contact information here, this is what every person you give your card to will
-        see, additionally it is possible to hide it from your public page if needed.
-      </p>
-
       <div
         className={cn(
           "rounded-lg border border-dashed p-4",
           !isHidden && "border-emerald-600 bg-emerald-50/50",
         )}
       >
-        <Label className="flex items-center gap-4">
+        <Label className="flex items-start gap-4">
           <Switch defaultChecked={!isHidden} onCheckedChange={handleToggle} />
-          Enable contact information visibility
+
+          <div className="flex flex-col gap-2">
+            <h3>Contact information visibility</h3>
+            <p className="text-muted-foreground">
+              If enabled your contact information will be visible when you share your portal through
+              the NFC card
+            </p>
+          </div>
         </Label>
       </div>
 
@@ -257,9 +259,9 @@ export const ContactDataForm = ({
             </div>
           </article>
 
-          <section className="grid w-full grid-cols-1 gap-2">
+          <section className="grid w-full grid-cols-1 gap-3">
             <Label asChild>
-              <p>Email addresses (max. 3)</p>
+              <p>Email address(es)</p>
             </Label>
 
             {emailFields.map((email, idx) => (
@@ -327,9 +329,9 @@ export const ContactDataForm = ({
             ))}
           </section>
 
-          <section className="grid grid-cols-1 gap-2">
+          <section className="grid grid-cols-1 gap-3">
             <Label asChild>
-              <p>Phone numbers (max. 5)</p>
+              <p>Phone number(s)</p>
             </Label>
 
             {phoneFields.map((phone, idx) => (
@@ -402,9 +404,9 @@ export const ContactDataForm = ({
             ))}
           </section>
 
-          <section className="grid w-full grid-cols-1 gap-2">
+          <section className="grid w-full grid-cols-1 gap-3">
             <Label asChild>
-              <p>Addresses</p>
+              <p>Address(es)</p>
             </Label>
 
             {addressFields.map((address, idx) => (
@@ -512,6 +514,7 @@ export const ContactDataForm = ({
                     variant="outline"
                     className="rounded-r-none"
                     type="button"
+                    disabled={addressFields.length >= 2}
                     onClick={() =>
                       appendAddress({
                         label: "",
@@ -542,7 +545,7 @@ export const ContactDataForm = ({
             ))}
           </section>
 
-          <Button className="mt-4" variant="primary">
+          <Button className="mt-6" variant="primary_ghost">
             {form.formState.isSubmitting ? <Spinner /> : <SaveIcon size={15} />}
             Save
           </Button>
