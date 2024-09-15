@@ -1,5 +1,5 @@
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
-import { createId } from "@paralleldrive/cuid2";
+import cuid2, { createId } from "@paralleldrive/cuid2";
 import { type NextAuthConfig } from "next-auth";
 import DiscordProvider from "next-auth/providers/discord";
 import GoogleProvider from "next-auth/providers/google";
@@ -62,7 +62,10 @@ export const AuthConfig = {
 
       const cookieUsername = cookies().get("decided-username");
       const pageHashKey = createId();
-      const username = cookieUsername?.value ?? user.email?.split("@")[0] + "_" + pageHashKey;
+
+      const shortId = cuid2.init({ length: 6 })();
+
+      const username = cookieUsername?.value ?? user.email?.split("@")[0] + "-" + shortId;
       const name = user.email?.split("@")[0];
       const image = user.image ?? `https://api.dicebear.com/7.x/initials/svg?seed=${username}`;
 

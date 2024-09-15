@@ -75,7 +75,7 @@ export const editViewerContactSchema = z.object({
         type: z.enum(["PREF", "WORK", "HOME"]),
       }),
     )
-    .max(3)
+    .max(5)
     .optional(),
 });
 
@@ -100,10 +100,38 @@ export const themeSchema: z.ZodType<ThemeType> = z.object({
     subtle: z.string(),
   }),
   buttons: z.object({
-    variant: z.enum(["pill", "rounded", "square"]),
+    variant: z.enum(["pill", "rounded", "square", "small-radius"]),
     textColor: z.string(),
     background: z.string(),
-    border: z.string(),
+    borderColor: z.string().optional(),
+    borderStyle: z.enum(["solid", "dashed", "dotted", "double"]),
     rounding: z.custom<`${number}px`>(),
+    fontStyle: z.enum(["normal", "italic"]),
+    fontWeight: z.enum([
+      "normal",
+      "bold",
+      "100",
+      "200",
+      "300",
+      "400",
+      "500",
+      "600",
+      "700",
+      "800",
+      "900",
+    ]),
   }),
 });
+
+export const saveNFCPreferencesSchema = z.object({
+  showName: z.boolean(),
+  nameOnFront: z.boolean(),
+  showJobTitle: z.boolean(),
+  jobTitleOnFront: z.boolean(),
+  showCompanyLogo: z.boolean(),
+  companyLogoOnFront: z.boolean(),
+  cardVariant: z.enum(["basic", "custom", "metallic"]),
+  companyLogoURL: z.string().url().optional(),
+});
+
+export type SaveNFCPreferences = z.infer<typeof saveNFCPreferencesSchema>;

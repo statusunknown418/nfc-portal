@@ -28,11 +28,25 @@ export type ThemeType = {
     subtle: string;
   };
   buttons: {
-    variant: "pill" | "rounded" | "square";
+    variant: "pill" | "rounded" | "square" | "small-radius";
     textColor: string;
     background: string;
     rounding: `${number}px`;
-    border: string;
+    borderColor?: string;
+    borderStyle: "solid" | "dashed" | "dotted" | "double";
+    fontStyle: "normal" | "italic";
+    fontWeight:
+      | "normal"
+      | "bold"
+      | "100"
+      | "200"
+      | "300"
+      | "400"
+      | "500"
+      | "600"
+      | "700"
+      | "800"
+      | "900";
   };
 };
 
@@ -153,6 +167,7 @@ export const users = sqliteTable("user", {
     mode: "boolean",
   }).default(false),
   hasPurchasedCard: int("has_purchased_card", { mode: "boolean" }).default(false),
+  hasCompletedOnboarding: int("has_completed_onboarding", { mode: "boolean" }).default(false),
   pageHashKey: text("page_hash_key"),
   metaTitle: text("meta_title", { length: 255 }),
   metaDescription: text("meta_description"),

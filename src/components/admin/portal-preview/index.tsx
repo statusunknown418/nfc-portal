@@ -26,7 +26,7 @@ export const PortalPreviewWrapperLoader = () => {
   return (
     <article
       id="portal-device-preview"
-      className="mx-auto flex max-h-[740px] min-h-full w-full min-w-[310px] max-w-[330px] items-center justify-center overflow-y-auto overscroll-y-contain rounded-[40px] border-4 shadow-lg"
+      className="mx-auto flex h-full max-h-[640px] w-full min-w-[310px] max-w-[330px] items-center justify-center overflow-y-auto overscroll-y-contain rounded-[40px] border-4 shadow-lg"
     >
       <Spinner />
     </article>
