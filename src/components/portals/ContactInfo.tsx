@@ -5,7 +5,6 @@ import Link from "next/link";
 import vCardBuilder from "vcard-creator";
 import { type ContactVCardType, type ThemeType } from "~/server/db/schema";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
-import { Button } from "../ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 
 export const ContactInfo = ({
@@ -101,18 +100,20 @@ export const ContactInfo = ({
 
   return (
     <>
-      <Button
+      <button
         onClick={handleImport}
-        size="lg"
-        className="mb-4 w-full"
+        className="mb-4 flex h-14 w-full items-center justify-center gap-2"
         style={{
           background: theme.buttons.background,
           color: theme.buttons.textColor,
+          borderRadius: theme.buttons.rounding,
+          fontWeight: theme.buttons.fontWeight,
+          fontStyle: theme.buttons.fontStyle,
         }}
       >
         <IdCardIcon className="h-5 w-5" />
-        Save contact
-      </Button>
+        Import contact
+      </button>
 
       <section
         className="flex flex-col gap-3 rounded-lg border border-dashed py-4 shadow-lg"

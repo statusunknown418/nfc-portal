@@ -55,14 +55,14 @@ export const PortalContent = ({
   return (
     <section
       className={cn(
-        "grid min-h-screen grid-cols-1 place-items-center overflow-y-auto pb-28 sm:pt-4 md:*:px-4",
+        "grid h-full min-h-screen grid-cols-1 place-items-center overflow-y-auto pb-28 sm:pt-4",
       )}
       style={{
         background: portal.data.theme.colors.background,
         color: portal.data.theme.colors.foreground,
       }}
     >
-      <article className="flex h-full w-full max-w-[580px] flex-col items-center gap-4">
+      <article className="flex h-full w-full max-w-[580px] flex-col items-center gap-4 overflow-hidden xl:rounded-3xl xl:border xl:border-border/50">
         <section
           className={cn(
             "relative z-0 w-full max-w-[580px] overflow-hidden bg-cover bg-center bg-no-repeat",
@@ -73,6 +73,7 @@ export const PortalContent = ({
           )}
           style={{
             maskImage: "radial-gradient(100% 100% at center top, #000 60%, transparent 100%)",
+            background: portal.data.theme.colors.background,
           }}
         >
           {portal.data.image && (
@@ -80,25 +81,26 @@ export const PortalContent = ({
               width={400}
               height={400}
               alt={`${username} profile image`}
-              className={cn("max-h-[320px] w-full self-center object-cover")}
+              className={cn("max-h-[300px] w-full self-center object-cover md:max-h-[400px]")}
               src={portal.data.image}
             />
           )}
 
           <div
-            className="absolute bottom-0 left-0 right-0 h-2/3 w-full"
+            className="absolute bottom-0 left-0 right-0 h-1/2 w-full"
             style={{
               background: `linear-gradient(to bottom, rgba(0,0,0,0) 40%, rgba(0,0,0) 80%)`,
             }}
           />
         </section>
 
-        <header className="z-10 -mt-24 flex w-full flex-col gap-0.5 px-4 text-center text-white">
-          <h2 className="text-lg font-semibold tracking-wide md:text-3xl">{portal.data.name}</h2>
-
+        <header className="z-10 -mt-32 mb-2 flex w-full flex-col gap-1 px-4 text-center text-white">
+          <h2 className="text-xl font-bold tracking-wide mix-blend-difference md:text-3xl">
+            {portal.data.name}
+          </h2>
           {(portal.data.profileHeader ?? portal.data.bio) && (
-            <div className="flex w-full flex-wrap items-center justify-center gap-1 px-4 py-3">
-              <p className="text-sm font-light text-neutral-300 md:text-base">{portal.data.bio}</p>
+            <div className="flex w-full flex-wrap items-center justify-center gap-1 px-4">
+              <p className="text-sm md:text-base">{portal.data.bio}</p>
             </div>
           )}
         </header>
@@ -159,9 +161,9 @@ export const PortalContent = ({
             </ul>
           </TabsContent>
         </Tabs>
-      </article>
 
-      <GetYours />
+        <GetYours />
+      </article>
     </section>
   );
 };

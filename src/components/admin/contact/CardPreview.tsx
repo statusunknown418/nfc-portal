@@ -2,9 +2,7 @@
 
 import DotPattern from "~/components/magicui/dot-pattern";
 import { CardBody, CardContainer, CardItem } from "~/components/ui/3d-card";
-import { Badge } from "~/components/ui/badge";
 import { cn } from "~/lib/utils";
-import { PurchaseCardModal } from "../PurchaseCard";
 
 export const CardPreview = () => {
   return (
@@ -32,12 +30,6 @@ export const CardPreview = () => {
           </CardItem>
         </CardBody>
       </CardContainer>
-
-      <section className="absolute bottom-1/3 z-10 flex w-full flex-col items-center justify-center gap-4">
-        <Badge>Not purchased yet</Badge>
-
-        <PurchaseCardModal />
-      </section>
 
       <DotPattern
         className={cn("z-0 w-full p-1 opacity-70 [mask-image:linear-gradient(to_bottom)]")}

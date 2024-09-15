@@ -24,7 +24,7 @@ export const Stepper = () => {
       Selector: ({ className, onClick }) => (
         <button
           className={cn(
-            "inline-flex gap-4 rounded-lg border border-transparent px-2 py-2 hover:bg-accent md:px-4",
+            "inline-flex max-h-24 gap-4 rounded-lg border border-transparent px-2 py-2 hover:bg-accent md:px-4",
             className,
           )}
           onClick={onClick}
@@ -48,7 +48,7 @@ export const Stepper = () => {
       Selector: ({ className, onClick }) => (
         <button
           className={cn(
-            "inline-flex gap-4 rounded-lg border border-transparent px-2 py-2 hover:bg-accent md:px-4",
+            "inline-flex max-h-24 gap-4 rounded-lg border border-transparent px-2 py-2 hover:bg-accent md:px-4",
             className,
           )}
           onClick={onClick}
@@ -72,7 +72,7 @@ export const Stepper = () => {
       Selector: ({ className, onClick }) => (
         <button
           className={cn(
-            "inline-flex gap-4 rounded-lg border border-transparent px-2 py-2 hover:bg-accent md:px-4",
+            "inline-flex max-h-24 gap-4 rounded-lg border border-transparent px-2 py-2 hover:bg-accent md:px-4",
             className,
           )}
           onClick={onClick}
@@ -96,7 +96,7 @@ export const Stepper = () => {
       Selector: ({ className, onClick }) => (
         <button
           className={cn(
-            "inline-flex gap-4 rounded-lg border border-transparent px-2 py-2 hover:bg-accent md:px-4",
+            "inline-flex max-h-24 gap-4 rounded-lg border border-transparent px-2 py-2 hover:bg-accent md:px-4",
             className,
           )}
           onClick={onClick}
@@ -120,14 +120,14 @@ export const Stepper = () => {
       Selector: ({ className, onClick }) => (
         <button
           className={cn(
-            "inline-flex gap-4 rounded-lg border border-transparent px-2 py-2 hover:bg-accent md:px-4",
+            "inline-flex max-h-24 gap-4 rounded-lg border border-transparent px-2 py-2 hover:bg-accent md:px-4",
             className,
           )}
           onClick={onClick}
         >
           <div className="space-y-1 text-left">
             <h2 className="font-medium">Finale</h2>
-            <p className="text-sm text-muted-foreground">All done! You&apos;re ready to go</p>
+            <p className="text-sm text-muted-foreground">All done! You&apos;re ready to roll</p>
           </div>
         </button>
       ),
@@ -140,10 +140,10 @@ export const Stepper = () => {
   ];
 
   return (
-    <ol className="grid w-auto grid-cols-1 gap-2 *:data-[stepper-separator=true]:-mt-5 md:grid-cols-[40px_1fr]">
-      <ul className="flex flex-col items-center gap-3">
+    <ol className="grid w-auto grid-cols-1 gap-2 *:data-[stepper-separator=true]:-mt-5 md:grid-cols-[32px_1fr]">
+      <ul className="flex flex-col items-center gap-4">
         {stepsItems.map(({ key, RenderIcon }, idx) => (
-          <li key={key} className="flex flex-col items-center gap-4">
+          <li key={key} className="flex flex-col items-center gap-3">
             <RenderIcon
               className={cn(
                 step !== key && "opacity-30",
@@ -165,13 +165,13 @@ export const Stepper = () => {
         ))}
       </ul>
 
-      <ul className="hidden w-0 flex-col gap-7 md:flex md:w-full">
+      <ul className="hidden w-0 flex-col gap-6 lg:flex lg:w-full">
         {stepsItems.map(({ key, Selector }, idx) => (
           <Selector
             key={key}
             className={cn(
               step !== key && "opacity-30",
-              step === key && "border-border",
+              step === key && "border-dashed border-border",
               stepsItems.findIndex((i) => i.key === step) > idx && "text-indigo-600 opacity-100",
             )}
             onClick={() => changeStep({ step: key })}

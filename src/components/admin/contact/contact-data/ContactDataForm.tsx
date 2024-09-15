@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Cross2Icon, PlusIcon } from "@radix-ui/react-icons";
 import { SaveIcon } from "lucide-react";
 import { type User } from "next-auth";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { type z } from "zod";
@@ -28,7 +28,6 @@ import {
   SelectValue,
 } from "~/components/ui/select";
 import { Switch } from "~/components/ui/switch";
-import { cardPreviewsStore } from "~/lib/stores/cardPreviews";
 import { cn } from "~/lib/utils";
 import { editViewerContactSchema } from "~/server/api/schemas.zod";
 import { api, type RouterOutputs } from "~/trpc/react";
@@ -135,8 +134,6 @@ export const ContactDataForm = ({
     control: form.control,
   });
 
-  const setContactPreview = cardPreviewsStore((s) => s.setPreview);
-
   const handleSubmit = form.handleSubmit(async (data) => {
     toast.promise(mutateAsync(data), {
       loading: "Saving...",
@@ -144,14 +141,6 @@ export const ContactDataForm = ({
       error: "Something went wrong",
     });
   });
-
-  useEffect(() => {
-    if (!data?.contactJSON) {
-      return;
-    }
-
-    setContactPreview(data?.contactJSON);
-  }, [data?.contactJSON, setContactPreview]);
 
   return (
     <section className="grid grid-cols-1 gap-4">

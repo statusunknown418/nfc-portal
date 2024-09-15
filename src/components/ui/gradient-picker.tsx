@@ -17,6 +17,8 @@ export function GradientPicker({
   className?: string;
 }) {
   const solids = [
+    "#ffffff",
+    "#FFFEF6",
     "#E2E2E2",
     "#ff75c3",
     "#ffa647",
@@ -25,6 +27,20 @@ export function GradientPicker({
     "#70e2ff",
     "#cd93ff",
     "#09203f",
+    "#4338ca",
+    "#0c2c2c",
+    "#00c6ff",
+    "#4facfe",
+    "#0ba360",
+    "#fdfc47",
+    "#8a2be2",
+    "#40e0d0",
+    "#fcc5e4",
+    "#ff7882",
+    "#c8699e",
+    "#7046aa",
+    "#0c1db8",
+    "#020f75",
   ];
 
   const gradients = [
@@ -65,7 +81,7 @@ export function GradientPicker({
         <Button
           variant={"outline"}
           className={cn(
-            "h-[36px] w-[220px] justify-start text-left font-normal",
+            "h-[36px] w-[240px] justify-start text-left font-normal",
             !background && "text-muted-foreground",
             className,
           )}

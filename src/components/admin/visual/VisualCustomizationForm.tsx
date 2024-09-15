@@ -1,15 +1,13 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CircleIcon, Component2Icon, SquareIcon } from "@radix-ui/react-icons";
-import {
-  RadioGroup as RadixRadioGroup,
-  RadioGroupItem as RadixRadioGroupItem,
-} from "@radix-ui/react-radio-group";
+import { FontBoldIcon, FontFamilyIcon, FontItalicIcon, FontRomanIcon } from "@radix-ui/react-icons";
+import { RadioGroupItem as RadixRadioGroupItem } from "@radix-ui/react-radio-group";
 import Image from "next/image";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
 import { Button } from "~/components/ui/button";
 import {
   Form,
@@ -20,9 +18,8 @@ import {
   FormLabel,
 } from "~/components/ui/form";
 import { GradientPicker } from "~/components/ui/gradient-picker";
-import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
+import { RadioGroup } from "~/components/ui/radio-group";
 import {
   Select,
   SelectContent,
@@ -30,14 +27,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "~/components/ui/select";
-import { Divider } from "~/components/ui/separator";
-import { Switch } from "~/components/ui/switch";
 import { Textarea } from "~/components/ui/textarea";
 import { useAutoSaveFormData } from "~/lib/hooks/use-auto-save";
 import { UploadDropzone } from "~/lib/uploadthing";
-import { BASE_THEMES, cn, type ThemeKeys } from "~/lib/utils";
+import { cn } from "~/lib/utils";
 import {
-  type AvatarShape,
   editVisualCustomizationSchema,
   type EditVisualCustomizationSchema,
 } from "~/server/db/schema";
@@ -51,15 +45,10 @@ export const VisualCustomizationForm = ({
   username: string;
 }) => {
   const form = useForm<EditVisualCustomizationSchema>({
-    defaultValues: !!defaultValues
-      ? {
-          ...defaultValues,
-          pageLayout: defaultValues.pageLayout ?? "basic",
-          bio: defaultValues.bio ?? "",
-        }
-      : {
-          theme: BASE_THEMES.default,
-        },
+    defaultValues: {
+      ...defaultValues,
+      bio: defaultValues?.bio ?? "",
+    },
     resolver: zodResolver(editVisualCustomizationSchema),
   });
 
@@ -71,11 +60,9 @@ export const VisualCustomizationForm = ({
     },
   });
 
-  const [enableCustom, setEnableCustom] = useState(
-    defaultValues?.theme.themeKey === "custom" || false,
-  );
+  const [enableCustom] = useState(defaultValues?.theme.themeKey === "custom" || false);
   const [avatar, setAvatar] = useState(defaultValues?.image);
-  const [avatarShape, setAvatarShape] = useState(defaultValues?.avatarShape);
+  const [avatarShape] = useState(defaultValues?.avatarShape);
 
   const handleSubmit = async (data: EditVisualCustomizationSchema) => {
     toast.promise(mutate.mutateAsync(data), {
@@ -85,23 +72,24 @@ export const VisualCustomizationForm = ({
     });
   };
 
-  const handleEnableCustom = (enable: boolean) => {
-    if (enable) {
-      form.setValue("theme.themeKey", "custom");
-    } else {
-      form.setValue("theme", BASE_THEMES.default);
-    }
-
-    setEnableCustom(enable);
-  };
-
   useAutoSaveFormData(500, form, (data) => void handleSubmit(data), []);
 
   return (
     <Form {...form}>
-      <form className="mt-2 grid grid-cols-1 gap-6 pb-12">
-        <section className="flex flex-col justify-between gap-4 md:flex-row">
-          <article className="flex flex-col gap-4 rounded-lg border p-6">
+      <form className="mt-2 grid grid-cols-1 gap-6">
+        <Alert variant="indigo" className="border-dashed">
+          <AlertTitle className="text-base text-indigo-600">
+            Themes / presets are coming!
+          </AlertTitle>
+
+          <AlertDescription>
+            We&apos;re working hard to provide the best experiences with new features!, if
+            you&apos;d like to see it sooner please shoot us an email.
+          </AlertDescription>
+        </Alert>
+
+        <section className="flex flex-col justify-between gap-6 rounded-lg border px-6 *:py-6 md:flex-row md:gap-8">
+          <article className="flex flex-col gap-4 rounded-lg">
             <h2 className="text-lg font-semibold">Avatar</h2>
 
             <section className="relative flex h-[200px] w-[200px] justify-center gap-2">
@@ -167,47 +155,27 @@ export const VisualCustomizationForm = ({
             </ul>
           </article>
 
-          <article className="flex flex-grow flex-col gap-4 rounded-lg border p-6">
+          <article className="flex flex-grow flex-col gap-4">
             <FormField
               control={form.control}
-              name="avatarShape"
+              name="profileHeader"
               render={({ field }) => (
                 <FormItem className="w-full">
-                  <FormLabel>Avatar shape</FormLabel>
+                  <FormLabel className="text-lg font-semibold">Profile header</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      {...field}
+                      rows={2}
+                      value={field.value ?? ""}
+                      className="resize-none"
+                      placeholder="Software Engineer"
+                    />
+                  </FormControl>
 
-                  <Select
-                    defaultValue={field.value}
-                    onValueChange={(v) => {
-                      setAvatarShape(v as AvatarShape);
-                      field.onChange(v);
-                    }}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue className="select-none" />
-                      </SelectTrigger>
-                    </FormControl>
-
-                    <SelectContent>
-                      <SelectItem value="circle">
-                        <CircleIcon className="h-5 w-5 text-indigo-600" />
-                        Circle
-                      </SelectItem>
-                      <SelectItem value="rounded">
-                        <Component2Icon className="h-5 w-5 text-cyan-600" />
-                        Rounded
-                      </SelectItem>
-                      <SelectItem value="square">
-                        <SquareIcon className="h-5 w-5 text-amber-600" />
-                        Square
-                      </SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <FormDescription>A short title you want to show off</FormDescription>
                 </FormItem>
               )}
             />
-
-            <Divider className="my-3" colorClassName="bg-zinc-300" />
 
             <FormField
               control={form.control}
@@ -218,15 +186,16 @@ export const VisualCustomizationForm = ({
                   <FormControl>
                     <Textarea
                       {...field}
-                      rows={5}
+                      rows={3}
                       value={field.value ?? ""}
+                      className="resize-none"
                       placeholder="I try to build cool stuff without breaking it..."
                     />
                   </FormControl>
 
                   <FormDescription>
                     Anything you want to tell people about yourself. This will be displayed on your
-                    profile page.
+                    profile page. (100 characters max.)
                   </FormDescription>
                 </FormItem>
               )}
@@ -234,142 +203,18 @@ export const VisualCustomizationForm = ({
           </article>
         </section>
 
-        <article>
-          <h3 className="text-xl font-medium">Themes</h3>
-          <p className="mt-1 text-sm text-muted-foreground">
-            These are curated themes that you can use for your public portal page
-          </p>
-        </article>
-
-        <section className="rounded-lg border p-6">
-          <FormField
-            control={form.control}
-            name="theme.themeKey"
-            render={({ field }) => (
-              <FormItem>
-                <RadixRadioGroup
-                  className="flex flex-wrap gap-4"
-                  value={field.value}
-                  onValueChange={(v) => {
-                    if (v === "custom") {
-                      handleEnableCustom(true);
-                    } else {
-                      setEnableCustom(false);
-                      form.setValue("theme", BASE_THEMES[v as ThemeKeys]);
-                      field.onChange(v);
-                    }
-                  }}
-                >
-                  <div className="flex flex-col items-center gap-2">
-                    <FormControl>
-                      <RadixRadioGroupItem
-                        value="custom"
-                        className="flex h-64 w-[138px] items-center justify-center gap-2 rounded-md border border-border/50 text-sm ring-offset-2 transition-all duration-200 data-[state=checked]:shadow-lg data-[state=checked]:ring data-[state=checked]:ring-ring"
-                      />
-                    </FormControl>
-
-                    <Label>Customized</Label>
-                  </div>
-
-                  <div className="flex flex-col items-center gap-2">
-                    <FormControl>
-                      <RadixRadioGroupItem
-                        value="default"
-                        className="flex h-64 w-[138px] items-center justify-center gap-2 rounded-md border border-border/50 text-sm ring-offset-2 transition-all duration-200 data-[state=checked]:shadow-lg data-[state=checked]:ring data-[state=checked]:ring-ring"
-                      />
-                    </FormControl>
-
-                    <Label>Default</Label>
-                  </div>
-
-                  <div className="flex flex-col items-center gap-2">
-                    <FormControl>
-                      <RadixRadioGroupItem
-                        value="minimal"
-                        className="flex h-64 w-[138px] items-center justify-center gap-2 rounded-md border border-border/50 text-sm ring-offset-2 transition-all duration-200 data-[state=checked]:shadow-lg data-[state=checked]:ring data-[state=checked]:ring-ring"
-                      />
-                    </FormControl>
-
-                    <Label>Minimal</Label>
-                  </div>
-
-                  <div className="flex flex-col items-center gap-2">
-                    <FormControl>
-                      <RadixRadioGroupItem
-                        value="crazy"
-                        className="flex h-64 w-[138px] items-center justify-center gap-2 rounded-md border border-border/50 text-sm ring-offset-2 transition-all duration-200 data-[state=checked]:shadow-lg data-[state=checked]:ring data-[state=checked]:ring-ring"
-                      />
-                    </FormControl>
-
-                    <Label>Cool</Label>
-                  </div>
-
-                  <div className="flex flex-col items-center gap-2">
-                    <FormControl>
-                      <RadixRadioGroupItem
-                        value="blurry"
-                        className="flex h-64 w-[138px] items-center justify-center gap-2 rounded-md border border-border/50 text-sm ring-offset-2 transition-all duration-200 data-[state=checked]:shadow-lg data-[state=checked]:ring data-[state=checked]:ring-ring"
-                      />
-                    </FormControl>
-
-                    <Label>Blurry</Label>
-                  </div>
-
-                  <div className="flex flex-col items-center gap-2">
-                    <FormControl>
-                      <RadixRadioGroupItem
-                        value="stripes"
-                        className="flex h-64 w-[138px] items-center justify-center gap-2 rounded-md border border-border/50 text-sm ring-offset-2 transition-all duration-200 data-[state=checked]:shadow-lg data-[state=checked]:ring data-[state=checked]:ring-ring"
-                      />
-                    </FormControl>
-
-                    <Label>Stripes</Label>
-                  </div>
-
-                  <div className="flex flex-col items-center gap-2">
-                    <FormControl>
-                      <RadixRadioGroupItem
-                        value="modern"
-                        className="flex h-64 w-[140px] items-center justify-center gap-2 rounded-md border border-border/50 text-sm ring-offset-2 transition-all duration-200 data-[state=checked]:shadow-lg data-[state=checked]:ring data-[state=checked]:ring-ring"
-                      />
-                    </FormControl>
-
-                    <Label>Modern</Label>
-                  </div>
-                </RadixRadioGroup>
-              </FormItem>
-            )}
-          />
-        </section>
-
-        <Divider>
-          <div className="flex items-center gap-2 px-4">
-            <Label htmlFor="enable-customization" className="text-foreground">
-              I want to build my own theme
-            </Label>
-
-            <Switch
-              id="enable-customization"
-              checked={enableCustom}
-              onCheckedChange={handleEnableCustom}
-            />
-          </div>
-        </Divider>
-
         <article
           className={cn("translate-y-0 transition-transform duration-300", {
             "h-0 translate-y-10 opacity-0": !enableCustom,
           })}
         >
-          <h3 className="text-xl font-medium">Custom theme</h3>
-          <p className="mt-1 text-sm text-muted-foreground">
-            We provide a few presets, but you can also build your own!
-          </p>
+          <h3 className="text-xl font-medium">Theme customization</h3>
+          <p className="mt-1 text-sm text-muted-foreground">Choose colors, font styles and more!</p>
         </article>
 
         <section
           className={cn(
-            "flex translate-y-0 flex-col gap-2 rounded-lg border p-6 transition-transform duration-300",
+            "flex translate-y-0 flex-col gap-4 rounded-lg border p-6 transition-transform duration-300",
             {
               "h-0 translate-y-10 opacity-0": !enableCustom,
             },
@@ -430,79 +275,198 @@ export const VisualCustomizationForm = ({
 
         <section
           className={cn(
-            "flex translate-y-0 flex-col gap-2 rounded-lg border p-6 transition-transform duration-300",
+            "flex translate-y-0 flex-col gap-4 rounded-lg border p-6 transition-transform duration-300",
             {
               "h-0 translate-y-10 opacity-0": !enableCustom,
             },
           )}
         >
-          <h2 className="text-lg font-semibold">Typography</h2>
+          <h2 className="text-lg font-semibold">Buttons (and links)</h2>
 
-          <article className="grid grid-cols-2 gap-4">
-            <FormItem>
-              <Label>Font family</Label>
+          <section className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <FormField
+              control={form.control}
+              name="theme.buttons.background"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Background color</FormLabel>
 
-              <Select>
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
+                  <GradientPicker background={field.value} setBackground={field.onChange} />
+                </FormItem>
+              )}
+            />
 
-                <SelectContent>
-                  <SelectItem value="inter">Inter</SelectItem>
-                  <SelectItem value="roboto">Roboto </SelectItem>
-                  <SelectItem value="poppins">Lato</SelectItem>
-                </SelectContent>
-              </Select>
-            </FormItem>
+            <FormField
+              control={form.control}
+              name="theme.buttons.textColor"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Text color</FormLabel>
 
-            <FormItem>
-              <Label>Font size</Label>
-              <Input />
-            </FormItem>
+                  <GradientPicker background={field.value} setBackground={field.onChange} />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="theme.buttons.borderColor"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Border color</FormLabel>
+
+                  <GradientPicker background={field.value ?? ""} setBackground={field.onChange} />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="theme.buttons.borderStyle"
+              render={({ field }) => (
+                <FormItem className="max-w-[240px]">
+                  <FormLabel>Border style</FormLabel>
+
+                  <Select value={field.value} onValueChange={field.onChange}>
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+
+                    <SelectContent>
+                      <SelectItem value="solid">Solid</SelectItem>
+                      <SelectItem value="dashed">Dashed</SelectItem>
+                      <SelectItem value="dotted">Dotted</SelectItem>
+                      <SelectItem value="double">Double</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormItem>
+              )}
+            />
+          </section>
+
+          <article className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+            <FormField
+              control={form.control}
+              name="theme.buttons.fontWeight"
+              render={({ field }) => (
+                <FormItem className="max-w-[240px]">
+                  <Label>Font weight</Label>
+
+                  <Select value={field.value} onValueChange={field.onChange}>
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+
+                    <SelectContent>
+                      <SelectItem value="100">
+                        <FontFamilyIcon />
+                        Thin
+                      </SelectItem>
+                      <SelectItem value="300">
+                        <FontFamilyIcon />
+                        Light
+                      </SelectItem>
+
+                      <SelectItem value="normal">
+                        <FontFamilyIcon />
+                        Normal
+                      </SelectItem>
+
+                      <SelectItem value="500">
+                        <FontBoldIcon />
+                        Medium
+                      </SelectItem>
+
+                      <SelectItem value="bold">
+                        <FontBoldIcon />
+                        Bold
+                      </SelectItem>
+
+                      <SelectItem value="900">
+                        <FontBoldIcon />
+                        Black
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="theme.buttons.fontStyle"
+              render={({ field }) => (
+                <FormItem className="max-w-[240px]">
+                  <Label>Font style</Label>
+
+                  <Select value={field.value} onValueChange={field.onChange}>
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+
+                    <SelectContent>
+                      <SelectItem value="normal">
+                        <FontRomanIcon />
+                        Normal
+                      </SelectItem>
+
+                      <SelectItem value="italic">
+                        <FontItalicIcon />
+                        Italic
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormItem>
+              )}
+            />
           </article>
-        </section>
-
-        <section
-          className={cn(
-            "flex translate-y-0 flex-col gap-2 rounded-lg border p-6 transition-transform duration-300",
-            {
-              "h-0 translate-y-10 opacity-0": !enableCustom,
-            },
-          )}
-        >
-          <h2 className="text-lg font-semibold">Button style</h2>
 
           <FormField
             control={form.control}
-            name="theme.buttons.rounding"
-            render={({}) => (
+            name="theme.buttons.variant"
+            render={({ field }) => (
               <FormItem>
                 <Label>Shape</Label>
 
-                <RadioGroup className="grid grid-cols-2 gap-4">
+                <RadioGroup
+                  className="flex items-center gap-4 pt-2"
+                  value={field.value}
+                  onValueChange={field.onChange}
+                >
                   <RadixRadioGroupItem
-                    value="9999px"
-                    className="flex min-h-12 w-full items-center justify-center gap-2 rounded-md border border-border/50 text-sm ring-offset-2 transition-all duration-200 data-[state=checked]:ring data-[state=checked]:ring-ring"
+                    value="pill"
+                    className="flex h-10 items-center justify-center gap-2 rounded-full border bg-muted px-8 text-sm ring-offset-2 transition-all duration-200 data-[state=checked]:ring data-[state=checked]:ring-ring"
                   >
-                    Pill rouding
+                    Pill rounding
                   </RadixRadioGroupItem>
 
                   <FormControl>
-                    <RadioGroupItem
-                      value="14px"
-                      className="flex min-h-12 w-full items-center justify-center gap-2 rounded-md border border-border/50 text-sm ring-offset-2 transition-all duration-200 data-[state=checked]:ring data-[state=checked]:ring-ring"
+                    <RadixRadioGroupItem
+                      value="rounded"
+                      className="flex h-10 items-center justify-center gap-2 rounded-xl border bg-muted px-8 text-sm ring-offset-2 transition-all duration-200 data-[state=checked]:ring data-[state=checked]:ring-ring"
                     >
-                      Medium rouding
-                    </RadioGroupItem>
+                      Medium
+                    </RadixRadioGroupItem>
                   </FormControl>
 
                   <FormControl>
-                    <RadioGroupItem
-                      value="8px"
-                      className="flex min-h-12 w-full items-center justify-center gap-2 rounded-md border border-border/50 text-sm ring-offset-2 transition-all duration-200 data-[state=checked]:ring data-[state=checked]:ring-ring"
+                    <RadixRadioGroupItem
+                      value="small-radius"
+                      className="flex h-10 items-center justify-center gap-2 rounded-sm border bg-muted px-8 text-sm ring-offset-2 transition-all duration-200 data-[state=checked]:ring data-[state=checked]:ring-ring"
                     >
-                      Small rouding
-                    </RadioGroupItem>
+                      Small
+                    </RadixRadioGroupItem>
+                  </FormControl>
+
+                  <p className="text-muted-foreground">or</p>
+
+                  <FormControl>
+                    <RadixRadioGroupItem
+                      value="square"
+                      className="flex h-10 items-center justify-center gap-2 border bg-muted px-8 text-sm ring-offset-2 transition-all duration-200 data-[state=checked]:ring data-[state=checked]:ring-ring"
+                    >
+                      No rounding
+                    </RadixRadioGroupItem>
                   </FormControl>
                 </RadioGroup>
               </FormItem>
