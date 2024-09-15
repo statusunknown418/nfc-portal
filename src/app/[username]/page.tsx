@@ -47,7 +47,7 @@ export async function generateViewport({ params }: Props): Promise<Viewport> {
     portal.data.theme.colors.background.includes("url");
 
   return {
-    themeColor: !!isGradient ? "#000000" : portal.data?.theme.colors.background,
+    themeColor: !!isGradient ? "rgba(0,0,0,0.5)" : portal.data?.theme.colors.background,
     colorScheme: portal.data?.theme.colorScheme,
   };
 }
