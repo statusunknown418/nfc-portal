@@ -7,19 +7,24 @@ export type NFCPreferencesStore = {
   setPreferences: (data: NFCPreferencesStore["preferencesData"]) => void;
 };
 
+export const DEFAULT_PREFERENCES: SaveNFCPreferences = {
+  showName: true,
+  showJobTitle: false,
+  showCompanyName: false,
+  companyNameOnFront: true,
+  showCompanyLogo: false,
+  nameOnFront: true,
+  jobTitleOnFront: true,
+  companyLogoOnFront: true,
+  cardImageBack: undefined,
+  cardImageFront: undefined,
+  cardVariant: "basic",
+};
+
 export const nfcPreferencesStore = create(
   persist<NFCPreferencesStore>(
     (set) => ({
-      preferencesData: {
-        showName: true,
-        showJobTitle: false,
-        showCompanyLogo: false,
-        nameOnFront: true,
-        jobTitleOnFront: true,
-        companyLogoOnFront: true,
-        cardVariant: "custom",
-        companyLogoURL: undefined,
-      },
+      preferencesData: DEFAULT_PREFERENCES,
       setPreferences: (data) => set({ preferencesData: data }),
     }),
     {

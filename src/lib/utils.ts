@@ -64,7 +64,7 @@ export enum ThemeKeys {
 
 export const BASE_THEMES: Record<ThemeKeys, ThemeType> = {
   default: {
-    themeKey: "default",
+    themeKey: "custom",
     colorScheme: "light",
     colors: {
       foreground: "#000000",

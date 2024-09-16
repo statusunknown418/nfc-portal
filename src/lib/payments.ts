@@ -17,6 +17,7 @@ export const getNFCProducts = ({
   description: string;
   id: string;
   unitPrice: number;
+  metadata?: Record<string, unknown>;
 }) =>
   new Preference(payments)
     .create({
@@ -30,6 +31,9 @@ export const getNFCProducts = ({
             quantity: 1,
           },
         ],
+        payment_methods: {
+          default_installments: 1,
+        },
       },
     })
     .then((res) => res.sandbox_init_point);
