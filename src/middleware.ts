@@ -5,11 +5,13 @@ export const PORTAL_KEY = "portal-password";
 export const PORTAL_QUERY = "ktp";
 export const INCOMING_URL = "x-current-url";
 
+const secure_routes = ["/admin", "/business", "/onboarding"];
+
 export default auth(async function middleware(req, _ctx) {
   const headers = new Headers(req.headers);
   headers.set(INCOMING_URL, req.nextUrl.pathname);
 
-  if (req.nextUrl.pathname.startsWith("/admin") || req.nextUrl.pathname.startsWith("/business")) {
+  if (secure_routes.includes(req.nextUrl.pathname)) {
     if (req.auth) {
       return NextResponse.next({ headers });
     } else {

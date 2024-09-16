@@ -125,13 +125,17 @@ export const themeSchema: z.ZodType<ThemeType> = z.object({
 
 export const saveNFCPreferencesSchema = z.object({
   showName: z.boolean(),
-  nameOnFront: z.boolean(),
   showJobTitle: z.boolean(),
+  showCompanyName: z.boolean(),
+  companyNameOnFront: z.boolean(),
+  nameOnFront: z.boolean(),
   jobTitleOnFront: z.boolean(),
   showCompanyLogo: z.boolean(),
   companyLogoOnFront: z.boolean(),
   cardVariant: z.enum(["basic", "custom", "metallic"]),
   companyLogoURL: z.string().url().optional(),
+  cardImageFront: z.string().url().optional(),
+  cardImageBack: z.string().url().optional(),
 });
 
 export type SaveNFCPreferences = z.infer<typeof saveNFCPreferencesSchema>;

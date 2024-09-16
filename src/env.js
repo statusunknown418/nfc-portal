@@ -26,6 +26,7 @@ export const env = createEnv({
     UPLOADTHING_SECRET: z.string(),
     MERCADOPAGO_TOKEN: z.string(),
     MERCADOPAGO_PUBLIC_KEY: z.string(),
+    MERCADOPAGO_WEBHOOK_SECRET: z.string(),
   },
 
   /**
@@ -55,6 +56,7 @@ export const env = createEnv({
     UPLOADTHING_SECRET: process.env.UPLOADTHING_SECRET,
     MERCADOPAGO_TOKEN: process.env.MERCADOPAGO_TOKEN,
     MERCADOPAGO_PUBLIC_KEY: process.env.MERCADOPAGO_PUBLIC_KEY,
+    MERCADOPAGO_WEBHOOK_SECRET: process.env.MERCADOPAGO_WEBHOOK_SECRET,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

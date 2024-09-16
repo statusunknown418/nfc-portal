@@ -23,6 +23,7 @@ export const AuthConfig = {
   pages: {
     signIn: "/auth/login",
     verifyRequest: "/auth/verify",
+    newUser: "/onboarding",
   },
   callbacks: {
     jwt: async ({ token, user }) => {
