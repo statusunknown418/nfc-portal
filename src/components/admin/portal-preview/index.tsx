@@ -4,9 +4,9 @@ import { api } from "~/trpc/server";
 import { PortalPreview } from "./PortalPreview";
 
 export const PortalPreviewWrapperRSC = async ({ username }: { username: string }) => {
-  const data = await api.portals.get({ username });
+  const portal = await api.portals.get({ username });
 
-  if (!data.data) {
+  if (!portal.data) {
     return redirect("/auth/login?error=no-data-found");
   }
 
@@ -16,7 +16,7 @@ export const PortalPreviewWrapperRSC = async ({ username }: { username: string }
         id="portal-device-preview"
         className="mx-auto max-h-[740px] min-h-[640px] w-full min-w-[310px] max-w-[330px] overflow-y-auto overscroll-y-contain rounded-[40px] border-4 shadow-lg shadow-black/50"
       >
-        <PortalPreview initialData={data} username={username} />
+        <PortalPreview initialData={portal} username={username} />
       </article>
     </>
   );

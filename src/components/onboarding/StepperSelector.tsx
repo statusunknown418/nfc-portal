@@ -13,6 +13,8 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import { ContactStep } from "./ContactStep";
 import { PublicPortalStep } from "./PublicPortalStep";
 import { NFCPreferencesStep } from "./NFCPreferencesStep";
+import { PurchaseCardStep } from "./PurchaseCardStep";
+import { type SaveNFCPreferences } from "~/server/api/schemas.zod";
 
 export const StepperSelector = ({
   session,
@@ -26,6 +28,7 @@ export const StepperSelector = ({
   components?: {
     portal: ReactNode;
     visual: ReactNode;
+    purchase: (data: SaveNFCPreferences) => Promise<string>;
   };
 }) => {
   const [{ step }, changeStep] = useQueryStates(onboardingParsers);
@@ -43,7 +46,7 @@ export const StepperSelector = ({
       </PublicPortalStep>
     ),
     "nfc-card": <NFCPreferencesStep initialData={initialData.contact} />,
-    purchase: <div></div>,
+    purchase: <PurchaseCardStep onPurchase={components!.purchase} />,
     finale: <div></div>,
   };
 
@@ -65,11 +68,11 @@ export const StepperSelector = ({
 
   return (
     <AnimatePresence>
-      <section className="relative flex h-full flex-col">
-        <section className="flex-grow overflow-auto p-4 md:p-8 md:pb-12">
-          <h3 className="mb-6">Let&apos;s get you set up, {session.user.username}</h3>
+      <section className="relative h-full">
+        <section className="h-full overflow-auto px-4 pt-4 md:px-8 md:pt-8">
+          <h3>Let&apos;s get you set up, {session.user.username}</h3>
 
-          {step && StepComponents[step]}
+          <div className="relative mt-4 pb-24">{step && StepComponents[step]}</div>
         </section>
 
         <div className="absolute bottom-0 left-0 flex h-max w-full items-center justify-between gap-4 border-t bg-muted px-8 py-4">

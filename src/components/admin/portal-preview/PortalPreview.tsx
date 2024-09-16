@@ -16,7 +16,7 @@ export const PortalPreview = ({
   const { data: portal } = api.portals.get.useQuery({ username }, { initialData });
 
   const mainKey = portal.data?.links.map((link) => `${JSON.stringify(link)}`).join(",");
-  const renderKey = `${mainKey}-${JSON.stringify(portal.data?.theme)}-${portal.data?.bio}--${portal.data?.hasContactInfoLocked}`;
+  const renderKey = `${mainKey}-${portal.data?.image}-${JSON.stringify(portal.data?.theme)}-${portal.data?.bio}--${portal.data?.hasContactInfoLocked}`;
 
   const fallbackKey = `${username}-${portal.data?.pageHashKey}`;
 

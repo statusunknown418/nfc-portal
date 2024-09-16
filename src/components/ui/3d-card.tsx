@@ -96,6 +96,7 @@ export const CardItem = ({
   rotateX = 0,
   rotateY = 0,
   rotateZ = 0,
+  style,
   ...rest
 }: {
   as?: React.ElementType;
@@ -107,6 +108,7 @@ export const CardItem = ({
   rotateX?: number | string;
   rotateY?: number | string;
   rotateZ?: number | string;
+  style?: React.CSSProperties;
   [key: string]: unknown;
 }) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -126,7 +128,12 @@ export const CardItem = ({
   };
 
   return (
-    <Tag ref={ref} className={cn("w-fit transition duration-200 ease-linear", className)} {...rest}>
+    <Tag
+      ref={ref}
+      className={cn("w-fit transition duration-200 ease-linear", className)}
+      style={style}
+      {...rest}
+    >
       {children}
     </Tag>
   );

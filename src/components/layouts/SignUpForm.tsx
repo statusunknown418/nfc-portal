@@ -27,12 +27,12 @@ export const signUpSchema = z.object({
   username: z
     .string()
     .trim()
-    .transform((val) => `@${val.toLowerCase()}`)
     .optional()
-    .refine((val) => !val || (val.length > 2 && usernameRegex.test(val)), {
+    .refine((val) => !val || (val.length >= 3 && usernameRegex.test(val)), {
       message:
-        "Should be at least 3 characters and contain only letters, numbers, dots and underscores",
-    }),
+        "Username must be at least 3 characters long and can only contain letters, numbers, dots, and underscores",
+    })
+    .transform((val) => (val ? `@${val.toLowerCase()}` : val)),
 });
 
 export default function SignUpForm({
@@ -73,10 +73,10 @@ export default function SignUpForm({
                   <Input
                     {...field}
                     className="rounded-l-none border-l-0 focus-visible:ring-0 focus-visible:ring-offset-0"
-                    placeholder="@the.architect"
+                    placeholder="the.architect"
                     autoCapitalize="off"
                     autoCorrect="off"
-                    autoComplete="username"
+                    autoComplete="off"
                     disabled={form.formState.isSubmitting}
                   />
                 </FormControl>
@@ -102,7 +102,6 @@ export default function SignUpForm({
                   placeholder="the.architect@nearu.tech"
                   autoCapitalize="off"
                   autoCorrect="off"
-                  autoComplete="email"
                   disabled={form.formState.isSubmitting}
                 />
               </FormControl>

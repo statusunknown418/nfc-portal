@@ -109,6 +109,7 @@ export const ContactInfo = ({
           borderRadius: theme.buttons.rounding,
           fontWeight: theme.buttons.fontWeight,
           fontStyle: theme.buttons.fontStyle,
+          border: `1px ${theme.buttons.borderStyle} ${theme.buttons.borderColor}`,
         }}
       >
         <IdCardIcon className="h-5 w-5" />

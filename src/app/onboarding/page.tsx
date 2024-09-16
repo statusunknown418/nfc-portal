@@ -7,6 +7,8 @@ import { onboardingParsesCache } from "~/components/onboarding/onboarding.parser
 import { Stepper } from "~/components/onboarding/Stepper";
 import { StepperSelector } from "~/components/onboarding/StepperSelector";
 import { Button } from "~/components/ui/button";
+import { getNFCProducts } from "~/lib/payments";
+import { type SaveNFCPreferences } from "~/server/api/schemas.zod";
 import { auth } from "~/server/auth";
 import { api } from "~/trpc/server";
 
@@ -18,6 +20,23 @@ export default async function OnboardingPage({ searchParams }: { searchParams: S
   if (!session?.user.username) {
     return redirect("/auth/signup");
   }
+
+  const onPurchase = async (data: SaveNFCPreferences) => {
+    "use server";
+
+    const redirectLink = await getNFCProducts({
+      title: `NFC card | ${data.cardVariant}`,
+      description: `Purchase your NFC card`,
+      id: `${session.user.id}-${data.cardVariant}`,
+      unitPrice: data.cardVariant === "basic" ? 50 : 70,
+    });
+
+    if (!redirectLink) {
+      throw new Error("No redirect link");
+    }
+
+    redirect(redirectLink);
+  };
 
   return (
     <>
@@ -31,13 +50,14 @@ export default async function OnboardingPage({ searchParams }: { searchParams: S
         </Button>
       </section>
 
-      <section className="flex w-full flex-col gap-8 overflow-auto bg-white">
+      <section className="h-full w-full overflow-auto bg-white">
         <StepperSelector
           initialData={{ contact: contactData }}
           session={session}
           components={{
             portal: <PortalPreviewWrapperRSC username={session.user.username} />,
             visual: <VisualWrapper />,
+            purchase: onPurchase,
           }}
         />
       </section>
