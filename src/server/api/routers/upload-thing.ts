@@ -46,7 +46,7 @@ export const uploadThingRouter = {
 
       return { uploadedBy: metadata.userId, url: file.url };
     }),
-  logos: f({ image: { maxFileSize: "4MB", minFileCount: 1, maxFileCount: 1 } })
+  logos: f({ image: { maxFileSize: "16MB", minFileCount: 1, maxFileCount: 1 } })
     .middleware(async () => {
       const session = await auth();
 

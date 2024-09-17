@@ -1,39 +1,8 @@
 "server only";
-import MercadoPago, { Preference } from "mercadopago";
+import MercadoPago from "mercadopago";
 
 import { env } from "~/env";
 
 export const payments = new MercadoPago({
   accessToken: env.MERCADOPAGO_TOKEN,
 });
-
-export const getNFCProducts = ({
-  title,
-  description,
-  id,
-  unitPrice,
-}: {
-  title: string;
-  description: string;
-  id: string;
-  unitPrice: number;
-  metadata?: Record<string, unknown>;
-}) =>
-  new Preference(payments)
-    .create({
-      body: {
-        items: [
-          {
-            id,
-            title,
-            description,
-            unit_price: unitPrice,
-            quantity: 1,
-          },
-        ],
-        payment_methods: {
-          default_installments: 1,
-        },
-      },
-    })
-    .then((res) => res.sandbox_init_point);

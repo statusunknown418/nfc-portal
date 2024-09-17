@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 import { type ContactVCardType } from "~/server/db/schema";
 
 type CardPreviewsStore = {
@@ -6,7 +7,14 @@ type CardPreviewsStore = {
   setPreview: (data: ContactVCardType) => void;
 };
 
-export const cardPreviewsStore = create<CardPreviewsStore>((set) => ({
-  previewsData: undefined,
-  setPreview: (data) => set({ previewsData: data }),
-}));
+export const cardPreviewsStore = create(
+  persist<CardPreviewsStore>(
+    (set) => ({
+      previewsData: undefined,
+      setPreview: (data) => set({ previewsData: data }),
+    }),
+    {
+      name: "card-previews-store",
+    },
+  ),
+);

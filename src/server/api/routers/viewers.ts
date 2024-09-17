@@ -2,6 +2,7 @@ import { createId } from "@paralleldrive/cuid2";
 import { z } from "zod";
 import { users } from "~/server/db/schema";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
+import { eq } from "drizzle-orm";
 
 export const viewersRouter = createTRPCRouter({
   /**
@@ -41,4 +42,33 @@ export const viewersRouter = createTRPCRouter({
       },
     });
   }),
+  setOnboardingStep: protectedProcedure
+    .input(
+      z.object({
+        step: z.enum(["contact", "portal", "nfc-card", "purchase", "finale"]).default("contact"),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      await ctx.db
+        .update(users)
+        .set({ onboardingStep: input.step })
+        .where(eq(users.id, ctx.session.user.id));
+
+      return { success: true };
+    }),
+  checkUsernameAvailability: publicProcedure
+    .input(z.string().optional())
+    .query(async ({ ctx, input }) => {
+      if (!input) {
+        return;
+      }
+
+      const username = input.toLowerCase();
+
+      const user = await ctx.db.query.users.findFirst({
+        where: (t, op) => op.eq(t.username, username),
+      });
+
+      return { available: !user };
+    }),
 });

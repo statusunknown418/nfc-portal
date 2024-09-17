@@ -4,8 +4,8 @@ import { index, int, primaryKey, sqliteTable, text } from "drizzle-orm/sqlite-co
 import { createInsertSchema } from "drizzle-zod";
 import { type AdapterAccount } from "next-auth/adapters";
 import { z } from "zod";
-import { themeSchema } from "../api/schemas.zod";
 import { BASE_THEMES } from "~/lib/utils";
+import { type SaveNFCPreferences, themeSchema } from "../api/schemas.zod";
 
 export const linkTypes = ["social", "deployable", "basic"] as const;
 export type LinkType = (typeof linkTypes)[number];
@@ -15,7 +15,7 @@ export type LinkLayoutType = (typeof linkLayoutTypes)[number];
 export const pageLayoutTypes = ["basic", "grid", "hero"] as const;
 export type PageLayoutType = (typeof pageLayoutTypes)[number];
 
-export const cardVariants = ["basic", "custom"] as const;
+export const cardVariants = ["basic", "custom", "metallic"] as const;
 export type CardVariant = (typeof cardVariants)[number];
 
 export type ThemeType = {
@@ -145,6 +145,11 @@ export const cardShippingStatusTypes = [
   "failed",
 ] as const;
 
+export const onboardingStepTypes = ["contact", "portal", "nfc-card", "purchase", "finale"] as const;
+export type OnboardingStep = (typeof onboardingStepTypes)[number];
+
+export type CardShippingStatus = (typeof cardShippingStatusTypes)[number];
+
 export const users = sqliteTable("user", {
   id: text("id", { length: 255 })
     .notNull()
@@ -168,6 +173,7 @@ export const users = sqliteTable("user", {
   }).default(false),
   hasPurchasedCard: int("has_purchased_card", { mode: "boolean" }).default(false),
   hasCompletedOnboarding: int("has_completed_onboarding", { mode: "boolean" }).default(false),
+  onboardingStep: text("onboarding_step", { enum: onboardingStepTypes }).default("contact"),
   pageHashKey: text("page_hash_key"),
   metaTitle: text("meta_title", { length: 255 }),
   metaDescription: text("meta_description"),
@@ -198,6 +204,32 @@ export const usersRelations = relations(users, ({ many }) => ({
   accounts: many(accounts),
   links: many(links),
   enterprisesThrough: many(usersToEnterprises),
+  purchases: many(purchases),
+}));
+
+export const purchases = sqliteTable("purchases", {
+  id: text("id", { length: 255 })
+    .notNull()
+    .primaryKey()
+    .$defaultFn(() => `pay_${createId()}`),
+  paymentId: int("payment_id", { mode: "number" }).unique(),
+  currency: text("currency", { length: 255 }).notNull(),
+  userId: text("user_id", { length: 255 }),
+  amount: int("amount", { mode: "number" }).notNull(),
+  metadata: text("metadata", { mode: "json" })
+    .$type<
+      SaveNFCPreferences & { app_user_id: string; shipping_address: string; [x: string]: unknown }
+    >()
+    .notNull(),
+  status: text("status", { length: 255 }).notNull().default("pending"),
+  createdAt: int("created_at", { mode: "timestamp" })
+    .default(sql`(unixepoch())`)
+    .notNull(),
+  updatedAt: int("updated_at", { mode: "timestamp" }).$onUpdate(() => new Date()),
+});
+
+export const purchasesRelations = relations(purchases, ({ one }) => ({
+  user: one(users, { fields: [purchases.userId], references: [users.id] }),
 }));
 
 export const enterprises = sqliteTable("enterprises", {

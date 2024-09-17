@@ -1,6 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { type ThemeType } from "~/server/db/schema";
+import { type CardShippingStatus, type ThemeType } from "~/server/db/schema";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -204,4 +204,19 @@ export const BASE_THEMES: Record<ThemeKeys, ThemeType> = {
       rounding: "9999px",
     },
   },
+};
+
+export const purchaseStatusToText = (status: CardShippingStatus) => {
+  switch (status) {
+    case "awaiting_purchase":
+      return "Not purchased yet";
+    case "in_progress":
+      return "Your card is being shipped! Sit tight...";
+    case "shipped":
+      return "You will receive your card shortly!";
+    case "failed":
+      return "Something went wrong during the shipping process. Please contact us directly";
+    default:
+      return "Unknown status";
+  }
 };
