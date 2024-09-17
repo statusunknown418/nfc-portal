@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { cardPreviewsStore } from "~/lib/stores/cardPreviews";
 import { type RouterOutputs } from "~/trpc/react";
 import { CardPreview } from "../admin/contact/CardPreview";
-import { CardPreferencesForm } from "../admin/PurchaseCard";
+import { CardPreferencesForm } from "../admin/CardPreferencesForm";
 
 export const NFCPreferencesStep = ({
   initialData,

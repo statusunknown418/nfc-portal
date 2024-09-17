@@ -133,7 +133,9 @@ export const CardPreferencesForm = () => {
               }}
             />
 
-            <Button>Remove design</Button>
+            <Button onClick={() => form.setValue("cardImageFront", undefined)}>
+              Remove design
+            </Button>
           </article>
 
           <article
@@ -190,7 +192,7 @@ export const CardPreferencesForm = () => {
               />
             </div>
 
-            <Button>Remove design</Button>
+            <Button onClick={() => form.setValue("cardImageBack", undefined)}>Remove design</Button>
           </article>
         </section>
 
@@ -474,7 +476,11 @@ export const CardPreferencesForm = () => {
                 />
               </section>
 
-              <Button className="max-w-max" variant="destructive_ghost">
+              <Button
+                className="max-w-max"
+                variant="destructive_ghost"
+                onClick={() => form.setValue("companyLogoURL", undefined)}
+              >
                 Remove logo
               </Button>
             </div>

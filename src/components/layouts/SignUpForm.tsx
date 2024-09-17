@@ -1,6 +1,6 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { DiscordLogoIcon } from "@radix-ui/react-icons";
+import { CheckCircledIcon, DiscordLogoIcon } from "@radix-ui/react-icons";
 import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -17,6 +17,8 @@ import {
 import { Input } from "~/components/ui/input";
 import { setDecidedUsername } from "../../lib/cookies.actions";
 import { Spinner } from "../shared/Spinner";
+import { api } from "~/trpc/react";
+import { useDebounce } from "@uidotdev/usehooks";
 
 const usernameRegex = /^[a-zA-Z0-9._]+$/;
 
@@ -48,6 +50,13 @@ export default function SignUpForm({
     },
   });
 
+  const username = form.watch("username");
+  const debouncedUsername = useDebounce(username, 400);
+
+  const { data, isLoading } = api.viewer.checkUsernameAvailability.useQuery(debouncedUsername, {
+    enabled: !!debouncedUsername,
+  });
+
   const handleSubmit = form.handleSubmit(async (data) => {
     !!data.username && (await setDecidedUsername(data.username.toLowerCase()));
 
@@ -65,22 +74,33 @@ export default function SignUpForm({
           name="username"
           render={({ field }) => (
             <FormItem>
-              <div className="flex items-center gap-0 rounded-md shadow-lg shadow-indigo-100 transition-shadow duration-100 has-[input:focus]:shadow-indigo-400">
-                <p className="flex h-[36px] w-56 items-center rounded-l-md border bg-primary px-3 text-sm tracking-wide text-primary-foreground">
-                  https://nearu.tech/@
-                </p>
-                <FormControl>
-                  <Input
-                    {...field}
-                    className="rounded-l-none border-l-0 focus-visible:ring-0 focus-visible:ring-offset-0"
-                    placeholder="the.architect"
-                    autoCapitalize="off"
-                    autoCorrect="off"
-                    autoComplete="off"
-                    disabled={form.formState.isSubmitting}
-                  />
-                </FormControl>
-              </div>
+              {!data?.available && debouncedUsername && !isLoading && (
+                <p className="text-destructive">This username is taken, please choose another</p>
+              )}
+
+              <section className="flex w-full items-center gap-2">
+                <div className="flex flex-grow items-center gap-0 rounded-md shadow-lg shadow-indigo-100 transition-shadow duration-100 has-[input:focus]:shadow-indigo-400">
+                  <p className="flex h-[36px] w-56 items-center rounded-l-md border bg-primary px-3 font-mono text-sm text-primary-foreground">
+                    https://nearu.tech/@
+                  </p>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      className="rounded-l-none border-l-0 focus-visible:ring-0 focus-visible:ring-offset-0"
+                      placeholder="the.architect"
+                      autoCapitalize="off"
+                      autoCorrect="off"
+                      autoComplete="off"
+                      disabled={form.formState.isSubmitting}
+                    />
+                  </FormControl>
+                </div>
+
+                {isLoading && <Spinner />}
+                {!isLoading && !!data?.available && (
+                  <CheckCircledIcon className="h-5 w-5 text-emerald-600" />
+                )}
+              </section>
 
               <FormMessage />
 

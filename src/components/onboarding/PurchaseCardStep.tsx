@@ -1,15 +1,53 @@
-import { ShoppingBagIcon } from "lucide-react";
+import { ShoppingBagIcon, SparklesIcon } from "lucide-react";
+import { useState } from "react";
+import { toast } from "sonner";
 import { nfcPreferencesStore } from "~/lib/stores/nfcPreferences";
-import { type SaveNFCPreferences } from "~/server/api/schemas.zod";
+import { purchaseStatusToText } from "~/lib/utils";
+import { api } from "~/trpc/react";
 import { CardPreview } from "../admin/contact/CardPreview";
+import { Spinner } from "../shared/Spinner";
+import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
+import { FormItem } from "../ui/form";
+import { Label } from "../ui/label";
+import { Textarea } from "../ui/textarea";
 
-export const PurchaseCardStep = ({
-  onPurchase,
-}: {
-  onPurchase: (data: SaveNFCPreferences) => Promise<string>;
-}) => {
+export const PurchaseCardStep = () => {
   const preferences = nfcPreferencesStore((s) => s.preferencesData);
+
+  const { data, isLoading } = api.purchases.getStatus.useQuery();
+  const { mutate, isPending } = api.purchases.withPreferences.useMutation({
+    onError: (err) => {
+      toast.error("Something went wrong", {
+        description: err.message,
+      });
+    },
+    onSuccess: (data) => {
+      if (!data.sandbox_init_point) {
+        toast.error("Something went wrong", {
+          description: "Unable to redirect to payment provider",
+        });
+      }
+
+      window.open(data.sandbox_init_point, "_self");
+    },
+  });
+
+  const [shippingAddress, setShippingAddress] = useState("");
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    mutate({
+      metadata: {
+        ...preferences,
+        shippingAddress,
+      },
+      title: `NFC card | ${preferences.cardVariant.toLocaleUpperCase()} Edition`,
+      cardVariant: preferences.cardVariant,
+      description: `Purchase your NFC card`,
+    });
+  };
 
   return (
     <section className="flex min-h-full flex-col gap-1">
@@ -23,19 +61,64 @@ export const PurchaseCardStep = ({
         <CardPreview />
       </div>
 
-      <Button
-        onClick={() => void onPurchase(preferences)}
-        variant="primary"
-        size="lg"
-        className="h-12 w-full max-w-sm self-center shadow-lg shadow-indigo-300"
+      <form
+        onSubmit={onSubmit}
+        className="mx-auto grid w-full max-w-sm grid-cols-1 place-items-center gap-2"
       >
-        <ShoppingBagIcon size={15} />
-        Buy now
-      </Button>
+        {!isLoading && data?.cardShippingStatus ? (
+          <Badge className="my-4 h-7 justify-self-center">
+            {purchaseStatusToText(data.cardShippingStatus)}{" "}
+            {data.cardShippingStatus === "in_progress" && (
+              <SparklesIcon size={15} className="ml-2 text-amber-500" />
+            )}
+          </Badge>
+        ) : (
+          <Badge className="my-3 h-7" variant="secondary">
+            <Spinner />
+          </Badge>
+        )}
 
-      <p className="mt-2 self-center text-balance text-muted-foreground">
-        You will be redirected to our payment provider to securely complete the payment
-      </p>
+        <FormItem className="w-full max-w-sm">
+          <Label>Shipping address</Label>
+
+          <Textarea
+            required
+            placeholder="Your shipping address"
+            autoCorrect="off"
+            autoCapitalize="off"
+            spellCheck="false"
+            autoComplete="address-line1"
+            rows={2}
+            value={shippingAddress}
+            onChange={(e) => setShippingAddress(e.currentTarget.value)}
+          />
+        </FormItem>
+
+        <Button
+          disabled={!shippingAddress}
+          onClick={() =>
+            mutate({
+              metadata: preferences,
+              title: `NFC card | ${preferences.cardVariant.toLocaleUpperCase()} Edition`,
+              cardVariant: preferences.cardVariant,
+              description: `Purchase your NFC card`,
+            })
+          }
+          variant="primary"
+          size="lg"
+          className="h-12 w-full max-w-sm self-center shadow-lg shadow-indigo-300"
+        >
+          {isPending ? <Spinner className="text-white" /> : <ShoppingBagIcon size={15} />}
+
+          {!isLoading && data?.cardShippingStatus !== "awaiting_purchase"
+            ? "Already purchased, want another?"
+            : "Buy now!"}
+        </Button>
+
+        <p className="mt-2 text-center text-muted-foreground">
+          You will be redirected to our payment provider to securely complete the payment
+        </p>
+      </form>
     </section>
   );
 };

@@ -12,7 +12,7 @@ import { cn } from "~/lib/utils";
 import { type Keys, onboardingParsers } from "./onboarding.parsers";
 
 export const Stepper = () => {
-  const [{ step }, changeStep] = useQueryStates(onboardingParsers);
+  const [{ step }, changeStep] = useQueryStates(onboardingParsers, { history: "push" });
 
   const stepsItems: {
     key: Keys;

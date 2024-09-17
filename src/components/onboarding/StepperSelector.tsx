@@ -1,20 +1,20 @@
 "use client";
 
+import { CheckCircledIcon, ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import { AnimatePresence } from "framer-motion";
 import { type Session } from "next-auth";
+import Link from "next/link";
 import { useQueryStates } from "nuqs";
 import { type ReactNode } from "react";
-import { type RouterOutputs } from "~/trpc/react";
+import { api, type RouterOutputs } from "~/trpc/react";
 import { ContactDataForm } from "../admin/contact/contact-data/ContactDataForm";
 import { Button } from "../ui/button";
-import { keys, onboardingParsers, type Keys } from "./onboarding.parsers";
-
-import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import { ContactStep } from "./ContactStep";
-import { PublicPortalStep } from "./PublicPortalStep";
+import { FinaleStep } from "./FinaleStep";
 import { NFCPreferencesStep } from "./NFCPreferencesStep";
+import { keys, onboardingParsers, type Keys } from "./onboarding.parsers";
+import { PublicPortalStep } from "./PublicPortalStep";
 import { PurchaseCardStep } from "./PurchaseCardStep";
-import { type SaveNFCPreferences } from "~/server/api/schemas.zod";
 
 export const StepperSelector = ({
   session,
@@ -28,10 +28,10 @@ export const StepperSelector = ({
   components?: {
     portal: ReactNode;
     visual: ReactNode;
-    purchase: (data: SaveNFCPreferences) => Promise<string>;
   };
 }) => {
   const [{ step }, changeStep] = useQueryStates(onboardingParsers);
+  const { mutate } = api.viewer.setOnboardingStep.useMutation();
 
   const StepComponents: Record<Keys, ReactNode> = {
     contact: (
@@ -46,8 +46,8 @@ export const StepperSelector = ({
       </PublicPortalStep>
     ),
     "nfc-card": <NFCPreferencesStep initialData={initialData.contact} />,
-    purchase: <PurchaseCardStep onPurchase={components!.purchase} />,
-    finale: <div></div>,
+    purchase: <PurchaseCardStep />,
+    finale: <FinaleStep />,
   };
 
   const goPrevious = () => {
@@ -57,12 +57,14 @@ export const StepperSelector = ({
 
     const newStep = keys[keys.indexOf(step) - 1];
 
+    void mutate({ step: newStep });
     void changeStep({ step: newStep });
   };
 
   const goNext = () => {
     const newStep = keys[keys.indexOf(step) + 1];
 
+    void mutate({ step: newStep });
     void changeStep({ step: newStep });
   };
 
@@ -72,7 +74,9 @@ export const StepperSelector = ({
         <section className="h-full overflow-auto px-4 pt-4 md:px-8 md:pt-8">
           <h3>Let&apos;s get you set up, {session.user.username}</h3>
 
-          <div className="relative mt-4 pb-24">{step && StepComponents[step]}</div>
+          <div className="relative mt-4 h-full max-h-[calc(100%-80px)]">
+            {step && StepComponents[step]}
+          </div>
         </section>
 
         <div className="absolute bottom-0 left-0 flex h-max w-full items-center justify-between gap-4 border-t bg-muted px-8 py-4">
@@ -82,10 +86,18 @@ export const StepperSelector = ({
             </Button>
           )}
 
-          <Button className="ml-auto" onClick={goNext}>
-            Next step
-            <ChevronRightIcon />
-          </Button>
+          {step === "finale" ? (
+            <Button className="ml-auto" asChild>
+              <Link href="/admin">
+                Complete onboarding <CheckCircledIcon />
+              </Link>
+            </Button>
+          ) : (
+            <Button className="ml-auto" onClick={goNext}>
+              Next step
+              <ChevronRightIcon />
+            </Button>
+          )}
         </div>
       </section>
     </AnimatePresence>
