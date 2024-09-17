@@ -23,14 +23,13 @@ export default async function LoginPage({
       <article className="flex flex-col items-center justify-center bg-muted/50 p-2 shadow-lg dark:bg-background lg:bg-transparent lg:p-0 lg:pl-8">
         <Card className="w-full max-w-xl bg-transparent lg:border-none lg:shadow-none">
           {error && (
-            <div className="px-6">
+            <div className="mt-4 px-6">
               <Alert variant="destructive">
                 <AlertTitle className="text-base">Something went wrong</AlertTitle>
                 <AlertDescription>Code: {error}</AlertDescription>
               </Alert>
             </div>
           )}
-
           <CardHeader>
             <CardTitle className="text-2xl">Welcome back!</CardTitle>
             <CardDescription>Log into your account to continue.</CardDescription>

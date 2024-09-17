@@ -122,7 +122,7 @@ export const AuthConfig = {
     GoogleProvider,
     DiscordProvider,
     Resend({
-      from: "no-reply@chronosecrets.app",
+      from: "Auth | NFC Portal  <no-reply@chronosecrets.app>",
       generateVerificationToken: async () => {
         return `nfc_${createId()}`;
       },
