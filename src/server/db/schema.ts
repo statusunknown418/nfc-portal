@@ -155,7 +155,7 @@ export const users = sqliteTable("user", {
     .notNull()
     .primaryKey()
     .$defaultFn(() => `usr_${createId()}`),
-  username: text("user_name", { length: 255 }).unique(),
+  username: text("user_name", { length: 255 }).notNull().unique(),
   name: text("name", { length: 255 }),
   email: text("email", { length: 255 }).notNull(),
   emailVerified: int("email_verified", {
