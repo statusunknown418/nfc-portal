@@ -45,7 +45,9 @@ export const viewersRouter = createTRPCRouter({
   setOnboardingStep: protectedProcedure
     .input(
       z.object({
-        step: z.enum(["contact", "portal", "nfc-card", "purchase", "finale"]).default("contact"),
+        step: z
+          .enum(["start", "contact", "portal", "nfc-card", "purchase", "finale"])
+          .default("start"),
       }),
     )
     .mutation(async ({ ctx, input }) => {

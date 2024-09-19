@@ -145,7 +145,14 @@ export const cardShippingStatusTypes = [
   "failed",
 ] as const;
 
-export const onboardingStepTypes = ["contact", "portal", "nfc-card", "purchase", "finale"] as const;
+export const onboardingStepTypes = [
+  "start",
+  "contact",
+  "portal",
+  "nfc-card",
+  "purchase",
+  "finale",
+] as const;
 export type OnboardingStep = (typeof onboardingStepTypes)[number];
 
 export type CardShippingStatus = (typeof cardShippingStatusTypes)[number];
@@ -155,7 +162,7 @@ export const users = sqliteTable("user", {
     .notNull()
     .primaryKey()
     .$defaultFn(() => `usr_${createId()}`),
-  username: text("user_name", { length: 255 }).notNull().unique(),
+  username: text("user_name", { length: 255 }).unique(),
   name: text("name", { length: 255 }),
   email: text("email", { length: 255 }).notNull(),
   emailVerified: int("email_verified", {

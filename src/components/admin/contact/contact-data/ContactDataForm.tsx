@@ -9,6 +9,8 @@ import { useFieldArray, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { type z } from "zod";
 import { Spinner } from "~/components/shared/Spinner";
+import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
+import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import {
   Form,
@@ -28,6 +30,7 @@ import {
   SelectValue,
 } from "~/components/ui/select";
 import { Switch } from "~/components/ui/switch";
+import { useAutoSaveFormData } from "~/lib/hooks/use-auto-save";
 import { cn } from "~/lib/utils";
 import { editViewerContactSchema } from "~/server/api/schemas.zod";
 import { api, type RouterOutputs } from "~/trpc/react";
@@ -44,8 +47,10 @@ export const ContactDataForm = ({
   const { data } = api.vCard.get.useQuery(undefined, { initialData });
   const [isHidden, setIsChecked] = useState(data?.hasContactInfoLocked ?? false);
 
-  const { mutateAsync } = api.vCard.edit.useMutation({
+  const { mutate, isPending } = api.vCard.edit.useMutation({
     onSuccess: async () => {
+      toast.success("Information saved!");
+
       await Promise.all([
         utils.vCard.get.invalidate(),
         utils.portals.get.invalidate({ username: user.username }),
@@ -145,13 +150,11 @@ export const ContactDataForm = ({
     control: form.control,
   });
 
-  const handleSubmit = form.handleSubmit(async (data) => {
-    toast.promise(mutateAsync(data), {
-      loading: "Saving...",
-      success: "Contact information saved",
-      error: "Something went wrong",
-    });
-  });
+  const onSubmit = async (data: z.infer<typeof editViewerContactSchema>) => {
+    mutate(data);
+  };
+
+  useAutoSaveFormData(500, form, (data) => void onSubmit(data), []);
 
   return (
     <section className="grid grid-cols-1 gap-4">
@@ -176,9 +179,28 @@ export const ContactDataForm = ({
 
       <Form {...form}>
         <form
-          onSubmit={handleSubmit}
+          onSubmit={form.handleSubmit(onSubmit)}
           className="grid h-max grid-cols-1 gap-6 rounded-lg border bg-white/30 p-6"
         >
+          <Alert variant="indigo">
+            <SaveIcon size={16} />
+
+            <AlertTitle>This form auto-saves!</AlertTitle>
+            <AlertDescription>
+              <p>
+                Just wait a few moments and your changes will be automatically saved, also a
+                notification will be shown in the screen.
+              </p>
+
+              {isPending && (
+                <Badge variant="outline" className="absolute right-4 top-2 h-7 animate-pulse">
+                  <Spinner className="mr-2" />
+                  Saving ...
+                </Badge>
+              )}
+            </AlertDescription>
+          </Alert>
+
           <article className="flex w-full flex-col gap-4">
             <div className="flex gap-2">
               <FormField
@@ -219,11 +241,7 @@ export const ContactDataForm = ({
                     <FormLabel>Position</FormLabel>
 
                     <FormControl>
-                      <Input
-                        placeholder="CEO & co-founder"
-                        autoComplete="organization-title"
-                        {...field}
-                      />
+                      <Input placeholder="CEO" autoComplete="organization-title" {...field} />
                     </FormControl>
                   </FormItem>
                 )}
@@ -237,7 +255,7 @@ export const ContactDataForm = ({
                     <FormLabel>Company</FormLabel>
 
                     <FormControl>
-                      <Input placeholder="Stackk Studios" {...field} />
+                      <Input placeholder="ACME Corp." {...field} />
                     </FormControl>
                   </FormItem>
                 )}
@@ -251,7 +269,7 @@ export const ContactDataForm = ({
                     <FormLabel>Company website</FormLabel>
 
                     <FormControl>
-                      <Input placeholder="stackkstudios.com" {...field} />
+                      <Input placeholder="acme.com" {...field} />
                     </FormControl>
                   </FormItem>
                 )}
@@ -342,7 +360,7 @@ export const ContactDataForm = ({
                   render={({ field }) => (
                     <FormItem className="flex-grow">
                       <FormControl>
-                        <Input placeholder="555 123 4567" {...field} />
+                        <Input placeholder="123 456 789" {...field} />
                       </FormControl>
 
                       <FormMessage />
@@ -544,11 +562,6 @@ export const ContactDataForm = ({
               </article>
             ))}
           </section>
-
-          <Button className="mt-6" variant="primary_ghost">
-            {form.formState.isSubmitting ? <Spinner /> : <SaveIcon size={15} />}
-            Save
-          </Button>
         </form>
       </Form>
     </section>

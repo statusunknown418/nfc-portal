@@ -141,7 +141,10 @@ export default function SignUpForm({
         />
 
         <div className="space-y-2">
-          <Button className="w-full rounded-full" disabled={form.formState.isSubmitting}>
+          <Button
+            className="w-full rounded-full"
+            disabled={form.formState.isSubmitting || isLoading || (!!data && !data.available)}
+          >
             {form.formState.isSubmitting && <Spinner className="mr-2" />}
             Get magic link
           </Button>

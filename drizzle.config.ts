@@ -6,7 +6,6 @@ export default {
   schema: "./src/server/db/schema.ts",
   dialect: "sqlite",
   driver: "turso",
-  breakpoints: true,
   verbose: true,
   dbCredentials: {
     url: env.DATABASE_URL,

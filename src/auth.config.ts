@@ -17,7 +17,7 @@ export const AuthConfig = {
     accountsTable: accounts,
     // @ts-expect-error what the hell
     sessionsTable: sessions,
-    // @ts-expect-error what the hell
+    // @ts-expect-error what the hel
     verificationTokensTable: verificationTokens,
   }),
   pages: {

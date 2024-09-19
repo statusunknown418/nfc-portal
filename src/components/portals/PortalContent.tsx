@@ -106,11 +106,11 @@ export const PortalContent = ({
           // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
           defaultValue={portal.data?.hasContactInfoLocked || !portal.unlocked ? "links" : "contact"}
         >
-          <TabsList className="mx-auto mb-6 mt-2 flex h-11 min-w-max rounded-full border px-0.5 mix-blend-difference">
+          <TabsList className="mx-auto mb-6 mt-2 flex h-11 max-w-max rounded-full border px-0.5 mix-blend-difference">
             {!portal.data.hasContactInfoLocked && (
               <TabsTrigger
                 value="contact"
-                className={cn("h-10 flex-grow rounded-full mix-blend-difference")}
+                className={cn("h-10 min-w-24 flex-grow rounded-full mix-blend-difference")}
               >
                 Contact
               </TabsTrigger>
@@ -118,7 +118,7 @@ export const PortalContent = ({
 
             <TabsTrigger
               value="links"
-              className={cn("h-10 flex-grow rounded-full mix-blend-difference")}
+              className={cn("h-10 min-w-24 flex-grow rounded-full mix-blend-difference")}
             >
               Links
             </TabsTrigger>
