@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  EnterIcon,
   IdCardIcon,
   LightningBoltIcon,
   PersonIcon,
@@ -12,22 +13,44 @@ import { cn } from "~/lib/utils";
 import { type Keys, onboardingParsers } from "./onboarding.parsers";
 
 export const Stepper = () => {
-  const [{ step }, changeStep] = useQueryStates(onboardingParsers, { history: "push" });
+  const [{ step }] = useQueryStates(onboardingParsers, { history: "push" });
 
   const stepsItems: {
     key: Keys;
-    Selector: React.FC<{ className?: string; onClick: () => void }>;
-    RenderIcon: React.FC<{ className?: string; onClick: () => void }>;
+    Selector: React.FC<{ className?: string }>;
+    RenderIcon: React.FC<{ className?: string }>;
   }[] = [
     {
-      key: "contact",
-      Selector: ({ className, onClick }) => (
-        <button
+      key: "start",
+      Selector: ({ className }) => (
+        <section
           className={cn(
-            "inline-flex max-h-24 gap-4 rounded-lg border border-transparent px-2 py-2 hover:bg-accent md:px-4",
+            "inline-flex max-h-24 cursor-default gap-4 rounded-lg border border-transparent px-2 py-2 md:px-4",
             className,
           )}
-          onClick={onClick}
+        >
+          <div className="space-y-1 text-left">
+            <h2 className="font-medium">Welcome</h2>
+            <p className="text-balance text-sm text-muted-foreground">
+              Quick information about the process
+            </p>
+          </div>
+        </section>
+      ),
+      RenderIcon: ({ className }) => (
+        <section className={cn("py-2", className)}>
+          <EnterIcon className="h-4 w-4 md:h-6 md:w-6" />
+        </section>
+      ),
+    },
+    {
+      key: "contact",
+      Selector: ({ className }) => (
+        <section
+          className={cn(
+            "inline-flex max-h-24 cursor-default gap-4 rounded-lg border border-transparent px-2 py-2 md:px-4",
+            className,
+          )}
         >
           <div className="space-y-1 text-left">
             <h2 className="font-medium">Contact information</h2>
@@ -35,23 +58,22 @@ export const Stepper = () => {
               Fill in your public contact information
             </p>
           </div>
-        </button>
+        </section>
       ),
-      RenderIcon: ({ className, onClick }) => (
-        <button className={cn("py-2", className)} onClick={onClick}>
+      RenderIcon: ({ className }) => (
+        <section className={cn("py-2", className)}>
           <PersonIcon className="h-4 w-4 md:h-6 md:w-6" />
-        </button>
+        </section>
       ),
     },
     {
       key: "portal",
-      Selector: ({ className, onClick }) => (
-        <button
+      Selector: ({ className }) => (
+        <section
           className={cn(
-            "inline-flex max-h-24 gap-4 rounded-lg border border-transparent px-2 py-2 hover:bg-accent md:px-4",
+            "inline-flex max-h-24 cursor-default gap-4 rounded-lg border border-transparent px-2 py-2 md:px-4",
             className,
           )}
-          onClick={onClick}
         >
           <div className="space-y-1 text-left">
             <h2 className="font-medium">Public portal</h2>
@@ -59,23 +81,22 @@ export const Stepper = () => {
               Customize your public page or use a template
             </p>
           </div>
-        </button>
+        </section>
       ),
-      RenderIcon: ({ className, onClick }) => (
-        <button className={cn("py-2", className)} onClick={onClick}>
+      RenderIcon: ({ className }) => (
+        <section className={cn("py-2", className)}>
           <RulerHorizontalIcon className="h-4 w-4 md:h-6 md:w-6" />
-        </button>
+        </section>
       ),
     },
     {
       key: "nfc-card",
-      Selector: ({ className, onClick }) => (
-        <button
+      Selector: ({ className }) => (
+        <section
           className={cn(
-            "inline-flex max-h-24 gap-4 rounded-lg border border-transparent px-2 py-2 hover:bg-accent md:px-4",
+            "inline-flex max-h-24 cursor-default gap-4 rounded-lg border border-transparent px-2 py-2 md:px-4",
             className,
           )}
-          onClick={onClick}
         >
           <div className="space-y-1 text-left">
             <h2 className="font-medium">NFC card</h2>
@@ -83,23 +104,22 @@ export const Stepper = () => {
               Customize your physical card and get it ready
             </p>
           </div>
-        </button>
+        </section>
       ),
-      RenderIcon: ({ className, onClick }) => (
-        <button className={cn("py-2", className)} onClick={onClick}>
+      RenderIcon: ({ className }) => (
+        <section className={cn("py-2", className)}>
           <IdCardIcon className="h-4 w-4 md:h-6 md:w-6" />
-        </button>
+        </section>
       ),
     },
     {
       key: "purchase",
-      Selector: ({ className, onClick }) => (
-        <button
+      Selector: ({ className }) => (
+        <section
           className={cn(
-            "inline-flex max-h-24 gap-4 rounded-lg border border-transparent px-2 py-2 hover:bg-accent md:px-4",
+            "inline-flex max-h-24 cursor-default gap-4 rounded-lg border border-transparent px-2 py-2 md:px-4",
             className,
           )}
-          onClick={onClick}
         >
           <div className="space-y-1 text-left">
             <h2 className="font-medium">Purchase your card</h2>
@@ -107,34 +127,33 @@ export const Stepper = () => {
               Get it with your preferred payment method
             </p>
           </div>
-        </button>
+        </section>
       ),
-      RenderIcon: ({ className, onClick }) => (
-        <button className={cn("py-2", className)} onClick={onClick}>
+      RenderIcon: ({ className }) => (
+        <section className={cn("py-2", className)}>
           <ShoppingBagIcon className="h-4 w-4 md:h-6 md:w-6" />
-        </button>
+        </section>
       ),
     },
     {
       key: "finale",
-      Selector: ({ className, onClick }) => (
-        <button
+      Selector: ({ className }) => (
+        <section
           className={cn(
-            "inline-flex max-h-24 gap-4 rounded-lg border border-transparent px-2 py-2 hover:bg-accent md:px-4",
+            "inline-flex max-h-24 cursor-default gap-4 rounded-lg border border-transparent px-2 py-2 md:px-4",
             className,
           )}
-          onClick={onClick}
         >
           <div className="space-y-1 text-left">
             <h2 className="font-medium">Finale</h2>
             <p className="text-sm text-muted-foreground">All done! You&apos;re ready to roll</p>
           </div>
-        </button>
+        </section>
       ),
-      RenderIcon: ({ className, onClick }) => (
-        <button className={cn("py-2", className)} onClick={onClick}>
+      RenderIcon: ({ className }) => (
+        <section className={cn("py-2", className)}>
           <LightningBoltIcon className="h-4 w-4 md:h-6 md:w-6" />
-        </button>
+        </section>
       ),
     },
   ];
@@ -146,10 +165,9 @@ export const Stepper = () => {
           <li key={key} className="flex flex-col items-center gap-3">
             <RenderIcon
               className={cn(
-                step !== key && "opacity-30",
+                step !== key && "opacity-35",
                 stepsItems.findIndex((i) => i.key === step) > idx && "text-indigo-600 opacity-100",
               )}
-              onClick={() => changeStep({ step: key })}
             />
 
             {key !== "finale" && (
@@ -170,11 +188,10 @@ export const Stepper = () => {
           <Selector
             key={key}
             className={cn(
-              step !== key && "opacity-30",
+              step !== key && "opacity-35",
               step === key && "border-dashed border-border",
               stepsItems.findIndex((i) => i.key === step) > idx && "text-indigo-600 opacity-100",
             )}
-            onClick={() => changeStep({ step: key })}
           />
         ))}
       </ul>

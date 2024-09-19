@@ -4,13 +4,13 @@ import { toast } from "sonner";
 import { nfcPreferencesStore } from "~/lib/stores/nfcPreferences";
 import { purchaseStatusToText } from "~/lib/utils";
 import { api } from "~/trpc/react";
-import { CardPreview } from "../admin/contact/CardPreview";
-import { Spinner } from "../shared/Spinner";
-import { Badge } from "../ui/badge";
-import { Button } from "../ui/button";
-import { FormItem } from "../ui/form";
-import { Label } from "../ui/label";
-import { Textarea } from "../ui/textarea";
+import { CardPreview } from "~/components/admin/contact/CardPreview";
+import { Spinner } from "~/components/shared/Spinner";
+import { Badge } from "~/components/ui/badge";
+import { Button } from "~/components/ui/button";
+import { FormItem } from "~/components/ui/form";
+import { Label } from "~/components/ui/label";
+import { Textarea } from "~/components/ui/textarea";
 
 export const PurchaseCardStep = () => {
   const preferences = nfcPreferencesStore((s) => s.preferencesData);

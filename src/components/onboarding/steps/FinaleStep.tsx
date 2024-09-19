@@ -2,8 +2,8 @@ import { ArrowRightIcon, CheckCircledIcon } from "@radix-ui/react-icons";
 import confetti from "canvas-confetti";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
-import Confetti, { type ConfettiRef } from "../magicui/confetti";
-import { Button } from "../ui/button";
+import Confetti, { type ConfettiRef } from "~/components/magicui/confetti";
+import { Button } from "~/components/ui/button";
 
 export const FinaleStep = () => {
   const confettiRef = useRef<ConfettiRef>(null);
@@ -46,14 +46,13 @@ export const FinaleStep = () => {
 
   return (
     <section className="relative mx-auto flex h-full flex-col items-center justify-center gap-4">
-      <CheckCircledIcon className="h-10 w-10 text-emerald-600 md:h-12 md:w-12" />
+      <CheckCircledIcon className="h-12 w-12 text-emerald-600 md:h-12 md:w-12" />
 
       <h2 className="text-2xl font-bold tracking-wide md:text-4xl">You are all done!</h2>
 
       <p className="max-w-prose text-center">
         Your purchase means a lot to us. Your support is heavily appreciated and will help us build
         a better product for our customers!.
-        <br />
         <br />
         <br />
         <span className="text-muted-foreground">

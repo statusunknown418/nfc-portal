@@ -1,6 +1,11 @@
 "use client";
 
-import { CheckCircledIcon, ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
+import {
+  CheckCircledIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  TrackNextIcon,
+} from "@radix-ui/react-icons";
 import { AnimatePresence } from "framer-motion";
 import { type Session } from "next-auth";
 import Link from "next/link";
@@ -9,13 +14,15 @@ import { type ReactNode } from "react";
 import { api, type RouterOutputs } from "~/trpc/react";
 import { ContactDataForm } from "../admin/contact/contact-data/ContactDataForm";
 import { Button } from "../ui/button";
-import { ContactStep } from "./ContactStep";
-import { FinaleStep } from "./FinaleStep";
-import { NFCPreferencesStep } from "./NFCPreferencesStep";
+import { ContactStep } from "./steps/ContactStep";
+import { NFCPreferencesStep } from "./steps/NFCPreferencesStep";
 import { keys, onboardingParsers, type Keys } from "./onboarding.parsers";
-import { PublicPortalStep } from "./PublicPortalStep";
-import { PurchaseCardStep } from "./PurchaseCardStep";
+import { PublicPortalStep } from "./steps/PublicPortalStep";
 import { cn } from "~/lib/utils";
+import { WelcomeStep } from "./steps/WelcomeStep";
+import { FinaleStep } from "./steps/FinaleStep";
+import { PurchaseCardStep } from "./steps/PurchaseCardStep";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
 
 export const StepperSelector = ({
   session,
@@ -35,6 +42,7 @@ export const StepperSelector = ({
   const { mutate } = api.viewer.setOnboardingStep.useMutation();
 
   const StepComponents: Record<Keys, ReactNode> = {
+    start: <WelcomeStep />,
     contact: (
       <ContactStep>
         <ContactDataForm initialData={initialData.contact} user={session.user} />
@@ -51,8 +59,8 @@ export const StepperSelector = ({
     finale: <FinaleStep />,
   };
 
-  const goPrevious = () => {
-    if (step === "contact") {
+  const rewindStep = () => {
+    if (step === "start") {
       return;
     }
 
@@ -62,7 +70,7 @@ export const StepperSelector = ({
     void changeStep({ step: newStep });
   };
 
-  const goNext = () => {
+  const forwardStep = () => {
     const newStep = keys[keys.indexOf(step) + 1];
 
     void mutate({ step: newStep });
@@ -85,26 +93,44 @@ export const StepperSelector = ({
           </div>
         </section>
 
-        <div className="absolute bottom-0 left-0 flex h-max w-full items-center justify-between gap-4 border-t bg-muted px-8 py-4">
-          {step !== "contact" && (
-            <Button variant="outline" onClick={goPrevious}>
+        <section className="absolute bottom-0 left-0 flex h-max w-full items-center justify-between gap-4 border-t bg-muted px-8 py-4">
+          {step !== "start" && (
+            <Button variant="outline" onClick={rewindStep}>
               <ChevronLeftIcon /> Previous step
             </Button>
           )}
 
-          {step === "finale" ? (
-            <Button className="ml-auto" asChild>
-              <Link href="/admin">
-                Complete onboarding <CheckCircledIcon />
-              </Link>
-            </Button>
-          ) : (
-            <Button className="ml-auto" onClick={goNext}>
-              Next step
-              <ChevronRightIcon />
-            </Button>
-          )}
-        </div>
+          <div className="ml-auto flex gap-4">
+            {step !== "finale" && step !== "start" && (
+              <TooltipProvider delayDuration={0}>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button variant="outline" onClick={forwardStep}>
+                      Skip step <TrackNextIcon />
+                    </Button>
+                  </TooltipTrigger>
+
+                  <TooltipContent>
+                    This is not recommended, you may loose access to cool features
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            )}
+
+            {step === "finale" ? (
+              <Button asChild>
+                <Link href="/admin">
+                  Complete onboarding <CheckCircledIcon />
+                </Link>
+              </Button>
+            ) : (
+              <Button onClick={forwardStep}>
+                Next step
+                <ChevronRightIcon />
+              </Button>
+            )}
+          </div>
+        </section>
       </section>
     </AnimatePresence>
   );
