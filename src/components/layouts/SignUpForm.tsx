@@ -19,6 +19,7 @@ import { setDecidedUsername } from "../../lib/cookies.actions";
 import { Spinner } from "../shared/Spinner";
 import { api } from "~/trpc/react";
 import { useDebounce } from "@uidotdev/usehooks";
+import { useEffect } from "react";
 
 const usernameRegex = /^[a-zA-Z0-9._]+$/;
 
@@ -65,6 +66,12 @@ export default function SignUpForm({
       email: data.email,
     });
   });
+
+  useEffect(() => {
+    if (data && !data.available) {
+      form.setError("username", { message: "This username is taken, please choose another" });
+    }
+  }, [data, data?.available, form]);
 
   return (
     <Form {...form}>

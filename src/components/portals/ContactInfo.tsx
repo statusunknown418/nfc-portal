@@ -6,6 +6,7 @@ import vCardBuilder from "vcard-creator";
 import { type ContactVCardType, type ThemeType } from "~/server/db/schema";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
+import { cn } from "~/lib/utils";
 
 export const ContactInfo = ({
   unlocked,
@@ -102,11 +103,16 @@ export const ContactInfo = ({
     <>
       <button
         onClick={handleImport}
-        className="mb-4 flex h-14 w-full items-center justify-center gap-2"
+        className={cn(
+          "mb-4 flex h-14 w-full items-center justify-center gap-2",
+          theme.buttons.variant === "pill" && "rounded-[34px]",
+          theme.buttons.variant === "rounded" && "rounded-lg",
+          theme.buttons.variant === "square" && "rounded-none",
+          theme.buttons.variant === "small-radius" && "rounded-sm",
+        )}
         style={{
           background: theme.buttons.background,
           color: theme.buttons.textColor,
-          borderRadius: theme.buttons.rounding,
           fontWeight: theme.buttons.fontWeight,
           fontStyle: theme.buttons.fontStyle,
           border: `1px ${theme.buttons.borderStyle} ${theme.buttons.borderColor}`,

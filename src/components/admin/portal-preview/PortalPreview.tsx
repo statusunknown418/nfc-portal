@@ -35,7 +35,7 @@ export const PortalPreview = ({
   return (
     <>
       {!loaded && (
-        <div className="flex h-full w-full animate-pulse items-center justify-center bg-muted">
+        <div className="absolute inset-0 flex h-full w-full animate-pulse items-center justify-center bg-gradient-to-b from-muted">
           <Spinner />
         </div>
       )}

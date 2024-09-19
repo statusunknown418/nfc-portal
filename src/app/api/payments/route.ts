@@ -19,7 +19,7 @@ export const POST = async (req: NextRequest) => {
     card_variant: "basic" | "custom" | "metallic";
     user_email: string;
   } & SaveNFCPreferences;
-  ``;
+
   if (!metadata.app_user_id) {
     return NextResponse.json({ listened: true, success: false, error: "UNAUTHORIZED" });
   }

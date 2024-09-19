@@ -237,10 +237,10 @@ export const VisualCustomizationForm = ({
 
             <FormField
               control={form.control}
-              name="theme.colors.subtle"
+              name="theme.colors.foreground"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Accent (subtle)</FormLabel>
+                  <FormLabel>Text color</FormLabel>
 
                   <GradientPicker background={field.value} setBackground={field.onChange} />
                 </FormItem>
@@ -249,10 +249,10 @@ export const VisualCustomizationForm = ({
 
             <FormField
               control={form.control}
-              name="theme.colors.foreground"
+              name="theme.colors.subtle"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Foreground</FormLabel>
+                  <FormLabel>Accent (subtle)</FormLabel>
 
                   <GradientPicker background={field.value} setBackground={field.onChange} />
                 </FormItem>

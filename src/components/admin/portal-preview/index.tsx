@@ -14,7 +14,7 @@ export const PortalPreviewWrapperRSC = async ({ username }: { username: string }
     <>
       <article
         id="portal-device-preview"
-        className="mx-auto max-h-[740px] min-h-[640px] w-full min-w-[310px] max-w-[330px] overflow-y-auto overscroll-y-contain rounded-[40px] border-4 shadow-lg shadow-black/50"
+        className="relative mx-auto mr-4 max-h-[740px] min-h-[640px] w-full min-w-[310px] max-w-[330px] overflow-hidden overscroll-y-contain rounded-[52px] border-[6px] border-primary/80 shadow-lg shadow-black"
       >
         <PortalPreview initialData={portal} username={username} />
       </article>

@@ -56,15 +56,18 @@ export const CardPreview = () => {
                 )}
             </article>
 
-            <article className="flex justify-between self-end">
+            <article className="flex items-center justify-between self-end">
               <p className="font-medium text-muted-foreground">
                 {preferences.showJobTitle && preferences.jobTitleOnFront && cardData?.jobTitle}
               </p>
 
-              <p className="text-base mix-blend-difference">
-                {preferences.showName &&
-                  preferences.nameOnFront &&
-                  `${cardData?.name.first} ${cardData?.name.last}`}
+              <p
+                className={cn(
+                  "text-base opacity-0 mix-blend-difference transition-all",
+                  preferences.showName && preferences.nameOnFront && "opacity-100",
+                )}
+              >
+                {cardData?.name.first} {cardData?.name.last}
               </p>
             </article>
           </CardItem>

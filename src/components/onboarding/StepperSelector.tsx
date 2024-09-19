@@ -15,6 +15,7 @@ import { NFCPreferencesStep } from "./NFCPreferencesStep";
 import { keys, onboardingParsers, type Keys } from "./onboarding.parsers";
 import { PublicPortalStep } from "./PublicPortalStep";
 import { PurchaseCardStep } from "./PurchaseCardStep";
+import { cn } from "~/lib/utils";
 
 export const StepperSelector = ({
   session,
@@ -41,8 +42,8 @@ export const StepperSelector = ({
     ),
     portal: (
       <PublicPortalStep>
-        <div className="max-h-max">{components?.visual}</div>
-        <div>{components?.portal}</div>
+        <div>{components?.visual}</div>
+        <div className="pr-4 md:pr-8">{components?.portal}</div>
       </PublicPortalStep>
     ),
     "nfc-card": <NFCPreferencesStep initialData={initialData.contact} />,
@@ -71,7 +72,12 @@ export const StepperSelector = ({
   return (
     <AnimatePresence>
       <section className="relative h-full">
-        <section className="h-full overflow-auto px-4 pt-4 md:px-8 md:pt-8">
+        <section
+          className={cn(
+            "h-full overflow-auto pl-4 pt-4 md:pl-8 md:pt-8",
+            step !== "portal" && "pr-4 md:pr-8",
+          )}
+        >
           <h3>Let&apos;s get you set up, {session.user.username}</h3>
 
           <div className="relative mt-4 h-full max-h-[calc(100%-80px)]">

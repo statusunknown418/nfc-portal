@@ -75,7 +75,18 @@ export const ContactDataForm = ({
   const form = useForm<z.infer<typeof editViewerContactSchema>>({
     resolver: zodResolver(editViewerContactSchema),
     defaultValues: data?.contactJSON
-      ? data?.contactJSON
+      ? {
+          ...data.contactJSON,
+          name: {
+            first: data.contactJSON.name.first ?? "",
+            last: data.contactJSON.name.last ?? "",
+          },
+          company: {
+            name: data.contactJSON.company?.name ?? "",
+            department: data.contactJSON.company?.department ?? "",
+          },
+          jobTitle: data.contactJSON.jobTitle ?? "",
+        }
       : {
           name: {
             first: user.name?.split(" ")[0] ?? "",
