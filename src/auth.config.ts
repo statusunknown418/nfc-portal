@@ -81,8 +81,8 @@ export const AuthConfig = {
             username,
             contactJSON: {
               name: {
-                first: user.name?.split(" ")[0] ?? "",
-                last: user.name?.split(" ")[1] ?? "",
+                first: user.name?.split(" ")[0] ?? undefined,
+                last: user.name?.split(" ")[1] ?? undefined,
               },
               email: [
                 {

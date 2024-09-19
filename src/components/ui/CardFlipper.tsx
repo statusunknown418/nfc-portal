@@ -4,6 +4,9 @@ import { useState } from "react";
 import { CardBody, CardContainer, CardItem } from "~/components/ui/3d-card";
 import DotPattern from "~/components/magicui/dot-pattern";
 import { cn } from "~/lib/utils";
+import { PurchaseCardModal } from "src/components/admin/PurchaseCard";
+import { Badge } from "src/components/ui/badge";
+import { Button } from "../ui/button";
 
 export default function CardFlipper() {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -62,14 +65,21 @@ export default function CardFlipper() {
         </CardBody>
       </CardContainer>
 
+      <section className="absolute bottom-1/4 z-10 flex w-full flex-col items-center justify-center gap-4">
+        <Badge>Not purchased yet</Badge>
+
+        <PurchaseCardModal />
+      </section>
+
       <DotPattern className={cn("absolute left-0 top-0 z-0 h-full w-full opacity-70")} />
 
-      <button
+      <Button
         onClick={handleFlip}
-        className="absolute right-1 top-2 z-20 rounded bg-primary p-2 text-white"
+        variant="outline"
+        className="absolute top-[160px] z-10 rounded-full"
       >
         {isFlipped ? "Show Front" : "Show Back"}
-      </button>
+      </Button>
     </div>
   );
 }

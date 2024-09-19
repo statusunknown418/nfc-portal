@@ -12,7 +12,8 @@ import {
   BreadcrumbSeparator,
 } from "~/components/ui/breadcrumb";
 import { cn } from "~/lib/utils";
-import CardFlipper from "~/components/ui/CardFlipper"; // Importa tu componente de cliente aquí
+import CardFlipper from "~/components/ui/CardFlipper";
+import { CardPreview } from "~/components/admin/contact/CardPreview";
 
 export default async function ContactPage() {
   return (

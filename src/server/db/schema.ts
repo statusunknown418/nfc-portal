@@ -5,6 +5,7 @@ import { createInsertSchema } from "drizzle-zod";
 import { type AdapterAccount } from "next-auth/adapters";
 import { z } from "zod";
 import { themeSchema } from "../api/schemas.zod";
+import { BASE_THEMES } from "~/lib/utils";
 
 export const linkTypes = ["social", "deployable", "basic"] as const;
 export type LinkType = (typeof linkTypes)[number];
@@ -14,13 +15,17 @@ export type LinkLayoutType = (typeof linkLayoutTypes)[number];
 export const pageLayoutTypes = ["basic", "grid", "hero"] as const;
 export type PageLayoutType = (typeof pageLayoutTypes)[number];
 
+export const cardVariants = ["basic", "custom"] as const;
+export type CardVariant = (typeof cardVariants)[number];
+
 export type ThemeType = {
-  themeKey: "default" | "dark" | "minimal" | "crazy" | "blurry" | "stripes" | "custom";
+  themeKey: "default" | "dark" | "minimal" | "crazy" | "blurry" | "stripes" | "modern" | "custom";
   colorScheme: "light" | "dark";
-  foregroundColor: string;
-  background: {
-    type: "flat" | "pattern" | "image";
+  colors: {
+    foreground: string;
     background: string;
+    border: string;
+    subtle: string;
   };
   buttons: {
     variant: "pill" | "rounded" | "square";
@@ -29,23 +34,6 @@ export type ThemeType = {
     rounding: `${number}px`;
     border: string;
   };
-};
-
-export const DEFAULT_THEME: ThemeType = {
-  themeKey: "default",
-  colorScheme: "light",
-  foregroundColor: "#000000",
-  background: {
-    type: "flat",
-    background: "#f8f8fc",
-  },
-  buttons: {
-    variant: "pill",
-    textColor: "#000000",
-    background: "#a5b4fc",
-    border: "1px solid black",
-    rounding: "9999px",
-  },
 };
 
 export const links = sqliteTable("links", {
@@ -172,8 +160,9 @@ export const users = sqliteTable("user", {
   cardShippingStatus: text("card_shipping_status", { enum: cardShippingStatusTypes }).default(
     "awaiting_purchase",
   ),
+  cardVariant: text("card_variant", { enum: cardVariants }).notNull().default("basic"),
   avatarShape: text("avatar_shape", { enum: avatarShapes }).notNull().default("rounded"),
-  theme: text("theme", { mode: "json" }).notNull().$type<ThemeType>().default(DEFAULT_THEME),
+  theme: text("theme", { mode: "json" }).notNull().$type<ThemeType>().default(BASE_THEMES.default),
 });
 
 export const userProfileSchema = createInsertSchema(users, {
