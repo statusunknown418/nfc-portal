@@ -200,7 +200,7 @@ export const userProfileSchema = createInsertSchema(users, {
 
 export const editVisualCustomizationSchema = createInsertSchema(users, {
   theme: themeSchema.and(z.custom<ThemeType>()),
-  bio: z.string().optional(),
+  bio: z.string().max(100).optional(),
   profileHeader: z.string().optional(),
   pageLayout: z.enum(["basic", "grid", "hero"]),
 }).pick({ theme: true, bio: true, profileHeader: true, pageLayout: true, avatarShape: true });

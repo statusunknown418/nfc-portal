@@ -16,6 +16,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "~/components/ui/form";
 import { GradientPicker } from "~/components/ui/gradient-picker";
 import { Label } from "~/components/ui/label";
@@ -52,6 +53,7 @@ export const VisualCustomizationForm = ({
     resolver: zodResolver(editVisualCustomizationSchema),
   });
 
+  const bioCharacters = form.watch("bio")?.length ?? 0;
   const utils = api.useUtils();
 
   const mutate = api.visuals.edit.useMutation({
@@ -195,8 +197,18 @@ export const VisualCustomizationForm = ({
 
                   <FormDescription>
                     Anything you want to tell people about yourself. This will be displayed on your
-                    profile page. (100 characters max.)
+                    profile page.
+                    <span
+                      className={cn(
+                        "ml-1 text-foreground",
+                        bioCharacters > 100 && "text-destructive",
+                      )}
+                    >
+                      ({bioCharacters}/100 characters max.)
+                    </span>
                   </FormDescription>
+
+                  <FormMessage />
                 </FormItem>
               )}
             />

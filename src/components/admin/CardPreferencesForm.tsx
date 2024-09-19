@@ -49,7 +49,7 @@ export const CardPreferencesForm = () => {
 
   useFormPersist("session:nfc-preferences", {
     ...form,
-    storage: localStorage,
+    storage: typeof window !== "undefined" ? window.localStorage : undefined,
   });
 
   return (

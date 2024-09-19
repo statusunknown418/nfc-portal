@@ -7,12 +7,17 @@ import { cardPreviewsStore } from "~/lib/stores/cardPreviews";
 import { nfcPreferencesStore } from "~/lib/stores/nfcPreferences";
 import { cn } from "~/lib/utils";
 
-export const CardPreview = () => {
+export const CardPreview = ({ className }: { className?: string }) => {
   const preferences = nfcPreferencesStore((s) => s.preferencesData);
   const cardData = cardPreviewsStore((s) => s.previewsData);
 
   return (
-    <article className="relative mt-4 flex min-h-full w-full flex-col items-center justify-center rounded-lg lg:mt-0">
+    <article
+      className={cn(
+        "relative mt-4 flex min-h-full w-full flex-col items-center justify-center rounded-lg lg:mt-0",
+        className,
+      )}
+    >
       <CardContainer
         className="min-h-full w-full flex-grow"
         containerClassName={cn("min-h-full flex-grow w-full z-10")}
@@ -35,10 +40,13 @@ export const CardPreview = () => {
             }}
           >
             <article className="flex justify-between">
-              <p className="font-medium text-muted-foreground">
-                {preferences.showCompanyName &&
-                  preferences.companyNameOnFront &&
-                  cardData?.company?.name}
+              <p
+                className={cn(
+                  "font-medium text-primary-foreground opacity-0 transition-opacity",
+                  preferences.showCompanyName && preferences.companyNameOnFront && "opacity-100",
+                )}
+              >
+                {cardData?.company?.name}
               </p>
             </article>
 
@@ -57,8 +65,13 @@ export const CardPreview = () => {
             </article>
 
             <article className="flex items-center justify-between self-end">
-              <p className="font-medium text-muted-foreground">
-                {preferences.showJobTitle && preferences.jobTitleOnFront && cardData?.jobTitle}
+              <p
+                className={cn(
+                  "font-medium uppercase text-muted-foreground opacity-0 transition-opacity",
+                  preferences.showJobTitle && preferences.jobTitleOnFront && "opacity-100",
+                )}
+              >
+                {cardData?.jobTitle}
               </p>
 
               <p

@@ -3,6 +3,7 @@ import confetti from "canvas-confetti";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import Confetti, { type ConfettiRef } from "~/components/magicui/confetti";
+import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
 import { Button } from "~/components/ui/button";
 
 export const FinaleStep = () => {
@@ -60,6 +61,15 @@ export const FinaleStep = () => {
           folder or contact us directly we&apos;re happy to help.
         </span>
       </p>
+
+      <Alert variant="indigo">
+        <AlertTitle>By the way!</AlertTitle>
+
+        <AlertDescription>
+          This is your public portal page, share it with anyone but remember that based on the
+          previous steps your contact information may be visible, so just be cautious!
+        </AlertDescription>
+      </Alert>
 
       <Button onClick={handleClick} className="z-10" size="sm" variant="outline">
         ✨ Click me for fun

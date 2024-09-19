@@ -94,17 +94,17 @@ export const PortalContent = ({
           <h2 className="text-xl font-bold tracking-wide md:text-3xl">{portal.data.name}</h2>
 
           {portal.data.bio && (
-            <p className="bg-clip-text px-4 text-sm mix-blend-difference md:text-base">
+            <p className="mt-1 line-clamp-4 px-2 text-xs mix-blend-difference md:text-sm">
               {portal.data.bio}
             </p>
           )}
         </header>
 
         <Tabs
-          className="z-10 w-full px-4"
           // Note: To avoid adding too many checks I'll just disable eslint here. Don't worry it's actually fine
           // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
           defaultValue={portal.data?.hasContactInfoLocked || !portal.unlocked ? "links" : "contact"}
+          className="z-10 w-full px-4"
         >
           <TabsList className="mx-auto mb-6 mt-2 flex h-11 max-w-max rounded-full border px-0.5 mix-blend-difference">
             {!portal.data.hasContactInfoLocked && (
