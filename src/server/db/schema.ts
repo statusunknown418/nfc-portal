@@ -164,7 +164,7 @@ export const users = sqliteTable("user", {
     .$defaultFn(() => `usr_${createId()}`),
   username: text("user_name", { length: 255 }).unique(),
   name: text("name", { length: 255 }),
-  email: text("email", { length: 255 }).notNull(),
+  email: text("email", { length: 255 }).notNull().unique(),
   emailVerified: int("email_verified", {
     mode: "timestamp",
   }).default(sql`(unixepoch())`),

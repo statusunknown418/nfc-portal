@@ -1,23 +1,17 @@
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import cuid2, { createId } from "@paralleldrive/cuid2";
 import { type NextAuthConfig } from "next-auth";
-import DiscordProvider from "next-auth/providers/discord";
-import GoogleProvider from "next-auth/providers/google";
 import Resend from "next-auth/providers/resend";
+import { cookies } from "next/headers";
 import { env } from "./env";
 import { db } from "./server/db";
 import { accounts, sessions, users, verificationTokens } from "./server/db/schema";
-import { cookies } from "next/headers";
 
 export const AuthConfig = {
   adapter: DrizzleAdapter(db, {
-    // @ts-expect-error what the hell
     usersTable: users,
-    // @ts-expect-error what the hell
     accountsTable: accounts,
-    // @ts-expect-error what the hell
     sessionsTable: sessions,
-    // @ts-expect-error what the hel
     verificationTokensTable: verificationTokens,
   }),
   pages: {
@@ -119,8 +113,8 @@ export const AuthConfig = {
   },
   debug: env.NODE_ENV === "development",
   providers: [
-    GoogleProvider,
-    DiscordProvider,
+    // GoogleProvider,
+    // DiscordProvider,
     Resend({
       from: "Auth | NFC Portal  <no-reply@chronosecrets.app>",
       generateVerificationToken: async () => {

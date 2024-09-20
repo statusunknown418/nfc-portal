@@ -1,9 +1,8 @@
 import { ArrowRightIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
-import SignUpForm, { SignInWithSocial } from "~/components/layouts/SignUpForm";
+import SignUpForm from "~/components/layouts/SignUpForm";
 import { Button } from "~/components/ui/button";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "~/components/ui/card";
-import { Divider } from "~/components/ui/separator";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/components/ui/card";
 
 export default function SignUpPage() {
   return (
@@ -21,13 +20,6 @@ export default function SignUpPage() {
 
           <CardContent>
             <SignUpForm />
-
-            <Divider className="my-6">or</Divider>
-
-            <div className="space-y-2">
-              <SignInWithSocial provider="google" />
-              <SignInWithSocial provider="discord" />
-            </div>
 
             <Button variant="link" className="mt-4 w-full" asChild>
               <Link href="/auth/login">

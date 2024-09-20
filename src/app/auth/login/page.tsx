@@ -1,8 +1,6 @@
 import { LoginForm } from "~/components/layouts/LoginForm";
-import { SignInWithSocial } from "~/components/layouts/SignUpForm";
 import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/components/ui/card";
-import { Divider } from "~/components/ui/separator";
 
 export default async function LoginPage({
   searchParams: { error },
@@ -37,13 +35,6 @@ export default async function LoginPage({
 
           <CardContent>
             <LoginForm />
-
-            <Divider className="my-6">or</Divider>
-
-            <div className="space-y-2">
-              <SignInWithSocial provider="google" />
-              <SignInWithSocial provider="discord" />
-            </div>
           </CardContent>
         </Card>
       </article>
