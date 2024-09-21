@@ -3,13 +3,18 @@
 import Image from "next/image";
 import DotPattern from "~/components/magicui/dot-pattern";
 import { CardBody, CardContainer, CardItem } from "~/components/ui/3d-card";
-import { cardPreviewsStore } from "~/lib/stores/cardPreviews";
 import { nfcPreferencesStore } from "~/lib/stores/nfcPreferences";
 import { cn } from "~/lib/utils";
+import { type ContactVCardType } from "~/server/db/schema";
 
-export const CardPreview = ({ className }: { className?: string }) => {
+export const CardPreview = ({
+  className,
+  cardData,
+}: {
+  className?: string;
+  cardData?: ContactVCardType;
+}) => {
   const preferences = nfcPreferencesStore((s) => s.preferencesData);
-  const cardData = cardPreviewsStore((s) => s.previewsData);
 
   return (
     <article

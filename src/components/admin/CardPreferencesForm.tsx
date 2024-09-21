@@ -140,16 +140,16 @@ export const CardPreferencesForm = () => {
 
           <article
             className={cn(
-              "relative col-span-2 mt-2 flex h-[240px] flex-col justify-center gap-2 transition-all",
+              "relative col-span-2 flex flex-col justify-center gap-2 transition-all",
               cardVariant !== "custom" && "pointer-events-none mt-0 h-0 opacity-0",
             )}
           >
-            <div>
-              <Label className="flex items-center gap-2">
-                <ResetIcon />
-                Back card design
-              </Label>
+            <Label className="flex items-center gap-2">
+              <ResetIcon />
+              Back card design
+            </Label>
 
+            <div className="relative">
               {!!imageBack && (
                 <div className="absolute z-0 h-56 w-full overflow-hidden rounded-lg">
                   <Image
@@ -184,7 +184,7 @@ export const CardPreferencesForm = () => {
                 content={{
                   label: () => (
                     <span className="cursor-default rounded-sm bg-muted px-3 py-0.5 text-sm">
-                      Upload a design (1050x600 pixels for the best results)
+                      Upload a design (1050x600 pixels for the best quality)
                     </span>
                   ),
                   uploadIcon: () => <></>,
@@ -468,7 +468,7 @@ export const CardPreferencesForm = () => {
                   content={{
                     label: () => (
                       <span className="cursor-default rounded-sm bg-muted px-3 py-0.5 text-sm">
-                        Upload a company logo (optional)
+                        Upload a company logo
                       </span>
                     ),
                     uploadIcon: () => <></>,
@@ -477,7 +477,7 @@ export const CardPreferencesForm = () => {
               </section>
 
               <Button
-                className="max-w-max"
+                className="max-w-max self-center"
                 variant="destructive_ghost"
                 onClick={() => form.setValue("companyLogoURL", undefined)}
               >
@@ -497,7 +497,7 @@ const DefaultCard = () => {
       className="h-28 w-52 rounded-lg border bg-background p-4 text-black shadow transition-all data-[state=checked]:ring data-[state=checked]:ring-ring data-[state=checked]:ring-offset-1"
       value="basic"
     >
-      <h4>Basic NFC card</h4>
+      <h4>Classic Edition</h4>
     </RadioGroupItemRadix>
   );
 };
@@ -508,7 +508,7 @@ const CustomCard = () => {
       className="h-28 w-52 rounded-lg border bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-4 shadow-md transition-all data-[state=checked]:ring data-[state=checked]:ring-ring data-[state=checked]:ring-offset-1"
       value="custom"
     >
-      <h4 className="bg-clip-text font-medium text-white">Customizable card</h4>
+      <h4 className="bg-clip-text font-medium text-white">Professional Edition (custom)</h4>
     </RadioGroupItemRadix>
   );
 };

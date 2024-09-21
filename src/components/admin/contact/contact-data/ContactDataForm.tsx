@@ -52,7 +52,7 @@ export const ContactDataForm = ({
       toast.success("Information saved!");
 
       await Promise.all([
-        utils.vCard.get.invalidate(),
+        utils.vCard.get.refetch(),
         utils.portals.get.invalidate({ username: user.username }),
       ]);
     },
@@ -118,6 +118,7 @@ export const ContactDataForm = ({
               region: "",
               postalCode: "",
               country: "",
+              type: "WORK",
             },
           ],
         },
@@ -157,7 +158,7 @@ export const ContactDataForm = ({
   useAutoSaveFormData(500, form, (data) => void onSubmit(data), []);
 
   return (
-    <section className="grid grid-cols-1 gap-4">
+    <section className="grid grid-cols-1 gap-4 pb-24">
       <div
         className={cn(
           "rounded-lg border border-dashed p-4",

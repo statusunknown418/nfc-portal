@@ -1,11 +1,23 @@
-import { Paintbrush } from "lucide-react";
-import Link from "next/link";
-import { useMemo } from "react";
+import { Paintbrush, Pipette } from "lucide-react";
+import { useCallback, useMemo } from "react";
+import { toast } from "sonner";
+import useEyeDropper from "use-eye-dropper";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "~/components/ui/popover";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
 import { cn } from "~/lib/utils";
+
+type DropperError = {
+  message: string;
+  canceled?: boolean;
+};
+
+const isError = <T,>(err: DropperError | T): err is DropperError =>
+  !!err && err instanceof Error && !!err.message;
+
+const isNotCanceled = <T,>(err: DropperError | T): err is DropperError =>
+  isError(err) && !err.canceled;
 
 export function GradientPicker({
   background,
@@ -63,10 +75,10 @@ export function GradientPicker({
   ];
 
   const images = [
-    "url(https://images.unsplash.com/photo-1691200099282-16fd34790ade?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2532&q=90)",
-    "url(https://images.unsplash.com/photo-1691226099773-b13a89a1d167?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2532&q=90",
-    "url(https://images.unsplash.com/photo-1688822863426-8c5f9b257090?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2532&q=90)",
-    "url(https://images.unsplash.com/photo-1691225850735-6e4e51834cad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2532&q=90)",
+    "url(https://images.unsplash.com/photo-1691200099282-16fd34790ade?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2532&q=70)",
+    "url(https://images.unsplash.com/photo-1691226099773-b13a89a1d167?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2532&q=70",
+    "url(https://images.unsplash.com/photo-1688822863426-8c5f9b257090?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2532&q=70)",
+    "url(https://images.unsplash.com/photo-1691225850735-6e4e51834cad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2532&q=70)",
   ];
 
   const defaultTab = useMemo(() => {
@@ -74,6 +86,25 @@ export function GradientPicker({
     if (background?.includes("gradient")) return "gradient";
     return "solid";
   }, [background]);
+
+  const { open, close, isSupported } = useEyeDropper();
+
+  const pickColor = useCallback(() => {
+    const openPicker = async () => {
+      try {
+        const color = await open();
+        setBackground(color.sRGBHex);
+      } catch (e) {
+        if (isNotCanceled(e)) {
+          toast.error("Something went wrong");
+        }
+
+        close();
+      }
+    };
+
+    void openPicker();
+  }, [close, open, setBackground]);
 
   return (
     <Popover>
@@ -136,17 +167,6 @@ export function GradientPicker({
                 />
               ))}
             </div>
-
-            <GradientButton background={background}>
-              💡 Get more at{" "}
-              <Link
-                href="https://gradient.page/css/ui-gradients"
-                className="font-bold hover:underline"
-                target="_blank"
-              >
-                Gradient Page
-              </Link>
-            </GradientButton>
           </TabsContent>
 
           <TabsContent value="image" className="mt-0">
@@ -160,20 +180,7 @@ export function GradientPicker({
                 />
               ))}
             </div>
-
-            <GradientButton background={background}>
-              🎁 Get abstract{" "}
-              <Link
-                href="https://gradient.page/wallpapers"
-                className="font-bold hover:underline"
-                target="_blank"
-              >
-                wallpapers
-              </Link>
-            </GradientButton>
           </TabsContent>
-
-          <TabsContent value="password">Change your password here.</TabsContent>
         </Tabs>
 
         <Input
@@ -182,6 +189,15 @@ export function GradientPicker({
           className="col-span-2 mt-4 h-8"
           onChange={(e) => setBackground(e.currentTarget.value)}
         />
+
+        {isSupported() ? (
+          <Button onClick={pickColor} className="mt-2 w-full" size="sm" variant="outline">
+            <Pipette size={14} />
+            Pick another color
+          </Button>
+        ) : (
+          <p>Eye dropper not supported here, try another browser</p>
+        )}
       </PopoverContent>
     </Popover>
   );

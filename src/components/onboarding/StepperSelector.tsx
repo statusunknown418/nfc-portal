@@ -55,7 +55,7 @@ export const StepperSelector = ({
       </PublicPortalStep>
     ),
     "nfc-card": <NFCPreferencesStep initialData={initialData.contact} />,
-    purchase: <PurchaseCardStep />,
+    purchase: <PurchaseCardStep initialData={initialData.contact} />,
     finale: <FinaleStep />,
   };
 

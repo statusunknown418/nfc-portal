@@ -1,10 +1,8 @@
 "use client";
 
-import { Cross1Icon } from "@radix-ui/react-icons";
-import Link from "next/link";
 import { useState } from "react";
-import { Button } from "../ui/button";
 import { api } from "~/trpc/react";
+import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 
 export const GetYours = ({ shouldShow = true }: { shouldShow?: boolean }) => {
   const [show, setShow] = useState(shouldShow);
@@ -19,28 +17,14 @@ export const GetYours = ({ shouldShow = true }: { shouldShow?: boolean }) => {
   }
 
   return (
-    <div className="mt-8 flex w-full items-center justify-center">
-      <section>
-        <Button asChild className="rounded-full pr-4 shadow-lg" size="lg">
-          <div>
-            <Link href="/" className="text-xs">
-              🚀 Powered by Near
-            </Link>
+    <div className="w-full px-4">
+      <Alert variant="indigo" className="w-full text-center">
+        <AlertTitle className="font-semibold">🚀 Powered by ConCard</AlertTitle>
 
-            <Button
-              asChild
-              variant="ghost"
-              size="icon"
-              className="ml-1 hover:bg-primary/30 hover:text-primary-foreground"
-              onClick={() => action.mutate()}
-            >
-              <span>
-                <Cross1Icon className="h-3 w-3 text-muted-foreground" />
-              </span>
-            </Button>
-          </div>
-        </Button>
-      </section>
+        <AlertDescription className="text-balance text-xs">
+          Get your own personalized NFC business card and digital portal!
+        </AlertDescription>
+      </Alert>
     </div>
   );
 };

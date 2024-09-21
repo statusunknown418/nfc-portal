@@ -348,7 +348,6 @@ export const VisualCustomizationForm = ({
                       <SelectItem value="solid">Solid</SelectItem>
                       <SelectItem value="dashed">Dashed</SelectItem>
                       <SelectItem value="dotted">Dotted</SelectItem>
-                      <SelectItem value="double">Double</SelectItem>
                     </SelectContent>
                   </Select>
                 </FormItem>

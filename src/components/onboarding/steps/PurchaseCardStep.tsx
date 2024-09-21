@@ -3,7 +3,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { nfcPreferencesStore } from "~/lib/stores/nfcPreferences";
 import { purchaseStatusToText } from "~/lib/utils";
-import { api } from "~/trpc/react";
+import { api, type RouterOutputs } from "~/trpc/react";
 import { CardPreview } from "~/components/admin/contact/CardPreview";
 import { Spinner } from "~/components/shared/Spinner";
 import { Badge } from "~/components/ui/badge";
@@ -12,7 +12,11 @@ import { FormItem } from "~/components/ui/form";
 import { Label } from "~/components/ui/label";
 import { Textarea } from "~/components/ui/textarea";
 
-export const PurchaseCardStep = () => {
+export const PurchaseCardStep = ({
+  initialData,
+}: {
+  initialData: RouterOutputs["vCard"]["get"];
+}) => {
   const preferences = nfcPreferencesStore((s) => s.preferencesData);
 
   const { data, isLoading } = api.purchases.getStatus.useQuery();
@@ -50,7 +54,7 @@ export const PurchaseCardStep = () => {
   };
 
   return (
-    <section className="flex min-h-full flex-col gap-1">
+    <section className="flex min-h-full flex-col gap-1 pb-24">
       <h3 className="text-xl font-semibold tracking-wide">Purchase your NFC card</h3>
       <p className="text-muted-foreground">
         Your card will be delivered as soon as possible and the way you customized it in the
@@ -58,7 +62,7 @@ export const PurchaseCardStep = () => {
       </p>
 
       <div className="my-4 h-[400px]">
-        <CardPreview />
+        <CardPreview cardData={initialData?.contactJSON ?? undefined} />
       </div>
 
       <form

@@ -1,31 +1,21 @@
 "use client";
 
-import { useEffect } from "react";
-import { cardPreviewsStore } from "~/lib/stores/cardPreviews";
-import { type RouterOutputs } from "~/trpc/react";
-import { CardPreview } from "../../admin/contact/CardPreview";
+import { api, type RouterOutputs } from "~/trpc/react";
 import { CardPreferencesForm } from "../../admin/CardPreferencesForm";
+import { CardPreview } from "../../admin/contact/CardPreview";
 
 export const NFCPreferencesStep = ({
   initialData,
 }: {
   initialData: RouterOutputs["vCard"]["get"];
 }) => {
-  const setContactPreview = cardPreviewsStore((s) => s.setPreview);
-
-  useEffect(() => {
-    if (!initialData?.contactJSON) {
-      return;
-    }
-
-    setContactPreview(initialData?.contactJSON);
-  }, [initialData?.contactJSON, setContactPreview]);
+  const [data] = api.vCard.get.useSuspenseQuery(undefined, { initialData });
 
   return (
     <section className="flex h-full max-h-[calc(100svh-170px)] flex-col gap-4 lg:flex-row">
       <CardPreferencesForm />
 
-      <CardPreview />
+      <CardPreview cardData={data.contactJSON ?? undefined} />
     </section>
   );
 };
