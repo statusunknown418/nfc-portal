@@ -64,9 +64,7 @@ export const AuthConfig = {
       const name = user.email?.split("@")[0];
       const image = user.image ?? `https://api.dicebear.com/7.x/initials/svg?seed=${username}`;
 
-      if (!cookieUsername?.value) {
-        cookies().set("decided-username", username, { path: "/" });
-      }
+      cookies().set("decided-username", username, { path: "/" });
 
       await db
         .insert(users)
