@@ -45,6 +45,7 @@ export const ContactDataForm = ({
   const utils = api.useUtils();
 
   const { data } = api.vCard.get.useQuery(undefined, { initialData });
+
   const [isHidden, setIsChecked] = useState(data?.hasContactInfoLocked ?? false);
 
   const { mutate, isPending } = api.vCard.edit.useMutation({

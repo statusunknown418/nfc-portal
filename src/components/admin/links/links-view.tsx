@@ -1,8 +1,6 @@
-import { PlusIcon, RocketIcon } from "@radix-ui/react-icons";
+import { PlusIcon } from "@radix-ui/react-icons";
 import { type Session } from "next-auth";
-import Link from "next/link";
 import { Suspense } from "react";
-import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -11,14 +9,17 @@ import {
   BreadcrumbSeparator,
 } from "~/components/ui/breadcrumb";
 import { Button } from "~/components/ui/button";
-import { CopyButton } from "~/components/ui/copy-button";
-import { LinksWrapperLoader, LinksWrapperRSC } from "./links-list/links-wrapper";
-import { NewLinkDrawer } from "./new-link";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
 import {
   ContactDataLoading,
   ContactDataWrapper,
 } from "../contact/contact-data/contact-data-wrapper";
+import {
+  PageEnabledWrapperLoader,
+  PageEnabledWrapperRSC,
+} from "../enabled-banner/page-enabled-wrapper";
+import { LinksWrapperLoader, LinksWrapperRSC } from "./links-list/links-wrapper";
+import { NewLinkDrawer } from "./new-link";
 
 export const LinksViewRSC = ({ jwt }: { jwt: Session }) => {
   return (
@@ -31,27 +32,9 @@ export const LinksViewRSC = ({ jwt }: { jwt: Session }) => {
         </BreadcrumbList>
       </Breadcrumb>
 
-      <article className="flex w-full flex-col">
-        <h1 className="text-2xl font-bold">Welcome {jwt?.user.username}</h1>
-        <p className="mt-1 text-sm text-muted-foreground">
-          Here you can manage everything that shows up on your NFC portal page.
-        </p>
-
-        <Alert variant="indigo" className="relative mt-4">
-          <RocketIcon className="text-indigo-600" />
-          <AlertTitle className="text-foreground"> Your page is LIVE!</AlertTitle>
-          <AlertDescription className="flex items-center gap-1">
-            <Link
-              href="https://nfc.nearu.tech"
-              className="text-sm text-indigo-600 underline hover:text-indigo-500"
-            >
-              https://nfc.nearu.tech/{jwt?.user.username}
-            </Link>
-
-            <CopyButton text={`https://nfc.nearu.tech/${jwt?.user.username}`} />
-          </AlertDescription>
-        </Alert>
-      </article>
+      <Suspense fallback={<PageEnabledWrapperLoader />}>
+        <PageEnabledWrapperRSC />
+      </Suspense>
 
       <Tabs defaultValue="links" className="mt-4 flex w-full flex-col gap-2">
         <TabsList className="h-[44px] w-max justify-start rounded-full border border-primary/20">

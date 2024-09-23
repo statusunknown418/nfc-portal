@@ -220,3 +220,8 @@ export const purchaseStatusToText = (status: CardShippingStatus) => {
       return "Unknown status";
   }
 };
+
+export const imageURLToBase64 = async (url: string) => {
+  const data = await fetch(url);
+  return await data.blob();
+};
