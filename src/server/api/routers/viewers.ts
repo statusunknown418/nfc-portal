@@ -73,4 +73,18 @@ export const viewersRouter = createTRPCRouter({
 
       return { available: !user };
     }),
+  shouldShowLive: protectedProcedure.query(async ({ ctx }) => {
+    return ctx.db.query.users.findFirst({
+      where: (t, op) => op.and(op.eq(t.id, ctx.session.user.id)),
+      columns: {
+        hasPurchasedCard: true,
+        cardShippingStatus: true,
+        hasCompletedOnboarding: true,
+        onboardingStep: true,
+        pageHashKey: true,
+        username: true,
+        id: true,
+      },
+    });
+  }),
 });

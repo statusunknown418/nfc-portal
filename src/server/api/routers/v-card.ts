@@ -32,8 +32,6 @@ export const vCardsRouter = createTRPCRouter({
         id: true,
         contactJSON: true,
         hasContactInfoLocked: true,
-        onboardingStep: true,
-        hasCompletedOnboarding: true,
       },
     });
   }),
