@@ -13,7 +13,11 @@ import { api } from "~/trpc/server";
 export default async function OnboardingPage({ searchParams }: { searchParams: SearchParams }) {
   onboardingParsesCache.parse(searchParams);
 
-  const [contactData, session] = await Promise.all([api.vCard.get(), auth()]);
+  const [contactData, shouldShowLive, session] = await Promise.all([
+    api.vCard.get(),
+    api.viewer.shouldShowLive(),
+    auth(),
+  ]);
 
   if (!session?.user.username) {
     return redirect("/auth/signup");
@@ -33,7 +37,7 @@ export default async function OnboardingPage({ searchParams }: { searchParams: S
 
       <section className="h-full w-full overflow-auto bg-white">
         <StepperSelector
-          initialData={{ contact: contactData }}
+          initialData={{ contact: contactData, shareLink: shouldShowLive }}
           session={session}
           components={{
             portal: <PortalPreviewWrapperRSC username={session.user.username} />,

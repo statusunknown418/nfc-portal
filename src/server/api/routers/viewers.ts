@@ -48,12 +48,13 @@ export const viewersRouter = createTRPCRouter({
         step: z
           .enum(["start", "contact", "portal", "nfc-card", "purchase", "finale"])
           .default("start"),
+        forceCompleted: z.boolean().optional().default(false),
       }),
     )
     .mutation(async ({ ctx, input }) => {
       await ctx.db
         .update(users)
-        .set({ onboardingStep: input.step })
+        .set({ onboardingStep: input.step, hasCompletedOnboarding: input.forceCompleted })
         .where(eq(users.id, ctx.session.user.id));
 
       return { success: true };

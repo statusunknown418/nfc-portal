@@ -5,7 +5,9 @@ import {
   PortalPreviewWrapperLoader,
   PortalPreviewWrapperRSC,
 } from "~/components/admin/portal-preview";
+import GridPattern from "~/components/magicui/grid-pattern";
 import { Alert, AlertTitle } from "~/components/ui/alert";
+import { cn } from "~/lib/utils";
 import { auth } from "~/server/auth";
 
 export default async function AdminPage() {
@@ -47,8 +49,15 @@ export default async function AdminPage() {
             )}
           </Suspense>
 
-          <h3 className="text-center text-muted-foreground">Preview</h3>
+          <h3 className="text-center tracking-wide text-muted-foreground">Preview</h3>
         </section>
+
+        <GridPattern
+          className={cn(
+            "[mask-image:radial-gradient(700px_circle_at_center,white,transparent)]",
+            "inset-0 -z-10 h-full skew-y-12",
+          )}
+        />
       </aside>
     </section>
   );
