@@ -32,6 +32,10 @@ const config = {
         hostname: "api.dicebear.com",
         protocol: "https",
       },
+      {
+        protocol: "https",
+        hostname: "img.clerk.com",
+      },
     ],
   },
 };

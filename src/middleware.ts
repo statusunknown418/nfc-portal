@@ -1,41 +1,43 @@
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import { auth } from "./server/auth";
+import { env } from "./env";
 
 export const PORTAL_KEY = "portal-password";
 export const PORTAL_QUERY = "ktp";
 export const INCOMING_URL = "x-current-url";
 
-const secure_routes = ["/admin", "/business", "/onboarding"];
+const isProtectedRoute = createRouteMatcher(["/admin(.*)", "/business", "/onboarding(.*)"]);
 
-export default auth(async function middleware(req, _ctx) {
-  const headers = new Headers(req.headers);
-  headers.set(INCOMING_URL, req.nextUrl.pathname);
+export default clerkMiddleware(
+  (auth, req) => {
+    const headers = new Headers(req.headers);
+    headers.set(INCOMING_URL, req.nextUrl.pathname);
 
-  if (secure_routes.includes(req.nextUrl.pathname)) {
-    if (req.auth) {
+    if (isProtectedRoute(req)) auth().protect();
+
+    if (!req.nextUrl.searchParams.has(PORTAL_QUERY)) {
       return NextResponse.next({ headers });
-    } else {
-      return NextResponse.redirect(new URL("/auth/login", req.url), {
-        headers,
-      });
     }
-  }
 
-  if (!req.nextUrl.searchParams.has(PORTAL_QUERY)) {
-    return NextResponse.next({ headers });
-  }
+    const portalPassword = req.nextUrl.searchParams.get(PORTAL_QUERY);
+    headers.set("set-cookie", `${PORTAL_KEY}=${portalPassword}; SameSite=Strict; HttpOnly`);
 
-  const portalPassword = req.nextUrl.searchParams.get(PORTAL_QUERY);
-  headers.set("set-cookie", `${PORTAL_KEY}=${portalPassword}; SameSite=Strict; HttpOnly`);
+    const nextUrl = req.nextUrl;
+    nextUrl.searchParams.delete(PORTAL_QUERY);
 
-  const nextUrl = req.nextUrl;
-  nextUrl.searchParams.delete(PORTAL_QUERY);
-
-  return NextResponse.redirect(nextUrl, {
-    headers,
-  });
-});
+    return NextResponse.redirect(nextUrl, {
+      headers,
+    });
+  },
+  {
+    debug: env.NODE_ENV === "development",
+  },
+);
 
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+  matcher: [
+    // Skip Next.js internals and all static files, unless found in search params
+    "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
+    "/(api|trpc)(.*)",
+  ],
 };
