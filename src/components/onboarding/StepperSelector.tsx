@@ -2,7 +2,6 @@
 
 import { CheckCircledIcon, ChevronLeftIcon, TrackNextIcon } from "@radix-ui/react-icons";
 import { AnimatePresence } from "framer-motion";
-import { type Session } from "next-auth";
 import Link from "next/link";
 import { useQueryStates } from "nuqs";
 import { type ReactNode } from "react";
@@ -23,7 +22,7 @@ export const StepperSelector = ({
   initialData,
   components,
 }: {
-  session: Session;
+  session: CustomJwtSessionClaims;
   initialData: {
     contact: RouterOutputs["vCard"]["get"];
     shareLink: RouterOutputs["viewer"]["shouldShowLive"];
@@ -41,7 +40,7 @@ export const StepperSelector = ({
     start: <WelcomeStep />,
     contact: (
       <ContactStep>
-        <ContactDataForm initialData={initialData.contact} user={session.user} />
+        <ContactDataForm initialData={initialData.contact} user={session} />
       </ContactStep>
     ),
     portal: (
@@ -88,7 +87,7 @@ export const StepperSelector = ({
             step !== "portal" && "pr-4 md:pr-8",
           )}
         >
-          <h3>Let&apos;s get you set up, {session.user.username}</h3>
+          <h3>Let&apos;s get you set up, {session.username}</h3>
 
           <div className="relative mt-4 h-full max-h-[calc(100%-80px)]">
             {step && StepComponents[step]}

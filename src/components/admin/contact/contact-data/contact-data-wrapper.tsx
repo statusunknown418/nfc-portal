@@ -1,12 +1,18 @@
 import { Skeleton } from "~/components/ui/skeleton";
-import { auth } from "~/server/auth";
 import { api } from "~/trpc/server";
 import { ContactDataForm } from "./ContactDataForm";
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 
 export const ContactDataWrapper = async () => {
-  const [data, session] = await Promise.all([api.vCard.get(), auth()]);
+  const { sessionClaims } = auth();
+  const [data] = await Promise.all([api.vCard.get()]);
 
-  return <ContactDataForm initialData={data} user={session!.user} />;
+  if (!sessionClaims) {
+    return redirect("/");
+  }
+
+  return <ContactDataForm initialData={data} user={sessionClaims} />;
 };
 
 export const ContactDataLoading = () => {

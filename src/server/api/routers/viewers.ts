@@ -21,7 +21,7 @@ export const viewersRouter = createTRPCRouter({
         .insert(users)
         .values({
           ...input,
-          pageHashKey: createId(),
+          id: `rm_${createId()}`,
         })
         .onConflictDoUpdate({
           set: input,
@@ -30,7 +30,7 @@ export const viewersRouter = createTRPCRouter({
     }),
   get: protectedProcedure.query(async ({ ctx }) => {
     return ctx.db.query.users.findFirst({
-      where: (t, op) => op.and(op.eq(t.id, ctx.session.user.id)),
+      where: (t, op) => op.and(op.eq(t.id, ctx.userId)),
       columns: {
         id: true,
         name: true,
@@ -55,7 +55,7 @@ export const viewersRouter = createTRPCRouter({
       await ctx.db
         .update(users)
         .set({ onboardingStep: input.step, hasCompletedOnboarding: input.forceCompleted })
-        .where(eq(users.id, ctx.session.user.id));
+        .where(eq(users.id, ctx.userId));
 
       return { success: true };
     }),
@@ -76,7 +76,7 @@ export const viewersRouter = createTRPCRouter({
     }),
   shouldShowLive: protectedProcedure.query(async ({ ctx }) => {
     return ctx.db.query.users.findFirst({
-      where: (t, op) => op.and(op.eq(t.id, ctx.session.user.id)),
+      where: (t, op) => op.and(op.eq(t.id, ctx.userId)),
       columns: {
         hasPurchasedCard: true,
         cardShippingStatus: true,

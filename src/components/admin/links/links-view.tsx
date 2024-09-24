@@ -1,5 +1,4 @@
 import { PlusIcon } from "@radix-ui/react-icons";
-import { type Session } from "next-auth";
 import { Suspense } from "react";
 import {
   Breadcrumb,
@@ -21,7 +20,7 @@ import {
 import { LinksWrapperLoader, LinksWrapperRSC } from "./links-list/links-wrapper";
 import { NewLinkDrawer } from "./new-link";
 
-export const LinksViewRSC = ({ jwt }: { jwt: Session }) => {
+export const LinksViewRSC = ({ jwt }: { jwt: CustomJwtSessionClaims }) => {
   return (
     <div className="flex h-full flex-grow flex-col items-center gap-4">
       <Breadcrumb className="self-start">
@@ -61,7 +60,7 @@ export const LinksViewRSC = ({ jwt }: { jwt: Session }) => {
             </p>
 
             <article className="flex w-full flex-col items-center gap-2 sm:flex-row sm:justify-start sm:gap-0">
-              <NewLinkDrawer username={jwt?.user.username ?? ""} />
+              <NewLinkDrawer username={jwt.username} />
 
               <Button size="lg" variant="outline" className="w-full sm:rounded-l-none">
                 <PlusIcon />

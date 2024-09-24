@@ -6,7 +6,7 @@ import { createTRPCRouter, protectedProcedure } from "../trpc";
 export const visualCustomizationRouter = createTRPCRouter({
   get: protectedProcedure.query(async ({ ctx }) => {
     return await ctx.db.query.users.findFirst({
-      where: (t, op) => op.eq(t.id, ctx.session.user.id),
+      where: (t, op) => op.eq(t.id, ctx.userId),
       columns: {
         id: true,
         image: true,
@@ -33,7 +33,7 @@ export const visualCustomizationRouter = createTRPCRouter({
         ...input,
         theme: themeKey !== "custom" ? templateTheme : input.theme,
       })
-      .where(eq(users.id, ctx.session.user.id))
+      .where(eq(users.id, ctx.userId))
       .returning();
   }),
 });

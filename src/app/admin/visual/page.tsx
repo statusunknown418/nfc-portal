@@ -1,4 +1,5 @@
-import { notFound } from "next/navigation";
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import {
   PortalPreviewWrapperLoader,
@@ -12,13 +13,12 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "~/components/ui/breadcrumb";
-import { auth } from "~/server/auth";
 
 export default async function VisualCustomizationPage() {
-  const session = await auth();
+  const { sessionClaims, userId } = auth();
 
-  if (!session) {
-    return notFound();
+  if (!sessionClaims || !userId) {
+    return redirect("/");
   }
 
   return (
@@ -48,7 +48,7 @@ export default async function VisualCustomizationPage() {
         <section className="flex h-full flex-col items-center justify-center gap-8">
           <Suspense>
             <Suspense fallback={<PortalPreviewWrapperLoader />}>
-              <PortalPreviewWrapperRSC username={session.user.username!} />
+              <PortalPreviewWrapperRSC username={sessionClaims.username} />
             </Suspense>
           </Suspense>
 

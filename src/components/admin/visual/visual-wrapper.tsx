@@ -2,21 +2,21 @@ import { api } from "~/trpc/server";
 import { VisualCustomizationForm } from "./VisualCustomizationForm";
 import { Skeleton } from "~/components/ui/skeleton";
 import { Divider } from "~/components/ui/separator";
-import { auth } from "~/server/auth";
-import { notFound } from "next/navigation";
+import { redirect } from "next/navigation";
+import { auth } from "@clerk/nextjs/server";
 
 export const VisualWrapper = async () => {
   const data = await api.visuals.get();
-  const session = await auth();
+  const { sessionClaims, userId } = auth();
 
   /**
    * TODO: Probably change this to something better
    */
-  if (!session) {
-    return notFound();
+  if (!sessionClaims || !userId) {
+    return redirect("/");
   }
 
-  return <VisualCustomizationForm defaultValues={data} username={session.user.username!} />;
+  return <VisualCustomizationForm defaultValues={data} username={sessionClaims.username} />;
 };
 
 export const VisualWrapperLoader = () => {

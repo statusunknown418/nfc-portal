@@ -13,7 +13,7 @@ export const PortalPreview = ({
   initialData: RouterOutputs["portals"]["get"];
   username: string;
 }) => {
-  const { data: portal } = api.portals.get.useQuery({ username }, { initialData });
+  const { data: portal } = api.portals.get.useQuery({ username, bypass: true }, { initialData });
 
   const mainKey = portal.data?.links.map((link) => `${JSON.stringify(link)}`).join(",");
   const renderKey = `${mainKey}-${portal.data?.image}-${JSON.stringify(portal.data?.theme)}-${portal.data?.bio}-${portal.data?.profileHeader}-${portal.data?.hasContactInfoLocked}`;
@@ -31,6 +31,8 @@ export const PortalPreview = ({
 
     setContactPreview(portal.data?.contactJSON);
   }, [portal.data?.contactJSON, setContactPreview]);
+
+  console.log({ portal: portal.data?.pageHashKey });
 
   return (
     <>

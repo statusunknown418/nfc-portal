@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Cross2Icon, PlusIcon } from "@radix-ui/react-icons";
 import { SaveIcon } from "lucide-react";
-import { type User } from "next-auth";
 import { useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -40,7 +39,7 @@ export const ContactDataForm = ({
   user,
 }: {
   initialData: RouterOutputs["vCard"]["get"];
-  user: User & { username?: string };
+  user: CustomJwtSessionClaims;
 }) => {
   const utils = api.useUtils();
 
@@ -95,8 +94,8 @@ export const ContactDataForm = ({
         }
       : {
           name: {
-            first: user.name?.split(" ")[0] ?? "",
-            last: user.name?.split(" ")[1] ?? "",
+            first: user.firstName ?? "",
+            last: user.lastName ?? "",
           },
           email: [
             {

@@ -2,10 +2,10 @@ import { ExclamationTriangleIcon, ArrowLeftIcon, ArrowRightIcon } from "@radix-u
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { Card, CardHeader, CardTitle, CardDescription, CardFooter } from "../ui/card";
-import { auth } from "~/server/auth";
+import { auth } from "@clerk/nextjs/server";
 
 export const NotFound = async () => {
-  const session = await auth();
+  const { sessionClaims } = auth();
 
   return (
     <main className="grid h-svh grid-cols-1 place-items-center bg-muted/50 p-4 dark:bg-background md:p-0">
@@ -26,7 +26,7 @@ export const NotFound = async () => {
             </Link>
           </Button>
 
-          {session?.user.id && (
+          {sessionClaims?.username && (
             <Button variant="outline" className="w-full rounded-full" asChild>
               <Link href="/admin">
                 To the admin panel <ArrowRightIcon className="ml-2" />

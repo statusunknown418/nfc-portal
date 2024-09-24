@@ -158,10 +158,9 @@ export type OnboardingStep = (typeof onboardingStepTypes)[number];
 export type CardShippingStatus = (typeof cardShippingStatusTypes)[number];
 
 export const users = sqliteTable("user", {
-  id: text("id", { length: 255 })
-    .notNull()
-    .primaryKey()
-    .$defaultFn(() => `usr_${createId()}`),
+  /** SHOULD ALWAYS USE CLERK's `userId` as the primary key */
+  id: text("id", { length: 255 }).notNull().primaryKey(),
+  /** ----------------------------------------------------- */
   username: text("user_name", { length: 255 }).unique(),
   name: text("name", { length: 255 }),
   email: text("email", { length: 255 }).notNull().unique(),
@@ -181,7 +180,7 @@ export const users = sqliteTable("user", {
   hasPurchasedCard: int("has_purchased_card", { mode: "boolean" }).default(false),
   hasCompletedOnboarding: int("has_completed_onboarding", { mode: "boolean" }).default(false),
   onboardingStep: text("onboarding_step", { enum: onboardingStepTypes }).default("contact"),
-  pageHashKey: text("page_hash_key"),
+  pageHashKey: text("page_hash_key").$defaultFn(() => createId()),
   metaTitle: text("meta_title", { length: 255 }),
   metaDescription: text("meta_description"),
   metaImage: text("meta_image"),
