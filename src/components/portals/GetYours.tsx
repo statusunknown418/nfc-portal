@@ -6,7 +6,7 @@ import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 
 export const GetYours = ({ shouldShow = true }: { shouldShow?: boolean }) => {
   const [show, setShow] = useState(shouldShow);
-  const action = api.portals.removeJoinBanner.useMutation({
+  const _action = api.portals.removeJoinBanner.useMutation({
     onSuccess: () => {
       setShow(false);
     },

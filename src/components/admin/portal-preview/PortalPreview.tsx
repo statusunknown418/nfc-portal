@@ -32,8 +32,6 @@ export const PortalPreview = ({
     setContactPreview(portal.data?.contactJSON);
   }, [portal.data?.contactJSON, setContactPreview]);
 
-  console.log({ portal: portal.data?.pageHashKey });
-
   return (
     <>
       {!loaded && (

@@ -7,12 +7,12 @@ import * as React from "react";
 import {
   Controller,
   type ControllerProps,
-  FieldError,
-  FieldErrorsImpl,
+  type FieldError,
+  type FieldErrorsImpl,
   type FieldPath,
   type FieldValues,
   FormProvider,
-  Merge,
+  type Merge,
   useFormContext,
 } from "react-hook-form";
 
