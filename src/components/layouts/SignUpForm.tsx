@@ -52,7 +52,7 @@ export default function SignUpForm({
   });
 
   const username = form.watch("username");
-  const debouncedUsername = useDebounce(username, 400);
+  const debouncedUsername = useDebounce(`@${username}`, 400);
 
   const { data, isLoading } = api.viewer.checkUsernameAvailability.useQuery(debouncedUsername, {
     enabled: !!debouncedUsername,

@@ -63,6 +63,7 @@
     "@types/canvas-confetti": "^1.6.4",
     "@uidotdev/usehooks": "^2.4.1",
     "@uploadthing/react": "^6.8.0",
+    "@vercel/speed-insights": "^1.0.12",
     "browser-image-compression": "^2.0.2",
     "canvas-confetti": "^1.9.3",
     "class-variance-authority": "^0.7.0",

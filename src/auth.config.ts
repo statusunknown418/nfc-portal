@@ -28,8 +28,11 @@ export const AuthConfig = {
       token.id = user.id;
       token.name = user.name;
       token.picture = user.image;
+
       // @ts-expect-error weird TS bug
-      token.username = cookies().get("decided-username")?.value ?? user.username;
+      if (!user.username) {
+        token.username = cookies().get("decided-username")?.value;
+      }
 
       return token;
     },
