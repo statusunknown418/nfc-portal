@@ -2,12 +2,20 @@ import { ArrowRightIcon, CheckCircledIcon } from "@radix-ui/react-icons";
 import confetti from "canvas-confetti";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
+import { ShareLink } from "~/components/admin/ShareLink";
 import Confetti, { type ConfettiRef } from "~/components/magicui/confetti";
 import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
 import { Button } from "~/components/ui/button";
+import { api, type RouterOutputs } from "~/trpc/react";
 
-export const FinaleStep = () => {
+export const FinaleStep = ({
+  initialData,
+}: {
+  initialData: RouterOutputs["viewer"]["shouldShowLive"];
+}) => {
   const confettiRef = useRef<ConfettiRef>(null);
+
+  const { mutate } = api.viewer.setOnboardingStep.useMutation();
 
   useEffect(() => {
     confettiRef?.current?.fire({});
@@ -52,33 +60,47 @@ export const FinaleStep = () => {
       <h2 className="text-2xl font-bold tracking-wide md:text-4xl">You are all done!</h2>
 
       <p className="max-w-prose text-center">
-        Your purchase means a lot to us. Your support is heavily appreciated and will help us build
-        a better product for our customers!.
-        <br />
-        <br />
+        <span>
+          Your purchase means a lot to us. Your support is heavily appreciated and will help us
+          build a better product for our customers!.
+        </span>{" "}
         <span className="text-muted-foreground">
           You will receive a confirmation email shortly. If nothing arrives try checking your spam
-          folder or contact us directly we&apos;re happy to help.
+          folder or contact us directly, we&apos;re happy to help.
         </span>
       </p>
 
-      <Alert variant="indigo">
-        <AlertTitle>By the way!</AlertTitle>
+      <Alert variant="indigo" className="z-10 mt-4 max-w-lg">
+        <AlertTitle>Your portal page!</AlertTitle>
 
-        <AlertDescription>
-          This is your public portal page, share it with anyone but remember that based on the
-          previous steps your contact information may be visible, so just be cautious!
+        <AlertDescription className="mb-4">
+          Share it with anyone but remember that based on the previous steps your contact
+          information may be visible, so just be cautious!
         </AlertDescription>
+
+        {initialData?.username && (
+          <ShareLink username={initialData.username} pageHashKey={initialData.pageHashKey!} />
+        )}
       </Alert>
 
-      <Button onClick={handleClick} className="z-10" size="sm" variant="outline">
+      <Button onClick={handleClick} className="z-10 mt-4" size="sm" variant="link">
         ✨ Click me for fun
       </Button>
 
-      <Button size="lg" variant="primary" className="z-10 mt-4 rounded-full" asChild>
+      <Button
+        size="lg"
+        variant="primary"
+        className="z-10 rounded-full"
+        onClick={() => mutate({ forceCompleted: true })}
+        asChild
+      >
         <Link href="/admin">
           Go to admin panel <ArrowRightIcon />
         </Link>
+      </Button>
+
+      <Button className="z-10" size="sm" variant="link" asChild>
+        <Link href="mailto:support@stackkstudios.com">Ask for help</Link>
       </Button>
 
       <Confetti

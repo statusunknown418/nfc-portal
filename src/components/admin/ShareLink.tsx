@@ -20,16 +20,10 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { Skeleton } from "../ui/skeleton";
+import { env } from "~/env";
 
-export const ShareLink = ({
-  username,
-  pageHashKey,
-  baseUrl,
-}: {
-  username: string;
-  pageHashKey: string;
-  baseUrl: string;
-}) => {
+export const ShareLink = ({ username, pageHashKey }: { username: string; pageHashKey: string }) => {
+  const baseUrl = env.NEXT_PUBLIC_BASE_URL;
   const fullUrl = `${baseUrl}/${username}`;
   const withHash = `${fullUrl}?ktp=${pageHashKey}`;
 
@@ -66,7 +60,7 @@ export const ShareLink = ({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button className="max-w-max rounded-full" variant="primary" size="lg">
+        <Button className="w-full" variant="primary_ghost">
           <Share2Icon />
           Share portal
         </Button>
@@ -77,7 +71,14 @@ export const ShareLink = ({
 
         <DropdownMenuSeparator className="mb-0" />
 
-        <DropdownMenuLabel className="-mx-1 bg-background py-2.5 text-base font-light">
+        <DropdownMenuLabel
+          className="-mx-1 bg-background py-2.5 text-base font-light"
+          onCopy={(e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            handleCopy(e as unknown as Event);
+          }}
+        >
           {fullUrl}
         </DropdownMenuLabel>
 

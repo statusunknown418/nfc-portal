@@ -80,9 +80,7 @@ export const VisualCustomizationForm = ({
     <Form {...form}>
       <form className="mt-2 grid grid-cols-1 gap-6">
         <Alert variant="indigo" className="border-dashed">
-          <AlertTitle className="text-base text-indigo-600">
-            Themes / presets are coming!
-          </AlertTitle>
+          <AlertTitle>Themes / presets are coming!</AlertTitle>
 
           <AlertDescription>
             We&apos;re working hard to provide the best experiences with new features!, if

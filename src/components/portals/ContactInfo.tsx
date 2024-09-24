@@ -3,19 +3,21 @@
 import { IdCardIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import vCardBuilder from "vcard-creator";
+import { cn } from "~/lib/utils";
 import { type ContactVCardType, type ThemeType } from "~/server/db/schema";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
-import { cn } from "~/lib/utils";
 
 export const ContactInfo = ({
   unlocked,
   data,
+  profilePicture,
   theme,
 }: {
   unlocked?: boolean;
   data: ContactVCardType | null;
   theme: ThemeType;
+  profilePicture: string | null;
 }) => {
   if (!unlocked) {
     return (
@@ -53,27 +55,32 @@ export const ContactInfo = ({
     );
   }
 
-  const handleImport = () => {
+  const handleImport = async () => {
     const vCard = new vCardBuilder();
+
     vCard.addName(data.name?.last, data.name?.first);
     data.company?.name && vCard.addCompany(data.company?.name, data.company?.department);
     data.jobTitle && vCard.addJobtitle(data.jobTitle);
     data.phoneNumbers?.forEach((phone) => vCard.addPhoneNumber(phone.number, phone.type));
     data.email?.forEach((email) => vCard.addEmail(email.link, email.type));
-    data.address?.forEach((address) =>
-      vCard.addAddress(
-        "",
-        undefined,
-        address.street,
-        address.city,
-        address.region,
-        address.postalCode,
-        address.country,
-        address.type,
-      ),
+    data.address?.forEach(
+      (address) =>
+        address.street &&
+        vCard.addAddress(
+          "",
+          undefined,
+          address.street,
+          address.city,
+          address.region,
+          address.postalCode,
+          address.country,
+          address.type,
+        ),
     );
 
-    const blob = new Blob([vCard.buildVCard()], {
+    const fullVCard = vCard.buildVCard();
+
+    const blob = new Blob([fullVCard], {
       type: "text/vcard",
     });
 

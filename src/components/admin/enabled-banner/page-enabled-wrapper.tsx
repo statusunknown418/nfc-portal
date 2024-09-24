@@ -9,5 +9,16 @@ export const PageEnabledWrapperRSC = async () => {
 };
 
 export const PageEnabledWrapperLoader = () => {
-  return <Skeleton className="h-14 w-full" />;
+  return (
+    <section className="flex w-full flex-col gap-4">
+      <header className="flex items-center gap-1">
+        <h2 className="text-2xl font-bold">Welcome</h2>
+        <Skeleton className="h-6 w-20" />
+      </header>
+
+      <Skeleton className="h-14 w-full" />
+
+      <Skeleton className="h-14 w-full" />
+    </section>
+  );
 };

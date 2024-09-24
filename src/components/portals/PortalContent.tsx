@@ -53,18 +53,16 @@ export const PortalContent = ({
 
   return (
     <section
-      className={cn(
-        "grid h-full min-h-svh grid-cols-1 place-items-center overflow-y-auto pb-28 sm:pt-4",
-      )}
+      className={cn("grid h-full grid-cols-1 place-items-center overflow-y-auto pb-28 sm:pt-4")}
       style={{
         background: portal.data.theme.colors.background,
         color: portal.data.theme.colors.foreground,
       }}
     >
-      <article className="flex h-full w-full max-w-[580px] flex-col items-center gap-4 overflow-hidden xl:rounded-3xl xl:border xl:border-border/50">
+      <article className="flex h-full w-full max-w-[580px] flex-col items-center gap-4 sm:shadow-lg xl:rounded-3xl xl:border xl:border-border/50">
         <section
           className={cn(
-            "relative z-0 max-h-[400px] min-h-[300px] w-full max-w-[580px] overflow-hidden bg-cover bg-center bg-no-repeat",
+            "relative z-0 max-h-[400px] min-h-[300px] w-full max-w-[580px] overflow-hidden bg-cover bg-center bg-no-repeat sm:min-h-[320px] md:min-h-[350px]",
             {
               "rounded-full": portal.data.avatarShape === "circle",
               "rounded-none": portal.data.avatarShape === "square",
@@ -130,6 +128,7 @@ export const PortalContent = ({
                 unlocked={portal.unlocked}
                 data={portal.data?.contactJSON}
                 theme={portal.data?.theme}
+                profilePicture={portal.data.image}
               />
             </TabsContent>
           )}

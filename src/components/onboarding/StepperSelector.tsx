@@ -1,28 +1,22 @@
 "use client";
 
-import {
-  CheckCircledIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  TrackNextIcon,
-} from "@radix-ui/react-icons";
+import { CheckCircledIcon, ChevronLeftIcon, TrackNextIcon } from "@radix-ui/react-icons";
 import { AnimatePresence } from "framer-motion";
 import { type Session } from "next-auth";
 import Link from "next/link";
 import { useQueryStates } from "nuqs";
 import { type ReactNode } from "react";
+import { cn } from "~/lib/utils";
 import { api, type RouterOutputs } from "~/trpc/react";
 import { ContactDataForm } from "../admin/contact/contact-data/ContactDataForm";
 import { Button } from "../ui/button";
-import { ContactStep } from "./steps/ContactStep";
-import { NFCPreferencesStep } from "./steps/NFCPreferencesStep";
 import { keys, onboardingParsers, type Keys } from "./onboarding.parsers";
-import { PublicPortalStep } from "./steps/PublicPortalStep";
-import { cn } from "~/lib/utils";
-import { WelcomeStep } from "./steps/WelcomeStep";
+import { ContactStep } from "./steps/ContactStep";
 import { FinaleStep } from "./steps/FinaleStep";
+import { NFCPreferencesStep } from "./steps/NFCPreferencesStep";
+import { PublicPortalStep } from "./steps/PublicPortalStep";
 import { PurchaseCardStep } from "./steps/PurchaseCardStep";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
+import { WelcomeStep } from "./steps/WelcomeStep";
 
 export const StepperSelector = ({
   session,
@@ -32,6 +26,7 @@ export const StepperSelector = ({
   session: Session;
   initialData: {
     contact: RouterOutputs["vCard"]["get"];
+    shareLink: RouterOutputs["viewer"]["shouldShowLive"];
   };
   components?: {
     portal: ReactNode;
@@ -40,6 +35,7 @@ export const StepperSelector = ({
 }) => {
   const [{ step }, changeStep] = useQueryStates(onboardingParsers);
   const { mutate } = api.viewer.setOnboardingStep.useMutation();
+  const utils = api.useUtils();
 
   const StepComponents: Record<Keys, ReactNode> = {
     start: <WelcomeStep />,
@@ -56,7 +52,7 @@ export const StepperSelector = ({
     ),
     "nfc-card": <NFCPreferencesStep initialData={initialData.contact} />,
     purchase: <PurchaseCardStep initialData={initialData.contact} />,
-    finale: <FinaleStep />,
+    finale: <FinaleStep initialData={initialData.shareLink} />,
   };
 
   const rewindStep = () => {
@@ -66,15 +62,21 @@ export const StepperSelector = ({
 
     const newStep = keys[keys.indexOf(step) - 1];
 
-    void mutate({ step: newStep });
-    void changeStep({ step: newStep });
+    void Promise.all([
+      mutate({ step: newStep }),
+      changeStep({ step: newStep }),
+      utils.viewer.shouldShowLive.invalidate(),
+    ]);
   };
 
   const forwardStep = () => {
     const newStep = keys[keys.indexOf(step) + 1];
 
-    void mutate({ step: newStep });
-    void changeStep({ step: newStep });
+    void Promise.all([
+      mutate({ step: newStep, forceCompleted: newStep === "finale" }),
+      changeStep({ step: newStep }),
+      utils.viewer.shouldShowLive.invalidate(),
+    ]);
   };
 
   return (
@@ -101,22 +103,6 @@ export const StepperSelector = ({
           )}
 
           <div className="ml-auto flex gap-4">
-            {step !== "finale" && step !== "start" && (
-              <TooltipProvider delayDuration={0}>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button variant="outline" onClick={forwardStep}>
-                      Skip step <TrackNextIcon />
-                    </Button>
-                  </TooltipTrigger>
-
-                  <TooltipContent>
-                    This is not recommended, you may loose access to cool features
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-            )}
-
             {step === "finale" ? (
               <Button asChild>
                 <Link href="/admin">
@@ -126,7 +112,7 @@ export const StepperSelector = ({
             ) : (
               <Button onClick={forwardStep}>
                 Next step
-                <ChevronRightIcon />
+                <TrackNextIcon />
               </Button>
             )}
           </div>
