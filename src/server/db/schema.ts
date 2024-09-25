@@ -2,7 +2,6 @@ import { createId } from "@paralleldrive/cuid2";
 import { relations, sql } from "drizzle-orm";
 import { index, int, primaryKey, sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { createInsertSchema } from "drizzle-zod";
-import { type AdapterAccount } from "next-auth/adapters";
 import { z } from "zod";
 import { BASE_THEMES } from "~/lib/utils";
 import { type SaveNFCPreferences, themeSchema } from "../api/schemas.zod";
@@ -343,7 +342,7 @@ export const accounts = sqliteTable(
     userId: text("user_id", { length: 255 })
       .notNull()
       .references(() => users.id),
-    type: text("type", { length: 255 }).$type<AdapterAccount["type"]>().notNull(),
+    type: text("type", { length: 255 }).notNull().default("managed"),
     provider: text("provider", { length: 255 }).notNull(),
     providerAccountId: text("provider_account_id", { length: 255 }).notNull(),
     refresh_token: text("refresh_token"),
