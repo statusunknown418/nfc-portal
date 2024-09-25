@@ -92,6 +92,7 @@ export const POST = async (req: NextRequest) => {
     .set({
       hasPurchasedCard: true,
       hasCompletedOnboarding: true,
+      hasPageActive: true,
       onboardingStep: "finale",
       cardShippingStatus: "in_progress",
       cardVariant: metadata.card_variant,

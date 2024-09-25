@@ -1,4 +1,5 @@
 import { type WebhookEvent } from "@clerk/nextjs/server";
+import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
 import { Webhook } from "svix";
 import { env } from "~/env";
@@ -79,6 +80,8 @@ export async function POST(req: Request) {
         },
         target: users.id,
       });
+
+    revalidatePath("/admin", "layout");
   }
 
   return new Response("Webhook received", {
