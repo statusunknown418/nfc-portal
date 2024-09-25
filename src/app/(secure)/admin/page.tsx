@@ -48,8 +48,6 @@ export default async function AdminPage() {
               </Alert>
             )}
           </Suspense>
-
-          <h3 className="text-center tracking-wide text-muted-foreground">Preview</h3>
         </section>
 
         <GridPattern
