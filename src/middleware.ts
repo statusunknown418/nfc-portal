@@ -13,7 +13,9 @@ export default clerkMiddleware(
     const headers = new Headers(req.headers);
     headers.set(INCOMING_URL, req.nextUrl.pathname);
 
-    if (isProtectedRoute(req)) auth().protect();
+    if (isProtectedRoute(req)) {
+      auth().protect();
+    }
 
     if (!req.nextUrl.searchParams.has(PORTAL_QUERY)) {
       return NextResponse.next({ headers });

@@ -1,8 +1,8 @@
 import { createId } from "@paralleldrive/cuid2";
 import { z } from "zod";
-import { users } from "~/server/db/schema";
+import { links, users } from "~/server/db/schema";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 
 export const viewersRouter = createTRPCRouter({
   /**
@@ -85,6 +85,17 @@ export const viewersRouter = createTRPCRouter({
         pageHashKey: true,
         username: true,
         id: true,
+      },
+    });
+  }),
+  previewPortal: protectedProcedure.query(async ({ ctx }) => {
+    return ctx.db.query.users.findFirst({
+      where: (t, op) => op.and(op.eq(t.id, ctx.userId)),
+      with: {
+        links: {
+          where: and(eq(links.isActive, true)),
+          orderBy: (t, op) => op.asc(t.position),
+        },
       },
     });
   }),

@@ -170,7 +170,7 @@ export const users = sqliteTable("user", {
   image: text("image", { length: 255 }),
   bio: text("bio"),
   profileHeader: text("profile_header"),
-  hasPageActive: int("page_active", { mode: "boolean" }).default(true),
+  hasPageActive: int("page_active", { mode: "boolean" }).default(false),
   pageLayout: text("page_layout", { enum: pageLayoutTypes }).default("basic"),
   contactVCard: text("contact_v_card"),
   contactJSON: text("contact_json", { mode: "json" }).$type<ContactVCardType>(),
