@@ -53,7 +53,7 @@ export const preventBackdropClick = (e: React.MouseEvent<HTMLElement>) => {
 };
 
 export enum ThemeKeys {
-  default = "default",
+  base = "base",
   dark = "dark",
   minimal = "minimal",
   crazy = "crazy",
@@ -63,7 +63,7 @@ export enum ThemeKeys {
 }
 
 export const BASE_THEMES: Record<ThemeKeys, ThemeType> = {
-  default: {
+  base: {
     themeKey: "custom",
     colorScheme: "light",
     colors: {

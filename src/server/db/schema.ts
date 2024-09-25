@@ -188,10 +188,7 @@ export const users = sqliteTable("user", {
   ),
   cardVariant: text("card_variant", { enum: cardVariants }).notNull().default("basic"),
   avatarShape: text("avatar_shape", { enum: avatarShapes }).notNull().default("rounded"),
-  theme: text("theme", { mode: "json" })
-    .notNull()
-    .$type<ThemeType>()
-    .$defaultFn(() => BASE_THEMES.default),
+  theme: text("theme", { mode: "json" }).notNull().$type<ThemeType>().default(BASE_THEMES.base),
 });
 
 export const userProfileSchema = createInsertSchema(users, {
