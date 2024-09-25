@@ -35,7 +35,7 @@ export const purchasesRouter = createTRPCRouter({
             success:
               env.NODE_ENV === "development"
                 ? "http://localhost:3000/onboarding?step=finale&payment=success"
-                : "https://nfc-portal.vercel.app/onboarding?step=finale&payment=success",
+                : "https://chronosecrets.app/onboarding?step=finale&payment=success",
           },
           items: [
             {
