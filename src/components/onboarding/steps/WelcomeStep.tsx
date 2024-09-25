@@ -33,7 +33,7 @@ export const WelcomeStep = () => {
           If there&apos;s anything you need help with, don&apos;t hesitate to reach out to us.
           We&apos;re here to help!{" "}
           <Link
-            href="mailto:support@stackkstudios.com"
+            href={`mailto:support@stackkstudios.com?subject=${encodeURIComponent("ConCard <> Help needed!")}`}
             className="inline-flex items-center gap-1 text-indigo-600 underline underline-offset-1"
           >
             Contact us here <ExternalLinkIcon />

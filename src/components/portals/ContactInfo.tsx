@@ -127,17 +127,15 @@ export const ContactInfo = ({
           background: theme.colors.subtle,
         }}
       >
-        <article className="flex flex-col gap-1 px-4 text-zinc-50 mix-blend-exclusion">
-          <h3 className="text-lg font-semibold">
-            {data?.name?.first} {data?.name?.last}
-          </h3>
+        {(data.company?.name ?? data.jobTitle) && (
+          <article className="flex flex-col gap-1 px-4 text-zinc-50 mix-blend-exclusion">
+            {data?.jobTitle && <p className="text-sm font-light tracking-tight">{data.jobTitle}</p>}
 
-          {data?.jobTitle && <p className="text-sm font-light tracking-tight">{data.jobTitle}</p>}
-
-          {data?.company?.name && (
-            <p className="text-sm font-light tracking-tight">{data.company.name}</p>
-          )}
-        </article>
+            {data?.company?.name && (
+              <p className="text-sm font-light tracking-tight">{data.company.name}</p>
+            )}
+          </article>
+        )}
 
         {!!data.phoneNumbers?.length && data.phoneNumbers.some((phone) => !!phone.number) && (
           <article className="flex flex-col gap-2 border-b pt-2">

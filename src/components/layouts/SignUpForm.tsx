@@ -1,7 +1,6 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CheckCircledIcon, DiscordLogoIcon } from "@radix-ui/react-icons";
-import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "~/components/ui/button";
@@ -61,10 +60,10 @@ export default function SignUpForm({
   const handleSubmit = form.handleSubmit(async (data) => {
     !!data.username && (await setDecidedUsername(data.username.toLowerCase()));
 
-    await signIn("resend", {
-      callbackUrl: "/admin",
-      email: data.email,
-    });
+    // await signIn("resend", {
+    //   callbackUrl: "/admin",
+    //   email: data.email,
+    // });
   });
 
   useEffect(() => {
@@ -160,15 +159,7 @@ export default function SignUpForm({
 
 export const SignInWithSocial = ({ provider }: { provider: "google" | "discord" }) => {
   return (
-    <Button
-      className="w-full rounded-full"
-      variant="outline"
-      onClick={() =>
-        signIn(provider, {
-          callbackUrl: "/admin",
-        })
-      }
-    >
+    <Button className="w-full rounded-full" variant="outline">
       {provider === "discord" && <DiscordLogoIcon className="mr-2 h-5 w-5 text-indigo-600" />}
       Sign in with {provider}
     </Button>

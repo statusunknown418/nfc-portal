@@ -53,6 +53,7 @@ export const ContactDataForm = ({
 
       await Promise.all([
         utils.vCard.get.refetch(),
+        utils.viewer.previewPortal.invalidate(),
         utils.portals.get.invalidate({ username: user.username }),
       ]);
     },
@@ -62,6 +63,7 @@ export const ContactDataForm = ({
     onSuccess: async () => {
       await Promise.all([
         utils.vCard.get.invalidate(),
+        utils.viewer.previewPortal.invalidate(),
         utils.portals.get.invalidate({ username: user.username }),
       ]);
     },
@@ -188,10 +190,7 @@ export const ContactDataForm = ({
 
             <AlertTitle>This form auto-saves!</AlertTitle>
             <AlertDescription>
-              <p>
-                Just wait a few moments and your changes will be automatically saved, also a
-                notification will be shown in the screen.
-              </p>
+              <p>Just wait a few moments and your changes will be automatically saved.</p>
 
               {isPending && (
                 <Badge variant="outline" className="absolute right-4 top-2 h-7 animate-pulse">

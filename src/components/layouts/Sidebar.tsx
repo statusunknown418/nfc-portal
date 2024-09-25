@@ -10,6 +10,8 @@ import Link from "next/link";
 import { useSelectedLayoutSegment } from "next/navigation";
 import { Button } from "../ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
+import { ClerkLoaded, ClerkLoading, UserButton } from "@clerk/nextjs";
+import { Skeleton } from "../ui/skeleton";
 
 export const Sidebar = () => {
   const selectedSegment = useSelectedLayoutSegment();
@@ -64,12 +66,12 @@ export const Sidebar = () => {
             <TooltipTrigger asChild>
               <Button
                 asChild
-                variant={selectedSegment === "visual" ? "primary_ghost" : "ghost"}
+                variant={selectedSegment === "signatures" ? "primary_ghost" : "ghost"}
                 size="icon"
                 aria-selected={selectedSegment === "signatures"}
                 className="h-[44px] w-[44px]"
               >
-                <Link href="/admin/visual">
+                <Link href="/admin/signatures">
                   <EnvelopeClosedIcon className="h-5 w-5" />
                   <span className="sr-only">Email signatures</span>
                 </Link>
@@ -100,10 +102,30 @@ export const Sidebar = () => {
         </TooltipProvider>
       </ul>
 
-      <Button className="h-[44px] w-[44px] text-xs md:text-sm" size="icon">
-        <span>AA</span>
-        <span className="sr-only">User</span>
-      </Button>
+      <div>
+        <ClerkLoading>
+          <Skeleton className="h-10 w-10 rounded-full" />
+        </ClerkLoading>
+
+        <ClerkLoaded>
+          <UserButton
+            userProfileProps={{
+              appearance: {
+                elements: {
+                  profileSectionPrimaryButton__username: "hidden",
+                },
+              },
+            }}
+            appearance={{
+              elements: {
+                userButtonAvatarBox: "w-10 h-10",
+                profileSectionPrimaryButton__username: "hidden",
+                userPreviewSecondaryIdentifier: "font-semibold tracking-wide",
+              },
+            }}
+          />
+        </ClerkLoaded>
+      </div>
     </aside>
   );
 };

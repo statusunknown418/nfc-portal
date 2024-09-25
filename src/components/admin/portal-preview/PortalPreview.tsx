@@ -9,28 +9,27 @@ import { api, type RouterOutputs } from "~/trpc/react";
 export const PortalPreview = ({
   initialData,
   username,
+  bypassKey,
 }: {
-  initialData: RouterOutputs["portals"]["get"];
+  initialData: RouterOutputs["viewer"]["previewPortal"];
   username: string;
+  bypassKey?: string;
 }) => {
-  const { data: portal } = api.portals.get.useQuery({ username, bypass: true }, { initialData });
+  const { data: portal } = api.viewer.previewPortal.useQuery(undefined, { initialData });
 
-  const mainKey = portal.data?.links.map((link) => `${JSON.stringify(link)}`).join(",");
-  const renderKey = `${mainKey}-${portal.data?.image}-${JSON.stringify(portal.data?.theme)}-${portal.data?.bio}-${portal.data?.profileHeader}-${portal.data?.hasContactInfoLocked}`;
-
-  const fallbackKey = `${username}-${portal.data?.pageHashKey}`;
+  const renderKey = JSON.stringify(portal);
 
   const setContactPreview = cardPreviewsStore((s) => s.setPreview);
-  const iframeRef = useFrameSyncSender(renderKey ?? fallbackKey);
+  const iframeRef = useFrameSyncSender(renderKey);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    if (!portal.data?.contactJSON) {
+    if (!portal?.contactJSON) {
       return;
     }
 
-    setContactPreview(portal.data?.contactJSON);
-  }, [portal.data?.contactJSON, setContactPreview]);
+    setContactPreview(portal?.contactJSON);
+  }, [portal?.contactJSON, setContactPreview]);
 
   return (
     <>
@@ -43,7 +42,7 @@ export const PortalPreview = ({
       <iframe
         ref={iframeRef}
         onLoad={() => setLoaded(true)}
-        src={`/${username}?ktp=${portal.data?.pageHashKey}`}
+        src={`/${username}?ktp=${portal?.pageHashKey}&bypassKey=${bypassKey}`}
         loading="lazy"
         className="h-full min-h-[640px] w-full"
       />

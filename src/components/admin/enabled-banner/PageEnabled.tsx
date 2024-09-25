@@ -1,6 +1,11 @@
 "use client";
 
-import { ExclamationTriangleIcon, IdCardIcon, RocketIcon } from "@radix-ui/react-icons";
+import {
+  ExclamationTriangleIcon,
+  ExternalLinkIcon,
+  IdCardIcon,
+  RocketIcon,
+} from "@radix-ui/react-icons";
 import Link from "next/link";
 import { useState } from "react";
 import { purchaseStatusToText } from "~/lib/utils";
@@ -41,16 +46,17 @@ export const PageEnabled = ({
 
         <AlertTitle>Onboarding pending!</AlertTitle>
 
-        <AlertDescription className="flex items-center gap-1">
+        <AlertDescription>
           It is strongly recommended to complete the onboarding process, this way you can complete
-          every step and get your portal active and linked to your business card.
+          every step and get your portal active and linked to your business card.{" "}
         </AlertDescription>
 
-        <div className="mt-2">
-          <Button className="text-primary" variant="secondary_ghost" size="sm" asChild>
-            <Link href={`/onboarding?step=${data.onboardingStep}`}>Pick up where you left off</Link>
-          </Button>
-        </div>
+        <Link
+          className="mt-1 flex items-center gap-1 text-muted-foreground underline hover:text-indigo-500 hover:text-primary"
+          href={`/onboarding?step=${data.onboardingStep}`}
+        >
+          Pick up where you left off! <ExternalLinkIcon />
+        </Link>
       </Alert>
     );
   };
@@ -91,17 +97,16 @@ export const PageEnabled = ({
         </AlertDescription>
 
         {data.cardShippingStatus === "awaiting_purchase" && (
-          <AlertDescription className="mt-2 text-muted-foreground">
+          <AlertDescription className="mt-1 text-muted-foreground">
             We noticed you haven&apos;t purchased a card yet, please{" "}
-            <Link href="/admin/cards" className="text-primary underline underline-offset-1">
-              purchase one here to fully unlock all features!
+            <Link
+              href="/admin/cards"
+              className="inline-flex items-center gap-1 underline underline-offset-1 transition-all hover:text-primary"
+            >
+              purchase one to unlock all features! <ExternalLinkIcon />
             </Link>
           </AlertDescription>
         )}
-
-        <AlertDescription className="mt-2 italic text-muted-foreground">
-          You&apos;ll be notified in every step of the way!
-        </AlertDescription>
       </Alert>
 
       {data.hasCompletedOnboarding ? <SuccessAlert /> : <WarningAlert />}

@@ -88,7 +88,11 @@ export function AddEditLinkForm({
     onSuccess: async () => {
       form.reset();
 
-      await Promise.all([utils.links.all.invalidate(), utils.portals.get.invalidate({ username })]);
+      await Promise.all([
+        utils.links.all.invalidate(),
+        utils.viewer.previewPortal.invalidate(),
+        utils.portals.get.invalidate({ username: username }),
+      ]);
     },
     onError: (error) => {
       const e = error as unknown as TRPCError;
@@ -133,7 +137,8 @@ export function AddEditLinkForm({
 
       await Promise.all([
         utils.links.all.invalidate(),
-        utils.portals.get.invalidate({ username }),
+        utils.viewer.previewPortal.invalidate(),
+        utils.portals.get.invalidate({ username: username }),
         setAvailableLinkPosition(data?.position ?? 0),
       ]);
     },
@@ -237,7 +242,7 @@ export function AddEditLinkForm({
                   form.setValue("thumbnail", file.url);
                 });
 
-                await utils.portals.get.refetch({ username });
+                await utils.portals.get.refetch({ username: username });
               }}
               config={{
                 mode: "auto",

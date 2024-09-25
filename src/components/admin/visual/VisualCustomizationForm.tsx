@@ -58,7 +58,8 @@ export const VisualCustomizationForm = ({
 
   const mutate = api.visuals.edit.useMutation({
     onSuccess: () => {
-      void utils.portals.get.invalidate({ username });
+      void utils.viewer.previewPortal.invalidate();
+      void utils.portals.get.invalidate({ username: username });
     },
   });
 
