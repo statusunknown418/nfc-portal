@@ -6,7 +6,7 @@ import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 
 export const GetYours = ({ shouldShow = true }: { shouldShow?: boolean }) => {
   const [show, setShow] = useState(shouldShow);
-  const action = api.portals.removeJoinBanner.useMutation({
+  const _action = api.portals.removeJoinBanner.useMutation({
     onSuccess: () => {
       setShow(false);
     },
@@ -18,7 +18,13 @@ export const GetYours = ({ shouldShow = true }: { shouldShow?: boolean }) => {
 
   return (
     <div className="w-full px-4">
-      <Alert variant="indigo" className="w-full text-center">
+      <Alert
+        variant="indigo"
+        className="w-full text-center"
+        style={{
+          borderRadius: "base",
+        }}
+      >
         <AlertTitle className="font-semibold">🚀 Powered by ConCard</AlertTitle>
 
         <AlertDescription className="text-balance text-xs">

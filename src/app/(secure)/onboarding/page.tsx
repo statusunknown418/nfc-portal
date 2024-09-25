@@ -1,4 +1,6 @@
+import { auth } from "@clerk/nextjs/server";
 import { ChevronLeftIcon } from "@radix-ui/react-icons";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { type SearchParams } from "nuqs/parsers";
 import { PortalPreviewWrapperRSC } from "~/components/admin/portal-preview";
@@ -7,19 +9,18 @@ import { onboardingParsesCache } from "~/components/onboarding/onboarding.parser
 import { Stepper } from "~/components/onboarding/Stepper";
 import { StepperSelector } from "~/components/onboarding/StepperSelector";
 import { Button } from "~/components/ui/button";
-import { auth } from "~/server/auth";
 import { api } from "~/trpc/server";
 
 export default async function OnboardingPage({ searchParams }: { searchParams: SearchParams }) {
   onboardingParsesCache.parse(searchParams);
 
-  const [contactData, shouldShowLive, session] = await Promise.all([
+  const { sessionClaims } = auth();
+  const [contactData, shouldShowLive] = await Promise.all([
     api.vCard.get(),
     api.viewer.shouldShowLive(),
-    auth(),
   ]);
 
-  if (!session?.user.username) {
+  if (!sessionClaims?.username) {
     return redirect("/auth/signup");
   }
 
@@ -30,17 +31,19 @@ export default async function OnboardingPage({ searchParams }: { searchParams: S
 
         <Stepper />
 
-        <Button variant="link" className="mt-auto px-0 md:px-4">
-          <ChevronLeftIcon /> Home
+        <Button variant="link" className="mt-auto px-0 md:px-4" asChild>
+          <Link href="/admin">
+            <ChevronLeftIcon /> Back to dashboard
+          </Link>
         </Button>
       </section>
 
       <section className="h-full w-full overflow-auto bg-white">
         <StepperSelector
           initialData={{ contact: contactData, shareLink: shouldShowLive }}
-          session={session}
+          session={sessionClaims}
           components={{
-            portal: <PortalPreviewWrapperRSC username={session.user.username} />,
+            portal: <PortalPreviewWrapperRSC hideAlerts username={sessionClaims.username} />,
             visual: <VisualWrapper />,
           }}
         />

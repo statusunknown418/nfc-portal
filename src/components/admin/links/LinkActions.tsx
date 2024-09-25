@@ -50,7 +50,11 @@ export const LinkActions = ({
     },
     onSuccess: async () => {
       toast.success("Link updated!");
-      await Promise.all([utils.portals.get.invalidate({ username }), utils.links.all.invalidate()]);
+      await Promise.all([
+        utils.viewer.previewPortal.invalidate(),
+        utils.portals.get.invalidate({ username: username }),
+        utils.links.all.invalidate(),
+      ]);
     },
     onError: (err, _vars, context) => {
       toast.error(err.message);
@@ -69,7 +73,11 @@ export const LinkActions = ({
     },
     onSuccess: async () => {
       toast.success("Link deleted!");
-      await Promise.all([utils.portals.get.invalidate({ username }), utils.links.all.invalidate()]);
+      await Promise.all([
+        utils.viewer.previewPortal.invalidate(),
+        utils.portals.get.invalidate({ username: username }),
+        utils.links.all.invalidate(),
+      ]);
     },
     onError: (err, _vars, context) => {
       toast.error(err.message);

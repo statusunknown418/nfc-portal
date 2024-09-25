@@ -1,20 +1,20 @@
 import { and, eq } from "drizzle-orm";
+import { cookies } from "next/headers";
 import { z } from "zod";
+import { PORTAL_KEY } from "~/middleware";
 import { links, userProfileSchema, users } from "~/server/db/schema";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
-import { cookies } from "next/headers";
-import { INCOMING_URL, PORTAL_KEY } from "~/middleware";
 
 export const portalsRouter = createTRPCRouter({
   edit: protectedProcedure.input(userProfileSchema).mutation(async ({ ctx, input }) => {
-    return ctx.db.update(users).set(input).where(eq(users.id, ctx.session.user.id)).returning();
+    return ctx.db.update(users).set(input).where(eq(users.id, ctx.userId)).returning();
   }),
 
   get: publicProcedure.input(z.object({ username: z.string() })).query(async ({ ctx, input }) => {
     const cookiePassword = cookies().get(PORTAL_KEY);
 
     const data = await ctx.db.query.users.findFirst({
-      where: and(eq(users.username, input.username), eq(users.hasPageActive, true)),
+      where: and(eq(users.username, input.username)),
       with: {
         links: {
           where: and(eq(links.isActive, true)),
@@ -29,17 +29,6 @@ export const portalsRouter = createTRPCRouter({
         unlocked: false,
       };
     }
-
-    /** Used for overriding the password on the admin page preview */
-    const incomingPath = ctx.headers.get(INCOMING_URL);
-
-    if (incomingPath?.startsWith("/admin")) {
-      return {
-        data,
-        unlocked: true,
-      };
-    }
-    /** ----------------------------------------------------------- */
 
     if (!!cookiePassword && data?.pageHashKey === cookiePassword.value) {
       return {

@@ -173,7 +173,7 @@ export const Stepper = () => {
             {key !== "finale" && (
               <div
                 className={cn(
-                  "h-10 w-0.5 self-center justify-self-center rounded-full",
+                  "h-10 w-px self-center justify-self-center rounded-full",
                   step === key ? "bg-border" : "bg-border/50",
                   stepsItems.findIndex((i) => i.key === step) > idx && "bg-indigo-600 opacity-100",
                 )}

@@ -1,10 +1,12 @@
-import { notFound } from "next/navigation";
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import {
   PortalPreviewWrapperLoader,
   PortalPreviewWrapperRSC,
 } from "~/components/admin/portal-preview";
 import { VisualWrapper, VisualWrapperLoader } from "~/components/admin/visual/visual-wrapper";
+import GridPattern from "~/components/magicui/grid-pattern";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -12,13 +14,13 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "~/components/ui/breadcrumb";
-import { auth } from "~/server/auth";
+import { cn } from "~/lib/utils";
 
 export default async function VisualCustomizationPage() {
-  const session = await auth();
+  const { sessionClaims, userId } = auth();
 
-  if (!session) {
-    return notFound();
+  if (!sessionClaims || !userId) {
+    return redirect("/");
   }
 
   return (
@@ -45,14 +47,19 @@ export default async function VisualCustomizationPage() {
       </section>
 
       <aside className="hidden flex-grow gap-4 py-6 pl-6 ring-0 lg:sticky lg:inset-0 lg:block lg:h-[calc(100vh-64px)]">
-        <section className="flex h-full flex-col items-center justify-center gap-8">
+        <section className="relative flex h-full flex-col items-center justify-center gap-4">
           <Suspense>
             <Suspense fallback={<PortalPreviewWrapperLoader />}>
-              <PortalPreviewWrapperRSC username={session.user.username!} />
+              <PortalPreviewWrapperRSC username={sessionClaims.username} />
             </Suspense>
           </Suspense>
 
-          <h3 className="text-center text-muted-foreground">Visual editing preview</h3>
+          <GridPattern
+            className={cn(
+              "[mask-image:radial-gradient(700px_circle_at_center,white,transparent)]",
+              "absolute inset-0 -z-10 size-full skew-y-12",
+            )}
+          />
         </section>
       </aside>
     </section>

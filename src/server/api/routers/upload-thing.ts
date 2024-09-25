@@ -1,8 +1,8 @@
+import { getAuth } from "@clerk/nextjs/server";
 import { and, eq } from "drizzle-orm";
 import { createUploadthing } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
 import { z } from "zod";
-import { auth } from "~/server/auth";
 import { db } from "~/server/db";
 import { links, users } from "~/server/db/schema";
 
@@ -15,12 +15,12 @@ export const uploadThingRouter = {
         linkId: z.number().optional(),
       }),
     )
-    .middleware(async ({ input }) => {
-      const session = await auth();
+    .middleware(async ({ input, req }) => {
+      const session = getAuth(req);
 
-      if (!session) throw new UploadThingError("Unauthorized");
+      if (!session.userId) throw new UploadThingError("Unauthorized");
 
-      return { userId: session.user.id, ...input };
+      return { userId: session.userId, ...input };
     })
     .onUploadComplete(async ({ metadata, file }) => {
       if (!metadata.linkId) return { uploadedBy: metadata.userId, url: file.url };
@@ -34,12 +34,12 @@ export const uploadThingRouter = {
     }),
 
   avatars: f({ image: { maxFileSize: "4MB", minFileCount: 1, maxFileCount: 1 } })
-    .middleware(async () => {
-      const session = await auth();
+    .middleware(async ({ req }) => {
+      const session = getAuth(req);
 
-      if (!session) throw new UploadThingError("Unauthorized");
+      if (!session.sessionClaims?.userId) throw new UploadThingError("Unauthorized");
 
-      return { userId: session.user.id };
+      return { userId: session.sessionClaims.userId };
     })
     .onUploadComplete(async ({ metadata, file }) => {
       await db.update(users).set({ image: file.url }).where(eq(users.id, metadata.userId));
@@ -47,23 +47,23 @@ export const uploadThingRouter = {
       return { uploadedBy: metadata.userId, url: file.url };
     }),
   logos: f({ image: { maxFileSize: "16MB", minFileCount: 1, maxFileCount: 1 } })
-    .middleware(async () => {
-      const session = await auth();
+    .middleware(async ({ req }) => {
+      const session = getAuth(req);
 
-      if (!session) throw new UploadThingError("Unauthorized");
+      if (!session.sessionClaims?.userId) throw new UploadThingError("Unauthorized");
 
-      return { userId: session.user.id };
+      return { userId: session.sessionClaims.userId };
     })
     .onUploadComplete(async ({ metadata, file }) => {
       return { uploadedBy: metadata.userId, url: file.url };
     }),
   cardDesigns: f({ image: { maxFileSize: "4MB", minFileCount: 1, maxFileCount: 1 } })
-    .middleware(async () => {
-      const session = await auth();
+    .middleware(async ({ req }) => {
+      const session = getAuth(req);
 
-      if (!session) throw new UploadThingError("Unauthorized");
+      if (!session.sessionClaims?.userId) throw new UploadThingError("Unauthorized");
 
-      return { userId: session.user.id };
+      return { userId: session.sessionClaims.userId };
     })
     .onUploadComplete(async ({ metadata, file }) => {
       return { uploadedBy: metadata.userId, url: file.url };

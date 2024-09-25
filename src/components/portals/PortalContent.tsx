@@ -13,22 +13,25 @@ import { LinkViewer } from "./LinkViewer";
 export const PortalContent = ({
   initialData,
   username,
-  selectedTab,
 }: {
   initialData: RouterOutputs["portals"]["get"];
   username: string;
   selectedTab: "links" | "contact";
 }) => {
+  const utils = api.useUtils();
+
   const {
     data: portal,
-    refetch,
     isRefetching,
+    refetch,
   } = api.portals.get.useQuery(
-    { username },
+    { username: username },
     { initialData, refetchOnWindowFocus: false, refetchOnMount: false },
   );
 
-  useFrameSyncReceiver(() => void refetch(), selectedTab) as string;
+  useFrameSyncReceiver(() => {
+    void Promise.all([utils.viewer.previewPortal.refetch(), refetch()]);
+  }) as string;
 
   if (!portal.data) {
     return;
@@ -69,14 +72,14 @@ export const PortalContent = ({
             },
           )}
           style={{
-            maskImage: "radial-gradient(100% 100% at center top, #000000 40%, transparent 95%)",
+            maskImage: "radial-gradient(100% 100% at center top, #ffffff 50%, transparent 90%)",
             backgroundImage: `url(${portal.data.image})`,
           }}
         >
           <div
             className="absolute bottom-0 left-0 right-0 h-2/3 w-full"
             style={{
-              background: `linear-gradient(to bottom, rgba(0,0,0,0) 40%, rgba(0,0,0,0.6) 80%)`,
+              background: `linear-gradient(to bottom, rgba(0,0,0,0) 70%, rgba(0,0,0,0.6) 80%)`,
             }}
           />
         </section>

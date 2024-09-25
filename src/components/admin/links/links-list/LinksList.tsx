@@ -60,7 +60,11 @@ export const LinksSortableList = ({
       return { prevData };
     },
     onSuccess: async () => {
-      await Promise.all([utils.portals.get.invalidate({ username }), utils.links.all.invalidate()]);
+      await Promise.all([
+        utils.portals.get.invalidate({ username: username }),
+        utils.viewer.previewPortal.invalidate(),
+        utils.links.all.invalidate(),
+      ]);
     },
     onError: (_input, _data, context) => {
       utils.links.all.setData(undefined, context?.prevData);

@@ -7,7 +7,7 @@ import { editViewerContactSchema } from "../schemas.zod";
 export const vCardsRouter = createTRPCRouter({
   hasContactEnabled: protectedProcedure.query(async ({ ctx }) => {
     return ctx.db.query.users.findFirst({
-      where: (t, op) => op.and(op.eq(t.id, ctx.session.user.id)),
+      where: (t, op) => op.and(op.eq(t.id, ctx.userId)),
       columns: {
         hasContactInfoLocked: true,
         id: true,
@@ -22,12 +22,12 @@ export const vCardsRouter = createTRPCRouter({
         .set({
           hasContactInfoLocked: input.hide,
         })
-        .where(eq(users.id, ctx.session.user.id))
+        .where(eq(users.id, ctx.userId))
         .returning();
     }),
   get: protectedProcedure.query(async ({ ctx }) => {
     return ctx.db.query.users.findFirst({
-      where: (t, op) => op.and(op.eq(t.id, ctx.session.user.id)),
+      where: (t, op) => op.and(op.eq(t.id, ctx.userId)),
       columns: {
         id: true,
         contactJSON: true,
@@ -42,14 +42,14 @@ export const vCardsRouter = createTRPCRouter({
         .set({
           contactJSON: input,
         })
-        .where(eq(users.id, ctx.session.user.id))
+        .where(eq(users.id, ctx.userId))
         .returning(),
       ctx.db
         .update(users)
         .set({
           name: `${input.name?.first} ${input.name?.last}`,
         })
-        .where(eq(users.id, ctx.session.user.id)),
+        .where(eq(users.id, ctx.userId)),
     ]);
 
     return updatedContact;

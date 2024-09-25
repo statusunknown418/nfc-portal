@@ -7,11 +7,13 @@
  * need to use are documented accordingly near the end.
  */
 
+import { getAuth } from "@clerk/nextjs/server";
 import { initTRPC, TRPCError } from "@trpc/server";
+import { NextRequest } from "next/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
+import { env } from "~/env";
 import { db } from "~/server/db";
-import { auth } from "../auth";
 
 /**
  * 1. CONTEXT
@@ -26,11 +28,9 @@ import { auth } from "../auth";
  * @see https://trpc.io/docs/server/context
  */
 export const createTRPCContext = async (opts: { headers: Headers }) => {
-  const session = await auth();
-
   return {
     db,
-    session,
+    auth: getAuth(new NextRequest(getBaseUrl(), { headers: opts.headers })),
     ...opts,
   };
 };
@@ -77,31 +77,13 @@ export const createCallerFactory = t.createCallerFactory;
 export const createTRPCRouter = t.router;
 
 /**
- * Middleware for timing procedure execution and adding an articifial delay in development.
- *
- * You can remove this if you don't like it, but it can help catch unwanted waterfalls by simulating
- * network latency that would occur in production but not in local development.
- */
-const timingMiddleware = t.middleware(async ({ next, path }) => {
-  const start = Date.now();
-
-  const result = await next();
-
-  const end = Date.now();
-
-  console.log(`🖥️ -> [TRPC] ${path} took ${end - start}ms\n`);
-
-  return result;
-});
-
-/**
  * Public (unauthenticated) procedure
  *
  * This is the base piece you use to build new queries and mutations on your tRPC API. It does not
  * guarantee that a user querying is authorized, but you can still access user session data if they
  * are logged in.
  */
-export const publicProcedure = t.procedure.use(timingMiddleware);
+export const publicProcedure = t.procedure;
 
 /**
  * Protected (authenticated) procedure
@@ -111,14 +93,22 @@ export const publicProcedure = t.procedure.use(timingMiddleware);
  *
  * @see https://trpc.io/docs/procedures
  */
-export const protectedProcedure = t.procedure.use(timingMiddleware).use(({ ctx, next }) => {
-  if (!ctx.session || !ctx.session.user) {
+export const protectedProcedure = t.procedure.use(({ ctx, next }) => {
+  if (!ctx.auth.userId) {
     throw new TRPCError({ code: "UNAUTHORIZED" });
   }
+
   return next({
     ctx: {
-      // infers the `session` as non-nullable
-      session: { ...ctx.session, user: ctx.session.user },
+      userId: ctx.auth.userId,
+      auth: ctx.auth,
     },
   });
 });
+
+function getBaseUrl() {
+  if (typeof window !== "undefined") return window.location.origin;
+  if (env.NEXT_PUBLIC_BASE_URL) return env.NEXT_PUBLIC_BASE_URL;
+  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+  return `http://localhost:${process.env.PORT ?? 3000}`;
+}

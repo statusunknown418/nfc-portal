@@ -1,24 +1,56 @@
-import { redirect } from "next/navigation";
+import { auth } from "@clerk/nextjs/server";
+import { CrossCircledIcon } from "@radix-ui/react-icons";
 import { Spinner } from "~/components/shared/Spinner";
+import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
+import { Badge } from "~/components/ui/badge";
 import { api } from "~/trpc/server";
 import { PortalPreview } from "./PortalPreview";
 
-export const PortalPreviewWrapperRSC = async ({ username }: { username: string }) => {
-  const portal = await api.portals.get({ username });
+export const PortalPreviewWrapperRSC = async ({
+  username,
+  hideAlerts = false,
+}: {
+  username: string;
+  hideAlerts?: boolean;
+}) => {
+  const portal = await api.viewer.previewPortal();
+  const bypassKey = auth().userId;
 
-  if (!portal.data) {
-    return redirect("/auth/login?error=no-data-found");
+  if (!portal || !bypassKey) {
+    return (
+      <Alert>
+        <AlertTitle>Something happened</AlertTitle>
+        <AlertDescription>Please contact us</AlertDescription>
+      </Alert>
+    );
   }
 
   return (
-    <>
+    <div className="mr-4 flex h-max flex-col items-center justify-center gap-4">
+      {!portal?.hasPurchasedCard && !hideAlerts && (
+        <Badge variant="destructive" size="lg">
+          <CrossCircledIcon className="h-5 w-5" />
+          Portal Inactive
+        </Badge>
+      )}
+
       <article
         id="portal-device-preview"
-        className="relative mr-4 max-h-[740px] min-h-[640px] w-full min-w-[310px] max-w-[330px] self-center justify-self-center overflow-hidden overscroll-y-contain rounded-[52px] border-[6px] border-primary/80 shadow-lg shadow-black"
+        className="relative max-h-[740px] min-h-[640px] w-full min-w-[310px] max-w-[330px] self-center justify-self-center overflow-hidden overscroll-y-contain rounded-[52px] border-[6px] border-primary/80 shadow-lg shadow-black"
       >
-        <PortalPreview initialData={portal} username={username} />
+        <PortalPreview initialData={portal} username={username} bypassKey={bypassKey} />
       </article>
-    </>
+
+      <div className="mt-2 flex flex-col items-center justify-center text-center tracking-wide text-muted-foreground">
+        {portal?.hasPageActive ? (
+          <h3>Preview</h3>
+        ) : (
+          <>
+            <p className="text-sm font-medium not-italic">Preview purposes only</p>
+          </>
+        )}
+      </div>
+    </div>
   );
 };
 

@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Cross2Icon, PlusIcon } from "@radix-ui/react-icons";
 import { SaveIcon } from "lucide-react";
-import { type User } from "next-auth";
 import { useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -40,7 +39,7 @@ export const ContactDataForm = ({
   user,
 }: {
   initialData: RouterOutputs["vCard"]["get"];
-  user: User & { username?: string };
+  user: CustomJwtSessionClaims;
 }) => {
   const utils = api.useUtils();
 
@@ -54,6 +53,7 @@ export const ContactDataForm = ({
 
       await Promise.all([
         utils.vCard.get.refetch(),
+        utils.viewer.previewPortal.invalidate(),
         utils.portals.get.invalidate({ username: user.username }),
       ]);
     },
@@ -63,6 +63,7 @@ export const ContactDataForm = ({
     onSuccess: async () => {
       await Promise.all([
         utils.vCard.get.invalidate(),
+        utils.viewer.previewPortal.invalidate(),
         utils.portals.get.invalidate({ username: user.username }),
       ]);
     },
@@ -95,8 +96,8 @@ export const ContactDataForm = ({
         }
       : {
           name: {
-            first: user.name?.split(" ")[0] ?? "",
-            last: user.name?.split(" ")[1] ?? "",
+            first: user.firstName ?? "",
+            last: user.lastName ?? "",
           },
           email: [
             {
@@ -189,10 +190,7 @@ export const ContactDataForm = ({
 
             <AlertTitle>This form auto-saves!</AlertTitle>
             <AlertDescription>
-              <p>
-                Just wait a few moments and your changes will be automatically saved, also a
-                notification will be shown in the screen.
-              </p>
+              <p>Just wait a few moments and your changes will be automatically saved.</p>
 
               {isPending && (
                 <Badge variant="outline" className="absolute right-4 top-2 h-7 animate-pulse">

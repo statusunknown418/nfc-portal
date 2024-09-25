@@ -6,7 +6,6 @@ import vCardBuilder from "vcard-creator";
 import { cn } from "~/lib/utils";
 import { type ContactVCardType, type ThemeType } from "~/server/db/schema";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 
 export const ContactInfo = ({
   unlocked,
@@ -21,37 +20,24 @@ export const ContactInfo = ({
 }) => {
   if (!unlocked) {
     return (
-      <Card className="relative border-dashed border-destructive py-4">
-        <section className="absolute inset-0 flex h-full w-full flex-col items-center justify-center gap-2 rounded-lg bg-destructive/5 p-4 text-center backdrop-blur backdrop-filter">
-          <h3 className="font-semibold">🔒 Contact info not visible</h3>
+      <Alert variant="destructive">
+        <AlertTitle className="text-center">🔒 Contact info not visible</AlertTitle>
 
-          <p className="text-sm">
-            This will be automatically unlocked when the owner&apos;s card is approached to your
-            phone.
-          </p>
-        </section>
-
-        <CardHeader>
-          <CardTitle />
-        </CardHeader>
-
-        <CardContent />
-      </Card>
+        <AlertDescription className="text-sm">
+          This will be automatically unlocked when the owner&apos;s card is approached to your
+          phone.
+        </AlertDescription>
+      </Alert>
     );
   }
 
   if (!data) {
     return (
-      <Card style={{ background: theme.colors.subtle }}>
-        <CardContent>
-          <CardHeader>
-            <CardTitle>No contact info found</CardTitle>
-            <CardDescription>
-              The page owner hasn&apos;t added any contact info yet.
-            </CardDescription>
-          </CardHeader>
-        </CardContent>
-      </Card>
+      <Alert style={{ background: theme.colors.subtle }}>
+        <AlertTitle className="text-center">No contact info found</AlertTitle>
+
+        <AlertDescription>The page owner hasn&apos;t added any contact info yet.</AlertDescription>
+      </Alert>
     );
   }
 
@@ -95,10 +81,9 @@ export const ContactInfo = ({
 
   if (!data.name.first && !data.name.last) {
     return (
-      <Alert className="border-dashed" style={{ borderColor: theme.colors.border }}>
-        <AlertTitle className="text-center text-base font-semibold">
-          No contact info added yet
-        </AlertTitle>
+      <Alert style={{ borderColor: theme.colors.border }}>
+        <AlertTitle className="text-center">No contact info added yet</AlertTitle>
+
         <AlertDescription className="text-center">
           You can add your contact info from the <strong>Portal customization</strong>
         </AlertDescription>
@@ -142,17 +127,15 @@ export const ContactInfo = ({
           background: theme.colors.subtle,
         }}
       >
-        <article className="flex flex-col gap-1 px-4 text-zinc-50 mix-blend-exclusion">
-          <h3 className="text-lg font-semibold">
-            {data?.name?.first} {data?.name?.last}
-          </h3>
+        {(data.company?.name ?? data.jobTitle) && (
+          <article className="flex flex-col gap-1 px-4 text-zinc-50 mix-blend-exclusion">
+            {data?.jobTitle && <p className="text-sm font-light tracking-tight">{data.jobTitle}</p>}
 
-          {data?.jobTitle && <p className="text-sm font-light tracking-tight">{data.jobTitle}</p>}
-
-          {data?.company?.name && (
-            <p className="text-sm font-light tracking-tight">{data.company.name}</p>
-          )}
-        </article>
+            {data?.company?.name && (
+              <p className="text-sm font-light tracking-tight">{data.company.name}</p>
+            )}
+          </article>
+        )}
 
         {!!data.phoneNumbers?.length && data.phoneNumbers.some((phone) => !!phone.number) && (
           <article className="flex flex-col gap-2 border-b pt-2">

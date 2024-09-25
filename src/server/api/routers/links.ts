@@ -8,13 +8,13 @@ import { createTRPCRouter, protectedProcedure } from "../trpc";
 export const linksRouter = createTRPCRouter({
   all: protectedProcedure.query(async ({ ctx }) => {
     return ctx.db.query.links.findMany({
-      where: (t, op) => op.eq(t.userId, ctx.session.user.id),
+      where: (t, op) => op.eq(t.userId, ctx.userId),
       orderBy: (t, op) => op.asc(t.position),
     });
   }),
 
   new: protectedProcedure.input(newLinkSchema).mutation(async ({ ctx, input }) => {
-    const userId = ctx.session.user.id;
+    const userId = ctx.userId;
 
     const [newLInk] = await ctx.db
       .insert(links)
@@ -50,7 +50,7 @@ export const linksRouter = createTRPCRouter({
       .update(links)
       .set({
         ...input,
-        userId: ctx.session.user.id,
+        userId: ctx.userId,
       })
       .where(eq(links.id, input.id));
 

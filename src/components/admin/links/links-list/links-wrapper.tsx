@@ -1,15 +1,15 @@
 import { api, HydrateClient } from "~/trpc/server";
 import { LinksSortableList } from "./LinksList";
 import { Skeleton } from "~/components/ui/skeleton";
-import { auth } from "~/server/auth";
+import { auth } from "@clerk/nextjs/server";
 
 export async function LinksWrapperRSC() {
   const data = await api.links.all();
-  const user = await auth();
+  const { sessionClaims } = auth();
 
   return (
     <HydrateClient>
-      <LinksSortableList initialData={data} username={user?.user.username ?? ""} />
+      <LinksSortableList initialData={data} username={sessionClaims?.username ?? ""} />
     </HydrateClient>
   );
 }

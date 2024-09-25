@@ -2,7 +2,6 @@ import { createId } from "@paralleldrive/cuid2";
 import { relations, sql } from "drizzle-orm";
 import { index, int, primaryKey, sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { createInsertSchema } from "drizzle-zod";
-import { type AdapterAccount } from "next-auth/adapters";
 import { z } from "zod";
 import { BASE_THEMES } from "~/lib/utils";
 import { type SaveNFCPreferences, themeSchema } from "../api/schemas.zod";
@@ -158,10 +157,9 @@ export type OnboardingStep = (typeof onboardingStepTypes)[number];
 export type CardShippingStatus = (typeof cardShippingStatusTypes)[number];
 
 export const users = sqliteTable("user", {
-  id: text("id", { length: 255 })
-    .notNull()
-    .primaryKey()
-    .$defaultFn(() => `usr_${createId()}`),
+  /** SHOULD ALWAYS USE CLERK's `userId` as the primary key */
+  id: text("id", { length: 255 }).notNull().primaryKey(),
+  /** ----------------------------------------------------- */
   username: text("user_name", { length: 255 }).unique(),
   name: text("name", { length: 255 }),
   email: text("email", { length: 255 }).notNull().unique(),
@@ -171,7 +169,7 @@ export const users = sqliteTable("user", {
   image: text("image", { length: 255 }),
   bio: text("bio"),
   profileHeader: text("profile_header"),
-  hasPageActive: int("page_active", { mode: "boolean" }).default(true),
+  hasPageActive: int("page_active", { mode: "boolean" }).default(false),
   pageLayout: text("page_layout", { enum: pageLayoutTypes }).default("basic"),
   contactVCard: text("contact_v_card"),
   contactJSON: text("contact_json", { mode: "json" }).$type<ContactVCardType>(),
@@ -181,7 +179,7 @@ export const users = sqliteTable("user", {
   hasPurchasedCard: int("has_purchased_card", { mode: "boolean" }).default(false),
   hasCompletedOnboarding: int("has_completed_onboarding", { mode: "boolean" }).default(false),
   onboardingStep: text("onboarding_step", { enum: onboardingStepTypes }).default("contact"),
-  pageHashKey: text("page_hash_key"),
+  pageHashKey: text("page_hash_key").$defaultFn(() => createId()),
   metaTitle: text("meta_title", { length: 255 }),
   metaDescription: text("meta_description"),
   metaImage: text("meta_image"),
@@ -190,10 +188,7 @@ export const users = sqliteTable("user", {
   ),
   cardVariant: text("card_variant", { enum: cardVariants }).notNull().default("basic"),
   avatarShape: text("avatar_shape", { enum: avatarShapes }).notNull().default("rounded"),
-  theme: text("theme", { mode: "json" })
-    .notNull()
-    .$type<ThemeType>()
-    .$defaultFn(() => BASE_THEMES.default),
+  theme: text("theme", { mode: "json" }).notNull().$type<ThemeType>().default(BASE_THEMES.base),
 });
 
 export const userProfileSchema = createInsertSchema(users, {
@@ -344,7 +339,7 @@ export const accounts = sqliteTable(
     userId: text("user_id", { length: 255 })
       .notNull()
       .references(() => users.id),
-    type: text("type", { length: 255 }).$type<AdapterAccount["type"]>().notNull(),
+    type: text("type", { length: 255 }).notNull().default("managed"),
     provider: text("provider", { length: 255 }).notNull(),
     providerAccountId: text("provider_account_id", { length: 255 }).notNull(),
     refresh_token: text("refresh_token"),

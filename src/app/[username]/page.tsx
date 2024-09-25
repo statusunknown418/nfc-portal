@@ -1,4 +1,4 @@
-import { type Viewport, type Metadata, type ResolvingMetadata } from "next";
+import { type Metadata, type ResolvingMetadata, type Viewport } from "next";
 import { NotFound } from "~/components/portals/NotFound";
 import { PortalContent } from "~/components/portals/PortalContent";
 import { api } from "~/trpc/server";
@@ -13,7 +13,7 @@ export async function generateMetadata(
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
   const username = decodeURIComponent(params.username);
-  const portal = await api.portals.get({ username });
+  const portal = await api.portals.get({ username: username });
 
   const previousImages = (await parent).openGraph?.images ?? [];
 
@@ -33,7 +33,7 @@ export async function generateMetadata(
 
 export async function generateViewport({ params }: Props): Promise<Viewport> {
   const username = decodeURIComponent(params.username);
-  const portal = await api.portals.get({ username });
+  const portal = await api.portals.get({ username: username });
 
   if (!portal.data) {
     return {
@@ -56,15 +56,15 @@ export default async function UsernamePage({
   params,
   searchParams,
 }: {
-  searchParams: { ktp?: string; selectedTab?: string };
+  searchParams: { ktp?: string; selectedTab?: string; bypassKey?: string };
   params: { username: string };
 }) {
   const username = decodeURIComponent(params.username);
-  const portal = await api.portals.get({ username });
+  const portal = await api.portals.get({ username: username });
 
   const tab = searchParams.selectedTab as "contact" | "links";
 
-  if (!portal.data) {
+  if (!portal.data?.hasPageActive && searchParams.bypassKey !== portal.data?.id) {
     return <NotFound />;
   }
 
@@ -72,7 +72,7 @@ export default async function UsernamePage({
     <PortalContent
       username={username}
       initialData={portal}
-      selectedTab={(tab ?? portal.data.hasContactInfoLocked) ? "links" : "contact"}
+      selectedTab={(tab ?? portal.data?.hasContactInfoLocked) ? "links" : "contact"}
     />
   );
 }

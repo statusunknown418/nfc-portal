@@ -108,7 +108,7 @@ export const LinkViewer = ({
 
   return (
     <Component>
-      <div className="h-12 w-9">
+      <div className="h-12 w-9 overflow-hidden">
         {!!link.thumbnail && (
           <Image
             width={56}

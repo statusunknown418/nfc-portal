@@ -27,8 +27,8 @@ export const purchasesRouter = createTRPCRouter({
       const paymentData = await new Preference(payments).create({
         body: {
           metadata: {
-            app_user_id: ctx.session.user.id,
-            user_email: ctx.session.user.email,
+            app_user_id: ctx.userId,
+            user_email: ctx.auth.sessionClaims.email,
             ...input.metadata,
           },
           back_urls: {
@@ -40,7 +40,7 @@ export const purchasesRouter = createTRPCRouter({
           items: [
             {
               quantity: 1,
-              id: ctx.session.user.id,
+              id: ctx.userId,
               unit_price: PRICES[input.cardVariant],
               title: input.title,
               description: input.description,
@@ -65,7 +65,7 @@ export const purchasesRouter = createTRPCRouter({
     }),
   getStatus: protectedProcedure.query(async ({ ctx }) => {
     return await ctx.db.query.users.findFirst({
-      where: eq(users.id, ctx.session.user.id),
+      where: eq(users.id, ctx.userId),
       columns: {
         id: true,
         cardVariant: true,
