@@ -43,7 +43,7 @@ export default async function OnboardingPage({ searchParams }: { searchParams: S
           initialData={{ contact: contactData, shareLink: shouldShowLive }}
           session={sessionClaims}
           components={{
-            portal: <PortalPreviewWrapperRSC username={sessionClaims.username} />,
+            portal: <PortalPreviewWrapperRSC hideAlerts username={sessionClaims.username} />,
             visual: <VisualWrapper />,
           }}
         />

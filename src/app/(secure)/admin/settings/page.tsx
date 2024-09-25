@@ -35,7 +35,7 @@ export default function SettingsPage() {
             }}
             appearance={{
               elements: {
-                userButtonTrigger: "rounded-full border p-2",
+                userButtonTrigger: "rounded-full border py-2 px-2.5",
                 userButtonAvatarBox: "w-20 h-20",
                 profileSectionPrimaryButton__username: "hidden",
                 userPreviewSecondaryIdentifier: "font-semibold tracking-wide",

@@ -53,7 +53,7 @@ export default async function AdminPage() {
         <GridPattern
           className={cn(
             "[mask-image:radial-gradient(700px_circle_at_center,white,transparent)]",
-            "inset-0 -z-10 h-full skew-y-12",
+            "absolute inset-0 -z-10 size-full skew-y-12",
           )}
         />
       </aside>
