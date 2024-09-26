@@ -133,6 +133,7 @@ export const saveNFCPreferencesSchema = z.object({
   showCompanyLogo: z.boolean(),
   companyLogoOnFront: z.boolean(),
   cardVariant: z.enum(["basic", "custom", "metallic"]),
+  cardTemplate: z.string().optional(),
   companyLogoURL: z.string().url().optional(),
   cardImageFront: z.string().url().optional(),
   cardImageBack: z.string().url().optional(),

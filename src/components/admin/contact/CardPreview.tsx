@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import DotPattern from "~/components/magicui/dot-pattern";
-import { CardBody, CardContainer, CardItem } from "~/components/ui/3d-card";
+import { CardBody, CardContainer, CardItem } from "~/components/aceternity/3d-card";
 import { nfcPreferencesStore } from "~/lib/stores/nfcPreferences";
-import { cn } from "~/lib/utils";
+import { basicCardTemplates, cn } from "~/lib/utils";
 import { type ContactVCardType } from "~/server/db/schema";
 
 export const CardPreview = ({
@@ -35,13 +35,16 @@ export const CardPreview = ({
             className={cn(
               "grid max-h-[250px] min-h-[250px] w-[440px] grid-rows-3 rounded-xl border border-muted p-6 text-sm shadow-lg group-hover:shadow-xl md:h-64",
               preferences.cardVariant === "basic" && "bg-primary text-primary-foreground",
-              preferences.cardVariant === "custom" && "bg-cover bg-center bg-no-repeat",
+              preferences.cardVariant === "custom" ||
+                (!!preferences.cardTemplate && "bg-cover bg-center bg-no-repeat"),
             )}
             style={{
               backgroundImage:
                 preferences.cardVariant === "custom"
                   ? `url(${preferences.cardImageFront})`
-                  : undefined,
+                  : !!preferences.cardTemplate
+                    ? `url(${basicCardTemplates.find((t) => t.value === preferences.cardTemplate)?.front})`
+                    : undefined,
             }}
           >
             <article className="flex justify-between">

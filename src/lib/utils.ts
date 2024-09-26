@@ -225,3 +225,21 @@ export const imageURLToBase64 = async (url: string) => {
   const data = await fetch(url);
   return await data.blob();
 };
+
+export const basicCardTemplates = [
+  {
+    value: "simple-logos",
+    front: "https://picsum.photos/id/10/350/200",
+    back: "https://picsum.photos/id/11/350/200",
+  },
+  {
+    value: "edge-to-edge",
+    front: "https://picsum.photos/id/6/350/200",
+    back: "https://picsum.photos/id/7/350/200",
+  },
+  {
+    value: "minimal-logos",
+    front: "https://picsum.photos/id/20/350/200",
+    back: "https://picsum.photos/id/21/350/200",
+  },
+];

@@ -19,6 +19,7 @@ export const DEFAULT_PREFERENCES: SaveNFCPreferences = {
   cardImageBack: undefined,
   cardImageFront: undefined,
   cardVariant: "basic",
+  cardTemplate: undefined,
 };
 
 export const nfcPreferencesStore = create(
