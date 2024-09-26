@@ -26,7 +26,7 @@ export default async function OnboardingPage({ searchParams }: { searchParams: S
 
   return (
     <>
-      <section className="hidden w-max max-w-[320px] flex-col gap-8 border-r bg-muted p-4 md:flex md:py-8">
+      <section className="hidden w-max max-w-[280px] flex-col gap-8 border-r bg-muted p-4 md:flex md:py-8">
         <header>CC</header>
 
         <Stepper />

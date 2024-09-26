@@ -1,6 +1,7 @@
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
-import { ArrowRightIcon } from "@radix-ui/react-icons";
+import { ArrowRightIcon, ChevronRightIcon } from "@radix-ui/react-icons";
+import Link from "next/link";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 
@@ -31,6 +32,13 @@ export default async function Home() {
             <ArrowRightIcon className="h-6 w-6" />
           </Button>
         </form>
+
+        <Button variant="primary_ghost" asChild size="lg" className="mt-4">
+          <Link href="/admin">
+            Go to dashboard
+            <ChevronRightIcon className="h-5 w-5" />
+          </Link>
+        </Button>
       </div>
     </HydrateClient>
   );

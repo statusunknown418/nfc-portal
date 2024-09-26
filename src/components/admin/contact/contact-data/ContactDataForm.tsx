@@ -57,6 +57,9 @@ export const ContactDataForm = ({
         utils.portals.get.invalidate({ username: user.username }),
       ]);
     },
+    onError: (err) => {
+      toast.error(err.message);
+    },
   });
 
   const { mutateAsync: toggleVisibility } = api.vCard.toggleVisibility.useMutation({
@@ -279,7 +282,7 @@ export const ContactDataForm = ({
 
           <section className="grid w-full grid-cols-1 gap-3">
             <Label asChild>
-              <p>Email address(es)</p>
+              <p>Email address(es) (5 max.)</p>
             </Label>
 
             {emailFields.map((email, idx) => (
@@ -323,10 +326,10 @@ export const ContactDataForm = ({
                     variant="outline"
                     size="icon"
                     type="button"
-                    className="rounded-r-none"
-                    disabled={emailFields.length >= 3}
+                    className="rounded-r-none shadow-none"
+                    disabled={emailFields.length >= 5}
                     onClick={() =>
-                      emailFields.length < 3 && appendEmail({ link: "", type: "WORK" })
+                      emailFields.length < 5 && appendEmail({ link: "", type: "WORK" })
                     }
                   >
                     <PlusIcon />
@@ -349,7 +352,7 @@ export const ContactDataForm = ({
 
           <section className="grid grid-cols-1 gap-3">
             <Label asChild>
-              <p>Phone number(s)</p>
+              <p>Phone number(s) (5 max.)</p>
             </Label>
 
             {phoneFields.map((phone, idx) => (
@@ -398,7 +401,7 @@ export const ContactDataForm = ({
                     variant="outline"
                     size="icon"
                     type="button"
-                    className="rounded-r-none"
+                    className="rounded-r-none shadow-none"
                     disabled={phoneFields.length >= 5}
                     onClick={() =>
                       phoneFields.length < 5 && appendPhone({ number: "", type: "WORK" })
@@ -424,7 +427,7 @@ export const ContactDataForm = ({
 
           <section className="grid w-full grid-cols-1 gap-3">
             <Label asChild>
-              <p>Address(es)</p>
+              <p>Address(es) (2 max.)</p>
             </Label>
 
             {addressFields.map((address, idx) => (

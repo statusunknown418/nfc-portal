@@ -33,8 +33,12 @@ const config = {
         protocol: "https",
       },
       {
-        protocol: "https",
         hostname: "img.clerk.com",
+        protocol: "https",
+      },
+      {
+        protocol: "https",
+        hostname: "picsum.photos",
       },
     ],
   },

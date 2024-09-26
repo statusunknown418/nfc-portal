@@ -12,7 +12,7 @@ export const NFCPreferencesStep = ({
   const [data] = api.vCard.get.useSuspenseQuery(undefined, { initialData });
 
   return (
-    <section className="flex h-full max-h-[calc(100svh-170px)] flex-col gap-4 lg:flex-row">
+    <section className="flex h-full flex-col gap-4 lg:flex-row">
       <CardPreferencesForm />
 
       <CardPreview cardData={data.contactJSON ?? undefined} />

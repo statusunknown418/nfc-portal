@@ -89,12 +89,12 @@ export const StepperSelector = ({
         >
           <h3>Let&apos;s get you set up, {session.username}</h3>
 
-          <div className="relative mt-4 h-full max-h-[calc(100%-80px)]">
+          <div className={cn("relative mt-4", step === "nfc-card" && "pb-32")}>
             {step && StepComponents[step]}
           </div>
         </section>
 
-        <section className="absolute bottom-0 left-0 flex h-max w-full items-center justify-between gap-4 border-t bg-muted px-8 py-4">
+        <section className="absolute bottom-0 left-0 z-10 flex h-max w-full items-center justify-between gap-4 border-t bg-muted px-8 py-4">
           {step !== "start" && (
             <Button variant="outline" onClick={rewindStep}>
               <ChevronLeftIcon /> Previous step

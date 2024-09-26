@@ -15,7 +15,7 @@ export const WelcomeStep = () => {
   };
 
   return (
-    <section className="relative mx-auto flex h-full flex-col items-center justify-center gap-4">
+    <section className="relative mx-auto flex h-[calc(100svh-250px)] flex-col items-center justify-center gap-4">
       <RocketIcon className="h-10 w-10 text-indigo-600 md:h-12 md:w-12" />
 
       <h2 className="text-2xl font-bold tracking-wide md:text-4xl">Welcome to ConCard!</h2>
