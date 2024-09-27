@@ -140,7 +140,13 @@ export const PortalContent = ({
             <ul className="flex w-full flex-col gap-2">
               {!portal.data.links.length && (
                 <Alert
-                  className="border-dashed"
+                  className={cn(
+                    "border-dashed",
+                    portal.data.theme.buttons.variant === "pill" && "rounded-[34px]",
+                    portal.data.theme.buttons.variant === "rounded" && "rounded-lg",
+                    portal.data.theme.buttons.variant === "square" && "rounded-none",
+                    portal.data.theme.buttons.variant === "small-radius" && "rounded-sm",
+                  )}
                   style={{ borderColor: portal.data.theme.colors.border }}
                 >
                   <AlertTitle className="text-center text-base font-semibold">

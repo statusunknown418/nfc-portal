@@ -137,6 +137,7 @@ export const saveNFCPreferencesSchema = z.object({
   companyLogoURL: z.string().url().optional(),
   cardImageFront: z.string().url().optional(),
   cardImageBack: z.string().url().optional(),
+  includeQRCode: z.boolean(),
 });
 
 export type SaveNFCPreferences = z.infer<typeof saveNFCPreferencesSchema>;
