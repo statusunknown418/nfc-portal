@@ -1,3 +1,5 @@
+import { env } from "./src/env.js";
+
 /**
  * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially useful
  * for Docker builds.
@@ -37,8 +39,14 @@ const config = {
         protocol: "https",
       },
       {
+        // TODO - remove this - used for placeholder images
         protocol: "https",
         hostname: "picsum.photos",
+      },
+      {
+        // DEV ONLY
+        protocol: "https",
+        hostname: "stingray-master-happily.ngrok-free.app",
       },
     ],
   },

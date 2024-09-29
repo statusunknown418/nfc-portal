@@ -5,6 +5,7 @@ import { viewersRouter } from "./routers/viewers";
 import { vCardsRouter } from "./routers/v-card";
 import { visualCustomizationRouter } from "./routers/visual";
 import { purchasesRouter } from "./routers/purchase";
+import { signaturesRouter } from "./routers/signatures";
 
 /**
  * This is the primary router for your server.
@@ -18,6 +19,7 @@ export const appRouter = createTRPCRouter({
   vCard: vCardsRouter,
   visuals: visualCustomizationRouter,
   purchases: purchasesRouter,
+  signatures: signaturesRouter,
 });
 
 // export type definition of API
