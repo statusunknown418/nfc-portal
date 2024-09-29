@@ -3,7 +3,7 @@ import { AllSignatures } from "./AllSignatures";
 import { Skeleton } from "~/components/ui/skeleton";
 
 export const SignaturesListWrapper = async () => {
-  const data = await api.vCard.get();
+  const data = await api.signatures.templates();
 
   return <AllSignatures initialData={data} />;
 };

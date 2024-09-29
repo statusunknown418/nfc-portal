@@ -30,7 +30,7 @@ export default async function AdminPage() {
   const username = sessionClaims.username;
 
   return (
-    <section className="flex h-max flex-col gap-4 lg:grid lg:grid-cols-2 lg:justify-between">
+    <section className="flex flex-col gap-4 lg:grid lg:grid-cols-2 lg:justify-between">
       <LinksViewRSC jwt={sessionClaims} />
 
       <aside className="hidden flex-grow gap-4 py-6 pl-6 ring-0 lg:sticky lg:inset-0 lg:block lg:h-[calc(100vh-64px)]">

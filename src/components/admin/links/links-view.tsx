@@ -19,10 +19,12 @@ import {
 } from "../enabled-banner/page-enabled-wrapper";
 import { LinksWrapperLoader, LinksWrapperRSC } from "./links-list/links-wrapper";
 import { NewLinkDrawer } from "./new-link";
+import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
+import { Switch } from "~/components/ui/switch";
 
 export const LinksViewRSC = ({ jwt }: { jwt: CustomJwtSessionClaims }) => {
   return (
-    <div className="flex h-full flex-grow flex-col items-center gap-4">
+    <div className="flex flex-col items-center gap-4">
       <Breadcrumb className="self-start">
         <BreadcrumbList>
           <BreadcrumbItem>Dashboard</BreadcrumbItem>
@@ -35,7 +37,7 @@ export const LinksViewRSC = ({ jwt }: { jwt: CustomJwtSessionClaims }) => {
         <PageEnabledWrapperRSC />
       </Suspense>
 
-      <Tabs defaultValue="links" className="mt-4 flex w-full flex-col gap-2">
+      <Tabs defaultValue="links" className="relative mt-4 flex w-full flex-col gap-2">
         <TabsList className="h-[44px] w-max justify-start rounded-full border border-primary/20">
           <TabsTrigger
             value="contact"
@@ -53,35 +55,38 @@ export const LinksViewRSC = ({ jwt }: { jwt: CustomJwtSessionClaims }) => {
         </TabsList>
 
         <TabsContent value="links">
-          <section className="grid w-full grid-cols-1 gap-4">
-            <p className="text-sm text-muted-foreground">
-              Here you can manage all your links, you can also import them from other places, this
-              is useful for you to showcase more of your work.
-            </p>
+          <article className="absolute right-0 top-1 flex w-1/2 flex-col items-center gap-2 sm:flex-row sm:justify-start sm:gap-0">
+            <NewLinkDrawer username={jwt.username} />
 
-            <article className="flex w-full flex-col items-center gap-2 sm:flex-row sm:justify-start sm:gap-0">
-              <NewLinkDrawer username={jwt.username} />
+            <Button size="lg" variant="outline" className="w-full sm:rounded-l-none">
+              <PlusIcon />
+              Import links
+            </Button>
+          </article>
 
-              <Button size="lg" variant="outline" className="w-full sm:rounded-l-none">
-                <PlusIcon />
-                Import links
-              </Button>
-            </article>
+          <Alert variant="success" className="flex gap-4 p-4">
+            <Switch />
 
-            <article className="mt-4 flex h-full w-full flex-col gap-4">
-              <Suspense fallback={<LinksWrapperLoader />}>
-                <LinksWrapperRSC />
-              </Suspense>
-            </article>
-          </section>
+            <div>
+              <AlertTitle className="text-primary">
+                Include all your links in contact information
+              </AlertTitle>
+
+              <AlertDescription className="mt-1 text-muted-foreground">
+                When enabled your contact information (vCard) will contain all the links you add
+                here.
+              </AlertDescription>
+            </div>
+          </Alert>
+
+          <article className="mt-4 flex h-full w-full flex-col gap-4">
+            <Suspense fallback={<LinksWrapperLoader />}>
+              <LinksWrapperRSC />
+            </Suspense>
+          </article>
         </TabsContent>
 
         <TabsContent value="contact">
-          <p className="mb-4 text-sm text-muted-foreground">
-            Manage your contact information here, this is what every person you give your card to
-            will see, additionally it is possible to hide it from your public page if needed.
-          </p>
-
           <Suspense fallback={<ContactDataLoading />}>
             <ContactDataWrapper />
           </Suspense>

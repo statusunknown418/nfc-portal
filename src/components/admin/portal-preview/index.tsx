@@ -1,8 +1,9 @@
 import { auth } from "@clerk/nextjs/server";
-import { CrossCircledIcon } from "@radix-ui/react-icons";
+import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { Spinner } from "~/components/shared/Spinner";
 import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
 import { Badge } from "~/components/ui/badge";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "~/components/ui/tooltip";
 import { api } from "~/trpc/server";
 import { PortalPreview } from "./PortalPreview";
 
@@ -28,10 +29,20 @@ export const PortalPreviewWrapperRSC = async ({
   return (
     <div className="mr-4 flex h-max flex-col items-center justify-center gap-4">
       {!portal?.hasPurchasedCard && !hideAlerts && (
-        <Badge variant="destructive" size="lg">
-          <CrossCircledIcon className="h-5 w-5" />
-          Portal Inactive
-        </Badge>
+        <TooltipProvider delayDuration={0}>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Badge variant="destructive" size="lg">
+                <InfoCircledIcon className="h-5 w-5" />
+                Portal Inactive
+              </Badge>
+            </TooltipTrigger>
+
+            <TooltipContent className="text-sm">
+              You need to purchase one of our cards to activate and share your portal!
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       )}
 
       <article

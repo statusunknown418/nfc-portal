@@ -81,7 +81,7 @@ export const PageEnabled = ({
 
   return (
     <article className="flex w-full flex-col">
-      <h1 className="text-2xl font-bold">Welcome {data.username}</h1>
+      <h1 className="text-2xl font-bold">Welcome {data.username}!</h1>
       <p className="mt-1 text-sm text-muted-foreground">
         Here you can manage everything that shows up on your NFC portal page.
       </p>
