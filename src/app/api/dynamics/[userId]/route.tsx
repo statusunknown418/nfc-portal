@@ -1,111 +1,128 @@
+import { eq } from "drizzle-orm";
 import { ImageResponse } from "next/og";
+import { db } from "~/server/db";
+import { users } from "~/server/db/schema";
 
-export async function GET(request: Request) {
+export async function GET(
+  request: Request,
+  {
+    params: { userId },
+  }: {
+    params: { userId: string };
+  },
+) {
   try {
-    const { searchParams } = new URL(request.url);
+    const data = await db.query.users.findFirst({
+      where: eq(users.id, userId),
+      columns: {
+        id: true,
+        name: true,
+        image: true,
+        contactJSON: true,
+      },
+    });
 
-    const hasName = searchParams.has("name");
-    const title = hasName ? searchParams.get("name") : "Somebody";
-    const imageUrl = searchParams.get("image");
-
-    const emails = searchParams.getAll("email").toString().split(",");
-    const phones = searchParams.getAll("phone");
+    if (!data) {
+      return new ImageResponse(
+        (
+          <div
+            style={{
+              height: "100%",
+              width: "100%",
+              backgroundColor: "black",
+              color: "white",
+            }}
+          >
+            <section className="flex flex-col items-center justify-center gap-4">
+              <p className="text-red-500">Error</p>
+              <h1>🥲 User not found</h1>
+            </section>
+          </div>
+        ),
+        {
+          debug: true,
+          width: 300,
+          height: 160,
+          status: 404,
+        },
+      );
+    }
 
     return new ImageResponse(
       (
         <div
           style={{
-            backgroundColor: "black",
-            backgroundSize: "150px 150px",
             height: "100%",
             width: "100%",
             display: "flex",
-            textAlign: "center",
             alignItems: "center",
             justifyContent: "center",
             flexDirection: "column",
             flexWrap: "nowrap",
           }}
         >
+          {data.image && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img alt="profile-picture" width={50} height={50} src={data.image} title="profile" />
+          )}
+
+          {data.contactJSON?.jobTitle && (
+            <span
+              style={{
+                color: "gray",
+              }}
+            >
+              {data.contactJSON?.jobTitle}
+            </span>
+          )}
+          {data.contactJSON?.company?.name && (
+            <span
+              style={{
+                color: "gray",
+              }}
+            >
+              {data.contactJSON.company?.name}
+            </span>
+          )}
+
+          <span
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: "bold",
+            }}
+          >
+            {data.name}
+          </span>
+
           <div
             style={{
               display: "flex",
+              flexDirection: "column",
+              gap: "3px",
+              fontSize: "0.9rem",
               alignItems: "center",
-              justifyContent: "center",
-              justifyItems: "center",
             }}
           >
-            <img
-              alt="Photo URL"
-              height={100}
-              width={100}
-              style={{ margin: "0 30px" }}
-              src={
-                imageUrl ??
-                "data:image/svg+xml,%3Csvg width='116' height='100' fill='white' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M57.5 0L115 100H0L57.5 0z' /%3E%3C/svg%3E"
-              }
-            />
+            {data.contactJSON?.email?.map((email) => (
+              <a
+                key={email.link}
+                href={`mailto:${email.link}`}
+                style={{
+                  color: "#818cf8",
+                }}
+              >
+                {email.link}
+              </a>
+            ))}
           </div>
-
-          <div
-            style={{
-              fontSize: 60,
-              fontStyle: "normal",
-              letterSpacing: "-0.025em",
-              color: "white",
-              marginTop: 30,
-              padding: "0 120px",
-              lineHeight: 1.4,
-              whiteSpace: "pre-wrap",
-            }}
-          >
-            {title}
-          </div>
-
-          {emails.map((email, idx) => (
-            <div
-              key={idx}
-              style={{
-                fontSize: 20,
-                fontStyle: "normal",
-                letterSpacing: "-0.025em",
-                color: "white",
-                marginTop: 30,
-                padding: "0 120px",
-                lineHeight: 1.4,
-                whiteSpace: "pre-wrap",
-              }}
-            >
-              {email}
-            </div>
-          ))}
-
-          {phones.map((phone, idx) => (
-            <div
-              key={idx}
-              style={{
-                fontSize: 20,
-                fontStyle: "normal",
-                letterSpacing: "-0.025em",
-                color: "white",
-                marginTop: 30,
-                padding: "0 120px",
-                lineHeight: 1.4,
-                whiteSpace: "pre-wrap",
-              }}
-            >
-              {phone}
-            </div>
-          ))}
         </div>
       ),
       {
-        width: 1200,
-        height: 630,
+        width: 400,
+        height: 300,
       },
     );
   } catch (e: unknown) {
-    console.log(`${(e as Error).message}`);
     return new Response(`Failed to generate the image`, {
       status: 500,
     });

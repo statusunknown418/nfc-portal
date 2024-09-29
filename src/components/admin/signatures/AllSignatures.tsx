@@ -19,15 +19,12 @@ export const AllSignatures = ({
       <body>
         <p>---</p>
 
-        <img src="https://chronosecrets.app/api/dynamics/${data.id}?name=${encodeURIComponent(
-          data.contactJSON?.name.first ?? "john doe",
-        )}&email=${encodeURIComponent(
-          data.contactJSON?.email?.map((email) => email.link).join(",") ?? "",
-        )}&phone=${encodeURIComponent(
-          data.contactJSON?.phoneNumbers?.map((phone) => phone.number).join(",") ?? "",
-        )}&image=${encodeURIComponent(data.image ?? "")}" alt="QR code" />
-          style="width:100%;height:auto;max-width:100%;max-height:100%;display:block;margin:0 auto;"
-        />
+        <img 
+          style="width:100%;height:auto;max-width:100%;max-height:100%;display:block"
+          src="https://chronosecrets.app/api/dynamics/${data.id}" alt="${data.username} Signature" 
+        >
+
+        <p>Created with <a style="color:#818cf8" href="https://chronosecrets.app">concard.app</a></p>
       </body>
     `;
 
