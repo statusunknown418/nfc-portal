@@ -48,6 +48,10 @@ const config = {
         protocol: "https",
         hostname: "stingray-master-happily.ngrok-free.app",
       },
+      {
+        protocol: "https",
+        hostname: "avatar.vercel.sh",
+      },
     ],
   },
 };

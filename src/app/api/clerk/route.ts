@@ -81,7 +81,7 @@ export async function POST(req: Request) {
         target: users.id,
       });
 
-    revalidatePath("/admin", "layout");
+    revalidatePath("/admin", "page");
   }
 
   return new Response("Webhook received", {

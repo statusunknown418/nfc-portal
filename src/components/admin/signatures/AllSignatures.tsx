@@ -16,16 +16,25 @@ export const AllSignatures = ({
 
   const generateInfoQR = () => {
     const signature = `
-      <body>
-        <p>---</p>
+      <html>
+        <head>
+          <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+          <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+          <meta http-equiv="Pragma" content="no-cache">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        </head>
+        
+        <body>
+          <p>---</p>
 
-        <img 
-          style="width:100%;height:auto;max-width:100%;max-height:100%;display:block"
-          src="https://chronosecrets.app/api/dynamics/${data.id}" alt="${data.username} Signature" 
-        >
+          <img 
+            style="width:100%;height:auto;max-width:100%;max-height:100%;display:block"
+            src="https://chronosecrets.app/api/dynamics/${data.id}" alt="${data.username} Signature" 
+          >
 
-        <p>Created with <a style="color:#818cf8" href="https://chronosecrets.app">concard.app</a></p>
-      </body>
+          <p>Powered by <a style="color:#818cf8" href="https://chronosecrets.app">concard.app</a></p>
+        </body>
+      </html>
     `;
 
     const generated = [
