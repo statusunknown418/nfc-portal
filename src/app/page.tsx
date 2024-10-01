@@ -216,7 +216,7 @@ export default async function Home() {
             </div>
 
             <section className="grid min-h-[800px] grid-cols-1 gap-4 *:flex *:flex-col *:gap-6 *:rounded-[24px] *:p-6 lg:grid-cols-12 lg:grid-rows-4">
-              <article className="group col-span-8 row-span-2 border border-indigo-400 bg-indigo-100 text-indigo-900">
+              <article className="group border border-indigo-400 bg-indigo-100 text-indigo-900 md:col-span-8 md:row-span-2">
                 <div>graphic 1</div>
 
                 <h2 className="text-2xl font-medium">
@@ -235,7 +235,7 @@ export default async function Home() {
                 </h2>
               </article>
 
-              <article className="col-span-4 row-span-2 border border-pink-400 bg-pink-100 text-pink-900">
+              <article className="border border-pink-400 bg-pink-100 text-pink-900 md:col-span-4 md:row-span-2">
                 <div>graphic 2</div>
 
                 <h2 className="text-2xl font-medium">
@@ -246,7 +246,7 @@ export default async function Home() {
                 </h2>
               </article>
 
-              <article className="col-span-4 row-span-2 border border-emerald-400 bg-emerald-100 text-emerald-900">
+              <article className="border border-emerald-400 bg-emerald-100 text-emerald-900 md:col-span-4 md:row-span-2">
                 <div>graphic 3</div>
 
                 <h2 className="text-2xl font-medium">
@@ -256,7 +256,7 @@ export default async function Home() {
                 </h2>
               </article>
 
-              <article className="col-span-8 row-span-2 border border-neutral-50 bg-primary text-neutral-50">
+              <article className="border border-neutral-50 bg-primary text-neutral-50 md:col-span-8 md:row-span-2">
                 <div>graphic 4</div>
 
                 <h2 className="text-2xl font-medium">
@@ -429,14 +429,13 @@ export default async function Home() {
 
         <section id="security" className="mx-auto w-full max-w-6xl p-10">
           <header className="space-y-2">
-            <QuestionMarkCircledIcon className="inline-block h-6 w-6" />
             <h2 className="text-4xl font-medium">FAQ</h2>
             <p className="text-muted-foreground">Have doubts? Check this out</p>
           </header>
         </section>
 
         <footer className="mt-20 flex flex-col justify-end gap-10 rounded-t-[32px] bg-gradient-to-t from-neutral-950 to-neutral-700 px-4 py-8 text-center text-neutral-400 shadow-xl md:px-10">
-          <section className="flex w-full items-center justify-center gap-5">
+          <section className="flex w-full flex-wrap items-center justify-center gap-5">
             <Button
               asChild
               variant="link"
