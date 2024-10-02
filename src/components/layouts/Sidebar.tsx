@@ -19,7 +19,7 @@ export const Sidebar = () => {
   return (
     <aside className="flex h-16 max-h-16 min-h-16 items-center justify-between overflow-x-auto border-t md:h-full md:max-h-full md:min-w-20 md:max-w-20 md:flex-col md:items-center md:rounded-r-2xl md:border-y md:border-r md:py-4">
       <Button size="icon" className="h-[44px] w-[44px]">
-        <span>NU</span>
+        <span>CC</span>
       </Button>
 
       <ul className="flex w-full flex-grow justify-center gap-2 md:flex-grow-0 md:flex-col md:items-center md:gap-4">

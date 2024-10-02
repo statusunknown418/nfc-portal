@@ -99,8 +99,8 @@ export const ContactDataForm = ({
         }
       : {
           name: {
-            first: user.firstName ?? "",
-            last: user.lastName ?? "",
+            first: "",
+            last: "",
           },
           email: [
             {

@@ -127,6 +127,8 @@ export const VisualCustomizationForm = ({
                   files.map((f) => {
                     setAvatar(f.url);
                   });
+
+                  void utils.viewer.previewPortal.invalidate();
                 }}
                 config={{
                   mode: "auto",

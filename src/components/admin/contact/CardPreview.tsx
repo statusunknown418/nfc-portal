@@ -29,16 +29,17 @@ export const CardPreview = ({
       >
         <CardBody className="group/card flex w-full items-start justify-center">
           <CardItem
-            translateZ="100"
+            translateZ={100}
             rotateX={15}
             rotateZ={5}
             className={cn(
-              "grid max-h-[250px] min-h-[250px] w-[440px] grid-rows-3 rounded-xl border border-muted p-6 text-sm shadow-lg group-hover:shadow-xl md:h-64",
+              "grid h-[250px] w-[440px] grid-rows-3 rounded-xl border border-muted p-6 text-sm shadow-xl group-hover:shadow-xl",
               preferences.cardVariant === "basic" && "bg-primary text-primary-foreground",
-              preferences.cardVariant === "custom" ||
-                (!!preferences.cardTemplate && "bg-cover bg-center bg-no-repeat"),
             )}
             style={{
+              backgroundPosition: "center",
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
               backgroundImage:
                 preferences.cardVariant === "custom"
                   ? `url(${preferences.cardImageFront})`

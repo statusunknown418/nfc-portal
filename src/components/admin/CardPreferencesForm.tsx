@@ -30,6 +30,8 @@ import {
 } from "../ui/dialog";
 import Image from "next/image";
 import { Badge } from "../ui/badge";
+import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
+import { Divider } from "../ui/separator";
 
 export const CardPreferencesForm = () => {
   const setPreferences = nfcPreferencesStore((s) => s.setPreferences);
@@ -75,7 +77,7 @@ export const CardPreferencesForm = () => {
         </header>
 
         <section className="flex flex-col gap-2">
-          <h3 className="text-lg font-medium">Card template</h3>
+          <h3 className="text-lg font-medium">Choose a card variant</h3>
 
           <FormField
             name="cardVariant"
@@ -101,7 +103,7 @@ export const CardPreferencesForm = () => {
                   cardVariant !== "basic" && "pointer-events-none hidden h-0 opacity-0",
                 )}
               >
-                <Label>Template</Label>
+                <Label className="text-lg">Template</Label>
 
                 <RadioGroupRadix value={field.value} onValueChange={field.onChange}>
                   <div className="relative flex min-h-40 min-w-full gap-2">
@@ -129,13 +131,24 @@ export const CardPreferencesForm = () => {
 
           <div
             className={cn(
-              "mt-4 flex w-full gap-2 rounded-lg bg-muted px-3 py-1",
+              // Fixed height and width to maintain card aspect ratio
+              "mt-4 flex max-w-max flex-col gap-2 rounded-lg px-3 pb-2 pt-1",
               cardVariant !== "custom" && "pointer-events-none mt-0 h-0 opacity-0",
             )}
           >
+            <Alert variant="warning" className="mb-2 max-w-lg">
+              <AlertTitle>Heads up!</AlertTitle>
+
+              <AlertDescription>
+                By choosing this option you are able fully customize the appearance of your card,
+                however <strong>it will be delivered AS IS</strong>, so make sure you add all the
+                details you want to be visible on the card.
+              </AlertDescription>
+            </Alert>
+
             <article
               className={cn(
-                "col-span-2 flex flex-grow flex-col justify-center gap-2 transition-all",
+                "mt-2 flex w-full flex-grow flex-col items-center gap-2 transition-all",
                 cardVariant !== "custom" && "pointer-events-none mt-0 h-0 opacity-0",
               )}
             >
@@ -146,7 +159,7 @@ export const CardPreferencesForm = () => {
 
               <section
                 className={cn(
-                  "relative flex h-[140px] w-full flex-col justify-center bg-contain bg-center bg-no-repeat",
+                  "relative flex h-[240px] w-[420px] flex-col justify-center bg-contain bg-center bg-no-repeat",
                 )}
                 style={{
                   backgroundImage: `url(${imageFront})`,
@@ -189,9 +202,11 @@ export const CardPreferencesForm = () => {
               </Button>
             </article>
 
+            <Divider className="my-5" />
+
             <article
               className={cn(
-                "relative col-span-2 flex flex-grow flex-col justify-center gap-2 transition-all",
+                "relative flex w-full flex-grow flex-col items-center gap-2 transition-all",
                 cardVariant !== "custom" && "pointer-events-none mt-0 h-0 opacity-0",
               )}
             >
@@ -202,7 +217,7 @@ export const CardPreferencesForm = () => {
 
               <section
                 className={cn(
-                  "relative flex h-[140px] w-full flex-col justify-center bg-contain bg-center bg-no-repeat",
+                  "relative flex h-[240px] w-[420px] flex-col justify-center bg-contain bg-center bg-no-repeat",
                 )}
                 style={{
                   backgroundImage: `url(${imageBack})`,
@@ -247,7 +262,12 @@ export const CardPreferencesForm = () => {
           </div>
         </section>
 
-        <section className="flex w-full flex-col gap-4">
+        <section
+          className={cn(
+            "flex w-full flex-col gap-4 transition-transform",
+            cardVariant === "custom" && "pointer-events-none mt-0 h-0 opacity-0",
+          )}
+        >
           <div className="space-y-1">
             <h3 className="text-lg font-medium">What should it show?</h3>
 
