@@ -4,14 +4,19 @@ import {
   ArrowDownIcon,
   ArrowRightIcon,
   ChevronRightIcon,
+  LightningBoltIcon,
+  LockClosedIcon,
+  MagicWandIcon,
   OpenInNewWindowIcon,
   QuestionMarkCircledIcon,
+  Share1Icon,
 } from "@radix-ui/react-icons";
 import Image from "next/image";
 import Link from "next/link";
 import AnimatedGridPattern from "~/components/magicui/animated-grid-pattern";
 import BlurFade from "~/components/magicui/blur-fade";
 import { BorderBeam } from "~/components/magicui/border-beam";
+import HyperText from "~/components/magicui/hyper-text";
 import Marquee from "~/components/magicui/marquee";
 import {
   Accordion,
@@ -34,42 +39,83 @@ import { cn } from "~/lib/utils";
 import { HydrateClient } from "~/trpc/server";
 
 const reviews = [
-  // Usuario & cargo/puesto - company
   {
-    name: "Juan",
-    username: "@j.pa****",
-    body: "Biomedical Engineering student. I like it 👍.",
+    name: "@ju.pa****",
+    username: "Biomedical Engineer ",
+    body: "Even while being a student this has improved my exposure to better job opportunities.",
     img: "https://avatar.vercel.sh/jose?text=jose.h",
   },
   {
-    name: "Boris",
-    username: "@bdi****",
-    body: "CEO at CI** Peru, this has been a great experience!",
+    name: "@rw.****",
+    username: "Mechanical Engineer ",
+    body: "This has highly improved my professional profile. Totally recommend it!.",
+    img: "https://avatar.vercel.sh/rodrigo?text=ra",
+  },
+  {
+    name: "@jos****",
+    username: "Product Engineer at AV****",
+    body: "This is the best solution for upgraded networking.",
+    img: "https://avatar.vercel.sh/joseph?text=jm",
+  },
+  {
+    name: "@bdi****",
+    username: "CEO at CI** Peru",
+    body: "Sharing my contact to new people has never been easier!",
     img: "https://avatar.vercel.sh/jill?text=boris.d",
   },
   {
-    name: "Martina",
-    username: "@mar****",
+    name: "@mar****",
+    username: "Marketing Lead at PEP****",
     body: "I'm at a loss for words. This is amazing. I love it.",
     img: "https://avatar.vercel.sh/john?text=martina.m",
   },
   {
-    name: "Jane",
-    username: "@jane08****",
-    body: "I'm at a loss for words. This is amazing. I love it.",
+    name: "@ari.****",
+    username: "Lawyer at M****",
+    body: "This product can truly change the way we communicate with each other.",
     img: "https://avatar.vercel.sh/jane?text=JO",
   },
   {
-    name: "Kimberly",
-    username: "@kim****",
-    body: "I'm at a loss for words. This is amazing. I love it.",
+    name: "@kim****",
+    username: "Software Engineer at NT****",
+    body: "I have been using this product for weeks now and it has been a game changer!",
     img: "https://avatar.vercel.sh/kimberly?text=kimberly.c",
   },
   {
-    name: "Francisco",
-    username: "@fr.****",
-    body: "I'm at a loss for words. This is amazing. I love it.",
+    name: "@fr.****",
+    username: "Physics Researcher at PU**",
+    body: "Improving our personal brand does indeed open many doors.",
     img: "https://avatar.vercel.sh/francisco?text=FD",
+  },
+  {
+    name: "@the.ar****",
+    username: "CEO at Sta****",
+    body: "Simple, easy and effective way to show off!",
+    img: "https://avatar.vercel.sh/john?text=TA",
+  },
+  {
+    name: "@j.a.****",
+    username: "Civil Engineer at V**",
+    body: "Using ConCard at social events makes you stand out from the crowd.",
+    img: "https://avatar.vercel.sh/john?text=JA",
+  },
+  {
+    name: "@er.d.****",
+    username: "Physician at Hosp**** *****",
+    body: "I used to think networking wasn't for me, but ConCard has changed that!",
+    img: "https://avatar.vercel.sh/john?text=JA",
+  },
+  {
+    name: "@sej.****",
+    username: "Marketing Manager at Via**** ****",
+    body: "We needed something like this for years, now it's finally here!",
+    img: "https://avatar.vercel.sh/john?text=JL",
+  },
+  {
+    name: "@diego.****",
+    username: "Biomedical Engineer at Cl**** *****",
+    body: "I've always loved networking but , this is definitely better!",
+    img: "https://avatar.vercel.sh/john?text=DR",
   },
 ];
 
@@ -81,9 +127,9 @@ export default async function Home() {
 
   return (
     <HydrateClient>
-      <main className="relative flex flex-col items-stretch gap-10 bg-neutral-50">
+      <main className="relative flex flex-col items-stretch gap-10">
         <div className="sticky inset-0 z-10 flex h-16 w-full items-end justify-center px-2">
-          <header className="flex h-12 w-full max-w-7xl items-center justify-between rounded-lg border border-border/50 bg-white px-2 py-2 backdrop-blur-lg backdrop-filter">
+          <header className="flex h-12 w-full max-w-7xl items-center justify-between rounded-full border border-border/50 bg-white px-2 py-2 backdrop-blur-lg backdrop-filter">
             <Link href={"/"}>
               <p>Logo</p>
             </Link>
@@ -95,10 +141,6 @@ export default async function Home() {
 
               <Button asChild variant="ghost">
                 <Link href={"/#customers"}>Customers</Link>
-              </Button>
-
-              <Button asChild variant="ghost">
-                <Link href={"/#security"}>Security</Link>
               </Button>
 
               <Button asChild variant="ghost">
@@ -211,10 +253,10 @@ export default async function Home() {
           </Button>
         </div>
 
-        <section className="border-border/50 bg-white py-24" id="customers">
+        <section className="bg-white py-24" id="customers">
           <article className="relative mx-auto max-w-7xl">
             <h3 className="text-center text-lg font-medium uppercase text-muted-foreground">
-              Trusted by professionals across different industries
+              Trusted by professionals across all industries
             </h3>
 
             <Marquee pauseOnHover className="mt-5 [--duration:30s]">
@@ -231,12 +273,16 @@ export default async function Home() {
 
             <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-white dark:from-background" />
             <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-white dark:from-background" />
+
+            <p className="mt-4 text-center text-xs text-muted-foreground">
+              We hide full usernames and personal data for privacy reasons
+            </p>
           </article>
         </section>
 
         <section
           id="features"
-          className="flex items-center justify-center bg-gradient-to-t px-4 py-10 md:px-10 md:pb-20"
+          className="flex items-center justify-center px-4 py-10 md:px-10 md:pb-20"
         >
           <article className="w-full max-w-7xl space-y-8 rounded-[32px]">
             <div className="space-y-2">
@@ -265,13 +311,24 @@ export default async function Home() {
                     and stand out from the competition{" "}
                   </span>
                   <span className="text-indigo-400 transition-all group-hover:text-inherit">
-                    by showcasing your work in a unique and professional way
-                  </span>
+                    by showcasing your profile in a unique and professional way.
+                  </span>{" "}
+                  <span>Share your ConCard URL anywhere!</span>
                 </h2>
               </article>
 
               <article className="border border-pink-300 bg-pink-100 text-pink-900 lg:col-span-4 lg:row-span-2">
-                <div>graphic 2</div>
+                <section className="group relative flex h-48">
+                  <div className="absolute right-5 top-0 h-36 w-64 rounded-lg border bg-white transition-all" />
+                  <div className="absolute right-14 top-4 h-36 w-64 rounded-lg border bg-gradient-to-r from-neutral-600 via-muted to-neutral-600 transition-all" />
+                  <div className="absolute right-28 top-8 flex h-36 w-64 flex-col items-center justify-center gap-3 rounded-lg border bg-primary text-primary-foreground transition-all group-hover:scale-105">
+                    <p className="flex items-center gap-2">
+                      <Share1Icon className="h-5 w-5" /> Johannes Doe
+                    </p>
+
+                    <p className="text-sm text-muted-foreground">CEO at ACME</p>
+                  </div>
+                </section>
 
                 <h2 className="text-2xl font-medium">
                   Highly customizable,{" "}
@@ -292,7 +349,10 @@ export default async function Home() {
               </article>
 
               <article className="border border-neutral-50 bg-primary text-neutral-50 lg:col-span-8 lg:row-span-2">
-                <div>graphic 4</div>
+                <div>
+                  <LockClosedIcon className="size-6" />
+                  <HyperText text="All contact info is encrypted" />
+                </div>
 
                 <h2 className="text-2xl font-medium">
                   Secure information,{" "}
@@ -311,9 +371,9 @@ export default async function Home() {
 
         <section
           id="comparison"
-          className="-mb-10 flex items-center justify-center bg-white px-4 py-24 md:min-h-[1000px] md:px-10"
+          className="-mb-10 flex items-center justify-center rounded-t-[24px] bg-white px-4 py-24 md:min-h-[1000px] md:px-10"
         >
-          <article className="w-full max-w-7xl space-y-10 rounded-[32px]">
+          <article className="group w-full max-w-7xl space-y-10 rounded-[32px]">
             <section className="space-y-2">
               <p className="font-medium text-blue-600">Compare it by yourself</p>
               <h2 className="text-4xl font-semibold tracking-tight">
@@ -330,8 +390,8 @@ export default async function Home() {
               </p>
             </section>
 
-            <section className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-10">
-              <Card className="rounded-[28px] border-dashed bg-zinc-100 p-3 shadow-none md:p-6">
+            <section className="grid grid-cols-1 gap-4 pb-10 md:grid-cols-2 md:gap-10">
+              <Card className="rounded-[28px] border-dashed bg-zinc-100 p-3 shadow-none transition-all duration-300 group-hover:translate-x-1/2 group-hover:scale-95 group-hover:blur-sm md:p-6">
                 <CardHeader>
                   <CardTitle className="text-xl">Others</CardTitle>
                   <CardDescription className="text-base">
@@ -352,7 +412,7 @@ export default async function Home() {
                 </CardContent>
               </Card>
 
-              <Card className="relative rounded-[28px] border border-indigo-400 bg-primary p-3 text-primary-foreground shadow-xl shadow-violet-300 md:p-6">
+              <Card className="relative rounded-[28px] border border-indigo-400 bg-primary p-3 text-primary-foreground shadow-xl shadow-violet-300 transition-all duration-300 group-hover:-translate-x-[calc(50%+2.5rem)] group-hover:translate-y-10 group-hover:scale-110 md:p-6">
                 <CardHeader>
                   <CardTitle className="text-2xl">ConCard</CardTitle>
                   <CardDescription className="text-base">
@@ -374,21 +434,26 @@ export default async function Home() {
 
                     <li className="flex gap-3">
                       <Badge variant="violet">3</Badge>
-                      <p>Secure information</p>
+                      <p>Add all the links you want to share</p>
                     </li>
 
                     <li className="flex gap-3">
                       <Badge variant="violet">4</Badge>
-                      <p>No need to install anything</p>
+                      <p>Secure information</p>
                     </li>
 
                     <li className="flex gap-3">
                       <Badge variant="violet">5</Badge>
-                      <p>Enhance your personal brand</p>
+                      <p>No need to install anything</p>
                     </li>
 
                     <li className="flex gap-3">
                       <Badge variant="violet">6</Badge>
+                      <p>Enhance and showcase your brand</p>
+                    </li>
+
+                    <li className="flex gap-3">
+                      <Badge variant="violet">7</Badge>
                       <p>Buy one ... or a lot!</p>
                     </li>
                   </ul>
@@ -404,15 +469,15 @@ export default async function Home() {
           </article>
         </section>
 
-        <div className="flex min-h-screen items-center bg-gradient-to-br from-neutral-950 via-neutral-800 to-neutral-950 py-20 text-neutral-200">
+        <div className="flex min-h-screen items-center rounded-t-[24px] bg-gradient-to-br from-neutral-950 via-neutral-800 to-neutral-950 p-4 py-20 text-neutral-200">
           <section
             id="how-it-works"
-            className="mx-auto flex w-full max-w-7xl flex-col gap-10 p-4 md:gap-14"
+            className="mx-auto flex w-full max-w-7xl flex-col gap-10 md:gap-14"
           >
             <header className="space-y-2 px-4 md:px-6">
               <p className="font-medium text-emerald-400">An explanation</p>
               <h2 className="text-4xl font-semibold tracking-tight">But how does it work?</h2>
-              <p className="text-muted-foreground">
+              <p className="text-lg text-muted-foreground">
                 We use a combination of technologies to make our product stand out
               </p>
             </header>
@@ -422,7 +487,7 @@ export default async function Home() {
                 <Badge variant="secondary">1</Badge>
 
                 <section>
-                  <h3 className="text-lg font-medium">Sign up and reserve your username</h3>
+                  <h3 className="text-lg font-medium">Sign up and choose your username</h3>
                   <p className="text-muted-foreground">
                     You can use an email or social media account to sign up
                   </p>
@@ -505,7 +570,7 @@ export default async function Home() {
               <h2 className="text-4xl font-semibold tracking-tight">
                 Dead simple pricing, no hidden costs
               </h2>
-              <p className="text-muted-foreground">
+              <p className="text-lg text-muted-foreground">
                 We offer a single plan for all our individual customers, so you can focus on what
                 matters most
               </p>
@@ -552,8 +617,8 @@ export default async function Home() {
 
               <Card className="relative z-10 h-full w-full rounded-[24px] border border-indigo-400 bg-gradient-to-br from-primary to-indigo-950 text-primary-foreground shadow-xl shadow-indigo-400 transition-all duration-300 group-hover:translate-y-5 group-hover:scale-105 md:p-4">
                 <CardHeader>
-                  <p className="text-muted-foreground">Starts at</p>
-                  <CardTitle className="text-xl font-normal text-green-400">
+                  <p className="text-muted-foreground">Starting from</p>
+                  <CardTitle className="text-2xl font-normal text-green-400">
                     S/. 49.90 PEN
                   </CardTitle>
                   <CardTitle className="text-2xl">Professional</CardTitle>
@@ -604,6 +669,7 @@ export default async function Home() {
                 <CardFooter>
                   <SignUpButton>
                     <Button variant="primary" className="w-full" size="lg">
+                      <MagicWandIcon className="h-5 w-5" />
                       Start now!
                     </Button>
                   </SignUpButton>
@@ -669,7 +735,7 @@ export default async function Home() {
             <Accordion type="single" collapsible className="mt-8 w-full">
               <AccordionItem value="explain-nfc">
                 <AccordionTrigger className="h-20 text-2xl font-medium">
-                  What is NFC?
+                  What is NFC technology?
                 </AccordionTrigger>
 
                 <AccordionContent className="text-lg font-light" accessKey="explain-nfc">
@@ -686,21 +752,37 @@ export default async function Home() {
                   How do I purchase a card?
                 </AccordionTrigger>
                 <AccordionContent className="text-lg font-light" accessKey="purchases">
-                  To purchase a card, you can visit the official website of the company and follow
-                  the instructions provided. Once you have completed the purchase, you will receive
-                  a unique code that you can use to redeem your card.
+                  To purchase a card, you can{" "}
+                  <SignUpButton>
+                    <button className="font-medium underline underline-offset-2 hover:text-indigo-700">
+                      start here
+                    </button>
+                  </SignUpButton>{" "}
+                  and follow the onboarding steps, it is simple and straightforward, you can
+                  complete it in less than 10 minutes.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="compatibility">
+                <AccordionTrigger className="h-20 text-2xl font-medium">
+                  What devices are compatible?
+                </AccordionTrigger>
+
+                <AccordionContent className="text-lg font-light" accessKey="how-it-works">
+                  ConCard is compatible with all iOS devices and most Android devices (i.e from 2020
+                  onwards), if the device is not compatible or you are unsure, you can still share
+                  your contact info and links by scanning the QR code.
                 </AccordionContent>
               </AccordionItem>
 
               <AccordionItem value="how-it-works">
                 <AccordionTrigger className="h-20 text-2xl font-medium">
-                  How does it work?
+                  How do I make it work?
                 </AccordionTrigger>
                 <AccordionContent className="text-lg font-light" accessKey="how-it-works">
-                  The process of using a card involves several steps. First, you need to register
-                  your username and create a profile. Then, you can add your contact information and
-                  customize your page. Finally, you can purchase a card and use it to share your
-                  information with others.
+                  You can use ConCard to share your contact information with others without the need
+                  for them to install any additional applications. Just approach it to
+                  someone&apos;s phone and share your page, including your contact information!
                 </AccordionContent>
               </AccordionItem>
 
@@ -710,10 +792,9 @@ export default async function Home() {
                 </AccordionTrigger>
 
                 <AccordionContent className="text-lg font-light">
-                  Don&apos;t worry, we take your privacy seriously and have architected a system in
-                  place to ensure the security of your information, all pages are encrypted and only
-                  accessible when you explicitly open it by approaching your card to someone&apos;s
-                  phone.
+                  Don&apos;t worry, we take your privacy seriously and have architected a system to
+                  secure your private information, all pages are encrypted and only accessible when
+                  you explicitly open it by approaching your card to someone&apos;s phone.
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
@@ -729,7 +810,7 @@ export default async function Home() {
             >
               <Link href="/admin">
                 Get started
-                <ChevronRightIcon className="transition-transform group-hover:translate-x-1" />
+                <LightningBoltIcon className="transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>
 
@@ -738,7 +819,7 @@ export default async function Home() {
               variant="link"
               className="group text-base hover:text-primary-foreground"
             >
-              <Link href="mailto:help@stackkstudios.com">Contact us</Link>
+              <Link href="mailto:help@stackkstudios.com">Contact</Link>
             </Button>
 
             <Button
@@ -746,7 +827,7 @@ export default async function Home() {
               variant="link"
               className="group text-base hover:text-primary-foreground"
             >
-              <Link href="mailto:help@stackkstudios.com">Terms of service</Link>
+              <Link href="/">About us</Link>
             </Button>
 
             <Button
@@ -754,12 +835,20 @@ export default async function Home() {
               variant="link"
               className="group text-base hover:text-primary-foreground"
             >
-              <Link href="mailto:help@stackkstudios.com">Privacy policy</Link>
+              <Link href="/">Terms of service</Link>
+            </Button>
+
+            <Button
+              asChild
+              variant="link"
+              className="group text-base hover:text-primary-foreground"
+            >
+              <Link href="/">Privacy policy</Link>
             </Button>
           </section>
 
           <div className="flex items-center justify-center gap-2">
-            <p>A project by </p>
+            <p>A project from</p>
 
             <Link
               target="_blank"
@@ -791,9 +880,9 @@ const ReviewCard = ({
   return (
     <figure
       className={cn(
-        "relative w-64 cursor-pointer overflow-hidden rounded-lg border p-5",
+        "relative w-72 cursor-pointer overflow-hidden rounded-3xl border p-6 transition-colors",
         // light styles
-        "border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05]",
+        "border-gray-950/[.1] bg-gray-950/[.01] hover:bg-indigo-50/50",
         // dark styles
         "dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]",
       )}
@@ -801,11 +890,12 @@ const ReviewCard = ({
       <div className="flex flex-row items-center gap-2">
         <Image className="rounded-full" width={32} height={32} alt="avatar" src={img} />
         <div className="flex flex-col">
-          <figcaption className="text-sm font-medium dark:text-white">{name}</figcaption>
-          <p className="text-xs font-medium dark:text-white/40">{username}</p>
+          <figcaption className="text-xs font-medium">{name}</figcaption>
+          <p className="text-sm dark:text-white/40">{username}</p>
         </div>
       </div>
-      <blockquote className="mt-2 text-sm">{body}</blockquote>
+
+      <blockquote className="mt-3 text-sm">{body}</blockquote>
     </figure>
   );
 };
