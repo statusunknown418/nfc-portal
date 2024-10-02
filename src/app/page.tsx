@@ -81,7 +81,7 @@ export default async function Home() {
 
   return (
     <HydrateClient>
-      <main className="relative flex flex-col items-stretch gap-10">
+      <main className="relative flex flex-col items-stretch gap-10 bg-neutral-50">
         <div className="sticky inset-0 z-10 flex h-16 w-full items-end justify-center px-2">
           <header className="flex h-12 w-full max-w-7xl items-center justify-between rounded-lg border border-border/50 bg-white px-2 py-2 backdrop-blur-lg backdrop-filter">
             <Link href={"/"}>
@@ -144,7 +144,7 @@ export default async function Home() {
           id="hero"
           className="relative flex min-h-[calc(100vh-9rem)] flex-col items-center justify-center gap-16"
         >
-          <section className="relative mx-auto w-full max-w-6xl px-5 md:px-10">
+          <section className="relative mx-auto w-full max-w-7xl px-5 md:px-10">
             <article className="flex flex-col items-center gap-7">
               <BlurFade delay={0.25 * 2}>
                 <Badge>
@@ -197,7 +197,7 @@ export default async function Home() {
             </article>
           </section>
 
-          <article className="w-full max-w-6xl px-4">
+          <article className="w-full max-w-7xl px-4">
             <BlurFade delay={0.25 * 2}>
               <div className="flex aspect-video w-full items-center justify-center rounded-2xl border border-border/50 bg-white shadow-lg shadow-[hsl(240_37%_90%)]">
                 Video or card animation
@@ -212,7 +212,7 @@ export default async function Home() {
         </div>
 
         <section className="border-border/50 bg-white py-24" id="customers">
-          <article className="relative mx-auto max-w-6xl">
+          <article className="relative mx-auto max-w-7xl">
             <h3 className="text-center text-lg font-medium uppercase text-muted-foreground">
               Trusted by professionals across different industries
             </h3>
@@ -236,9 +236,9 @@ export default async function Home() {
 
         <section
           id="features"
-          className="flex items-center justify-center bg-gradient-to-t py-10 md:pb-20"
+          className="flex items-center justify-center bg-gradient-to-t px-4 py-10 md:px-10 md:pb-20"
         >
-          <article className="w-full max-w-6xl space-y-8 rounded-[32px] px-10">
+          <article className="w-full max-w-7xl space-y-8 rounded-[32px]">
             <div className="space-y-2">
               <p className="font-semibold text-indigo-600">Features</p>
 
@@ -251,7 +251,7 @@ export default async function Home() {
             </div>
 
             <section className="grid min-h-[800px] grid-cols-1 gap-4 *:flex *:flex-col *:gap-6 *:rounded-[24px] *:p-6 lg:grid-cols-12 lg:grid-rows-4">
-              <article className="group border border-indigo-300 bg-indigo-100 text-indigo-900 md:col-span-8 md:row-span-2">
+              <article className="group border border-indigo-300 bg-indigo-100 text-indigo-900 lg:col-span-8 lg:row-span-2">
                 <div>graphic 1</div>
 
                 <h2 className="text-2xl font-medium">
@@ -270,7 +270,7 @@ export default async function Home() {
                 </h2>
               </article>
 
-              <article className="border border-pink-300 bg-pink-100 text-pink-900 md:col-span-4 md:row-span-2">
+              <article className="border border-pink-300 bg-pink-100 text-pink-900 lg:col-span-4 lg:row-span-2">
                 <div>graphic 2</div>
 
                 <h2 className="text-2xl font-medium">
@@ -281,7 +281,7 @@ export default async function Home() {
                 </h2>
               </article>
 
-              <article className="border border-emerald-300 bg-emerald-100 text-emerald-900 md:col-span-4 md:row-span-2">
+              <article className="border border-emerald-300 bg-emerald-100 text-emerald-900 lg:col-span-4 lg:row-span-2">
                 <div>graphic 3</div>
 
                 <h2 className="text-2xl font-medium">
@@ -291,7 +291,7 @@ export default async function Home() {
                 </h2>
               </article>
 
-              <article className="border border-neutral-50 bg-primary text-neutral-50 md:col-span-8 md:row-span-2">
+              <article className="border border-neutral-50 bg-primary text-neutral-50 lg:col-span-8 lg:row-span-2">
                 <div>graphic 4</div>
 
                 <h2 className="text-2xl font-medium">
@@ -311,9 +311,9 @@ export default async function Home() {
 
         <section
           id="comparison"
-          className="-mb-10 flex items-center justify-center bg-white py-24 md:min-h-[900px]"
+          className="-mb-10 flex items-center justify-center bg-white px-4 py-24 md:min-h-[1000px] md:px-10"
         >
-          <article className="w-full max-w-6xl space-y-10 rounded-[32px] px-10">
+          <article className="w-full max-w-7xl space-y-10 rounded-[32px]">
             <section className="space-y-2">
               <p className="font-medium text-blue-600">Compare it by yourself</p>
               <h2 className="text-4xl font-semibold tracking-tight">
@@ -331,7 +331,7 @@ export default async function Home() {
             </section>
 
             <section className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-10">
-              <Card className="rounded-[24px] border-dashed bg-zinc-100 p-4 shadow-none">
+              <Card className="rounded-[28px] border-dashed bg-zinc-100 p-3 shadow-none md:p-6">
                 <CardHeader>
                   <CardTitle className="text-xl">Others</CardTitle>
                   <CardDescription className="text-base">
@@ -352,9 +352,9 @@ export default async function Home() {
                 </CardContent>
               </Card>
 
-              <Card className="relative rounded-[24px] border border-indigo-400 bg-primary p-4 text-primary-foreground shadow-xl shadow-violet-300">
+              <Card className="relative rounded-[28px] border border-indigo-400 bg-primary p-3 text-primary-foreground shadow-xl shadow-violet-300 md:p-6">
                 <CardHeader>
-                  <CardTitle className="text-xl">ConCard</CardTitle>
+                  <CardTitle className="text-2xl">ConCard</CardTitle>
                   <CardDescription className="text-base">
                     Improve your professional profile
                   </CardDescription>
@@ -384,7 +384,7 @@ export default async function Home() {
 
                     <li className="flex gap-3">
                       <Badge variant="violet">5</Badge>
-                      <p>Improves your personal brand</p>
+                      <p>Enhance your personal brand</p>
                     </li>
 
                     <li className="flex gap-3">
@@ -394,7 +394,7 @@ export default async function Home() {
                   </ul>
                 </CardContent>
 
-                <CardFooter className="justify-center text-muted-foreground">
+                <CardFooter className="text-muted-foreground">
                   <p className="text-sm">Think of LinkTree but much better</p>
                 </CardFooter>
 
@@ -407,7 +407,7 @@ export default async function Home() {
         <div className="flex min-h-screen items-center bg-gradient-to-br from-neutral-950 via-neutral-800 to-neutral-950 py-20 text-neutral-200">
           <section
             id="how-it-works"
-            className="mx-auto flex w-full max-w-6xl flex-col gap-10 p-4 md:gap-14"
+            className="mx-auto flex w-full max-w-7xl flex-col gap-10 p-4 md:gap-14"
           >
             <header className="space-y-2 px-4 md:px-6">
               <p className="font-medium text-emerald-400">An explanation</p>
@@ -497,10 +497,10 @@ export default async function Home() {
 
         <section
           id="pricing"
-          className="-mt-10 flex items-center justify-center bg-white bg-gradient-to-t py-10 md:min-h-[950px] md:pb-20"
+          className="-mt-10 flex items-center justify-center bg-white bg-gradient-to-t px-4 py-10 md:min-h-[950px] md:px-10 md:pb-20"
         >
-          <article className="w-full max-w-6xl space-y-14 rounded-[32px]">
-            <div className="flex flex-col items-center justify-center space-y-2">
+          <article className="w-full max-w-7xl space-y-14 rounded-[32px]">
+            <div className="flex flex-col items-center justify-center space-y-2 text-center">
               <p className="font-semibold text-indigo-600">Pricing</p>
               <h2 className="text-4xl font-semibold tracking-tight">
                 Dead simple pricing, no hidden costs
@@ -550,7 +550,7 @@ export default async function Home() {
                 </CardContent>
               </Card>
 
-              <Card className="relative z-10 h-full w-full rounded-[24px] border border-indigo-400 bg-gradient-to-br from-primary to-indigo-950 p-4 text-primary-foreground shadow-xl shadow-indigo-400 transition-all duration-300 group-hover:translate-y-5 group-hover:scale-105">
+              <Card className="relative z-10 h-full w-full rounded-[24px] border border-indigo-400 bg-gradient-to-br from-primary to-indigo-950 text-primary-foreground shadow-xl shadow-indigo-400 transition-all duration-300 group-hover:translate-y-5 group-hover:scale-105 md:p-4">
                 <CardHeader>
                   <p className="text-muted-foreground">Starts at</p>
                   <CardTitle className="text-xl font-normal text-green-400">
@@ -563,7 +563,7 @@ export default async function Home() {
                 </CardHeader>
 
                 <CardContent>
-                  <ul className="space-y-4 text-lg font-light text-zinc-200">
+                  <ul className="space-y-4 font-light text-zinc-200 md:text-lg">
                     <li className="flex gap-3">
                       <Badge variant="secondary">1</Badge>
                       <p>1 business card included</p>
@@ -654,7 +654,7 @@ export default async function Home() {
         </section>
 
         <article className="p-10">
-          <section id="security" className="mx-auto w-full max-w-6xl">
+          <section id="security" className="mx-auto w-full max-w-7xl">
             <header className="space-y-2">
               <p className="font-medium text-pink-700">FAQ</p>
               <h2 className="text-4xl font-semibold tracking-tight">Any doubts?</h2>
