@@ -15,6 +15,7 @@ const badgeVariants = cva(
           "border-destructive bg-destructive/10 text-destructive shadow hover:bg-destructive/25",
         outline: "text-foreground",
         indigo: "border-indigo-500 bg-indigo-200 text-indigo-700 hover:bg-indigo/80",
+        violet: "border-violet-500 bg-violet-200 text-violet-700 hover:bg-violet/80",
       },
       size: {
         default: "h-6 text-xs",

@@ -5,7 +5,6 @@ import {
   ArrowRightIcon,
   ChevronRightIcon,
   OpenInNewWindowIcon,
-  OverlineIcon,
   QuestionMarkCircledIcon,
 } from "@radix-ui/react-icons";
 import Image from "next/image";
@@ -137,7 +136,7 @@ export default async function Home() {
           numSquares={50}
           className={cn(
             "[mask-image:radial-gradient(800px_circle_at_center,white,transparent)]",
-            "absolute inset-0 -z-10 h-svh w-svw fill-indigo-400 opacity-30",
+            "absolute inset-0 -z-10 h-svh w-svw fill-indigo-500 opacity-30",
           )}
         />
 
@@ -145,9 +144,6 @@ export default async function Home() {
           id="hero"
           className="relative flex min-h-[calc(100vh-9rem)] flex-col items-center justify-center gap-16"
         >
-          {/* <div className="absolute left-1/2 top-0 -z-10 h-[500px] w-[500px] rounded-full bg-indigo-500 opacity-10 blur-2xl" />
-            <div className="absolute bottom-0 right-1/2 -z-10 h-[500px] w-[500px] rounded-full bg-violet-500 opacity-10 blur-2xl" /> */}
-
           <section className="relative mx-auto w-full max-w-6xl px-5 md:px-10">
             <article className="flex flex-col items-center gap-7">
               <BlurFade delay={0.25 * 2}>
@@ -176,17 +172,19 @@ export default async function Home() {
 
               <BlurFade delay={0.25}>
                 <div className="flex flex-col items-center justify-center gap-2 md:flex-row">
-                  <Button
-                    asChild
-                    variant="primary"
-                    size="lg"
-                    className="group w-full shadow-lg shadow-indigo-300 transition-all hover:shadow-xl hover:shadow-indigo-300 sm:w-auto"
-                  >
-                    <Link href="/admin">
-                      Get started
-                      <ChevronRightIcon className="transition-transform group-hover:translate-x-1" />
-                    </Link>
-                  </Button>
+                  <SignUpButton>
+                    <Button
+                      asChild
+                      variant="primary"
+                      size="lg"
+                      className="group w-full shadow-lg shadow-indigo-300 transition-all hover:shadow-xl hover:shadow-indigo-300 sm:w-auto"
+                    >
+                      <Link href="/admin">
+                        Get started
+                        <ChevronRightIcon className="transition-transform group-hover:translate-x-1" />
+                      </Link>
+                    </Button>
+                  </SignUpButton>
 
                   <Button asChild variant="ghost" size="lg" className="group">
                     <Link href="#features">
@@ -311,8 +309,11 @@ export default async function Home() {
           </article>
         </section>
 
-        <section id="comparison" className="-mb-10 flex items-center justify-center bg-white py-24">
-          <article className="w-full max-w-6xl space-y-8 rounded-[32px] px-10">
+        <section
+          id="comparison"
+          className="-mb-10 flex items-center justify-center bg-white py-24 md:min-h-[900px]"
+        >
+          <article className="w-full max-w-6xl space-y-10 rounded-[32px] px-10">
             <section className="space-y-2">
               <p className="font-medium text-blue-600">Compare it by yourself</p>
               <h2 className="text-4xl font-semibold tracking-tight">
@@ -339,7 +340,7 @@ export default async function Home() {
                 </CardHeader>
 
                 <CardContent>
-                  <ul className="list-disc space-y-2 pl-4 text-lg font-light">
+                  <ul className="list-disc space-y-3 pl-4 text-lg font-light text-muted-foreground">
                     <li>Plain link in bio (not always offered)</li>
                     <li>Will most likely be require an app</li>
                     <li>Not useful to show off</li>
@@ -351,7 +352,7 @@ export default async function Home() {
                 </CardContent>
               </Card>
 
-              <Card className="relative rounded-[24px] border border-indigo-400 bg-primary p-4 text-primary-foreground shadow-xl shadow-indigo-300">
+              <Card className="relative rounded-[24px] border border-indigo-400 bg-primary p-4 text-primary-foreground shadow-xl shadow-violet-300">
                 <CardHeader>
                   <CardTitle className="text-xl">ConCard</CardTitle>
                   <CardDescription className="text-base">
@@ -360,34 +361,34 @@ export default async function Home() {
                 </CardHeader>
 
                 <CardContent>
-                  <ul className="space-y-2 text-lg font-light text-zinc-200">
-                    <li className="flex items-center gap-2">
-                      <Badge variant="indigo">1</Badge>
-                      <p>Customizable NFC business card</p>
+                  <ul className="space-y-3 text-lg font-light text-zinc-200">
+                    <li className="flex gap-3">
+                      <Badge variant="violet">1</Badge>
+                      <p>Customizable NFC business card ✨</p>
                     </li>
 
-                    <li className="flex items-center gap-2">
-                      <Badge variant="indigo">2</Badge>
+                    <li className="flex gap-3">
+                      <Badge variant="violet">2</Badge>
                       <p>Make your own public personal page</p>
                     </li>
 
-                    <li className="flex items-center gap-2">
-                      <Badge variant="indigo">3</Badge>
+                    <li className="flex gap-3">
+                      <Badge variant="violet">3</Badge>
                       <p>Secure information</p>
                     </li>
 
-                    <li className="flex items-center gap-2">
-                      <Badge variant="indigo">4</Badge>
+                    <li className="flex gap-3">
+                      <Badge variant="violet">4</Badge>
                       <p>No need to install anything</p>
                     </li>
 
-                    <li className="flex items-center gap-2">
-                      <Badge variant="indigo">5</Badge>
+                    <li className="flex gap-3">
+                      <Badge variant="violet">5</Badge>
                       <p>Improves your personal brand</p>
                     </li>
 
-                    <li className="flex items-center gap-2">
-                      <Badge variant="indigo">6</Badge>
+                    <li className="flex gap-3">
+                      <Badge variant="violet">6</Badge>
                       <p>Buy one ... or a lot!</p>
                     </li>
                   </ul>
@@ -406,7 +407,7 @@ export default async function Home() {
         <div className="flex min-h-screen items-center bg-gradient-to-br from-neutral-950 via-neutral-800 to-neutral-950 py-20 text-neutral-200">
           <section
             id="how-it-works"
-            className="mx-auto flex w-full max-w-6xl flex-col gap-8 p-4 md:gap-14"
+            className="mx-auto flex w-full max-w-6xl flex-col gap-10 p-4 md:gap-14"
           >
             <header className="space-y-2 px-4 md:px-6">
               <p className="font-medium text-emerald-400">An explanation</p>
@@ -416,7 +417,7 @@ export default async function Home() {
               </p>
             </header>
 
-            <div className="grid grid-cols-1 *:space-y-3 *:border-b *:border-border/20 *:px-4 *:py-8 md:grid-cols-2 md:justify-items-stretch md:gap-0 md:*:space-y-5 md:*:border-r md:*:p-6">
+            <div className="grid grid-cols-1 *:space-y-3 *:border-b *:border-border/20 *:px-4 *:py-6 md:grid-cols-2 md:justify-items-stretch md:gap-0 md:*:space-y-5 md:*:border-r md:*:px-8 md:*:py-10">
               <article className="border-b">
                 <Badge variant="secondary">1</Badge>
 
@@ -494,6 +495,164 @@ export default async function Home() {
           </section>
         </div>
 
+        <section
+          id="pricing"
+          className="-mt-10 flex items-center justify-center bg-white bg-gradient-to-t py-10 md:min-h-[950px] md:pb-20"
+        >
+          <article className="w-full max-w-6xl space-y-14 rounded-[32px]">
+            <div className="flex flex-col items-center justify-center space-y-2">
+              <p className="font-semibold text-indigo-600">Pricing</p>
+              <h2 className="text-4xl font-semibold tracking-tight">
+                Dead simple pricing, no hidden costs
+              </h2>
+              <p className="text-muted-foreground">
+                We offer a single plan for all our individual customers, so you can focus on what
+                matters most
+              </p>
+            </div>
+
+            <section className="group grid grid-cols-1 place-items-center gap-4 md:grid-cols-3">
+              <Card className="hidden h-full translate-x-14 translate-y-10 rounded-[24px] border-dashed bg-zinc-50 p-4 shadow-none blur-sm transition-all duration-300 group-hover:translate-x-24 group-hover:-rotate-12 group-hover:scale-90 group-hover:blur-md md:block">
+                <CardHeader>
+                  <CardTitle className="text-xl">Some plan</CardTitle>
+                  <CardDescription className="text-base">
+                    Many brands usually offer way too many options, so we decided to keep it simple
+                    and only offer a single plan
+                  </CardDescription>
+                </CardHeader>
+
+                <CardContent className="list-inside space-y-4 text-lg font-light text-muted-foreground">
+                  <li className="flex gap-2">
+                    <Badge variant="outline">1</Badge>
+                    <p>The landing page is nice, innit?</p>
+                  </li>
+                  <li className="flex gap-2">
+                    <Badge variant="outline">2</Badge>
+                    <p>Something that is not included</p>
+                  </li>
+                  <li className="flex gap-2">
+                    <Badge variant="outline">3</Badge>
+                    <p>You should read this</p>
+                  </li>
+                  <li className="flex gap-2">
+                    <Badge variant="outline">4</Badge>
+                    <p>Just placeholder text</p>
+                  </li>
+
+                  <li className="flex gap-2">
+                    <Badge variant="outline">5</Badge>
+                    <p>More unused text</p>
+                  </li>
+                  <li className="flex gap-2">
+                    <Badge variant="outline">6</Badge>
+                    <p>Something that is not included</p>
+                  </li>
+                </CardContent>
+              </Card>
+
+              <Card className="relative z-10 h-full w-full rounded-[24px] border border-indigo-400 bg-gradient-to-br from-primary to-indigo-950 p-4 text-primary-foreground shadow-xl shadow-indigo-400 transition-all duration-300 group-hover:translate-y-5 group-hover:scale-105">
+                <CardHeader>
+                  <p className="text-muted-foreground">Starts at</p>
+                  <CardTitle className="text-xl font-normal text-green-400">
+                    S/. 49.90 PEN
+                  </CardTitle>
+                  <CardTitle className="text-2xl">Professional</CardTitle>
+                  <CardDescription className="text-base">
+                    Single, affordable and flexible plan, perfect for everyone, it includes:
+                  </CardDescription>
+                </CardHeader>
+
+                <CardContent>
+                  <ul className="space-y-4 text-lg font-light text-zinc-200">
+                    <li className="flex gap-3">
+                      <Badge variant="secondary">1</Badge>
+                      <p>1 business card included</p>
+                    </li>
+
+                    <li className="flex gap-3">
+                      <Badge variant="secondary">2</Badge>
+                      <p>Free shipping! (Lima)</p>
+                    </li>
+
+                    <li className="flex gap-3">
+                      <Badge variant="secondary">3</Badge>
+                      <p>All page customization options</p>
+                    </li>
+
+                    <li className="flex gap-3">
+                      <Badge variant="secondary">4</Badge>
+                      <p>Social/professional links </p>
+                    </li>
+
+                    <li className="flex gap-3">
+                      <Badge variant="secondary">5</Badge>
+                      <p>High security for your information</p>
+                    </li>
+
+                    <li className="flex gap-3">
+                      <Badge variant="secondary">6</Badge>
+                      <p>Email signatures</p>
+                    </li>
+
+                    <li className="flex gap-3">
+                      <Badge variant="secondary">7</Badge>
+                      <p>And more!</p>
+                    </li>
+                  </ul>
+                </CardContent>
+
+                <CardFooter>
+                  <SignUpButton>
+                    <Button variant="primary" className="w-full" size="lg">
+                      Start now!
+                    </Button>
+                  </SignUpButton>
+                </CardFooter>
+
+                <BorderBeam size={100} duration={10} delay={5} borderWidth={2} />
+              </Card>
+
+              <Card className="hidden h-full -translate-x-14 translate-y-10 rounded-[24px] border-dashed bg-zinc-50 p-4 shadow-none blur-sm transition-all duration-300 group-hover:-translate-x-24 group-hover:rotate-12 group-hover:scale-90 group-hover:blur-md md:block">
+                <CardHeader>
+                  <CardTitle className="text-xl">Another plan</CardTitle>
+                  <CardDescription className="text-base">
+                    Some other plan not offered by us that is more expensive without much additional
+                    benefits
+                  </CardDescription>
+                </CardHeader>
+
+                <CardContent className="list-inside space-y-4 text-lg font-light text-muted-foreground">
+                  <li className="flex gap-2">
+                    <Badge variant="outline">1</Badge>
+                    <p>The landing page is nice, innit?</p>
+                  </li>
+                  <li className="flex gap-2">
+                    <Badge variant="outline">2</Badge>
+                    <p>Something that is not included</p>
+                  </li>
+                  <li className="flex gap-2">
+                    <Badge variant="outline">3</Badge>
+                    <p>You should read this</p>
+                  </li>
+                  <li className="flex gap-2">
+                    <Badge variant="outline">4</Badge>
+                    <p>Just placeholder text</p>
+                  </li>
+
+                  <li className="flex gap-2">
+                    <Badge variant="outline">5</Badge>
+                    <p>More unused text</p>
+                  </li>
+                  <li className="flex gap-2">
+                    <Badge variant="outline">6</Badge>
+                    <p>Something that is not included</p>
+                  </li>
+                </CardContent>
+              </Card>
+            </section>
+          </article>
+        </section>
+
         <article className="p-10">
           <section id="security" className="mx-auto w-full max-w-6xl">
             <header className="space-y-2">
@@ -509,7 +668,9 @@ export default async function Home() {
 
             <Accordion type="single" collapsible className="mt-8 w-full">
               <AccordionItem value="explain-nfc">
-                <AccordionTrigger className="text-2xl font-medium">What is NFC?</AccordionTrigger>
+                <AccordionTrigger className="h-20 text-2xl font-medium">
+                  What is NFC?
+                </AccordionTrigger>
 
                 <AccordionContent className="text-lg font-light" accessKey="explain-nfc">
                   NFC stands for Near Field Communication, which is a technology that allows two
@@ -521,7 +682,7 @@ export default async function Home() {
               </AccordionItem>
 
               <AccordionItem value="purchases">
-                <AccordionTrigger className="text-2xl font-medium">
+                <AccordionTrigger className="h-20 text-2xl font-medium">
                   How do I purchase a card?
                 </AccordionTrigger>
                 <AccordionContent className="text-lg font-light" accessKey="purchases">
@@ -532,7 +693,7 @@ export default async function Home() {
               </AccordionItem>
 
               <AccordionItem value="how-it-works">
-                <AccordionTrigger className="text-2xl font-medium">
+                <AccordionTrigger className="h-20 text-2xl font-medium">
                   How does it work?
                 </AccordionTrigger>
                 <AccordionContent className="text-lg font-light" accessKey="how-it-works">
@@ -544,7 +705,7 @@ export default async function Home() {
               </AccordionItem>
 
               <AccordionItem value="security">
-                <AccordionTrigger className="text-2xl font-medium">
+                <AccordionTrigger className="h-20 text-2xl font-medium">
                   What if someone finds out my username by accident?
                 </AccordionTrigger>
 
@@ -559,7 +720,7 @@ export default async function Home() {
           </section>
         </article>
 
-        <footer className="mt-20 flex flex-col justify-end gap-10 rounded-t-[32px] bg-gradient-to-t from-neutral-950 to-neutral-700 px-4 py-8 text-center text-neutral-400 shadow-xl md:px-10">
+        <footer className="mt-20 flex flex-col justify-end gap-10 rounded-t-[32px] bg-neutral-900 px-4 py-8 text-center text-neutral-400 shadow-xl md:px-10">
           <section className="flex w-full flex-wrap items-center justify-center gap-5">
             <Button
               asChild
