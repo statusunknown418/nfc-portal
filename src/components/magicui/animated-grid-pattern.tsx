@@ -18,7 +18,7 @@ interface GridPatternProps {
   repeatDelay?: number;
 }
 
-export function GridPattern({
+export function AnimatedGridPattern({
   width = 40,
   height = 40,
   x = -1,
@@ -127,7 +127,7 @@ export function GridPattern({
             height={height - 1}
             x={x! * width + 1}
             y={y! * height + 1}
-            fill="currentColor"
+            fill="inherit"
             strokeWidth="0"
           />
         ))}
@@ -136,4 +136,4 @@ export function GridPattern({
   );
 }
 
-export default GridPattern;
+export default AnimatedGridPattern;

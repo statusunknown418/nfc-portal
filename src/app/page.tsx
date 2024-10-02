@@ -5,12 +5,21 @@ import {
   ArrowRightIcon,
   ChevronRightIcon,
   OpenInNewWindowIcon,
+  OverlineIcon,
   QuestionMarkCircledIcon,
 } from "@radix-ui/react-icons";
 import Image from "next/image";
 import Link from "next/link";
+import AnimatedGridPattern from "~/components/magicui/animated-grid-pattern";
+import BlurFade from "~/components/magicui/blur-fade";
 import { BorderBeam } from "~/components/magicui/border-beam";
 import Marquee from "~/components/magicui/marquee";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "~/components/ui/accordion";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import {
@@ -100,12 +109,12 @@ export default async function Home() {
 
             {!sessionClaims?.username && (
               <ClerkLoading>
-                <Skeleton className="h-9 w-32" />
+                <Skeleton className="h-9 w-28" />
               </ClerkLoading>
             )}
 
             <SignedIn>
-              <Button asChild>
+              <Button asChild className="rounded-full">
                 <Link href="/admin">
                   Dashboard <ChevronRightIcon />
                 </Link>
@@ -114,7 +123,7 @@ export default async function Home() {
 
             <SignedOut>
               <SignUpButton>
-                <Button>
+                <Button className="rounded-full">
                   Join now <ArrowRightIcon />
                 </Button>
               </SignUpButton>
@@ -122,52 +131,80 @@ export default async function Home() {
           </header>
         </div>
 
+        <AnimatedGridPattern
+          duration={2}
+          repeatDelay={0.5}
+          numSquares={50}
+          className={cn(
+            "[mask-image:radial-gradient(800px_circle_at_center,white,transparent)]",
+            "absolute inset-0 -z-10 h-svh w-svw fill-indigo-400 opacity-30",
+          )}
+        />
+
         <div
           id="hero"
-          className="flex min-h-[calc(100vh-9rem)] flex-col items-center justify-center gap-16"
+          className="relative flex min-h-[calc(100vh-9rem)] flex-col items-center justify-center gap-16"
         >
+          {/* <div className="absolute left-1/2 top-0 -z-10 h-[500px] w-[500px] rounded-full bg-indigo-500 opacity-10 blur-2xl" />
+            <div className="absolute bottom-0 right-1/2 -z-10 h-[500px] w-[500px] rounded-full bg-violet-500 opacity-10 blur-2xl" /> */}
+
           <section className="relative mx-auto w-full max-w-6xl px-5 md:px-10">
-            <article className="flex flex-col items-center gap-6">
-              <Badge>
-                ✨ Introducing NFC cards <ArrowRightIcon />
-              </Badge>
+            <article className="flex flex-col items-center gap-7">
+              <BlurFade delay={0.25 * 2}>
+                <Badge>
+                  ✨ Introducing premium cards <ArrowRightIcon />
+                </Badge>
+              </BlurFade>
 
-              <h1 className="text-center text-5xl font-bold tracking-tight sm:text-6xl md:text-7xl">
-                Discover a new era of networking, powered by{" "}
-                <span className="bg-gradient-to-r from-indigo-700 via-violet-500 to-purple-400 bg-clip-text text-transparent">
-                  NFC
-                </span>{" "}
-                technology
-              </h1>
+              <BlurFade>
+                <h1 className="text-center text-5xl font-bold tracking-tight sm:text-6xl md:text-7xl">
+                  Discover a new era of networking, powered by{" "}
+                  <span className="bg-gradient-to-r from-indigo-700 via-violet-500 to-purple-400 bg-clip-text text-transparent">
+                    NFC
+                  </span>{" "}
+                  technology
+                </h1>
+              </BlurFade>
 
-              <p className="max-w-sm text-pretty text-center text-muted-foreground sm:text-lg md:max-w-lg md:text-xl lg:max-w-4xl">
-                Supercharge your experience and stand up to the competition with our premium
-                business cards, simply approach it to someone&apos;s phone and share your own
-                custom-made personal page!
-              </p>
+              <BlurFade delay={0.25}>
+                <p className="max-w-sm text-pretty text-center text-muted-foreground sm:text-lg md:max-w-lg md:text-xl lg:max-w-4xl">
+                  Supercharge your experience and stand up to the competition with our premium
+                  business cards, simply approach it to someone&apos;s phone and share your own
+                  custom-made personal page!
+                </p>
+              </BlurFade>
 
-              <div className="flex flex-col items-center justify-center gap-2 md:flex-row">
-                <Button asChild variant="primary" size="lg" className="group w-full sm:w-auto">
-                  <Link href="/admin">
-                    Get started
-                    <ChevronRightIcon className="transition-transform group-hover:translate-x-1" />
-                  </Link>
-                </Button>
+              <BlurFade delay={0.25}>
+                <div className="flex flex-col items-center justify-center gap-2 md:flex-row">
+                  <Button
+                    asChild
+                    variant="primary"
+                    size="lg"
+                    className="group w-full shadow-lg shadow-indigo-300 transition-all hover:shadow-xl hover:shadow-indigo-300 sm:w-auto"
+                  >
+                    <Link href="/admin">
+                      Get started
+                      <ChevronRightIcon className="transition-transform group-hover:translate-x-1" />
+                    </Link>
+                  </Button>
 
-                <Button asChild variant="ghost" size="lg" className="group">
-                  <Link href="#features">
-                    Why us?
-                    <QuestionMarkCircledIcon className="transition-transform group-hover:translate-x-1" />
-                  </Link>
-                </Button>
-              </div>
+                  <Button asChild variant="ghost" size="lg" className="group">
+                    <Link href="#features">
+                      Why us?
+                      <QuestionMarkCircledIcon className="transition-transform group-hover:translate-x-1" />
+                    </Link>
+                  </Button>
+                </div>
+              </BlurFade>
             </article>
           </section>
 
           <article className="w-full max-w-6xl px-4">
-            <div className="flex aspect-video w-full items-center justify-center rounded-2xl border border-border/50 shadow-xl">
-              Video or card animation
-            </div>
+            <BlurFade delay={0.25 * 2}>
+              <div className="flex aspect-video w-full items-center justify-center rounded-2xl border border-border/50 bg-white shadow-lg shadow-[hsl(240_37%_90%)]">
+                Video or card animation
+              </div>
+            </BlurFade>
           </article>
 
           <Button variant="ghost">
@@ -216,7 +253,7 @@ export default async function Home() {
             </div>
 
             <section className="grid min-h-[800px] grid-cols-1 gap-4 *:flex *:flex-col *:gap-6 *:rounded-[24px] *:p-6 lg:grid-cols-12 lg:grid-rows-4">
-              <article className="group border border-indigo-400 bg-indigo-100 text-indigo-900 md:col-span-8 md:row-span-2">
+              <article className="group border border-indigo-300 bg-indigo-100 text-indigo-900 md:col-span-8 md:row-span-2">
                 <div>graphic 1</div>
 
                 <h2 className="text-2xl font-medium">
@@ -235,24 +272,24 @@ export default async function Home() {
                 </h2>
               </article>
 
-              <article className="border border-pink-400 bg-pink-100 text-pink-900 md:col-span-4 md:row-span-2">
+              <article className="border border-pink-300 bg-pink-100 text-pink-900 md:col-span-4 md:row-span-2">
                 <div>graphic 2</div>
 
                 <h2 className="text-2xl font-medium">
                   Highly customizable,{" "}
-                  <span className="text-pink-400">we offer a wide range of options</span> to make
+                  <span className="text-pink-500">we offer a wide range of options</span> to make
                   your portal and business card truly{" "}
-                  <span className="text-pink-400">yours and unique</span>
+                  <span className="text-pink-500">yours and unique</span>
                 </h2>
               </article>
 
-              <article className="border border-emerald-400 bg-emerald-100 text-emerald-900 md:col-span-4 md:row-span-2">
+              <article className="border border-emerald-300 bg-emerald-100 text-emerald-900 md:col-span-4 md:row-span-2">
                 <div>graphic 3</div>
 
                 <h2 className="text-2xl font-medium">
                   No external applications required,{" "}
-                  <span className="text-emerald-600">it works right out of the box</span> on all iOS
-                  devices and most Android phones
+                  <span className="text-emerald-500">it works right out of the box</span> on all iOS
+                  devices and <span className="text-emerald-500"> most Android phones</span>
                 </h2>
               </article>
 
@@ -279,7 +316,10 @@ export default async function Home() {
             <section className="space-y-2">
               <p className="font-medium text-blue-600">Compare it by yourself</p>
               <h2 className="text-4xl font-semibold tracking-tight">
-                The old vs <span className="text-violet-700">New way</span>
+                The old way vs{" "}
+                <span className="bg-gradient-to-r from-violet-700 to-purple-400 bg-clip-text text-transparent">
+                  New way
+                </span>
               </h2>
 
               <p className="max-w-prose text-lg text-muted-foreground">
@@ -299,11 +339,14 @@ export default async function Home() {
                 </CardHeader>
 
                 <CardContent>
-                  <ul className="list-disc space-y-1.5 pl-4 text-lg font-light">
-                    <li>Plain link in bio</li>
+                  <ul className="list-disc space-y-2 pl-4 text-lg font-light">
+                    <li>Plain link in bio (not always offered)</li>
                     <li>Will most likely be require an app</li>
                     <li>Not useful to show off</li>
-                    <li>Boring ... but it works</li>
+                    <li>Traditional printed cards may harm the environment</li>
+                    <li>
+                      Works ... but it&apos;s <span className="font-medium italic">boring</span>
+                    </li>
                   </ul>
                 </CardContent>
               </Card>
@@ -317,12 +360,36 @@ export default async function Home() {
                 </CardHeader>
 
                 <CardContent>
-                  <ul className="space-y-1.5 text-lg font-light">
-                    <li>Customizable NFC business card</li>
-                    <li>Make your own public personal page</li>
-                    <li>Secure contact information</li>
-                    <li>No need to install anything</li>
-                    <li>Buy one ... or a lot!</li>
+                  <ul className="space-y-2 text-lg font-light text-zinc-200">
+                    <li className="flex items-center gap-2">
+                      <Badge variant="indigo">1</Badge>
+                      <p>Customizable NFC business card</p>
+                    </li>
+
+                    <li className="flex items-center gap-2">
+                      <Badge variant="indigo">2</Badge>
+                      <p>Make your own public personal page</p>
+                    </li>
+
+                    <li className="flex items-center gap-2">
+                      <Badge variant="indigo">3</Badge>
+                      <p>Secure information</p>
+                    </li>
+
+                    <li className="flex items-center gap-2">
+                      <Badge variant="indigo">4</Badge>
+                      <p>No need to install anything</p>
+                    </li>
+
+                    <li className="flex items-center gap-2">
+                      <Badge variant="indigo">5</Badge>
+                      <p>Improves your personal brand</p>
+                    </li>
+
+                    <li className="flex items-center gap-2">
+                      <Badge variant="indigo">6</Badge>
+                      <p>Buy one ... or a lot!</p>
+                    </li>
                   </ul>
                 </CardContent>
 
@@ -343,7 +410,7 @@ export default async function Home() {
           >
             <header className="space-y-2 px-4 md:px-6">
               <p className="font-medium text-emerald-400">An explanation</p>
-              <h2 className="text-4xl font-medium">But how does it work?</h2>
+              <h2 className="text-4xl font-semibold tracking-tight">But how does it work?</h2>
               <p className="text-muted-foreground">
                 We use a combination of technologies to make our product stand out
               </p>
@@ -427,12 +494,70 @@ export default async function Home() {
           </section>
         </div>
 
-        <section id="security" className="mx-auto w-full max-w-6xl p-10">
-          <header className="space-y-2">
-            <h2 className="text-4xl font-medium">FAQ</h2>
-            <p className="text-muted-foreground">Have doubts? Check this out</p>
-          </header>
-        </section>
+        <article className="p-10">
+          <section id="security" className="mx-auto w-full max-w-6xl">
+            <header className="space-y-2">
+              <p className="font-medium text-pink-700">FAQ</p>
+              <h2 className="text-4xl font-semibold tracking-tight">Any doubts?</h2>
+              <p className="text-muted-foreground">
+                If none of these answers your question, feel free to contact us at{" "}
+                <Link href="mailto:help@stackkstudios.com" className="text-primary underline">
+                  help@stackkstudios.com
+                </Link>
+              </p>
+            </header>
+
+            <Accordion type="single" collapsible className="mt-8 w-full">
+              <AccordionItem value="explain-nfc">
+                <AccordionTrigger className="text-2xl font-medium">What is NFC?</AccordionTrigger>
+
+                <AccordionContent className="text-lg font-light" accessKey="explain-nfc">
+                  NFC stands for Near Field Communication, which is a technology that allows two
+                  devices to communicate with each other over a short distance, aka what powers
+                  Apple Pay and Google Pay. ConCard uses it to enable you to share any contact
+                  information with others without the need for them to install any additional
+                  applications.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="purchases">
+                <AccordionTrigger className="text-2xl font-medium">
+                  How do I purchase a card?
+                </AccordionTrigger>
+                <AccordionContent className="text-lg font-light" accessKey="purchases">
+                  To purchase a card, you can visit the official website of the company and follow
+                  the instructions provided. Once you have completed the purchase, you will receive
+                  a unique code that you can use to redeem your card.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="how-it-works">
+                <AccordionTrigger className="text-2xl font-medium">
+                  How does it work?
+                </AccordionTrigger>
+                <AccordionContent className="text-lg font-light" accessKey="how-it-works">
+                  The process of using a card involves several steps. First, you need to register
+                  your username and create a profile. Then, you can add your contact information and
+                  customize your page. Finally, you can purchase a card and use it to share your
+                  information with others.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="security">
+                <AccordionTrigger className="text-2xl font-medium">
+                  What if someone finds out my username by accident?
+                </AccordionTrigger>
+
+                <AccordionContent className="text-lg font-light">
+                  Don&apos;t worry, we take your privacy seriously and have architected a system in
+                  place to ensure the security of your information, all pages are encrypted and only
+                  accessible when you explicitly open it by approaching your card to someone&apos;s
+                  phone.
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          </section>
+        </article>
 
         <footer className="mt-20 flex flex-col justify-end gap-10 rounded-t-[32px] bg-gradient-to-t from-neutral-950 to-neutral-700 px-4 py-8 text-center text-neutral-400 shadow-xl md:px-10">
           <section className="flex w-full flex-wrap items-center justify-center gap-5">
