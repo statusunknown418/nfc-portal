@@ -11,13 +11,16 @@ import {
   QuestionMarkCircledIcon,
   Share1Icon,
 } from "@radix-ui/react-icons";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
+import { Suspense } from "react";
 import AnimatedGridPattern from "~/components/magicui/animated-grid-pattern";
 import BlurFade from "~/components/magicui/blur-fade";
 import { BorderBeam } from "~/components/magicui/border-beam";
 import HyperText from "~/components/magicui/hyper-text";
 import Marquee from "~/components/magicui/marquee";
+import { LocaleSwitcherWrapper } from "~/components/shared/locale-switcher";
 import {
   Accordion,
   AccordionContent,
@@ -122,8 +125,9 @@ const reviews = [
 const firstRow = reviews.slice(0, reviews.length / 2);
 const secondRow = reviews.slice(reviews.length / 2);
 
-export default async function Home() {
+export default function Home() {
   const { sessionClaims } = auth();
+  const t = useTranslations("landing");
 
   return (
     <HydrateClient>
@@ -153,6 +157,10 @@ export default async function Home() {
                 <Skeleton className="h-9 w-28" />
               </ClerkLoading>
             )}
+
+            <Suspense>
+              <LocaleSwitcherWrapper />
+            </Suspense>
 
             <SignedIn>
               <Button asChild className="rounded-full">
@@ -196,18 +204,16 @@ export default async function Home() {
 
               <BlurFade>
                 <h1 className="text-center text-5xl font-bold tracking-tight sm:text-6xl md:text-7xl">
-                  Descubre la nueva era profesional, gracias a la tecnologia{" "}
-                  <span className="bg-gradient-to-r from-indigo-700 via-violet-500 to-purple-400 bg-clip-text text-transparent">
+                  {t("hero.heading")}
+                  {/* <span className="bg-gradient-to-r from-indigo-700 via-violet-500 to-purple-400 bg-clip-text text-transparent">
                     NFC
-                  </span>{" "}
+                  </span>{" "} */}
                 </h1>
               </BlurFade>
 
               <BlurFade delay={0.25}>
                 <p className="max-w-sm text-pretty text-center text-muted-foreground sm:text-lg md:max-w-lg md:text-xl lg:max-w-4xl">
-                  Potencia tu experiencia y destaca frente a la competencia con nuestras tarjetas de
-                  presentación premium. Solo acércala al teléfono de alguien y comparte tu página
-                  personal personalizada!
+                  {t("hero.description")}
                 </p>
               </BlurFade>
 

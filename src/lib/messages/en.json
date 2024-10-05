@@ -1,0 +1,13 @@
+{
+  "landing": {
+    "hero": {
+      "heading": "Discover the new era of networking powered by NFC technology",
+      "description": "Enhance your experience and stand out from the competition with premium card designs. Just tap the card on a phone to connect and share your personalized page!",
+      "button": "Start now",
+      "secondaryButton": "Learn more"
+    },
+    "testimonials": {
+      "heading": "Trusted by professionals across all industries"
+    }
+  }
+}
