@@ -1,0 +1,13 @@
+{
+  "landing": {
+    "hero": {
+      "heading": "Descubre la nueva era profesional, gracias a la tecnología NFC",
+      "description": "Potencia tu experiencia y destaca frente a la competencia con nuestras tarjetas de presentación premium. Solo acércala al teléfono de alguien y comparte tu página personal personalizada!",
+      "button": "Empieza ahora",
+      "secondaryButton": "Saber más"
+    },
+    "testimonials": {
+      "heading": "Utilizado por profesionales de todos las industrias"
+    }
+  }
+}
