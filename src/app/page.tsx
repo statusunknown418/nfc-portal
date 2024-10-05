@@ -41,80 +41,80 @@ import { HydrateClient } from "~/trpc/server";
 const reviews = [
   {
     name: "@ju.pa****",
-    username: "Biomedical Engineer ",
-    body: "Even while being a student this has improved my exposure to better job opportunities.",
+    username: "Ingeniero Biomédico",
+    body: "Incluso siendo estudiante, esto ha mejorado mi acceso a mejores oportunidades laborales.",
     img: "https://avatar.vercel.sh/jose?text=jose.h",
   },
   {
     name: "@rw.****",
-    username: "Mechanical Engineer ",
-    body: "This has highly improved my professional profile. Totally recommend it!.",
+    username: "Ingeniero Mecánico",
+    body: "Esto ha mejorado mucho mi perfil profesional. ¡Lo recomiendo totalmente!",
     img: "https://avatar.vercel.sh/rodrigo?text=ra",
   },
   {
     name: "@jos****",
-    username: "Product Engineer at AV****",
-    body: "This is the best solution for upgraded networking.",
+    username: "Ingeniero de Producto en AV****",
+    body: "Esta es la mejor solución para mejorar el networking.",
     img: "https://avatar.vercel.sh/joseph?text=jm",
   },
   {
     name: "@bdi****",
-    username: "CEO at CI** Peru",
-    body: "Sharing my contact to new people has never been easier!",
+    username: "CEO en CI** Perú",
+    body: "¡Compartir mi contacto con nuevas personas nunca ha sido tan fácil!",
     img: "https://avatar.vercel.sh/jill?text=boris.d",
   },
   {
     name: "@mar****",
-    username: "Marketing Lead at PEP****",
-    body: "I'm at a loss for words. This is amazing. I love it.",
+    username: "Líder de Marketing en PEP****",
+    body: "Me faltan las palabras. Esto es increíble. Me encanta.",
     img: "https://avatar.vercel.sh/john?text=martina.m",
   },
   {
     name: "@ari.****",
-    username: "Lawyer at M****",
-    body: "This product can truly change the way we communicate with each other.",
+    username: "Abogado en M****",
+    body: "Este producto puede realmente cambiar la forma en que nos comunicamos.",
     img: "https://avatar.vercel.sh/jane?text=JO",
   },
   {
     name: "@kim****",
-    username: "Software Engineer at NT****",
-    body: "I have been using this product for weeks now and it has been a game changer!",
+    username: "Ingeniera de Software en NT****",
+    body: "He estado usando este producto durante semanas y ha sido un cambio radical.",
     img: "https://avatar.vercel.sh/kimberly?text=kimberly.c",
   },
   {
     name: "@fr.****",
-    username: "Physics Researcher at PU**",
-    body: "Improving our personal brand does indeed open many doors.",
+    username: "Investigador en Física en PU**",
+    body: "Mejorar nuestra marca personal definitivamente abre muchas puertas.",
     img: "https://avatar.vercel.sh/francisco?text=FD",
   },
   {
     name: "@the.ar****",
-    username: "CEO at Sta****",
-    body: "Simple, easy and effective way to show off!",
+    username: "CEO en Sta****",
+    body: "¡Simple, fácil y efectivo para destacar!",
     img: "https://avatar.vercel.sh/john?text=TA",
   },
   {
     name: "@j.a.****",
-    username: "Civil Engineer at V**",
-    body: "Using ConCard at social events makes you stand out from the crowd.",
+    username: "Ingeniero Civil en V**",
+    body: "Usar ConCard en eventos sociales te hace destacar entre la multitud.",
     img: "https://avatar.vercel.sh/john?text=JA",
   },
   {
     name: "@er.d.****",
-    username: "Physician at Hosp**** *****",
-    body: "I used to think networking wasn't for me, but ConCard has changed that!",
+    username: "Médico en Hosp**** *****",
+    body: "Solía pensar que el networking no era para mí, ¡pero ConCard cambió eso!",
     img: "https://avatar.vercel.sh/john?text=JA",
   },
   {
     name: "@sej.****",
-    username: "Marketing Manager at Via**** ****",
-    body: "We needed something like this for years, now it's finally here!",
+    username: "Gerente de Marketing en Via**** ****",
+    body: "¡Llevábamos años necesitando algo como esto, y por fin está aquí!",
     img: "https://avatar.vercel.sh/john?text=JL",
   },
   {
     name: "@diego.****",
-    username: "Biomedical Engineer at Cl**** *****",
-    body: "I've always loved networking but , this is definitely better!",
+    username: "Ingeniero Biomédico en Cl**** *****",
+    body: "Siempre me ha encantado el networking, ¡pero esto es definitivamente mejor!",
     img: "https://avatar.vercel.sh/john?text=DR",
   },
 ];
@@ -196,19 +196,18 @@ export default async function Home() {
 
               <BlurFade>
                 <h1 className="text-center text-5xl font-bold tracking-tight sm:text-6xl md:text-7xl">
-                  Discover a new era of networking, powered by{" "}
+                  Descubre la nueva era profesional, gracias a la tecnologia{" "}
                   <span className="bg-gradient-to-r from-indigo-700 via-violet-500 to-purple-400 bg-clip-text text-transparent">
                     NFC
                   </span>{" "}
-                  technology
                 </h1>
               </BlurFade>
 
               <BlurFade delay={0.25}>
                 <p className="max-w-sm text-pretty text-center text-muted-foreground sm:text-lg md:max-w-lg md:text-xl lg:max-w-4xl">
-                  Supercharge your experience and stand up to the competition with our premium
-                  business cards, simply approach it to someone&apos;s phone and share your own
-                  custom-made personal page!
+                  Potencia tu experiencia y destaca frente a la competencia con nuestras tarjetas de
+                  presentación premium. Solo acércala al teléfono de alguien y comparte tu página
+                  personal personalizada!
                 </p>
               </BlurFade>
 
@@ -222,7 +221,7 @@ export default async function Home() {
                       className="group w-full shadow-lg shadow-indigo-300 transition-all hover:shadow-xl hover:shadow-indigo-300 sm:w-auto"
                     >
                       <Link href="/admin">
-                        Get started
+                        Comienza Ahora
                         <ChevronRightIcon className="transition-transform group-hover:translate-x-1" />
                       </Link>
                     </Button>
@@ -230,7 +229,7 @@ export default async function Home() {
 
                   <Button asChild variant="ghost" size="lg" className="group">
                     <Link href="#features">
-                      Why us?
+                      Porque ConCard?
                       <QuestionMarkCircledIcon className="transition-transform group-hover:translate-x-1" />
                     </Link>
                   </Button>
@@ -256,7 +255,7 @@ export default async function Home() {
         <section className="bg-white py-24" id="customers">
           <article className="relative mx-auto max-w-7xl">
             <h3 className="text-center text-lg font-medium uppercase text-muted-foreground">
-              Trusted by professionals across all industries
+              Con la confianza de profesionales en todas las industrias
             </h3>
 
             <Marquee pauseOnHover className="mt-5 [--duration:30s]">
@@ -275,7 +274,7 @@ export default async function Home() {
             <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-white dark:from-background" />
 
             <p className="mt-4 text-center text-xs text-muted-foreground">
-              We hide full usernames and personal data for privacy reasons
+              Ocultamos los nombres completos e informacion personal por razones de privacidad
             </p>
           </article>
         </section>
@@ -286,13 +285,15 @@ export default async function Home() {
         >
           <article className="w-full max-w-7xl space-y-8 rounded-[32px]">
             <div className="space-y-2">
-              <p className="font-semibold text-indigo-600">Features</p>
+              <p className="font-semibold text-indigo-600">Caracteristicas</p>
 
-              <h2 className="text-4xl font-semibold tracking-tight">Benefits, and why us?</h2>
+              <h2 className="text-4xl font-semibold tracking-tight">
+                Beneficios, y porque escogernos?
+              </h2>
 
               <p className="max-w-prose text-lg text-muted-foreground">
-                Explore countless benefits of using our product, and why we are the best choice for
-                you
+                Explora los beneficios de usar nuestro producto y porque somos la mejor opcion para
+                ti
               </p>
             </div>
 
@@ -302,18 +303,18 @@ export default async function Home() {
 
                 <h2 className="text-2xl font-medium">
                   <span className="transition-all group-hover:text-indigo-400">
-                    Extremely easy to use,
+                    Extremadamente facil de usar,
                   </span>{" "}
                   <span className="text-indigo-400 transition-all group-hover:text-inherit">
-                    get started in just a few minutes
+                    comienza en solo unos minutos
                   </span>{" "}
                   <span className="transition-all group-hover:text-indigo-400">
-                    and stand out from the competition{" "}
+                    y destaca frente a la competencia{" "}
                   </span>
                   <span className="text-indigo-400 transition-all group-hover:text-inherit">
-                    by showcasing your profile in a unique and professional way.
+                    mostrando tu perfil de manera única y profesional.
                   </span>{" "}
-                  <span>Share your ConCard URL anywhere!</span>
+                  <span>¡Comparte tu URL de ConCard en cualquier lugar!</span>
                 </h2>
               </article>
 
@@ -331,10 +332,10 @@ export default async function Home() {
                 </section>
 
                 <h2 className="text-2xl font-medium">
-                  Highly customizable,{" "}
-                  <span className="text-pink-500">we offer a wide range of options</span> to make
-                  your portal and business card truly{" "}
-                  <span className="text-pink-500">yours and unique</span>
+                  Altamente personalizable,{" "}
+                  <span className="text-pink-500">ofrecemos una amplia gama de opciones</span> para
+                  que tu portal y tarjeta de presentacion sean verdaderamente{" "}
+                  <span className="text-pink-500">tuyos y unicos</span>
                 </h2>
               </article>
 
@@ -342,26 +343,27 @@ export default async function Home() {
                 <div>graphic 3</div>
 
                 <h2 className="text-2xl font-medium">
-                  No external applications required,{" "}
-                  <span className="text-emerald-500">it works right out of the box</span> on all iOS
-                  devices and <span className="text-emerald-500"> most Android phones</span>
+                  No se requieren aplicaciones externas,{" "}
+                  <span className="text-emerald-500">funciona de inmediato</span> en todos los
+                  dispositivos iOS y{" "}
+                  <span className="text-emerald-500"> en la mayoría de los teléfonos Android</span>
                 </h2>
               </article>
 
               <article className="border border-neutral-50 bg-primary text-neutral-50 lg:col-span-8 lg:row-span-2">
                 <div>
                   <LockClosedIcon className="size-6" />
-                  <HyperText text="All contact info is encrypted" />
+                  <HyperText text="Toda tu informacion esta encriptada" />
                 </div>
 
                 <h2 className="text-2xl font-medium">
-                  Secure information,{" "}
+                  Informacion segura,{" "}
                   <span className="text-muted-foreground">
-                    no one is able to see your personal contact unless you
+                    nadie puede ver tu contacto personal a menos
                   </span>{" "}
-                  <span>explicitly share it</span>{" "}
+                  <span>que lo compartas explícitamente</span>{" "}
                   <span className="text-muted-foreground">
-                    by approaching one of your business cards
+                    acercando una de tus tarjetas de presentación.
                   </span>
                 </h2>
               </article>
@@ -375,38 +377,39 @@ export default async function Home() {
         >
           <article className="group w-full max-w-7xl space-y-10 rounded-[32px]">
             <section className="space-y-2">
-              <p className="font-medium text-blue-600">Compare it by yourself</p>
+              <p className="font-medium text-blue-600">Comparalo tu mismo</p>
               <h2 className="text-4xl font-semibold tracking-tight">
-                The old way vs{" "}
+                Antes vs{" "}
                 <span className="bg-gradient-to-r from-violet-700 to-purple-400 bg-clip-text text-transparent">
-                  New way
+                  Despues
                 </span>
               </h2>
 
               <p className="max-w-prose text-lg text-muted-foreground">
-                The usual way to share information is to send a text message or email. But what if
-                you want to share your contact information with someone without having to type it
-                out?
+                La forma tradicional de compartir tu información es entregando una tarjeta de
+                presentación o escribiendo tus datos en un papel. Pero, ¿y si pudieras compartir tu
+                contacto de manera instantánea y sin complicaciones, sin tener que recurrir al
+                papel?
               </p>
             </section>
 
             <section className="grid grid-cols-1 gap-4 pb-10 md:grid-cols-2 md:gap-10">
               <Card className="rounded-[28px] border-dashed bg-zinc-100 p-3 shadow-none transition-all duration-300 group-hover:translate-x-1/2 group-hover:scale-95 group-hover:blur-sm md:p-6">
                 <CardHeader>
-                  <CardTitle className="text-xl">Others</CardTitle>
+                  <CardTitle className="text-xl">Otros</CardTitle>
                   <CardDescription className="text-base">
-                    The usual way, nothing special
+                    El modo usual, nada especial
                   </CardDescription>
                 </CardHeader>
 
                 <CardContent>
                   <ul className="list-disc space-y-3 pl-4 text-lg font-light text-muted-foreground">
-                    <li>Plain link in bio (not always offered)</li>
-                    <li>Will most likely be require an app</li>
-                    <li>Not useful to show off</li>
-                    <li>Traditional printed cards may harm the environment</li>
+                    <li>Enlace simple en la biografía (no siempre disponible)</li>
+                    <li>Lo más probable es que requiera una aplicación</li>
+                    <li>No es útil para destacar</li>
+                    <li>Las tarjetas impresas tradicionales pueden dañar el medio ambiente</li>
                     <li>
-                      Works ... but it&apos;s <span className="font-medium italic">boring</span>
+                      Funciona... pero es <span className="font-medium italic">aburrido</span>
                     </li>
                   </ul>
                 </CardContent>
@@ -416,7 +419,7 @@ export default async function Home() {
                 <CardHeader>
                   <CardTitle className="text-2xl">ConCard</CardTitle>
                   <CardDescription className="text-base">
-                    Improve your professional profile
+                    Mejora tu perfil profesional
                   </CardDescription>
                 </CardHeader>
 
@@ -424,43 +427,43 @@ export default async function Home() {
                   <ul className="space-y-3 text-lg font-light text-zinc-200">
                     <li className="flex gap-3">
                       <Badge variant="violet">1</Badge>
-                      <p>Customizable NFC business card ✨</p>
+                      <p>Tarjeta de presentación NFC personalizable ✨</p>
                     </li>
 
                     <li className="flex gap-3">
                       <Badge variant="violet">2</Badge>
-                      <p>Make your own public personal page</p>
+                      <p>Crea tu propia página personal pública</p>
                     </li>
 
                     <li className="flex gap-3">
                       <Badge variant="violet">3</Badge>
-                      <p>Add all the links you want to share</p>
+                      <p>Añade todos los enlaces que quieras compartir</p>
                     </li>
 
                     <li className="flex gap-3">
                       <Badge variant="violet">4</Badge>
-                      <p>Secure information</p>
+                      <p>Información segura</p>
                     </li>
 
                     <li className="flex gap-3">
                       <Badge variant="violet">5</Badge>
-                      <p>No need to install anything</p>
+                      <p>No necesitas instalar nada</p>
                     </li>
 
                     <li className="flex gap-3">
                       <Badge variant="violet">6</Badge>
-                      <p>Enhance and showcase your brand</p>
+                      <p>Mejora y muestra tu marca</p>
                     </li>
 
                     <li className="flex gap-3">
                       <Badge variant="violet">7</Badge>
-                      <p>Buy one ... or a lot!</p>
+                      <p>¡Compra una... o muchas!</p>
                     </li>
                   </ul>
                 </CardContent>
 
                 <CardFooter className="text-muted-foreground">
-                  <p className="text-sm">Think of LinkTree but much better</p>
+                  <p className="text-sm">Como un LinkTree, pero mucho mejor!</p>
                 </CardFooter>
 
                 <BorderBeam size={100} duration={10} delay={5} borderWidth={2} />
@@ -475,10 +478,11 @@ export default async function Home() {
             className="mx-auto flex w-full max-w-7xl flex-col gap-10 md:gap-14"
           >
             <header className="space-y-2 px-4 md:px-6">
-              <p className="font-medium text-emerald-400">An explanation</p>
-              <h2 className="text-4xl font-semibold tracking-tight">But how does it work?</h2>
+              <p className="font-medium text-emerald-400">Paso a Paso</p>
+              <h2 className="text-4xl font-semibold tracking-tight">Y como funciona?</h2>
               <p className="text-lg text-muted-foreground">
-                We use a combination of technologies to make our product stand out
+                Combinamos tecnologias de primera para que nuestro producto tenga la calidad que
+                buscas
               </p>
             </header>
 
@@ -487,9 +491,10 @@ export default async function Home() {
                 <Badge variant="secondary">1</Badge>
 
                 <section>
-                  <h3 className="text-lg font-medium">Sign up and choose your username</h3>
+                  <h3 className="text-lg font-medium">Registrate y elige tu nombre de usuario</h3>
                   <p className="text-muted-foreground">
-                    You can use an email or social media account to sign up
+                    Puedes usar un correo electrónico o una cuenta de redes sociales para
+                    registrarte
                   </p>
                 </section>
 
@@ -502,9 +507,9 @@ export default async function Home() {
                 <Badge variant="secondary">2</Badge>
 
                 <section>
-                  <h3 className="text-lg font-medium">Add your contact information</h3>
+                  <h3 className="text-lg font-medium">Agrega tu información de contacto</h3>
                   <p className="text-muted-foreground">
-                    Anything you want to share with your contacts
+                    Cualquier cosa que quieras compartir con tus contactos.
                   </p>
                 </section>
 
@@ -517,9 +522,9 @@ export default async function Home() {
                 <Badge variant="secondary">3</Badge>
 
                 <section>
-                  <h3 className="text-lg font-medium">Customize your page</h3>
+                  <h3 className="text-lg font-medium">Personaliza tu página</h3>
                   <p className="text-muted-foreground">
-                    You can add your own content and customize your page
+                    Puedes agregar tu propio contenido y personalizar tu página.
                   </p>
                 </section>
 
@@ -532,8 +537,10 @@ export default async function Home() {
                 <Badge variant="secondary">4</Badge>
 
                 <section>
-                  <h3 className="text-lg font-medium">Purchase an NFC card</h3>
-                  <p className="text-muted-foreground">Choose from a variety of options</p>
+                  <h3 className="text-lg font-medium">Personaliza tu tarjeta</h3>
+                  <p className="text-muted-foreground">
+                    Elige entre una variedad de opciones o crea tu propio diseño
+                  </p>
                 </section>
 
                 <div className="flex h-52 w-full items-center justify-center bg-neutral-700">
@@ -545,10 +552,10 @@ export default async function Home() {
                 <Badge variant="secondary">5</Badge>
 
                 <section>
-                  <h3 className="text-lg font-medium">Use it anywhere!</h3>
+                  <h3 className="text-lg font-medium">Ya estas listo!</h3>
                   <p className="max-w-prose text-muted-foreground">
-                    No need to install anything, simply approach it to someone&apos;s phone and
-                    share your page, including your contact information!
+                    No necesitas instalar nada, simplemente acércala al teléfono de alguien y
+                    comparte tu página, ¡incluida tu información de contacto!
                   </p>
                 </section>
 
@@ -566,13 +573,13 @@ export default async function Home() {
         >
           <article className="w-full max-w-7xl space-y-14 rounded-[32px]">
             <div className="flex flex-col items-center justify-center space-y-2 text-center">
-              <p className="font-semibold text-indigo-600">Pricing</p>
+              <p className="font-semibold text-indigo-600">Precio</p>
               <h2 className="text-4xl font-semibold tracking-tight">
-                Dead simple pricing, no hidden costs
+                Precios claros y sencillos, sin costos ocultos
               </h2>
               <p className="text-lg text-muted-foreground">
-                We offer a single plan for all our individual customers, so you can focus on what
-                matters most
+                Ofrecemos un único plan para todos nuestros clientes individuales, para que puedas
+                enfocarte en lo que más importa.
               </p>
             </div>
 
@@ -617,13 +624,13 @@ export default async function Home() {
 
               <Card className="relative z-10 h-full w-full rounded-[24px] border border-indigo-400 bg-gradient-to-br from-primary to-indigo-950 text-primary-foreground shadow-xl shadow-indigo-400 transition-all duration-300 group-hover:translate-y-5 group-hover:scale-105 md:p-4">
                 <CardHeader>
-                  <p className="text-muted-foreground">Starting from</p>
+                  <p className="text-muted-foreground">Empezando desde</p>
                   <CardTitle className="text-2xl font-normal text-green-400">
                     S/. 49.90 PEN
                   </CardTitle>
-                  <CardTitle className="text-2xl">Professional</CardTitle>
+                  <CardTitle className="text-2xl">Profesional</CardTitle>
                   <CardDescription className="text-base">
-                    Single, affordable and flexible plan, perfect for everyone, it includes:
+                    Un único plan asequible y flexible, perfecto para todos. Incluye:
                   </CardDescription>
                 </CardHeader>
 
@@ -636,32 +643,32 @@ export default async function Home() {
 
                     <li className="flex gap-3">
                       <Badge variant="secondary">2</Badge>
-                      <p>Free shipping! (Lima)</p>
+                      <p>Envio gratuito! (Lima)</p>
                     </li>
 
                     <li className="flex gap-3">
                       <Badge variant="secondary">3</Badge>
-                      <p>All page customization options</p>
+                      <p>Todas las opciones de personalización de la página</p>
                     </li>
 
                     <li className="flex gap-3">
                       <Badge variant="secondary">4</Badge>
-                      <p>Social/professional links </p>
+                      <p>Enlaces sociales/profesionales </p>
                     </li>
 
                     <li className="flex gap-3">
                       <Badge variant="secondary">5</Badge>
-                      <p>High security for your information</p>
+                      <p>Alta seguridad para tu información</p>
                     </li>
 
                     <li className="flex gap-3">
                       <Badge variant="secondary">6</Badge>
-                      <p>Email signatures</p>
+                      <p>Firmas de correo electrónicos</p>
                     </li>
 
                     <li className="flex gap-3">
                       <Badge variant="secondary">7</Badge>
-                      <p>And more!</p>
+                      <p>¡Y más!</p>
                     </li>
                   </ul>
                 </CardContent>
@@ -670,7 +677,7 @@ export default async function Home() {
                   <SignUpButton>
                     <Button variant="primary" className="w-full" size="lg">
                       <MagicWandIcon className="h-5 w-5" />
-                      Start now!
+                      Empieza ahora!
                     </Button>
                   </SignUpButton>
                 </CardFooter>
@@ -723,9 +730,9 @@ export default async function Home() {
           <section id="security" className="mx-auto w-full max-w-7xl">
             <header className="space-y-2">
               <p className="font-medium text-pink-700">FAQ</p>
-              <h2 className="text-4xl font-semibold tracking-tight">Any doubts?</h2>
+              <h2 className="text-4xl font-semibold tracking-tight">Alguna duda?</h2>
               <p className="text-muted-foreground">
-                If none of these answers your question, feel free to contact us at{" "}
+                Si ninguna de estas respuestas resuelve tu duda, no dudes en contactarnos en{" "}
                 <Link href="mailto:help@stackkstudios.com" className="text-primary underline">
                   help@stackkstudios.com
                 </Link>
@@ -735,66 +742,68 @@ export default async function Home() {
             <Accordion type="single" collapsible className="mt-8 w-full">
               <AccordionItem value="explain-nfc">
                 <AccordionTrigger className="h-20 text-2xl font-medium">
-                  What is NFC technology?
+                  Que es la tecnologia NFC?
                 </AccordionTrigger>
 
                 <AccordionContent className="text-lg font-light" accessKey="explain-nfc">
-                  NFC stands for Near Field Communication, which is a technology that allows two
-                  devices to communicate with each other over a short distance, aka what powers
-                  Apple Pay and Google Pay. ConCard uses it to enable you to share any contact
-                  information with others without the need for them to install any additional
-                  applications.
+                  NFC significa Near Field Communication (Comunicación de Campo Cercano), una
+                  tecnología que permite que dos dispositivos se comuniquen entre sí a corta
+                  distancia, lo que también impulsa a Apple Pay y Google Pay. ConCard lo utiliza
+                  para que puedas compartir cualquier información de contacto con otros, sin
+                  necesidad de que instalen aplicaciones adicionales.
                 </AccordionContent>
               </AccordionItem>
 
               <AccordionItem value="purchases">
                 <AccordionTrigger className="h-20 text-2xl font-medium">
-                  How do I purchase a card?
+                  Como compro una tarjeta?
                 </AccordionTrigger>
                 <AccordionContent className="text-lg font-light" accessKey="purchases">
-                  To purchase a card, you can{" "}
+                  Para comprar una tarjeta, simplemente{" "}
                   <SignUpButton>
                     <button className="font-medium underline underline-offset-2 hover:text-indigo-700">
-                      start here
+                      empieza aqui
                     </button>
                   </SignUpButton>{" "}
-                  and follow the onboarding steps, it is simple and straightforward, you can
-                  complete it in less than 10 minutes.
+                  y solo sigue los pasos de incorporación, es simple y directo, puedes completarlo
+                  en menos de 10 minutos.
                 </AccordionContent>
               </AccordionItem>
 
               <AccordionItem value="compatibility">
                 <AccordionTrigger className="h-20 text-2xl font-medium">
-                  What devices are compatible?
+                  Que dispositivos son compatibles?
                 </AccordionTrigger>
 
                 <AccordionContent className="text-lg font-light" accessKey="how-it-works">
-                  ConCard is compatible with all iOS devices and most Android devices (i.e from 2020
-                  onwards), if the device is not compatible or you are unsure, you can still share
-                  your contact info and links by scanning the QR code.
+                  ConCard es compatible con todos los dispositivos iOS y la mayoría de los
+                  dispositivos Android (es decir, desde 2020 en adelante). Si el dispositivo no es
+                  compatible o tienes dudas, aún puedes compartir tu información de contacto y
+                  enlaces escaneando el código QR.
                 </AccordionContent>
               </AccordionItem>
 
               <AccordionItem value="how-it-works">
                 <AccordionTrigger className="h-20 text-2xl font-medium">
-                  How do I make it work?
+                  Como lo uso?
                 </AccordionTrigger>
                 <AccordionContent className="text-lg font-light" accessKey="how-it-works">
-                  You can use ConCard to share your contact information with others without the need
-                  for them to install any additional applications. Just approach it to
-                  someone&apos;s phone and share your page, including your contact information!
+                  Puedes usar ConCard para compartir tu información de contacto con otros sin que
+                  ellos necesiten instalar aplicaciones adicionales. Simplemente acércala al
+                  teléfono de alguien y comparte tu página, ¡incluida tu información de contacto!
                 </AccordionContent>
               </AccordionItem>
 
               <AccordionItem value="security">
                 <AccordionTrigger className="h-20 text-2xl font-medium">
-                  What if someone finds out my username by accident?
+                  Que pasa si alguien encuentra mi perfil por accidente?
                 </AccordionTrigger>
 
                 <AccordionContent className="text-lg font-light">
-                  Don&apos;t worry, we take your privacy seriously and have architected a system to
-                  secure your private information, all pages are encrypted and only accessible when
-                  you explicitly open it by approaching your card to someone&apos;s phone.
+                  No te preocupes, tomamos tu privacidad muy en serio y hemos diseñado un sistema
+                  para proteger tu información privada. Todas las páginas están encriptadas y solo
+                  son accesibles cuando tú las abres explícitamente al acercar tu tarjeta al
+                  teléfono de alguien.
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
