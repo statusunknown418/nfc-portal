@@ -68,14 +68,6 @@ export const CardPreferencesForm = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)} className="flex w-full flex-col gap-8">
-        <header className="space-y-1">
-          <h2 className="text-2xl font-bold">Get your own business card</h2>
-
-          <p className="text-muted-foreground">
-            Improve your personal brand and make it stand out from the crowd.
-          </p>
-        </header>
-
         <section className="flex flex-col gap-2">
           <h3 className="text-lg font-medium">Choose a card variant</h3>
 

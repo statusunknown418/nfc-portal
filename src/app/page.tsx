@@ -184,7 +184,7 @@ export default async function Home() {
 
         <div
           id="hero"
-          className="relative flex min-h-[calc(100vh-9rem)] flex-col items-center justify-center gap-16"
+          className="relative flex min-h-[calc(100svh-10rem)] flex-col items-center justify-center gap-16"
         >
           <section className="relative mx-auto w-full max-w-7xl px-5 md:px-10">
             <article className="flex flex-col items-center gap-7">
@@ -319,9 +319,9 @@ export default async function Home() {
 
               <article className="border border-pink-300 bg-pink-100 text-pink-900 lg:col-span-4 lg:row-span-2">
                 <section className="group relative flex h-48">
-                  <div className="absolute right-5 top-0 h-36 w-64 rounded-lg border bg-white transition-all" />
-                  <div className="absolute right-14 top-4 h-36 w-64 rounded-lg border bg-gradient-to-r from-neutral-600 via-muted to-neutral-600 transition-all" />
-                  <div className="absolute right-28 top-8 flex h-36 w-64 flex-col items-center justify-center gap-3 rounded-lg border bg-primary text-primary-foreground transition-all group-hover:scale-105">
+                  <div className="absolute top-0 h-36 w-64 rounded-lg border bg-white transition-all md:right-5" />
+                  <div className="absolute top-4 h-36 w-64 rounded-lg border bg-gradient-to-r from-neutral-600 via-muted to-neutral-600 transition-all md:right-14" />
+                  <div className="absolute top-8 flex h-36 w-64 flex-col items-center justify-center gap-3 rounded-lg border bg-primary text-primary-foreground transition-all group-hover:scale-105 md:right-28">
                     <p className="flex items-center gap-2">
                       <Share1Icon className="h-5 w-5" /> Johannes Doe
                     </p>
@@ -391,7 +391,7 @@ export default async function Home() {
             </section>
 
             <section className="grid grid-cols-1 gap-4 pb-10 md:grid-cols-2 md:gap-10">
-              <Card className="rounded-[28px] border-dashed bg-zinc-100 p-3 shadow-none transition-all duration-300 group-hover:translate-x-1/2 group-hover:scale-95 group-hover:blur-sm md:p-6">
+              <Card className="rounded-[28px] border-dashed bg-zinc-100 p-3 shadow-none transition-all duration-300 group-hover:scale-95 group-hover:blur-sm md:p-6 md:group-hover:translate-x-1/2">
                 <CardHeader>
                   <CardTitle className="text-xl">Others</CardTitle>
                   <CardDescription className="text-base">
@@ -412,7 +412,7 @@ export default async function Home() {
                 </CardContent>
               </Card>
 
-              <Card className="relative rounded-[28px] border border-indigo-400 bg-primary p-3 text-primary-foreground shadow-xl shadow-violet-300 transition-all duration-300 group-hover:-translate-x-[calc(50%+2.5rem)] group-hover:translate-y-10 group-hover:scale-110 md:p-6">
+              <Card className="relative rounded-[28px] border border-indigo-400 bg-primary p-3 text-primary-foreground shadow-xl shadow-violet-300 transition-all duration-300 group-hover:scale-110 md:p-6 md:group-hover:-translate-x-[calc(50%+2.5rem)] md:group-hover:translate-y-10">
                 <CardHeader>
                   <CardTitle className="text-2xl">ConCard</CardTitle>
                   <CardDescription className="text-base">
