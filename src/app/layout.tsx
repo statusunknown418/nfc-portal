@@ -10,7 +10,7 @@ import { Toaster } from "~/components/ui/sonner";
 import { type Viewport } from "next";
 
 export const metadata: Metadata = {
-  title: "NFC Portal",
+  title: "ConCard",
   description: "Custom pages for your NFC business card",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
   authors: [
@@ -19,11 +19,11 @@ export const metadata: Metadata = {
       url: "https://github.com/statusunknown418",
     },
   ],
-  metadataBase: new URL("https://nfc-portal.vercel.app"),
+  metadataBase: new URL("https://concard.app"),
   openGraph: {
     images: "/opengraph-image.png",
     type: "website",
-    url: "https://nfc-portal.vercel.app/opengraph-image.png",
+    url: "https://concard.app/opengraph-image.png",
   },
 };
 
