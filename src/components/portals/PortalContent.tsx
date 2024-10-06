@@ -65,7 +65,7 @@ export const PortalContent = ({
       <article className="flex h-full w-full max-w-[580px] flex-col items-center gap-4 sm:shadow-lg xl:rounded-3xl xl:border xl:border-border/50">
         <section
           className={cn(
-            "relative z-0 max-h-[400px] min-h-[300px] w-full max-w-[580px] overflow-hidden bg-cover bg-center bg-no-repeat sm:min-h-[320px] md:min-h-[350px]",
+            "relative z-0 max-h-[400px] min-h-[400px] w-full max-w-[580px] overflow-hidden bg-cover bg-center bg-no-repeat sm:min-h-[320px] md:min-h-[350px]",
             {
               "rounded-full": portal.data.avatarShape === "circle",
               "rounded-none": portal.data.avatarShape === "square",
@@ -87,7 +87,7 @@ export const PortalContent = ({
         <header
           className={cn(
             "z-10 -mt-24 flex w-full flex-col px-4 text-center",
-            portal.data.profileHeader && "-mt-16",
+            portal.data.profileHeader && "-mt-28",
           )}
         >
           {portal.data.profileHeader && <p className="px-4 text-sm">{portal.data.profileHeader}</p>}
