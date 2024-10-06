@@ -29,10 +29,10 @@ export const AllSignatures = ({
 
           <img 
             style="width:100%;height:auto;max-width:100%;max-height:100%;display:block"
-            src="https://chronosecrets.app/api/dynamics/${data.id}" alt="${data.username} Signature" 
+            src="https://concard.app/api/dynamics/${data.id}" alt="${data.username} Signature" 
           >
 
-          <p>Powered by <a style="color:#818cf8" href="https://chronosecrets.app">concard.app</a></p>
+          <p>Powered by <a style="color:#818cf8" href="https://concard.app">concard.app</a></p>
         </body>
       </html>
     `;
