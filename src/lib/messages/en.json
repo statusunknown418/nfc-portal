@@ -1,13 +1,109 @@
 {
   "landing": {
     "hero": {
-      "heading": "Discover the new era of networking powered by NFC technology",
-      "description": "Enhance your experience and stand out from the competition with premium card designs. Just tap the card on a phone to connect and share your personalized page!",
-      "button": "Start now",
+      "heading": "Discover the new professional era, thanks to NFC technology",
+      "description": "Enhance your experience and stand out from the competition with our premium business cards. Just tap it on someone's phone and share your personalized page!",
+      "button": "Get started now",
       "secondaryButton": "Learn more"
     },
     "testimonials": {
-      "heading": "Trusted by professionals across all industries"
+      "heading": "Trusted by professionals in all industries",
+      "disclaimer": "We hide full names and personal information for privacy reasons"
+    },
+    "features": {
+      "heading": "Benefits, and why choose us?",
+      "description": "Explore the benefits of using our product and why we are the best option for you",
+      "graphic 1.1": "Extremely easy to use,",
+      "graphic 1.2": "get started in just a few minutes",
+      "graphic 1.3": "and stand out from the competition",
+      "graphic 1.4": "by showcasing your profile in a unique and professional way.",
+      "graphic 1.5": "Share your ConCard URL anywhere!",
+      "graphic 2.1": "Highly customizable,",
+      "graphic 2.2": "we offer a wide range of options",
+      "graphic 2.3": "to make your portal and business card truly",
+      "graphic 2.4": "yours and unique",
+      "graphic 3.1": "No external apps required,",
+      "graphic 3.2": "works instantly",
+      "graphic 3.3": "on all iOS devices and",
+      "graphic 3.4": "most Android phones",
+      "graphic 4.1": "Secure information,",
+      "graphic 4.2": "no one can see your personal contact unless",
+      "graphic 4.3": "they tap one of your business cards."
+    },
+    "comparison": {
+      "Compare": "Compare it yourself",
+      "Before": "Before vs",
+      "After": "After",
+      "text": "The traditional way of sharing your information is by handing over a business card or writing your details on paper. But what if you could share your contact instantly and hassle-free, without resorting to paper?",
+      "head1": "The usual way, nothing special",
+      "lic1": "Simple link in bio (not always available)",
+      "lic2": "Most likely requires an app",
+      "lic3": "Not useful to stand out",
+      "lic4": "Printed business cards can harm the environment",
+      "lic5.1": "It works... but it's",
+      "lic5.2": "boring",
+      "head2": "Upgrade your professional profile",
+      "lin1": "Customizable NFC business card ✨",
+      "lin2": "Create your own public personal page",
+      "lin3": "Add all the links you want to share",
+      "lin4": "Secure information",
+      "lin5": "No need to install anything",
+      "lin6": "Enhance and showcase your brand",
+      "lin7": "Buy one... or many!",
+      "bottom": "Like a LinkTree, but much better!"
+    },
+    "StepByStep": {
+      "title": "Step by Step",
+      "subtitle": "How does it work?",
+      "subheading": "We combine top technologies to ensure our product delivers the quality you're looking for",
+      "s1title": "Sign up and choose your username",
+      "s1description": "You can sign up using an email or social media account",
+      "s2title": "Add your contact information",
+      "s2description": "Anything you want to share with your contacts.",
+      "s3title": "Customize your page",
+      "s31description": "You can add your own content and personalize your page.",
+      "s4title": "Customize your card",
+      "s4description": "Choose from a variety of options or create your own design",
+      "s5title": "You're all set!",
+      "s5description": "No need to install anything, just tap it on someone's phone and share your page, including your contact information!"
+    },
+    "Price": {
+      "title": "Pricing",
+      "description": "Clear and simple pricing, no hidden costs",
+      "From": "We offer a single plan for all individual customers, so you can focus on what matters most.",
+      "plandescription": "A single affordable and flexible plan, perfect for everyone. Includes:",
+      "in1": "1 business card included",
+      "in2": "Free shipping! (Lima)",
+      "in3": "All page customization options",
+      "in4": "Social/professional links",
+      "in5": "High security for your information",
+      "in6": "Email signatures",
+      "in7": "And more!",
+      "button": "Get started now!"
+    },
+    "FAQ": {
+      "subtitle": "Any questions?",
+      "messg": "If none of these answers resolve your doubts, feel free to contact us at",
+      "Q1": "What is NFC technology?",
+      "A1": "NFC stands for Near Field Communication, a technology that allows two devices to communicate at close range, which also powers Apple Pay and Google Pay. ConCard uses it so you can share any contact information with others without needing them to install additional apps.",
+      "Q2": "How do I purchase a card?",
+      "A2.1": "To purchase a card, simply",
+      "A2.2": "start here",
+      "A2.3": "and follow the onboarding steps, it's simple and straightforward, you can complete it in less than 10 minutes.",
+      "Q3": "What devices are compatible?",
+      "A3": "ConCard is compatible with all iOS devices and most Android devices (i.e., 2020 onwards). If the device isn't compatible or you have doubts, you can still share your contact information and links by scanning the QR code.",
+      "Q4": "How do I use it?",
+      "A4": "You can use ConCard to share your contact information with others without them needing to install additional apps. Just tap it on someone's phone and share your page, including your contact information!",
+      "Q5": "What if someone finds my profile by accident?",
+      "A5": "Don't worry, we take your privacy very seriously and have designed a system to protect your private information. All pages are encrypted and are only accessible when you explicitly open them by tapping your card on someone's phone."
+    },
+    "Footer": {
+      "GetStarted": "Get started here",
+      "Contact": "Contact",
+      "AboutUs": "About Us",
+      "TOS": "Terms of Service",
+      "PP": "Privacy Policy",
+      "Project": "A project by"
     }
   }
 }
