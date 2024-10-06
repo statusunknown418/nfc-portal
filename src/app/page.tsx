@@ -131,7 +131,13 @@ export default async function Home() {
         <div className="sticky inset-0 z-10 flex h-16 w-full items-end justify-center px-2">
           <header className="flex h-12 w-full max-w-7xl items-center justify-between rounded-full border border-border/50 bg-white px-2 py-2 backdrop-blur-lg backdrop-filter">
             <Link href={"/"}>
-              <p>Logo</p>
+              <Image
+                src="/logo-light.png"
+                alt="concard-logo"
+                width={32}
+                height={32}
+                className="rounded-lg"
+              />
             </Link>
 
             <ul className="hidden md:flex">
