@@ -72,14 +72,14 @@ export const PortalContent = ({
             },
           )}
           style={{
-            maskImage: "radial-gradient(100% 100% at center top, #ffffff 50%, transparent 90%)",
+            maskImage: "radial-gradient(100% 100% at center top, #ffffff 30%, transparent 90%)",
             backgroundImage: `url(${portal.data.image})`,
           }}
         >
           <div
             className="absolute bottom-0 left-0 right-0 h-2/3 w-full"
             style={{
-              background: `linear-gradient(to bottom, rgba(0,0,0,0) 70%, rgba(0,0,0,0.6) 80%)`,
+              background: `linear-gradient(to bottom, rgba(0,0,0,0) 30%, rgba(0,0,0,0.6) 80%)`,
             }}
           />
         </section>
@@ -92,7 +92,7 @@ export const PortalContent = ({
         >
           {portal.data.profileHeader && <p className="px-4 text-sm">{portal.data.profileHeader}</p>}
 
-          <h2 className="text-xl font-bold tracking-wide md:text-3xl">{portal.data.name}</h2>
+          <h2 className="text-2xl font-bold tracking-wide md:text-3xl">{portal.data.name}</h2>
 
           {portal.data.bio && (
             <p className="mt-1 line-clamp-4 px-2 text-xs mix-blend-difference md:text-sm">
