@@ -104,6 +104,45 @@
       "TOS":"Terminos de Servicio",
       "PP":"Politica de Privacidad",
       "Project":"Un proyecto de"
+    },
+    "onboarding": {
+      "top": "Vamos a alistar todo,",
+      "buttonP": "Paso Anterior",
+      "buttonN": "Siguiente Paso",
+      "welcome": {
+        "title": "¡Bienvenido a ConCard!",
+        "message": "Estamos emocionados de tenerte a bordo. Antes de comenzar (y para hacer todo más fluido), solo necesitas seguir estos simples pasos para configurar tu cuenta.",
+        "help1": "Si necesitas ayuda con algo, no dudes en contactarnos. ¡Estamos aquí para ayudarte!",
+        "help2": "Contáctanos aquí",
+        "button": "Empieza aqui"
+      },
+      "Contact": {
+        "title": "Información de contacto",
+        "subtitle": "Completa tu información de contacto pública, esto es lo que verá cada persona a la que le entregues tu tarjeta. Además, es posible ocultarla de tu página pública si es necesario.",
+        "visibility1": "Visibilidad de la información de contacto",
+        "visibility2": "Si está habilitado, tu información de contacto será visible cuando compartas tu portal a través de la tarjeta NFC.",
+        "Name": "Nombre",
+        "Apellidos": "Apellidos",
+        "Posicion": "Cargo",
+        "Empresa": "Empresa",
+        "WebEmpresa": "Sitio web de la empresa",
+        "Emails": "Correo(s) electrónico(s) (máx. 5)",
+        "Cel": "Número(s) de teléfono (máx. 5)",
+        "Direcciones": "Dirección(es) (máx. 2)"
+      },
+      "Portal": {
+        "title": "Personalización del portal",
+        "description": "Aquí puedes personalizar tu página pública a tu gusto, las plantillas también están disponibles.",
+        "Themes": "¡Temas / preajustes próximamente!",
+        "Tmess": "Estamos trabajando arduamente para brindarte las mejores experiencias con nuevas características. Si deseas verlas antes, por favor envíanos un correo.",
+        "ProfileH": "Encabezado del perfil",
+        "ProfileF": "Un título corto que quieras destacar",
+        "Bio": "Biografía",
+        "footmess": "Cualquier cosa que quieras contarle a las personas sobre ti. Esto se mostrará en tu página de perfil. (0/100 caracteres máx.)",
+        "AvatarUpl": "Subir un avatar (opcional)",
+        "Generated": "Generar Avatar",
+        "Remove": "Eliminar Avatar"
     }
+  }
   }
 }
