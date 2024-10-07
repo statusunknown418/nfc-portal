@@ -1,5 +1,6 @@
 import { ArrowRightIcon, CheckCircledIcon } from "@radix-ui/react-icons";
 import confetti from "canvas-confetti";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { ShareLink } from "~/components/admin/ShareLink";
@@ -15,6 +16,7 @@ export const FinaleStep = ({
   initialData: RouterOutputs["viewer"]["shouldShowLive"];
 }) => {
   const confettiRef = useRef<ConfettiRef>(null);
+  const t = useTranslations("admin.onboarding.steps.finale");
 
   const { mutate } = api.viewer.setOnboardingStep.useMutation();
   const { data, isLoading } = api.viewer.shouldShowLive.useQuery();
@@ -89,17 +91,11 @@ export const FinaleStep = ({
     <section className="relative mx-auto flex h-full flex-col items-center justify-center gap-4">
       <CheckCircledIcon className="h-12 w-12 text-emerald-600 md:h-12 md:w-12" />
 
-      <h2 className="text-2xl font-bold tracking-wide md:text-4xl">You are all done!</h2>
+      <h2 className="text-2xl font-bold tracking-wide md:text-4xl">{t("title")}</h2>
 
       <p className="max-w-prose text-center">
-        <span>
-          Your purchase means a lot to us. Your support is heavily appreciated and will help us
-          build a better product for our customers!.
-        </span>{" "}
-        <span className="text-muted-foreground">
-          You will receive a confirmation email shortly. If nothing arrives try checking your spam
-          folder or contact us directly, we&apos;re happy to help.
-        </span>
+        <span>{t("descriptionPart1")}</span>{" "}
+        <span className="text-muted-foreground">{t("descriptionPart2")}</span>
       </p>
 
       {isLoading ? <Skeleton className="h-32 w-96" /> : <RenderAlert />}

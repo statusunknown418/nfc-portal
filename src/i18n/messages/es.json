@@ -370,11 +370,28 @@
             "back": "Vista previa trasera",
             "close": "Cancelar"
           }
+        },
+        "purchaseCard": {
+          "title": "Compra tu tarjeta NFC",
+          "description": "Tu tarjeta NFC será entregada tan pronto como sea posible y la manera en que fue personalizada en el paso anterior.",
+          "address": "Dirección de envío",
+          "purchase": "Compra tu tarjeta",
+          "redirection": "Serás redirigido a nuestro proveedor de pagos para completar el pago de manera segura",
+          "alreadyPurchased": "Ya compraste una, ¿necesitas otra?",
+          "buyNow": "Comprar ahora!"
+        },
+        "finale": {
+          "title": "Ya está todo listo!",
+          "descriptionPart1": "Tu compra significa mucho para nosotros. Tu apoyo es muy apreciado y nos ayudará a construir un mejor producto para nuestros clientes!.",
+          "descriptionPart2": "Recibirás un correo de confirmación en breve. Si nada llega, intenta comprobar tu carpeta de spam o contáctenos directamente, estamos encantados de ayudarte."
         }
       }
     }
   },
   "common": {
-    "comingSoon": "¡Próximamente!"
+    "comingSoon": "¡Próximamente!",
+    "errors": {
+      "somethingWentWrong": "Oops, algo salió mal"
+    }
   }
 }

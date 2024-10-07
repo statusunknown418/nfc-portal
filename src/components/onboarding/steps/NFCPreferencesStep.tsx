@@ -11,7 +11,7 @@ export const NFCPreferencesStep = ({
   initialData: RouterOutputs["vCard"]["get"];
 }) => {
   const [data] = api.vCard.get.useSuspenseQuery(undefined, { initialData });
-  const t = useTranslations("admin.onboarding.steps.portal.cardPreferences");
+  const t = useTranslations("admin.onboarding.steps.cardPreferences");
 
   return (
     <section className="flex h-full flex-col gap-4 lg:flex-row">

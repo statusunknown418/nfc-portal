@@ -349,32 +349,49 @@
                 "italic": "Italic"
               }
             }
-          },
-          "cardPreferences": {
-            "title": "Customize your business card",
-            "description": "Improve your personal brand and make it stand out from the crowd.",
-            "avatar": "Avatar",
-            "avatarDescription": "Choose an avatar that you like!",
-            "variant": {
-              "label": "Choose a card variant",
-              "basic": "Classic Edition",
-              "custom": "Professional Edition (custom)",
-              "metallic": "Metallic Edition"
-            },
-            "templates": {
-              "title": "Templates",
-              "details": "See both sides",
-              "detailsTitle": "Detailed view",
-              "front": "Front card preview",
-              "back": "Back card preview",
-              "close": "Close"
-            }
           }
+        },
+        "cardPreferences": {
+          "title": "Customize your business card",
+          "description": "Improve your personal brand and make it stand out from the crowd.",
+          "avatar": "Avatar",
+          "avatarDescription": "Choose an avatar that you like!",
+          "variant": {
+            "label": "Choose a card variant",
+            "basic": "Classic Edition",
+            "custom": "Professional Edition (custom)",
+            "metallic": "Metallic Edition"
+          },
+          "templates": {
+            "title": "Templates",
+            "details": "See both sides",
+            "detailsTitle": "Detailed view",
+            "front": "Front card preview",
+            "back": "Back card preview",
+            "close": "Close"
+          }
+        },
+        "purchaseCard": {
+          "title": "Purchase your NFC card",
+          "description": "Your NFC card will be delivered as soon as possible and the way it was customized in the previous step.",
+          "address": "Shipping address",
+          "purchase": "Purchase",
+          "redirection": "You will be redirected to our payment provider to securely complete the payment",
+          "alreadyBought": "Already purchased, want another?",
+          "buyNow": "Buy now!"
+        },
+        "finale": {
+          "title": "You're all done!",
+          "descriptionPart1": "Your purchase means a lot to us. Your support is heavily appreciated and will help us build a better product for our customers!.",
+          "descriptionPart2": "You will receive a confirmation email shortly. If nothing arrives try checking your spam folder or contact us directly, we're happy to help."
         }
       }
     }
   },
   "common": {
-    "comingSoon": "Coming soon!"
+    "comingSoon": "Coming soon!",
+    "errors": {
+      "somethingWentWrong": "Something went wrong"
+    }
   }
 }

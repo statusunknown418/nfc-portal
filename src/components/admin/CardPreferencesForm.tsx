@@ -36,7 +36,7 @@ import { useTranslations } from "next-intl";
 
 export const CardPreferencesForm = () => {
   const setPreferences = nfcPreferencesStore((s) => s.setPreferences);
-  const t = useTranslations("admin.onboarding.steps.portal.cardPreferences");
+  const t = useTranslations("admin.onboarding.steps.cardPreferences");
 
   const form = useForm<SaveNFCPreferences>({
     resolver: zodResolver(saveNFCPreferencesSchema),
@@ -557,7 +557,7 @@ export const CardPreferencesForm = () => {
 };
 
 const DefaultCard = () => {
-  const t = useTranslations("admin.onboarding.steps.portal.cardPreferences");
+  const t = useTranslations("admin.onboarding.steps.cardPreferences");
 
   return (
     <RadioGroupItemRadix
@@ -584,7 +584,7 @@ const TemplateCard = ({
 }) => {
   const form = useFormContext<SaveNFCPreferences>();
   const currentTemplate = form.watch("cardTemplate");
-  const t = useTranslations("admin.onboarding.steps.portal.cardPreferences");
+  const t = useTranslations("admin.onboarding.steps.cardPreferences");
 
   return (
     <Dialog modal>
@@ -664,7 +664,7 @@ const TemplateCard = ({
 };
 
 const CustomCard = () => {
-  const t = useTranslations("admin.onboarding.steps.portal.cardPreferences");
+  const t = useTranslations("admin.onboarding.steps.cardPreferences");
   return (
     <RadioGroupItemRadix
       className="h-28 w-52 rounded-lg border bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-4 shadow-md transition-all data-[state=checked]:ring data-[state=checked]:ring-ring data-[state=checked]:ring-offset-1"
@@ -676,7 +676,7 @@ const CustomCard = () => {
 };
 
 const MetallicCard = () => {
-  const t = useTranslations("admin.onboarding.steps.portal.cardPreferences");
+  const t = useTranslations("admin.onboarding.steps.cardPreferences");
   const common = useTranslations("common");
 
   return (
