@@ -4,6 +4,7 @@ import {
   ArrowDownIcon,
   ArrowRightIcon,
   ChevronRightIcon,
+  InfoCircledIcon,
   LightningBoltIcon,
   LockClosedIcon,
   MagicWandIcon,
@@ -38,6 +39,7 @@ import {
   CardTitle,
 } from "~/components/ui/card";
 import { Skeleton } from "~/components/ui/skeleton";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "~/components/ui/tooltip";
 import { cn } from "~/lib/utils";
 import { HydrateClient } from "~/trpc/server";
 
@@ -132,10 +134,17 @@ export default function Home() {
   return (
     <HydrateClient>
       <main className="relative flex flex-col items-stretch gap-10">
-        <div className="sticky inset-0 z-10 flex h-16 w-full items-end justify-center px-2">
-          <header className="flex h-12 w-full max-w-7xl items-center justify-between rounded-full border border-border/50 bg-white px-2 py-2 backdrop-blur-lg backdrop-filter">
-            <Link href={"/"}>
-              <p>Logo</p>
+        <div className="sticky inset-0 z-30 flex h-16 w-full items-end justify-center px-2">
+          <header className="flex h-12 w-full max-w-7xl scroll-mt-2 items-center justify-between rounded-full border border-border/50 bg-white px-2 py-2 backdrop-blur-lg backdrop-filter">
+            <Link href={"/"} className="flex items-center gap-2 font-medium">
+              <Image
+                src="/logo-light.png"
+                alt="concard-logo"
+                width={32}
+                height={32}
+                className="rounded-lg"
+              />
+              ConCard
             </Link>
 
             <ul className="hidden md:flex">
@@ -284,6 +293,97 @@ export default function Home() {
             </p>
           </article>
         </section>
+
+        <div className="-mt-10 flex min-h-screen items-center rounded-t-[24px] bg-gradient-to-br from-neutral-950 via-neutral-800 to-neutral-950 p-4 py-20 text-neutral-200">
+          <section
+            id="how-it-works"
+            className="mx-auto flex w-full max-w-7xl flex-col gap-10 md:gap-14"
+          >
+            <header className="space-y-2 px-4 md:px-6">
+              <p className="font-medium text-emerald-400">An explanation</p>
+              <h2 className="text-4xl font-semibold tracking-tight">But how does it work?</h2>
+              <p className="text-lg text-muted-foreground">
+                We use a combination of technologies to make our product stand out
+              </p>
+            </header>
+
+            <div className="grid grid-cols-1 *:space-y-3 *:border-b *:border-border/20 *:px-4 *:py-6 md:grid-cols-2 md:justify-items-stretch md:gap-0 md:*:space-y-5 md:*:border-r md:*:px-8 md:*:py-10">
+              <article className="border-b">
+                <Badge variant="secondary">1</Badge>
+
+                <section>
+                  <h3 className="text-lg font-medium">Sign up and choose your username</h3>
+                  <p className="text-muted-foreground">
+                    You can use an email or social media account to sign up
+                  </p>
+                </section>
+
+                <div className="flex h-52 w-full items-center justify-center bg-neutral-700">
+                  add graphic
+                </div>
+              </article>
+
+              <article className="!border-r-0 border-b">
+                <Badge variant="secondary">2</Badge>
+
+                <section>
+                  <h3 className="text-lg font-medium">Add your contact information</h3>
+                  <p className="text-muted-foreground">
+                    Anything you want to share with your contacts
+                  </p>
+                </section>
+
+                <div className="flex h-52 w-full items-center justify-center bg-neutral-700">
+                  add graphic
+                </div>
+              </article>
+
+              <article className="border-b">
+                <Badge variant="secondary">3</Badge>
+
+                <section>
+                  <h3 className="text-lg font-medium">Customize your page</h3>
+                  <p className="text-muted-foreground">
+                    You can add your own content and customize your page
+                  </p>
+                </section>
+
+                <div className="flex h-52 w-full items-center justify-center bg-neutral-700">
+                  add graphic
+                </div>
+              </article>
+
+              <article className="!border-r-0 border-b">
+                <Badge variant="secondary">4</Badge>
+
+                <section>
+                  <h3 className="text-lg font-medium">Purchase an NFC card</h3>
+                  <p className="text-muted-foreground">Choose from a variety of options</p>
+                </section>
+
+                <div className="flex h-52 w-full items-center justify-center bg-neutral-700">
+                  add graphic
+                </div>
+              </article>
+
+              <article className="border-none md:col-span-2">
+                <Badge variant="secondary">5</Badge>
+
+                <section>
+                  <h3 className="text-lg font-medium">Use it anywhere!</h3>
+                  <p className="max-w-prose text-muted-foreground">
+                    No need to install anything, simply approach it to someone&apos;s phone and
+                    share your page, including your contact information!
+                  </p>
+                </section>
+
+                <div className="flex h-52 w-full items-center justify-center bg-neutral-700">
+                  add graphic
+                </div>
+              </article>
+            </div>
+          </section>
+        </div>
 
         <section
           id="features"
@@ -478,101 +578,6 @@ export default function Home() {
           </article>
         </section>
 
-        <div className="flex min-h-screen items-center rounded-t-[24px] bg-gradient-to-br from-neutral-950 via-neutral-800 to-neutral-950 p-4 py-20 text-neutral-200">
-          <section
-            id="how-it-works"
-            className="mx-auto flex w-full max-w-7xl flex-col gap-10 md:gap-14"
-          >
-            <header className="space-y-2 px-4 md:px-6">
-              <p className="font-medium text-emerald-400">Paso a Paso</p>
-              <h2 className="text-4xl font-semibold tracking-tight">Y como funciona?</h2>
-              <p className="text-lg text-muted-foreground">
-                Combinamos tecnologias de primera para que nuestro producto tenga la calidad que
-                buscas
-              </p>
-            </header>
-
-            <div className="grid grid-cols-1 *:space-y-3 *:border-b *:border-border/20 *:px-4 *:py-6 md:grid-cols-2 md:justify-items-stretch md:gap-0 md:*:space-y-5 md:*:border-r md:*:px-8 md:*:py-10">
-              <article className="border-b">
-                <Badge variant="secondary">1</Badge>
-
-                <section>
-                  <h3 className="text-lg font-medium">Registrate y elige tu nombre de usuario</h3>
-                  <p className="text-muted-foreground">
-                    Puedes usar un correo electrónico o una cuenta de redes sociales para
-                    registrarte
-                  </p>
-                </section>
-
-                <div className="flex h-52 w-full items-center justify-center bg-neutral-700">
-                  add graphic
-                </div>
-              </article>
-
-              <article className="!border-r-0 border-b">
-                <Badge variant="secondary">2</Badge>
-
-                <section>
-                  <h3 className="text-lg font-medium">Agrega tu información de contacto</h3>
-                  <p className="text-muted-foreground">
-                    Cualquier cosa que quieras compartir con tus contactos.
-                  </p>
-                </section>
-
-                <div className="flex h-52 w-full items-center justify-center bg-neutral-700">
-                  add graphic
-                </div>
-              </article>
-
-              <article className="border-b">
-                <Badge variant="secondary">3</Badge>
-
-                <section>
-                  <h3 className="text-lg font-medium">Personaliza tu página</h3>
-                  <p className="text-muted-foreground">
-                    Puedes agregar tu propio contenido y personalizar tu página.
-                  </p>
-                </section>
-
-                <div className="flex h-52 w-full items-center justify-center bg-neutral-700">
-                  add graphic
-                </div>
-              </article>
-
-              <article className="!border-r-0 border-b">
-                <Badge variant="secondary">4</Badge>
-
-                <section>
-                  <h3 className="text-lg font-medium">Personaliza tu tarjeta</h3>
-                  <p className="text-muted-foreground">
-                    Elige entre una variedad de opciones o crea tu propio diseño
-                  </p>
-                </section>
-
-                <div className="flex h-52 w-full items-center justify-center bg-neutral-700">
-                  add graphic
-                </div>
-              </article>
-
-              <article className="border-none md:col-span-2">
-                <Badge variant="secondary">5</Badge>
-
-                <section>
-                  <h3 className="text-lg font-medium">Ya estas listo!</h3>
-                  <p className="max-w-prose text-muted-foreground">
-                    No necesitas instalar nada, simplemente acércala al teléfono de alguien y
-                    comparte tu página, ¡incluida tu información de contacto!
-                  </p>
-                </section>
-
-                <div className="flex h-52 w-full items-center justify-center bg-neutral-700">
-                  add graphic
-                </div>
-              </article>
-            </div>
-          </section>
-        </div>
-
         <section
           id="pricing"
           className="-mt-10 flex items-center justify-center bg-white bg-gradient-to-t px-4 py-10 md:min-h-[950px] md:px-10 md:pb-20"
@@ -630,8 +635,24 @@ export default function Home() {
 
               <Card className="relative z-10 h-full w-full rounded-[24px] border border-indigo-400 bg-gradient-to-br from-primary to-indigo-950 text-primary-foreground shadow-xl shadow-indigo-400 transition-all duration-300 group-hover:translate-y-5 group-hover:scale-105 md:p-4">
                 <CardHeader>
-                  <p className="text-muted-foreground">Empezando desde</p>
-                  <CardTitle className="text-2xl font-normal text-green-400">
+                  <p className="text-muted-foreground">Starting from</p>
+
+                  <div className="flex items-center gap-2">
+                    <p className="text-xl font-light text-green-600 line-through">S/. 69.90</p>
+
+                    <TooltipProvider delayDuration={0}>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <InfoCircledIcon className="text-muted-foreground" />
+                        </TooltipTrigger>
+
+                        <TooltipContent className="text-sm">
+                          🚀 Launch event only offer
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  </div>
+                  <CardTitle className="text-2xl font-medium tabular-nums text-green-400">
                     S/. 49.90 PEN
                   </CardTitle>
                   <CardTitle className="text-2xl">Profesional</CardTitle>
@@ -644,7 +665,10 @@ export default function Home() {
                   <ul className="space-y-4 font-light text-zinc-200 md:text-lg">
                     <li className="flex gap-3">
                       <Badge variant="secondary">1</Badge>
-                      <p>1 business card included</p>
+                      <p>
+                        1 <strong className="font-semibold">fully customizable</strong> business
+                        card included
+                      </p>
                     </li>
 
                     <li className="flex gap-3">
@@ -654,12 +678,12 @@ export default function Home() {
 
                     <li className="flex gap-3">
                       <Badge variant="secondary">3</Badge>
-                      <p>Todas las opciones de personalización de la página</p>
+                      <p>Highly customizable personal page (portal)</p>
                     </li>
 
                     <li className="flex gap-3">
                       <Badge variant="secondary">4</Badge>
-                      <p>Enlaces sociales/profesionales </p>
+                      <p>Social / professional links </p>
                     </li>
 
                     <li className="flex gap-3">
@@ -747,8 +771,8 @@ export default function Home() {
 
             <Accordion type="single" collapsible className="mt-8 w-full">
               <AccordionItem value="explain-nfc">
-                <AccordionTrigger className="h-20 text-2xl font-medium">
-                  Que es la tecnologia NFC?
+                <AccordionTrigger className="h-20 text-2xl font-medium md:h-20">
+                  What is NFC technology?
                 </AccordionTrigger>
 
                 <AccordionContent className="text-lg font-light" accessKey="explain-nfc">
@@ -761,8 +785,8 @@ export default function Home() {
               </AccordionItem>
 
               <AccordionItem value="purchases">
-                <AccordionTrigger className="h-20 text-2xl font-medium">
-                  Como compro una tarjeta?
+                <AccordionTrigger className="h-24 text-2xl font-medium md:h-20">
+                  How do I purchase a card?
                 </AccordionTrigger>
                 <AccordionContent className="text-lg font-light" accessKey="purchases">
                   Para comprar una tarjeta, simplemente{" "}
@@ -777,8 +801,8 @@ export default function Home() {
               </AccordionItem>
 
               <AccordionItem value="compatibility">
-                <AccordionTrigger className="h-20 text-2xl font-medium">
-                  Que dispositivos son compatibles?
+                <AccordionTrigger className="h-24 text-2xl font-medium md:h-20">
+                  What devices are compatible?
                 </AccordionTrigger>
 
                 <AccordionContent className="text-lg font-light" accessKey="how-it-works">
@@ -790,8 +814,8 @@ export default function Home() {
               </AccordionItem>
 
               <AccordionItem value="how-it-works">
-                <AccordionTrigger className="h-20 text-2xl font-medium">
-                  Como lo uso?
+                <AccordionTrigger className="h-20 text-2xl font-medium md:h-20">
+                  How do I make it work?
                 </AccordionTrigger>
                 <AccordionContent className="text-lg font-light" accessKey="how-it-works">
                   Puedes usar ConCard para compartir tu información de contacto con otros sin que
@@ -801,8 +825,8 @@ export default function Home() {
               </AccordionItem>
 
               <AccordionItem value="security">
-                <AccordionTrigger className="h-20 text-2xl font-medium">
-                  Que pasa si alguien encuentra mi perfil por accidente?
+                <AccordionTrigger className="h-28 text-2xl font-medium md:h-20">
+                  What if someone finds out my username by accident?
                 </AccordionTrigger>
 
                 <AccordionContent className="text-lg font-light">
@@ -863,7 +887,7 @@ export default function Home() {
           </section>
 
           <div className="flex items-center justify-center gap-2">
-            <p>A project from</p>
+            <p>Powered by</p>
 
             <Link
               target="_blank"

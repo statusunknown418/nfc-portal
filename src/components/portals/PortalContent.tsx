@@ -65,21 +65,21 @@ export const PortalContent = ({
       <article className="flex h-full w-full max-w-[580px] flex-col items-center gap-4 sm:shadow-lg xl:rounded-3xl xl:border xl:border-border/50">
         <section
           className={cn(
-            "relative z-0 max-h-[400px] min-h-[300px] w-full max-w-[580px] overflow-hidden bg-cover bg-center bg-no-repeat sm:min-h-[320px] md:min-h-[350px]",
+            "relative z-0 max-h-[400px] min-h-[400px] w-full max-w-[580px] overflow-hidden bg-cover bg-center bg-no-repeat sm:min-h-[320px] md:min-h-[350px]",
             {
               "rounded-full": portal.data.avatarShape === "circle",
               "rounded-none": portal.data.avatarShape === "square",
             },
           )}
           style={{
-            maskImage: "radial-gradient(100% 100% at center top, #ffffff 50%, transparent 90%)",
+            maskImage: "radial-gradient(100% 100% at center top, #ffffff 30%, transparent 90%)",
             backgroundImage: `url(${portal.data.image})`,
           }}
         >
           <div
             className="absolute bottom-0 left-0 right-0 h-2/3 w-full"
             style={{
-              background: `linear-gradient(to bottom, rgba(0,0,0,0) 70%, rgba(0,0,0,0.6) 80%)`,
+              background: `linear-gradient(to bottom, rgba(0,0,0,0) 30%, rgba(0,0,0,0.6) 80%)`,
             }}
           />
         </section>
@@ -87,12 +87,12 @@ export const PortalContent = ({
         <header
           className={cn(
             "z-10 -mt-24 flex w-full flex-col px-4 text-center",
-            portal.data.profileHeader && "-mt-16",
+            portal.data.profileHeader && "-mt-28",
           )}
         >
           {portal.data.profileHeader && <p className="px-4 text-sm">{portal.data.profileHeader}</p>}
 
-          <h2 className="text-xl font-bold tracking-wide md:text-3xl">{portal.data.name}</h2>
+          <h2 className="text-2xl font-bold tracking-wide md:text-3xl">{portal.data.name}</h2>
 
           {portal.data.bio && (
             <p className="mt-1 line-clamp-4 px-2 text-xs mix-blend-difference md:text-sm">

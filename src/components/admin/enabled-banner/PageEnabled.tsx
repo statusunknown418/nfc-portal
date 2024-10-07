@@ -39,6 +39,12 @@ export const PageEnabled = ({
     void utils.viewer.shouldShowLive.invalidate();
   };
 
+  const onCopy = async () => {
+    await navigator.clipboard.writeText(
+      `https://concard.app/${data.username}?ktp=${data.pageHashKey}`,
+    );
+  };
+
   const WarningAlert = () => {
     return (
       <Alert variant="warning" className="relative mt-4">
@@ -69,11 +75,20 @@ export const PageEnabled = ({
         <AlertTitle className="text-foreground">Your page is LIVE!</AlertTitle>
 
         <AlertDescription className="flex items-center gap-1">
-          <Link href="https://nfc.nearu.tech" className="text-sm underline hover:text-indigo-500">
-            https://nfc.nearu.tech/{data.username}
+          <Link
+            target="_blank"
+            href={`https://concard.app/${data.username}?ktp=${data.pageHashKey}`}
+            className="text-base underline-offset-1 hover:text-indigo-500 hover:underline"
+            onCopy={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+              void onCopy();
+            }}
+          >
+            https://concard.app/{data.username}
           </Link>
 
-          <CopyButton text={`https://nfc.nearu.tech/${data.username}?ktp=${data.pageHashKey}`} />
+          <CopyButton text={`https://concard.app/${data.username}?ktp=${data.pageHashKey}`} />
         </AlertDescription>
       </Alert>
     );

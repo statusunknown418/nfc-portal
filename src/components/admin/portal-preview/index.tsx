@@ -6,6 +6,8 @@ import { Badge } from "~/components/ui/badge";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "~/components/ui/tooltip";
 import { api } from "~/trpc/server";
 import { PortalPreview } from "./PortalPreview";
+import Link from "next/link";
+import { Button } from "~/components/ui/button";
 
 export const PortalPreviewWrapperRSC = async ({
   username,
@@ -21,7 +23,13 @@ export const PortalPreviewWrapperRSC = async ({
     return (
       <Alert>
         <AlertTitle>Something happened</AlertTitle>
-        <AlertDescription>Please contact us</AlertDescription>
+
+        <Button variant="ghost">Reload</Button>
+
+        <AlertDescription>
+          Contact support here{" "}
+          <Link href="mailto:help@stackkstudios.com">help@stackkstudios.com</Link>
+        </AlertDescription>
       </Alert>
     );
   }

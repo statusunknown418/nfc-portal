@@ -74,7 +74,7 @@ export const POST = async (req: NextRequest) => {
   try {
     await resend.emails.send({
       to: metadata.user_email,
-      from: "Purchases | NFC Portal <no-reply@chronosecrets.app>",
+      from: "Purchases | NFC Portal <no-reply@concard.app>",
       subject: "Your NFC card was successfully purchased! 🎉",
       html: "Thanks for your purchase! Your card will be delivered as soon as possible.",
       react: PurchaseConfirmationEmail({
