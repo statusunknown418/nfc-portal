@@ -1,5 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { ChevronLeftIcon } from "@radix-ui/react-icons";
+import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { type SearchParams } from "nuqs/parsers";
@@ -27,7 +28,15 @@ export default async function OnboardingPage({ searchParams }: { searchParams: S
   return (
     <>
       <section className="hidden w-max max-w-[280px] flex-col gap-8 border-r bg-muted p-4 md:flex md:py-8">
-        <header>CC</header>
+        <header>
+          <Image
+            src="/logo-light.png"
+            alt="concard-logo"
+            width={32}
+            height={32}
+            className="rounded-lg"
+          />
+        </header>
 
         <Stepper />
 
