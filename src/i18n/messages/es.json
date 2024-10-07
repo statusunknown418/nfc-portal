@@ -211,6 +211,33 @@
       "previousButton": "Paso anterior",
       "nextButton": "Siguiente paso",
       "completeOnboarding": "Completar el onboarding",
+      "stepper": {
+        "welcome": {
+          "title": "Bienvenido",
+          "description": "Información rápida sobre el proceso"
+        },
+        "contact": {
+          "title": "Información de contacto",
+          "description": "Completa tu información de contacto público"
+        },
+        "portal": {
+          "title": "Página pública",
+          "description": "Personaliza tu página pública o usa una plantilla"
+        },
+        "nfc-card": {
+          "title": "Tarjeta NFC",
+          "description": "Personaliza tu tarjeta física y la prepara"
+        },
+        "purchase": {
+          "title": "Compra tu tarjeta",
+          "description": "Consíguela con tu método de pago preferido",
+          "purchase": "Comprar"
+        },
+        "finale": {
+          "title": "Finalizado",
+          "description": "¡Todo listo! ¡Estás listo para empezar!"
+        }
+      },
       "steps": {
         "welcome": {
           "title": "¡Bienvenido a ConCard!",
@@ -323,8 +350,31 @@
               }
             }
           }
+        },
+        "cardPreferences": {
+          "title": "Personaliza tu tarjeta",
+          "description": "¡Mejora tu personal brand y hace que te destaque de la multitud!",
+          "avatar": "Avatar",
+          "avatarDescription": "¡Escoge un avatar que te guste!",
+          "variant": {
+            "label": "Elige una variante de tarjeta",
+            "basic": "Edición clásica",
+            "custom": "Edición profesional (personalizada)",
+            "metallic": "Edición Metálica"
+          },
+          "templates": {
+            "title": "Plantillas",
+            "details": "Ver ambos lados",
+            "detailsTitle": "Vista detallada",
+            "front": "Vista previa frontal",
+            "back": "Vista previa trasera",
+            "close": "Cancelar"
+          }
         }
       }
     }
+  },
+  "common": {
+    "comingSoon": "¡Próximamente!"
   }
 }

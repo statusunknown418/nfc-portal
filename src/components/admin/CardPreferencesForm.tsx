@@ -32,9 +32,11 @@ import Image from "next/image";
 import { Badge } from "../ui/badge";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { Divider } from "../ui/separator";
+import { useTranslations } from "next-intl";
 
 export const CardPreferencesForm = () => {
   const setPreferences = nfcPreferencesStore((s) => s.setPreferences);
+  const t = useTranslations("admin.onboarding.steps.portal.cardPreferences");
 
   const form = useForm<SaveNFCPreferences>({
     resolver: zodResolver(saveNFCPreferencesSchema),
@@ -69,7 +71,7 @@ export const CardPreferencesForm = () => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)} className="flex w-full flex-col gap-8">
         <section className="flex flex-col gap-2">
-          <h3 className="text-lg font-medium">Choose a card variant</h3>
+          <h3 className="text-lg font-medium">{t("variant.label")}</h3>
 
           <FormField
             name="cardVariant"
@@ -95,7 +97,7 @@ export const CardPreferencesForm = () => {
                   cardVariant !== "basic" && "pointer-events-none hidden h-0 opacity-0",
                 )}
               >
-                <Label className="text-lg">Template</Label>
+                <Label className="text-lg">{t("templates.title")}</Label>
 
                 <RadioGroupRadix value={field.value} onValueChange={field.onChange}>
                   <div className="relative flex min-h-40 min-w-full gap-2">
@@ -555,12 +557,14 @@ export const CardPreferencesForm = () => {
 };
 
 const DefaultCard = () => {
+  const t = useTranslations("admin.onboarding.steps.portal.cardPreferences");
+
   return (
     <RadioGroupItemRadix
       className="h-28 w-52 rounded-lg border bg-background p-4 text-black shadow transition-all data-[state=checked]:ring data-[state=checked]:ring-ring data-[state=checked]:ring-offset-1"
       value="basic"
     >
-      <h4>Classic Edition</h4>
+      <h4>{t("variant.basic")}</h4>
     </RadioGroupItemRadix>
   );
 };
@@ -580,6 +584,7 @@ const TemplateCard = ({
 }) => {
   const form = useFormContext<SaveNFCPreferences>();
   const currentTemplate = form.watch("cardTemplate");
+  const t = useTranslations("admin.onboarding.steps.portal.cardPreferences");
 
   return (
     <Dialog modal>
@@ -597,19 +602,19 @@ const TemplateCard = ({
         >
           <Badge size="lg">
             <ZoomInIcon className="h-5 w-5" />
-            See details
+            {t("templates.details")}
           </Badge>
         </button>
       </DialogTrigger>
 
       <DialogContent className="max-w-3xl">
         <DialogHeader>
-          <DialogTitle>Detailed view</DialogTitle>
+          <DialogTitle>{t("templates.detailsTitle")}</DialogTitle>
         </DialogHeader>
 
         <section className="flex h-full min-h-max w-full items-center gap-2">
           <div className="flex flex-col gap-2">
-            <p className="text-sm text-muted-foreground">Front card preview</p>
+            <p className="text-sm text-muted-foreground">{t("templates.front")}</p>
 
             <Image
               src={front}
@@ -623,7 +628,7 @@ const TemplateCard = ({
           <ResetIcon className="mt-4 h-5 w-5 text-muted-foreground" />
 
           <div className="flex flex-col gap-2">
-            <p className="text-sm text-muted-foreground">Back card preview</p>
+            <p className="text-sm text-muted-foreground">{t("templates.back")}</p>
             <Image
               src={back}
               alt="back-template-design"
@@ -650,7 +655,7 @@ const TemplateCard = ({
           </Button>
 
           <DialogClose asChild>
-            <Button variant="outline">Close</Button>
+            <Button variant="outline">{t("templates.close")}</Button>
           </DialogClose>
         </DialogFooter>
       </DialogContent>
@@ -659,22 +664,26 @@ const TemplateCard = ({
 };
 
 const CustomCard = () => {
+  const t = useTranslations("admin.onboarding.steps.portal.cardPreferences");
   return (
     <RadioGroupItemRadix
       className="h-28 w-52 rounded-lg border bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-4 shadow-md transition-all data-[state=checked]:ring data-[state=checked]:ring-ring data-[state=checked]:ring-offset-1"
       value="custom"
     >
-      <h4 className="bg-clip-text font-medium text-white">Professional Edition (custom)</h4>
+      <h4 className="bg-clip-text font-medium text-white">{t("variant.custom")}</h4>
     </RadioGroupItemRadix>
   );
 };
 
 const MetallicCard = () => {
+  const t = useTranslations("admin.onboarding.steps.portal.cardPreferences");
+  const common = useTranslations("common");
+
   return (
     <div className="cursor-not-allowed opacity-50">
       <section className="flex h-28 w-52 flex-col items-center justify-center rounded-lg border border-dashed bg-gradient-to-r from-zinc-400 via-transparent to-zinc-400 p-4 shadow-lg transition-all data-[state=checked]:ring data-[state=checked]:ring-ring data-[state=checked]:ring-offset-1">
-        <h4 className="font-bold text-primary">Metallic</h4>
-        <p className="mt-1 text-center text-sm">Coming soon...</p>
+        <h4 className="font-bold text-primary">{t("variant.metallic")}</h4>
+        <p className="mt-1 text-center text-sm">{common("comingSoon")}</p>
       </section>
     </div>
   );
