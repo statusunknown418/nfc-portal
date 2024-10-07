@@ -202,44 +202,128 @@
       "termsOfService": "Terms of Service",
       "privacyPolicy": "Privacy Policy",
       "projectBy": "A project by"
-    },
+    }
+  },
+  "admin": {
     "onboarding": {
       "topText": "Let's get you set up, ",
-      "previousButton": "Paso Anterior",
-      "nextButton": "Siguiente Paso",
-      "welcome": {
-        "title": "Welcome to ConCard!",
-        "message": "We are excited to have you on board. Before we get started (and to make everything smoother), you just need to follow these simple steps to get your account set up.",
-        "helpOne": "If there's anything you need help with, don't hesitate to reach out to us. We're here to help!",
-        "helpTwo": "Contact us here",
-        "startButton": "Start onboarding"
-      },
-      "contact": {
-        "title": "Contact information",
-        "subtitle": "Fill in your public contact information, this is what every person you give your card to will see, additionally it is possible to hide it from your public page if needed.",
-        "visibilityOptionOne": "Contact information visibility",
-        "visibilityOptionTwo": "If enabled your contact information will be visible when you share your portal through the NFC card",
-        "firstName": "First name",
-        "lastName": "Last name",
-        "position": "Position",
-        "company": "Company",
-        "companyWebsite": "Company website",
-        "emails": "Email address(es) (5 max.)",
-        "phoneNumbers": "Phone number(s) (5 max.)",
-        "addresses": "Address(es) (2 max.)"
-      },
-      "portal": {
-        "title": "Portal customization",
-        "description": "You can customize your public page to your liking here, templates are also available",
-        "themes": "Themes / presets are coming!",
-        "themesMessage": "We're working hard to provide the best experiences with new features!, if you'd like to see it sooner please shoot us an email.",
-        "profileHeader": "Profile header",
-        "profileFooter": "A short title you want to show off",
-        "bio": "Biography",
-        "footerMessage": "Anything you want to tell people about yourself. This will be displayed on your profile page.(0/100 characters max.)",
-        "avatarUpload": "Upload an avatar (optional)",
-        "generated": "Replace with generated",
-        "remove": "Remove Avatar"
+      "previousButton": "Previous Step",
+      "nextButton": "Next Step",
+      "return": "Back to dashboard",
+      "completeOnboarding": "Complete onboarding",
+      "steps": {
+        "welcome": {
+          "title": "Welcome to ConCard!",
+          "message": "We are excited to have you on board. Before we get started (and to make everything smoother), you just need to follow these simple steps to get your account set up.",
+          "helpOne": "If there's anything you need help with, don't hesitate to reach out to us. We're here to help!",
+          "helpTwo": "Contact us here",
+          "startButton": "Start onboarding"
+        },
+        "contact": {
+          "title": "Contact information",
+          "autosave": "This form auto-saves!",
+          "autosaveDescription": "Just wait a few moments and your changes will be automatically saved.",
+          "subtitle": "Fill in your public contact information, this is what every person you give your card to will see, additionally it is possible to hide it from your public page if needed.",
+          "visibilityOptionOne": "Contact information visibility",
+          "visibilityOptionTwo": "If enabled your contact information will be visible when you share your portal through the NFC card",
+          "firstName": "First name",
+          "lastName": "Last name",
+          "position": "Position",
+          "company": "Company",
+          "companyWebsite": "Company website",
+          "addLabel": "Add another",
+          "removeLabel": "Remove",
+          "emails": {
+            "label": "Email address(es) (5 max.)",
+            "types": {
+              "PREF": "Primary",
+              "WORK": "Work",
+              "HOME": "Home",
+              "OTHER": "Other"
+            }
+          },
+          "phoneNumbers": {
+            "label": "Phone number(s) (5 max.)",
+            "types": {
+              "PREF": "Preferred",
+              "WORK": "Work",
+              "HOME": "Home",
+              "FAX": "Fax",
+              "MSG": "Messages",
+              "CELL": "Cellular",
+              "BBS": "Bulletin Board",
+              "VIDEO": "Video"
+            }
+          },
+          "addresses": {
+            "label": "Address(es) (2 max.)",
+            "types": {
+              "DOM": "Primary",
+              "HOME": "Home",
+              "WORK": "Work",
+              "POSTAL": "Postal"
+            }
+          }
+        },
+        "portal": {
+          "title": "Portal customization",
+          "description": "You can customize your public page to your liking here, templates are also available",
+          "themes": "Themes / presets are coming!",
+          "themesMessage": "We're working hard to provide the best experiences with new features!, if you'd like to see it sooner please shoot us an email.",
+          "profileHeader": "Profile header",
+          "profileFooter": "A short title you want to show off",
+          "bio": "Biography",
+          "bioDescription": "Anything you want to tell people about yourself. This will be displayed on your profile page.(0/100 characters max.)",
+          "avatarUpload": "Upload an avatar (optional)",
+          "generated": "Replace with generated",
+          "remove": "Remove Avatar",
+          "themeCustomization": {
+            "title": "Theme customization",
+            "description": "Choose colors, font styles and more!",
+            "colors": {
+              "title": "Color palette",
+              "background": "Background color",
+              "textColor": "Text color",
+              "accent": "Accent (subtle)",
+              "border": "Border color"
+            },
+            "buttons": {
+              "title": "Buttons (and links)",
+              "background": "Background color",
+              "textColor": "Text color",
+              "borderColor": "Border color",
+              "borderStyle": "Border style",
+              "styles": {
+                "solid": "Solid",
+                "dashed": "Dashed",
+                "dotted": "Dotted"
+              },
+              "shape": {
+                "label": "Shape",
+                "pill": "Pill rounding",
+                "rounded": "Medium",
+                "small": "Small",
+                "square": "No rounding"
+              }
+            },
+            "fonts": {
+              "weight": "Font weight",
+              "style": "Font style",
+              "weights": {
+                "thin": "Thin",
+                "light": "Light",
+                "normal": "Normal",
+                "medium": "Medium",
+                "bold": "Bold",
+                "black": "Black"
+              },
+              "styles": {
+                "normal": "Normal",
+                "italic": "Italic"
+              }
+            }
+          }
+        }
       }
     }
   }

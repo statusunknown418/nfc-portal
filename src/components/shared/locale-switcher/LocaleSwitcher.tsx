@@ -34,12 +34,12 @@ export const LocaleSwitcher = ({ initial }: { initial: Locale }) => {
         <DropdownMenuSeparator />
 
         <DropdownMenuItem
-          onSelect={() => handleChange("en").then(() => toast.success("Language updated"))}
+          onSelect={() => toast.promise(handleChange("en"), { loading: "Updating..." })}
         >
           🇺🇸 English
         </DropdownMenuItem>
         <DropdownMenuItem
-          onSelect={() => handleChange("es").then(() => toast.success("Language updated"))}
+          onSelect={() => toast.promise(handleChange("es"), { loading: "Updating..." })}
         >
           🇪🇸 Español
         </DropdownMenuItem>

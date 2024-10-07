@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FontBoldIcon, FontFamilyIcon, FontItalicIcon, FontRomanIcon } from "@radix-ui/react-icons";
 import { RadioGroupItem as RadixRadioGroupItem } from "@radix-ui/react-radio-group";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -55,6 +56,7 @@ export const VisualCustomizationForm = ({
 
   const bioCharacters = form.watch("bio")?.length ?? 0;
   const utils = api.useUtils();
+  const t = useTranslations("admin.onboarding.steps.portal");
 
   const mutate = api.visuals.edit.useMutation({
     onSuccess: () => {
@@ -81,12 +83,9 @@ export const VisualCustomizationForm = ({
     <Form {...form}>
       <form className="mt-2 grid grid-cols-1 gap-6">
         <Alert variant="indigo" className="border-dashed">
-          <AlertTitle>Themes / presets are coming!</AlertTitle>
+          <AlertTitle>{t("themes")}</AlertTitle>
 
-          <AlertDescription>
-            We&apos;re working hard to provide the best experiences with new features!, if
-            you&apos;d like to see it sooner please shoot us an email.
-          </AlertDescription>
+          <AlertDescription>{t("themesMessage")}</AlertDescription>
         </Alert>
 
         <section className="flex flex-col justify-between gap-6 rounded-lg border px-6 *:py-6 md:flex-row md:gap-8">
@@ -136,7 +135,7 @@ export const VisualCustomizationForm = ({
                 content={{
                   label: () => (
                     <span className="cursor-default rounded-sm bg-muted px-3 py-0.5 text-sm">
-                      Upload an avatar (optional)
+                      {t("avatarUpload")}
                     </span>
                   ),
                 }}
@@ -145,7 +144,7 @@ export const VisualCustomizationForm = ({
 
             <ul className="flex w-full flex-col gap-2">
               <Button variant="outline" type="button" className="w-full">
-                Replace with generated
+                {t("generated")}
               </Button>
 
               <Button
@@ -153,7 +152,7 @@ export const VisualCustomizationForm = ({
                 type="button"
                 className="w-full border-destructive/50 bg-destructive/10 hover:bg-destructive/20"
               >
-                Remove avatar
+                {t("remove")}
               </Button>
             </ul>
           </article>
@@ -164,7 +163,7 @@ export const VisualCustomizationForm = ({
               name="profileHeader"
               render={({ field }) => (
                 <FormItem className="w-full">
-                  <FormLabel className="text-lg font-semibold">Profile header</FormLabel>
+                  <FormLabel className="text-lg font-semibold">{t("profileHeader")}</FormLabel>
                   <FormControl>
                     <Textarea
                       {...field}
@@ -175,7 +174,7 @@ export const VisualCustomizationForm = ({
                     />
                   </FormControl>
 
-                  <FormDescription>A short title you want to show off</FormDescription>
+                  <FormDescription>{t("profileFooter")}</FormDescription>
                 </FormItem>
               )}
             />
@@ -185,7 +184,7 @@ export const VisualCustomizationForm = ({
               name="bio"
               render={({ field }) => (
                 <FormItem className="w-full">
-                  <FormLabel className="text-lg font-semibold">Biography</FormLabel>
+                  <FormLabel className="text-lg font-semibold">{t("bio")}</FormLabel>
                   <FormControl>
                     <Textarea
                       {...field}
@@ -197,8 +196,7 @@ export const VisualCustomizationForm = ({
                   </FormControl>
 
                   <FormDescription>
-                    Anything you want to tell people about yourself. This will be displayed on your
-                    profile page.
+                    {t("bioDescription")}
                     <span
                       className={cn(
                         "ml-1 text-foreground",
@@ -221,8 +219,10 @@ export const VisualCustomizationForm = ({
             "h-0 translate-y-10 opacity-0": !enableCustom,
           })}
         >
-          <h3 className="text-xl font-medium">Theme customization</h3>
-          <p className="mt-1 text-sm text-muted-foreground">Choose colors, font styles and more!</p>
+          <h3 className="text-xl font-medium">{t("themeCustomization.title")}</h3>
+          <p className="mt-1 text-sm text-muted-foreground">
+            {t("themeCustomization.description")}
+          </p>
         </article>
 
         <section
@@ -233,7 +233,7 @@ export const VisualCustomizationForm = ({
             },
           )}
         >
-          <h2 className="text-lg font-semibold">Color palette</h2>
+          <h2 className="text-lg font-semibold">{t("themeCustomization.colors.title")}</h2>
 
           <article className="grid grid-cols-2 gap-4">
             <FormField
@@ -241,7 +241,7 @@ export const VisualCustomizationForm = ({
               name="theme.colors.background"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Background</FormLabel>
+                  <FormLabel>{t("themeCustomization.colors.background")}</FormLabel>
 
                   <GradientPicker background={field.value} setBackground={field.onChange} />
                 </FormItem>
@@ -253,7 +253,7 @@ export const VisualCustomizationForm = ({
               name="theme.colors.foreground"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Text color</FormLabel>
+                  <FormLabel>{t("themeCustomization.colors.textColor")}</FormLabel>
 
                   <GradientPicker background={field.value} setBackground={field.onChange} />
                 </FormItem>
@@ -265,7 +265,7 @@ export const VisualCustomizationForm = ({
               name="theme.colors.subtle"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Accent (subtle)</FormLabel>
+                  <FormLabel>{t("themeCustomization.colors.accent")}</FormLabel>
 
                   <GradientPicker background={field.value} setBackground={field.onChange} />
                 </FormItem>
@@ -277,7 +277,7 @@ export const VisualCustomizationForm = ({
               name="theme.colors.border"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Border color</FormLabel>
+                  <FormLabel>{t("themeCustomization.colors.border")}</FormLabel>
 
                   <GradientPicker background={field.value} setBackground={field.onChange} />
                 </FormItem>
@@ -294,7 +294,7 @@ export const VisualCustomizationForm = ({
             },
           )}
         >
-          <h2 className="text-lg font-semibold">Buttons (and links)</h2>
+          <h2 className="text-lg font-semibold">{t("themeCustomization.buttons.title")}</h2>
 
           <section className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <FormField
@@ -302,7 +302,7 @@ export const VisualCustomizationForm = ({
               name="theme.buttons.background"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Background color</FormLabel>
+                  <FormLabel>{t("themeCustomization.buttons.background")}</FormLabel>
 
                   <GradientPicker background={field.value} setBackground={field.onChange} />
                 </FormItem>
@@ -314,7 +314,7 @@ export const VisualCustomizationForm = ({
               name="theme.buttons.textColor"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Text color</FormLabel>
+                  <FormLabel>{t("themeCustomization.buttons.textColor")}</FormLabel>
 
                   <GradientPicker background={field.value} setBackground={field.onChange} />
                 </FormItem>
@@ -326,7 +326,7 @@ export const VisualCustomizationForm = ({
               name="theme.buttons.borderColor"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Border color</FormLabel>
+                  <FormLabel>{t("themeCustomization.buttons.borderColor")}</FormLabel>
 
                   <GradientPicker background={field.value ?? ""} setBackground={field.onChange} />
                 </FormItem>
@@ -338,7 +338,7 @@ export const VisualCustomizationForm = ({
               name="theme.buttons.borderStyle"
               render={({ field }) => (
                 <FormItem className="max-w-[240px]">
-                  <FormLabel>Border style</FormLabel>
+                  <FormLabel>{t("themeCustomization.buttons.borderStyle")}</FormLabel>
 
                   <Select value={field.value} onValueChange={field.onChange}>
                     <SelectTrigger>
@@ -346,9 +346,15 @@ export const VisualCustomizationForm = ({
                     </SelectTrigger>
 
                     <SelectContent>
-                      <SelectItem value="solid">Solid</SelectItem>
-                      <SelectItem value="dashed">Dashed</SelectItem>
-                      <SelectItem value="dotted">Dotted</SelectItem>
+                      <SelectItem value="solid">
+                        {t("themeCustomization.buttons.styles.solid")}
+                      </SelectItem>
+                      <SelectItem value="dashed">
+                        {t("themeCustomization.buttons.styles.dashed")}
+                      </SelectItem>
+                      <SelectItem value="dotted">
+                        {t("themeCustomization.buttons.styles.dotted")}
+                      </SelectItem>
                     </SelectContent>
                   </Select>
                 </FormItem>
@@ -362,7 +368,7 @@ export const VisualCustomizationForm = ({
               name="theme.buttons.fontWeight"
               render={({ field }) => (
                 <FormItem className="max-w-[240px]">
-                  <Label>Font weight</Label>
+                  <Label>{t("themeCustomization.fonts.weight")}</Label>
 
                   <Select value={field.value} onValueChange={field.onChange}>
                     <SelectTrigger>
@@ -372,31 +378,31 @@ export const VisualCustomizationForm = ({
                     <SelectContent>
                       <SelectItem value="100">
                         <FontFamilyIcon />
-                        Thin
+                        {t("themeCustomization.fonts.weights.thin")}
                       </SelectItem>
                       <SelectItem value="300">
                         <FontFamilyIcon />
-                        Light
+                        {t("themeCustomization.fonts.weights.light")}
                       </SelectItem>
 
                       <SelectItem value="normal">
                         <FontFamilyIcon />
-                        Normal
+                        {t("themeCustomization.fonts.weights.normal")}
                       </SelectItem>
 
                       <SelectItem value="500">
                         <FontBoldIcon />
-                        Medium
+                        {t("themeCustomization.fonts.weights.medium")}
                       </SelectItem>
 
                       <SelectItem value="bold">
                         <FontBoldIcon />
-                        Bold
+                        {t("themeCustomization.fonts.weights.bold")}
                       </SelectItem>
 
                       <SelectItem value="900">
                         <FontBoldIcon />
-                        Black
+                        {t("themeCustomization.fonts.weights.black")}
                       </SelectItem>
                     </SelectContent>
                   </Select>
@@ -409,7 +415,7 @@ export const VisualCustomizationForm = ({
               name="theme.buttons.fontStyle"
               render={({ field }) => (
                 <FormItem className="max-w-[240px]">
-                  <Label>Font style</Label>
+                  <Label>{t("themeCustomization.fonts.style")}</Label>
 
                   <Select value={field.value} onValueChange={field.onChange}>
                     <SelectTrigger>
@@ -419,12 +425,12 @@ export const VisualCustomizationForm = ({
                     <SelectContent>
                       <SelectItem value="normal">
                         <FontRomanIcon />
-                        Normal
+                        {t("themeCustomization.fonts.styles.normal")}
                       </SelectItem>
 
                       <SelectItem value="italic">
                         <FontItalicIcon />
-                        Italic
+                        {t("themeCustomization.fonts.styles.italic")}
                       </SelectItem>
                     </SelectContent>
                   </Select>
@@ -438,7 +444,7 @@ export const VisualCustomizationForm = ({
             name="theme.buttons.variant"
             render={({ field }) => (
               <FormItem>
-                <Label>Shape</Label>
+                <Label>{t("themeCustomization.buttons.shape.label")}</Label>
 
                 <RadioGroup
                   className="flex items-center gap-4 pt-2"
@@ -449,7 +455,7 @@ export const VisualCustomizationForm = ({
                     value="pill"
                     className="flex h-10 items-center justify-center gap-2 rounded-full border bg-muted px-8 text-sm ring-offset-2 transition-all duration-200 data-[state=checked]:ring data-[state=checked]:ring-ring"
                   >
-                    Pill rounding
+                    {t("themeCustomization.buttons.shape.pill")}
                   </RadixRadioGroupItem>
 
                   <FormControl>
@@ -457,7 +463,7 @@ export const VisualCustomizationForm = ({
                       value="rounded"
                       className="flex h-10 items-center justify-center gap-2 rounded-xl border bg-muted px-8 text-sm ring-offset-2 transition-all duration-200 data-[state=checked]:ring data-[state=checked]:ring-ring"
                     >
-                      Medium
+                      {t("themeCustomization.buttons.shape.rounded")}
                     </RadixRadioGroupItem>
                   </FormControl>
 
@@ -466,7 +472,7 @@ export const VisualCustomizationForm = ({
                       value="small-radius"
                       className="flex h-10 items-center justify-center gap-2 rounded-sm border bg-muted px-8 text-sm ring-offset-2 transition-all duration-200 data-[state=checked]:ring data-[state=checked]:ring-ring"
                     >
-                      Small
+                      {t("themeCustomization.buttons.shape.small")}
                     </RadixRadioGroupItem>
                   </FormControl>
 
@@ -477,7 +483,7 @@ export const VisualCustomizationForm = ({
                       value="square"
                       className="flex h-10 items-center justify-center gap-2 border bg-muted px-8 text-sm ring-offset-2 transition-all duration-200 data-[state=checked]:ring data-[state=checked]:ring-ring"
                     >
-                      No rounding
+                      {t("themeCustomization.buttons.shape.square")}
                     </RadixRadioGroupItem>
                   </FormControl>
                 </RadioGroup>

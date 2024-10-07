@@ -16,6 +16,7 @@ import { NFCPreferencesStep } from "./steps/NFCPreferencesStep";
 import { PublicPortalStep } from "./steps/PublicPortalStep";
 import { PurchaseCardStep } from "./steps/PurchaseCardStep";
 import { WelcomeStep } from "./steps/WelcomeStep";
+import { useTranslations } from "next-intl";
 
 export const StepperSelector = ({
   session,
@@ -35,6 +36,7 @@ export const StepperSelector = ({
   const [{ step }, changeStep] = useQueryStates(onboardingParsers);
   const { mutate } = api.viewer.setOnboardingStep.useMutation();
   const utils = api.useUtils();
+  const t = useTranslations("admin.onboarding");
 
   const StepComponents: Record<Keys, ReactNode> = {
     start: <WelcomeStep />,
@@ -87,7 +89,9 @@ export const StepperSelector = ({
             step !== "portal" && "pr-4 md:pr-8",
           )}
         >
-          <h3>Let&apos;s get you set up, {session.username}</h3>
+          <h3>
+            {t("topText")}, {session.username}
+          </h3>
 
           <div className={cn("relative mt-4", step === "nfc-card" && "pb-32")}>
             {step && StepComponents[step]}
@@ -97,7 +101,7 @@ export const StepperSelector = ({
         <section className="absolute bottom-0 left-0 z-10 flex h-max w-full items-center justify-between gap-4 border-t bg-muted px-8 py-4">
           {step !== "start" && (
             <Button variant="outline" onClick={rewindStep}>
-              <ChevronLeftIcon /> Previous step
+              <ChevronLeftIcon /> {t("previousButton")}
             </Button>
           )}
 
@@ -105,12 +109,13 @@ export const StepperSelector = ({
             {step === "finale" ? (
               <Button asChild>
                 <Link href="/admin">
-                  Complete onboarding <CheckCircledIcon />
+                  {t("completeOnboarding")}
+                  <CheckCircledIcon />
                 </Link>
               </Button>
             ) : (
               <Button onClick={forwardStep}>
-                Next step
+                {t("nextButton")}
                 <TrackNextIcon />
               </Button>
             )}

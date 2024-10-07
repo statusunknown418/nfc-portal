@@ -1,5 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { ChevronLeftIcon } from "@radix-ui/react-icons";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -20,6 +21,8 @@ export default async function OnboardingPage({ searchParams }: { searchParams: S
     api.vCard.get(),
     api.viewer.shouldShowLive(),
   ]);
+
+  const t = useTranslations("admin.onboarding");
 
   if (!sessionClaims?.username) {
     return redirect("/auth/signup");
@@ -42,7 +45,7 @@ export default async function OnboardingPage({ searchParams }: { searchParams: S
 
         <Button variant="link" className="mt-auto px-0 md:px-4" asChild>
           <Link href="/admin">
-            <ChevronLeftIcon /> Back to dashboard
+            <ChevronLeftIcon /> {t("return")}
           </Link>
         </Button>
       </section>
