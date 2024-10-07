@@ -23,6 +23,7 @@
       "privacyDisclaimer": "Ocultamos los nombres completos y la información personal por razones de privacidad"
     },
     "features": {
+      "subheading": "Características",
       "heading": "¿Por qué elegirnos? Conoce nuestros beneficios",
       "description": "Descubre las ventajas de usar nuestro producto y por qué somos la mejor opción para ti.",
       "firstGraphic": "Extremadamente fácil de usar,",
@@ -40,7 +41,8 @@
       "thirteenthGraphic": "la mayoría de los teléfonos Android.",
       "fourteenthGraphic": "Información segura,",
       "fifteenthGraphic": "nadie podrá ver tu contacto personal a menos que",
-      "sixteenthGraphic": "acerques una de tus tarjetas a su teléfono."
+      "sixteenthGraphic": "acerques una de tus tarjetas a su teléfono.",
+      "hyperText": "Toda tu información esta encriptada"
     },
     "comparison": {
       "compare": "Compáralo tú mismo",
@@ -48,6 +50,7 @@
       "after": "Después",
       "text": "La forma tradicional de compartir tu información es entregando una tarjeta de presentación o anotando tus datos en papel. Pero, ¿y si pudieras compartir tu contacto de manera instantánea, sin complicaciones y sin usar papel?",
       "usualHeading": "La manera tradicional, nada especial",
+      "usualSubheading": "Otros",
       "firstUsual": "Link simple en  biografía (no siempre disponible)",
       "secondUsual": "Probablemente requerirá una aplicación",
       "thirdUsual": "No es útil para destacar",
@@ -82,8 +85,11 @@
     "pricing": {
       "title": "Precios",
       "description": "Precios claros y sencillos, sin costos ocultos",
-      "from": "Ofrecemos un único plan para todos nuestros clientes individuales, para que puedas enfocarte en lo que realmente importa.",
+      "subheading": "Ofrecemos un único plan para todos nuestros clientes individuales, para que puedas enfocarte en lo que realmente importa.",
       "planDescription": "Un plan asequible y flexible, perfecto para cualquier persona. Incluye:",
+      "startingFrom": "Empieza desde",
+      "offerExplanation": "🚀 Oferta de tiempo limitado por lanzamiento",
+      "planName": "Profesional",
       "firstIncluded": "1 tarjeta de presentación incluida",
       "secondIncluded": "¡Envío gratuito! (Lima)",
       "thirdIncluded": "Todas las opciones de personalización de la página",
@@ -94,7 +100,7 @@
       "primaryButton": "Empieza ahora!"
     },
     "faq": {
-      "subtitle": "Alguna duda?",
+      "subheading": "Alguna duda?",
       "message": "Si ninguna de estas respuestas resuelve tu duda,no dudes en contactarnos aquí",
       "questionOne": "¿Qué es la tecnología NFC?",
       "answerOne": "NFC significa Near Field Communication (Comunicación de Campo Cercano), una tecnología que permite que dos dispositivos se comuniquen entre sí a corta distancia, similar a Apple Pay y Google Pay. ConCard lo utiliza para que puedas compartir tu información de contacto con otros sin necesidad de instalar aplicaciones adicionales.",

@@ -23,8 +23,9 @@
       "privacyDisclaimer": "We hide full names and personal information for privacy reasons"
     },
     "features": {
+      "subheading": "Features",
       "heading": "Benefits, and why choose us?",
-      "description": "Explore the benefits of using our product and why we are the best option for you",
+      "description": "Explore the benefits of using our product and why we are the best option for you!",
       "firstGraphic": "Extremely easy to use,",
       "secondGraphic": "get started in just a few minutes",
       "thirdGraphic": "and stand out from the competition",
@@ -40,13 +41,15 @@
       "thirteenthGraphic": "most Android phones",
       "fourteenthGraphic": "Secure information,",
       "fifteenthGraphic": "no one can see your personal contact unless",
-      "sixteenthGraphic": "they tap one of your business cards."
+      "sixteenthGraphic": "they tap one of your business cards.",
+      "hyperText": "All your information is encrypted"
     },
     "comparison": {
       "compare": "Compare it yourself",
       "before": "Before vs",
       "after": "After",
       "text": "The traditional way of sharing your information is by handing over a business card or writing your details on paper. But what if you could share your contact instantly and hassle-free, without resorting to paper?",
+      "usualSubheading": "Others",
       "usualHeading": "The usual way, nothing special",
       "firstUsual": "Simple link in bio (not always available)",
       "secondUsual": "Most likely requires an app",
@@ -62,10 +65,10 @@
       "fifthUpgrade": "No need to install anything",
       "sixthUpgrade": "Enhance and showcase your brand",
       "seventhUpgrade": "Buy one... or many!",
-      "bottomText": "Like a LinkTree, but much better!"
+      "bottomText": "Think of it as a LinkTree, but way better!"
     },
     "stepByStep": {
-      "title": "Step by Step",
+      "title": "An explanation",
       "subtitle": "How does it work?",
       "subheading": "We combine top technologies to ensure our product delivers the quality you're looking for",
       "stepOneTitle": "Sign up and choose your username",
@@ -74,7 +77,7 @@
       "stepTwoDescription": "Anything you want to share with your contacts.",
       "stepThreeTitle": "Customize your page",
       "stepThreeDescription": "You can add your own content and personalize your page.",
-      "stepFourTitle": "Customize your card",
+      "stepFourTitle": "Purchase your card",
       "stepFourDescription": "Choose from a variety of options or create your own design",
       "stepFiveTitle": "You're all set!",
       "stepFiveDescription": "No need to install anything, just tap it on someone's phone and share your page, including your contact information!"
@@ -82,19 +85,22 @@
     "pricing": {
       "title": "Pricing",
       "description": "Clear and simple pricing, no hidden costs",
-      "from": "We offer a single plan for all individual customers, so you can focus on what matters most.",
+      "subheading": "We offer a single plan for all individual customers, so you can focus on what matters most.",
+      "startingFrom": "Starting from",
+      "offerExplanation": "🚀 Launch event only offer",
+      "planName": "Professional",
       "planDescription": "A single affordable and flexible plan, perfect for everyone. Includes:",
-      "firstIncluded": "1 business card included",
+      "firstIncluded": "1 fully customizable business card included",
       "secondIncluded": "Free shipping! (Lima)",
       "thirdIncluded": "All page customization options",
-      "fourthIncluded": "Social/professional links",
+      "fourthIncluded": "Social / professional links",
       "fifthIncluded": "High security for your information",
       "sixthIncluded": "Email signatures",
       "seventhIncluded": "And more!",
       "primaryButton": "Get started now!"
     },
     "faq": {
-      "subtitle": "Any questions?",
+      "subheading": "Any questions?",
       "message": "If none of these answers resolve your doubts, feel free to contact us at",
       "questionOne": "What is NFC technology?",
       "answerOne": "NFC stands for Near Field Communication, a technology that allows two devices to communicate at close range, which also powers Apple Pay and Google Pay. ConCard uses it so you can share any contact information with others without needing them to install additional apps.",

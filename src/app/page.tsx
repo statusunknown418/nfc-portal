@@ -149,15 +149,15 @@ export default function Home() {
 
             <ul className="hidden md:flex">
               <Button asChild variant="ghost">
-                <Link href={"/#features"}>Features</Link>
+                <Link href={"/#features"}>{t("navbar.features")}</Link>
               </Button>
 
               <Button asChild variant="ghost">
-                <Link href={"/#customers"}>Customers</Link>
+                <Link href={"/#customers"}>{t("navbar.customers")}</Link>
               </Button>
 
               <Button asChild variant="ghost">
-                <Link href={"#pricing"}>Pricing</Link>
+                <Link href={"#pricing"}>{t("navbar.pricing")}</Link>
               </Button>
             </ul>
 
@@ -174,7 +174,7 @@ export default function Home() {
             <SignedIn>
               <Button asChild className="rounded-full">
                 <Link href="/admin">
-                  Dashboard <ChevronRightIcon />
+                  {t("navbar.dashboard")} <ChevronRightIcon />
                 </Link>
               </Button>
             </SignedIn>
@@ -182,7 +182,7 @@ export default function Home() {
             <SignedOut>
               <SignUpButton>
                 <Button className="rounded-full">
-                  Join now <ArrowRightIcon />
+                  {t("navbar.joinNow")} <ArrowRightIcon />
                 </Button>
               </SignUpButton>
             </SignedOut>
@@ -207,7 +207,7 @@ export default function Home() {
             <article className="flex flex-col items-center gap-7">
               <BlurFade delay={0.25 * 2}>
                 <Badge>
-                  ✨ Introducing premium cards <ArrowRightIcon />
+                  ✨ {t("hero.banner")} <ArrowRightIcon />
                 </Badge>
               </BlurFade>
 
@@ -236,7 +236,7 @@ export default function Home() {
                       className="group w-full shadow-lg shadow-indigo-300 transition-all hover:shadow-xl hover:shadow-indigo-300 sm:w-auto"
                     >
                       <Link href="/admin">
-                        Comienza Ahora
+                        {t("hero.startNow")}
                         <ChevronRightIcon className="transition-transform group-hover:translate-x-1" />
                       </Link>
                     </Button>
@@ -244,7 +244,7 @@ export default function Home() {
 
                   <Button asChild variant="ghost" size="lg" className="group">
                     <Link href="#features">
-                      Porque ConCard?
+                      {t("hero.why")}
                       <QuestionMarkCircledIcon className="transition-transform group-hover:translate-x-1" />
                     </Link>
                   </Button>
@@ -263,14 +263,14 @@ export default function Home() {
 
           <Button variant="ghost">
             <ArrowDownIcon />
-            Learn more
+            {t("hero.learnMore")}
           </Button>
         </div>
 
         <section className="bg-white py-24" id="customers">
           <article className="relative mx-auto max-w-7xl">
             <h3 className="text-center text-lg font-medium uppercase text-muted-foreground">
-              Con la confianza de profesionales en todas las industrias
+              {t("testimonials.heading")}
             </h3>
 
             <Marquee pauseOnHover className="mt-5 [--duration:30s]">
@@ -289,7 +289,7 @@ export default function Home() {
             <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-white dark:from-background" />
 
             <p className="mt-4 text-center text-xs text-muted-foreground">
-              Ocultamos los nombres completos e informacion personal por razones de privacidad
+              {t("testimonials.privacyDisclaimer")}
             </p>
           </article>
         </section>
@@ -300,11 +300,9 @@ export default function Home() {
             className="mx-auto flex w-full max-w-7xl flex-col gap-10 md:gap-14"
           >
             <header className="space-y-2 px-4 md:px-6">
-              <p className="font-medium text-emerald-400">An explanation</p>
-              <h2 className="text-4xl font-semibold tracking-tight">But how does it work?</h2>
-              <p className="text-lg text-muted-foreground">
-                We use a combination of technologies to make our product stand out
-              </p>
+              <p className="font-medium text-emerald-400">{t("stepByStep.title")}</p>
+              <h2 className="text-4xl font-semibold tracking-tight">{t("stepByStep.subtitle")}</h2>
+              <p className="text-lg text-muted-foreground">{t("stepByStep.subheading")}</p>
             </header>
 
             <div className="grid grid-cols-1 *:space-y-3 *:border-b *:border-border/20 *:px-4 *:py-6 md:grid-cols-2 md:justify-items-stretch md:gap-0 md:*:space-y-5 md:*:border-r md:*:px-8 md:*:py-10">
@@ -312,10 +310,8 @@ export default function Home() {
                 <Badge variant="secondary">1</Badge>
 
                 <section>
-                  <h3 className="text-lg font-medium">Sign up and choose your username</h3>
-                  <p className="text-muted-foreground">
-                    You can use an email or social media account to sign up
-                  </p>
+                  <h3 className="text-lg font-medium">{t("stepByStep.stepOneTitle")}</h3>
+                  <p className="text-muted-foreground">{t("stepByStep.stepOneDescription")}</p>
                 </section>
 
                 <div className="flex h-52 w-full items-center justify-center bg-neutral-700">
@@ -327,10 +323,8 @@ export default function Home() {
                 <Badge variant="secondary">2</Badge>
 
                 <section>
-                  <h3 className="text-lg font-medium">Add your contact information</h3>
-                  <p className="text-muted-foreground">
-                    Anything you want to share with your contacts
-                  </p>
+                  <h3 className="text-lg font-medium">{t("stepByStep.stepTwoTitle")}</h3>
+                  <p className="text-muted-foreground">{t("stepByStep.stepTwoDescription")}</p>
                 </section>
 
                 <div className="flex h-52 w-full items-center justify-center bg-neutral-700">
@@ -342,10 +336,8 @@ export default function Home() {
                 <Badge variant="secondary">3</Badge>
 
                 <section>
-                  <h3 className="text-lg font-medium">Customize your page</h3>
-                  <p className="text-muted-foreground">
-                    You can add your own content and customize your page
-                  </p>
+                  <h3 className="text-lg font-medium">{t("stepByStep.stepThreeTitle")}</h3>
+                  <p className="text-muted-foreground">{t("stepByStep.stepThreeDescription")}</p>
                 </section>
 
                 <div className="flex h-52 w-full items-center justify-center bg-neutral-700">
@@ -357,8 +349,8 @@ export default function Home() {
                 <Badge variant="secondary">4</Badge>
 
                 <section>
-                  <h3 className="text-lg font-medium">Purchase an NFC card</h3>
-                  <p className="text-muted-foreground">Choose from a variety of options</p>
+                  <h3 className="text-lg font-medium">{t("stepByStep.stepFourTitle")}</h3>
+                  <p className="text-muted-foreground">{t("stepByStep.stepFourDescription")}</p>
                 </section>
 
                 <div className="flex h-52 w-full items-center justify-center bg-neutral-700">
@@ -370,10 +362,9 @@ export default function Home() {
                 <Badge variant="secondary">5</Badge>
 
                 <section>
-                  <h3 className="text-lg font-medium">Use it anywhere!</h3>
+                  <h3 className="text-lg font-medium">{t("stepByStep.stepFiveTitle")}</h3>
                   <p className="max-w-prose text-muted-foreground">
-                    No need to install anything, simply approach it to someone&apos;s phone and
-                    share your page, including your contact information!
+                    {t("stepByStep.stepFiveDescription")}
                   </p>
                 </section>
 
@@ -391,15 +382,12 @@ export default function Home() {
         >
           <article className="w-full max-w-7xl space-y-8 rounded-[32px]">
             <div className="space-y-2">
-              <p className="font-semibold text-indigo-600">Caracteristicas</p>
+              <p className="font-semibold text-indigo-600">{t("features.subheading")}</p>
 
-              <h2 className="text-4xl font-semibold tracking-tight">
-                Beneficios, y porque escogernos?
-              </h2>
+              <h2 className="text-4xl font-semibold tracking-tight">{t("features.heading")}</h2>
 
               <p className="max-w-prose text-lg text-muted-foreground">
-                Explora los beneficios de usar nuestro producto y porque somos la mejor opcion para
-                ti
+                {t("features.description")}
               </p>
             </div>
 
@@ -409,18 +397,18 @@ export default function Home() {
 
                 <h2 className="text-2xl font-medium">
                   <span className="transition-all group-hover:text-indigo-400">
-                    Extremadamente facil de usar,
+                    {t("features.firstGraphic")}
                   </span>{" "}
                   <span className="text-indigo-400 transition-all group-hover:text-inherit">
-                    comienza en solo unos minutos
+                    {t("features.secondGraphic")}
                   </span>{" "}
                   <span className="transition-all group-hover:text-indigo-400">
-                    y destaca frente a la competencia{" "}
+                    {t("features.thirdGraphic")}
                   </span>
                   <span className="text-indigo-400 transition-all group-hover:text-inherit">
-                    mostrando tu perfil de manera única y profesional.
+                    {t("features.fourthGraphic")}
                   </span>{" "}
-                  <span>¡Comparte tu URL de ConCard en cualquier lugar!</span>
+                  <span>{t("features.fifthGraphic")}</span>
                 </h2>
               </article>
 
@@ -438,10 +426,10 @@ export default function Home() {
                 </section>
 
                 <h2 className="text-2xl font-medium">
-                  Altamente personalizable,{" "}
-                  <span className="text-pink-500">ofrecemos una amplia gama de opciones</span> para
-                  que tu portal y tarjeta de presentacion sean verdaderamente{" "}
-                  <span className="text-pink-500">tuyos y unicos</span>
+                  {t("features.sixthGraphic")}{" "}
+                  <span className="text-pink-500">{t("features.seventhGraphic")}</span>
+                  {t("features.eighthGraphic")}{" "}
+                  <span className="text-pink-500">{t("features.ninthGraphic")}</span>
                 </h2>
               </article>
 
@@ -449,28 +437,23 @@ export default function Home() {
                 <div>graphic 3</div>
 
                 <h2 className="text-2xl font-medium">
-                  No se requieren aplicaciones externas,{" "}
-                  <span className="text-emerald-500">funciona de inmediato</span> en todos los
-                  dispositivos iOS y{" "}
-                  <span className="text-emerald-500"> en la mayoría de los teléfonos Android</span>
+                  {t("features.tenthGraphic")}
+                  <span className="text-emerald-500">{t("features.eleventhGraphic")}</span>
+                  {t("features.twelfthGraphic")}{" "}
+                  <span className="text-emerald-500">{t("features.thirteenthGraphic")}</span>
                 </h2>
               </article>
 
               <article className="border border-neutral-50 bg-primary text-neutral-50 lg:col-span-8 lg:row-span-2">
                 <div>
                   <LockClosedIcon className="size-6" />
-                  <HyperText text="Toda tu informacion esta encriptada" />
+                  <HyperText text={t("features.hyperText")} />
                 </div>
 
                 <h2 className="text-2xl font-medium">
-                  Informacion segura,{" "}
-                  <span className="text-muted-foreground">
-                    nadie puede ver tu contacto personal a menos
-                  </span>{" "}
-                  <span>que lo compartas explícitamente</span>{" "}
-                  <span className="text-muted-foreground">
-                    acercando una de tus tarjetas de presentación.
-                  </span>
+                  {t("features.fourteenthGraphic")}{" "}
+                  <span className="text-muted-foreground">{t("features.fifteenthGraphic")}</span>{" "}
+                  <span>{t("features.sixteenthGraphic")}</span>
                 </h2>
               </article>
             </section>
@@ -483,39 +466,35 @@ export default function Home() {
         >
           <article className="group w-full max-w-7xl space-y-10 rounded-[32px]">
             <section className="space-y-2">
-              <p className="font-medium text-blue-600">Comparalo tu mismo</p>
+              <p className="font-medium text-blue-600">{t("comparison.compare")}</p>
               <h2 className="text-4xl font-semibold tracking-tight">
-                Antes vs{" "}
+                {t("comparison.before")}{" "}
                 <span className="bg-gradient-to-r from-violet-700 to-purple-400 bg-clip-text text-transparent">
-                  Despues
+                  {t("comparison.after")}
                 </span>
               </h2>
 
-              <p className="max-w-prose text-lg text-muted-foreground">
-                La forma tradicional de compartir tu información es entregando una tarjeta de
-                presentación o escribiendo tus datos en un papel. Pero, ¿y si pudieras compartir tu
-                contacto de manera instantánea y sin complicaciones, sin tener que recurrir al
-                papel?
-              </p>
+              <p className="max-w-prose text-lg text-muted-foreground">{t("comparison.text")}</p>
             </section>
 
             <section className="grid grid-cols-1 gap-4 pb-10 md:grid-cols-2 md:gap-10">
               <Card className="rounded-[28px] border-dashed bg-zinc-100 p-3 shadow-none transition-all duration-300 group-hover:scale-95 group-hover:blur-sm md:p-6 md:group-hover:translate-x-1/2">
                 <CardHeader>
-                  <CardTitle className="text-xl">Otros</CardTitle>
+                  <CardTitle className="text-xl">{t("comparison.usualSubheading")}</CardTitle>
                   <CardDescription className="text-base">
-                    El modo usual, nada especial
+                    {t("comparison.usualHeading")}
                   </CardDescription>
                 </CardHeader>
 
                 <CardContent>
                   <ul className="list-disc space-y-3 pl-4 text-lg font-light text-muted-foreground">
-                    <li>Enlace simple en la biografía (no siempre disponible)</li>
-                    <li>Lo más probable es que requiera una aplicación</li>
-                    <li>No es útil para destacar</li>
-                    <li>Las tarjetas impresas tradicionales pueden dañar el medio ambiente</li>
+                    <li>{t("comparison.firstUsual")}</li>
+                    <li>{t("comparison.secondUsual")}</li>
+                    <li>{t("comparison.thirdUsual")}</li>
+                    <li>{t("comparison.fourthUsual")}</li>
                     <li>
-                      Funciona... pero es <span className="font-medium italic">aburrido</span>
+                      {t("comparison.fifthUsualPart1")}
+                      <span className="font-medium italic">{t("comparison.fifthUsualPart2")}</span>
                     </li>
                   </ul>
                 </CardContent>
@@ -525,7 +504,7 @@ export default function Home() {
                 <CardHeader>
                   <CardTitle className="text-2xl">ConCard</CardTitle>
                   <CardDescription className="text-base">
-                    Mejora tu perfil profesional
+                    {t("comparison.upgradeHeading")}
                   </CardDescription>
                 </CardHeader>
 
@@ -533,43 +512,43 @@ export default function Home() {
                   <ul className="space-y-3 text-lg font-light text-zinc-200">
                     <li className="flex gap-3">
                       <Badge variant="violet">1</Badge>
-                      <p>Tarjeta de presentación NFC personalizable ✨</p>
+                      <p>{t("comparison.firstUpgrade")}</p>
                     </li>
 
                     <li className="flex gap-3">
                       <Badge variant="violet">2</Badge>
-                      <p>Crea tu propia página personal pública</p>
+                      <p>{t("comparison.secondUpgrade")}</p>
                     </li>
 
                     <li className="flex gap-3">
                       <Badge variant="violet">3</Badge>
-                      <p>Añade todos los enlaces que quieras compartir</p>
+                      <p>{t("comparison.thirdUpgrade")}</p>
                     </li>
 
                     <li className="flex gap-3">
                       <Badge variant="violet">4</Badge>
-                      <p>Información segura</p>
+                      <p>{t("comparison.fourthUpgrade")}</p>
                     </li>
 
                     <li className="flex gap-3">
                       <Badge variant="violet">5</Badge>
-                      <p>No necesitas instalar nada</p>
+                      <p>{t("comparison.fifthUpgrade")}</p>
                     </li>
 
                     <li className="flex gap-3">
                       <Badge variant="violet">6</Badge>
-                      <p>Mejora y muestra tu marca</p>
+                      <p>{t("comparison.sixthUpgrade")}</p>
                     </li>
 
                     <li className="flex gap-3">
                       <Badge variant="violet">7</Badge>
-                      <p>¡Compra una... o muchas!</p>
+                      <p>{t("comparison.seventhUpgrade")}</p>
                     </li>
                   </ul>
                 </CardContent>
 
                 <CardFooter className="text-muted-foreground">
-                  <p className="text-sm">Como un LinkTree, pero mucho mejor!</p>
+                  <p className="text-sm">{t("comparison.bottomText")}</p>
                 </CardFooter>
 
                 <BorderBeam size={100} duration={10} delay={5} borderWidth={2} />
@@ -584,14 +563,9 @@ export default function Home() {
         >
           <article className="w-full max-w-7xl space-y-14 rounded-[32px]">
             <div className="flex flex-col items-center justify-center space-y-2 text-center">
-              <p className="font-semibold text-indigo-600">Precio</p>
-              <h2 className="text-4xl font-semibold tracking-tight">
-                Precios claros y sencillos, sin costos ocultos
-              </h2>
-              <p className="text-lg text-muted-foreground">
-                Ofrecemos un único plan para todos nuestros clientes individuales, para que puedas
-                enfocarte en lo que más importa.
-              </p>
+              <p className="font-semibold text-indigo-600">{t("pricing.title")}</p>
+              <h2 className="text-4xl font-semibold tracking-tight">{t("pricing.description")}</h2>
+              <p className="text-lg text-muted-foreground">{t("pricing.subheading")}</p>
             </div>
 
             <section className="group grid grid-cols-1 place-items-center gap-4 md:grid-cols-3">
@@ -635,7 +609,7 @@ export default function Home() {
 
               <Card className="relative z-10 h-full w-full rounded-[24px] border border-indigo-400 bg-gradient-to-br from-primary to-indigo-950 text-primary-foreground shadow-xl shadow-indigo-400 transition-all duration-300 group-hover:translate-y-5 group-hover:scale-105 md:p-4">
                 <CardHeader>
-                  <p className="text-muted-foreground">Starting from</p>
+                  <p className="text-muted-foreground">{t("pricing.startingFrom")}</p>
 
                   <div className="flex items-center gap-2">
                     <p className="text-xl font-light text-green-600 line-through">S/. 69.90</p>
@@ -647,7 +621,7 @@ export default function Home() {
                         </TooltipTrigger>
 
                         <TooltipContent className="text-sm">
-                          🚀 Launch event only offer
+                          {t("pricing.offerExplanation")}
                         </TooltipContent>
                       </Tooltip>
                     </TooltipProvider>
@@ -655,9 +629,9 @@ export default function Home() {
                   <CardTitle className="text-2xl font-medium tabular-nums text-green-400">
                     S/. 49.90 PEN
                   </CardTitle>
-                  <CardTitle className="text-2xl">Profesional</CardTitle>
+                  <CardTitle className="text-2xl">{t("pricing.planName")}</CardTitle>
                   <CardDescription className="text-base">
-                    Un único plan asequible y flexible, perfecto para todos. Incluye:
+                    {t("pricing.planDescription")}
                   </CardDescription>
                 </CardHeader>
 
@@ -665,40 +639,37 @@ export default function Home() {
                   <ul className="space-y-4 font-light text-zinc-200 md:text-lg">
                     <li className="flex gap-3">
                       <Badge variant="secondary">1</Badge>
-                      <p>
-                        1 <strong className="font-semibold">fully customizable</strong> business
-                        card included
-                      </p>
+                      <p>{t("pricing.firstIncluded")}</p>
                     </li>
 
                     <li className="flex gap-3">
                       <Badge variant="secondary">2</Badge>
-                      <p>Envio gratuito! (Lima)</p>
+                      <p>{t("pricing.secondIncluded")}</p>
                     </li>
 
                     <li className="flex gap-3">
                       <Badge variant="secondary">3</Badge>
-                      <p>Highly customizable personal page (portal)</p>
+                      <p>{t("pricing.thirdIncluded")}</p>
                     </li>
 
                     <li className="flex gap-3">
                       <Badge variant="secondary">4</Badge>
-                      <p>Social / professional links </p>
+                      <p>{t("pricing.fourthIncluded")}</p>
                     </li>
 
                     <li className="flex gap-3">
                       <Badge variant="secondary">5</Badge>
-                      <p>Alta seguridad para tu información</p>
+                      <p>{t("pricing.fifthIncluded")}</p>
                     </li>
 
                     <li className="flex gap-3">
                       <Badge variant="secondary">6</Badge>
-                      <p>Firmas de correo electrónicos</p>
+                      <p>{t("pricing.sixthIncluded")}</p>
                     </li>
 
                     <li className="flex gap-3">
                       <Badge variant="secondary">7</Badge>
-                      <p>¡Y más!</p>
+                      <p>{t("pricing.seventhIncluded")}</p>
                     </li>
                   </ul>
                 </CardContent>
@@ -707,7 +678,7 @@ export default function Home() {
                   <SignUpButton>
                     <Button variant="primary" className="w-full" size="lg">
                       <MagicWandIcon className="h-5 w-5" />
-                      Empieza ahora!
+                      {t("pricing.primaryButton")}
                     </Button>
                   </SignUpButton>
                 </CardFooter>
@@ -760,9 +731,9 @@ export default function Home() {
           <section id="security" className="mx-auto w-full max-w-7xl">
             <header className="space-y-2">
               <p className="font-medium text-pink-700">FAQ</p>
-              <h2 className="text-4xl font-semibold tracking-tight">Alguna duda?</h2>
+              <h2 className="text-4xl font-semibold tracking-tight">{t("faq.subheading")}</h2>
               <p className="text-muted-foreground">
-                Si ninguna de estas respuestas resuelve tu duda, no dudes en contactarnos en{" "}
+                {t("faq.message")}{" "}
                 <Link href="mailto:help@stackkstudios.com" className="text-primary underline">
                   help@stackkstudios.com
                 </Link>
@@ -772,68 +743,56 @@ export default function Home() {
             <Accordion type="single" collapsible className="mt-8 w-full">
               <AccordionItem value="explain-nfc">
                 <AccordionTrigger className="h-20 text-2xl font-medium md:h-20">
-                  What is NFC technology?
+                  {t("faq.questionOne")}
                 </AccordionTrigger>
 
                 <AccordionContent className="text-lg font-light" accessKey="explain-nfc">
-                  NFC significa Near Field Communication (Comunicación de Campo Cercano), una
-                  tecnología que permite que dos dispositivos se comuniquen entre sí a corta
-                  distancia, lo que también impulsa a Apple Pay y Google Pay. ConCard lo utiliza
-                  para que puedas compartir cualquier información de contacto con otros, sin
-                  necesidad de que instalen aplicaciones adicionales.
+                  {t("faq.answerOne")}
                 </AccordionContent>
               </AccordionItem>
 
               <AccordionItem value="purchases">
                 <AccordionTrigger className="h-24 text-2xl font-medium md:h-20">
-                  How do I purchase a card?
+                  {t("faq.questionTwo")}
                 </AccordionTrigger>
+
                 <AccordionContent className="text-lg font-light" accessKey="purchases">
-                  Para comprar una tarjeta, simplemente{" "}
+                  {t("faq.answerTwoPart1")}{" "}
                   <SignUpButton>
                     <button className="font-medium underline underline-offset-2 hover:text-indigo-700">
-                      empieza aqui
+                      {t("faq.answerTwoPart2")}
                     </button>
                   </SignUpButton>{" "}
-                  y solo sigue los pasos de incorporación, es simple y directo, puedes completarlo
-                  en menos de 10 minutos.
+                  {t("faq.answerTwoPart3")}
                 </AccordionContent>
               </AccordionItem>
 
               <AccordionItem value="compatibility">
                 <AccordionTrigger className="h-24 text-2xl font-medium md:h-20">
-                  What devices are compatible?
+                  {t("faq.questionThree")}
                 </AccordionTrigger>
 
                 <AccordionContent className="text-lg font-light" accessKey="how-it-works">
-                  ConCard es compatible con todos los dispositivos iOS y la mayoría de los
-                  dispositivos Android (es decir, desde 2020 en adelante). Si el dispositivo no es
-                  compatible o tienes dudas, aún puedes compartir tu información de contacto y
-                  enlaces escaneando el código QR.
+                  {t("faq.answerThree")}
                 </AccordionContent>
               </AccordionItem>
 
               <AccordionItem value="how-it-works">
                 <AccordionTrigger className="h-20 text-2xl font-medium md:h-20">
-                  How do I make it work?
+                  {t("faq.questionFour")}
                 </AccordionTrigger>
                 <AccordionContent className="text-lg font-light" accessKey="how-it-works">
-                  Puedes usar ConCard para compartir tu información de contacto con otros sin que
-                  ellos necesiten instalar aplicaciones adicionales. Simplemente acércala al
-                  teléfono de alguien y comparte tu página, ¡incluida tu información de contacto!
+                  {t("faq.answerFour")}
                 </AccordionContent>
               </AccordionItem>
 
               <AccordionItem value="security">
                 <AccordionTrigger className="h-28 text-2xl font-medium md:h-20">
-                  What if someone finds out my username by accident?
+                  {t("faq.questionFive")}
                 </AccordionTrigger>
 
                 <AccordionContent className="text-lg font-light">
-                  No te preocupes, tomamos tu privacidad muy en serio y hemos diseñado un sistema
-                  para proteger tu información privada. Todas las páginas están encriptadas y solo
-                  son accesibles cuando tú las abres explícitamente al acercar tu tarjeta al
-                  teléfono de alguien.
+                  {t("faq.answerFive")}
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
@@ -848,7 +807,7 @@ export default function Home() {
               className="group text-base hover:text-primary-foreground"
             >
               <Link href="/admin">
-                Get started
+                {t("footer.getStarted")}
                 <LightningBoltIcon className="transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>
@@ -858,7 +817,7 @@ export default function Home() {
               variant="link"
               className="group text-base hover:text-primary-foreground"
             >
-              <Link href="mailto:help@stackkstudios.com">Contact</Link>
+              <Link href="mailto:help@stackkstudios.com">{t("footer.contact")}</Link>
             </Button>
 
             <Button
@@ -866,7 +825,7 @@ export default function Home() {
               variant="link"
               className="group text-base hover:text-primary-foreground"
             >
-              <Link href="/">About us</Link>
+              <Link href="/">{t("footer.aboutUs")}</Link>
             </Button>
 
             <Button
@@ -874,7 +833,7 @@ export default function Home() {
               variant="link"
               className="group text-base hover:text-primary-foreground"
             >
-              <Link href="/">Terms of service</Link>
+              <Link href="/">{t("footer.termsOfService")}</Link>
             </Button>
 
             <Button
@@ -882,7 +841,7 @@ export default function Home() {
               variant="link"
               className="group text-base hover:text-primary-foreground"
             >
-              <Link href="/">Privacy policy</Link>
+              <Link href="/">{t("footer.privacyPolicy")}</Link>
             </Button>
           </section>
 
