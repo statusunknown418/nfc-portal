@@ -1,8 +1,8 @@
-import { type Formats } from "next-intl";
+import { type AbstractIntlMessages, type Formats } from "next-intl";
 import { getRequestConfig } from "next-intl/server";
 import { cookies } from "next/headers";
-import { defaultLocale, type Locale } from "./config";
 import { LOCALE_KEY } from "~/middleware";
+import { defaultLocale, type Locale } from "./config";
 
 export const formats = {
   list: {
@@ -12,14 +12,18 @@ export const formats = {
   },
 } satisfies Formats;
 
+const messageImports = {
+  en: () => import("./messages/en.json"),
+  es: () => import("./messages/es.json"),
+} as const satisfies Record<Locale, () => Promise<{ default: AbstractIntlMessages }>>;
+
 export default getRequestConfig(async () => {
   const locale = (cookies().get(LOCALE_KEY)?.value as Locale) || defaultLocale;
+  const messages = await messageImports[locale]();
 
   return {
     locale,
     formats,
-    // TODO: Make this work without eslint-ignore and ts-ignore
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-    messages: (await import(`../lib/messages/${locale}.json`)).default,
+    messages,
   };
 });
