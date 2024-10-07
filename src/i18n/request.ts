@@ -1,8 +1,8 @@
 import { type AbstractIntlMessages, type Formats } from "next-intl";
 import { getRequestConfig } from "next-intl/server";
+import { locales, type Locale } from "./config";
 import { cookies } from "next/headers";
 import { LOCALE_KEY } from "~/middleware";
-import { defaultLocale, type Locale } from "./config";
 
 export const formats = {
   list: {
@@ -18,7 +18,16 @@ const messageImports = {
 } as const satisfies Record<Locale, () => Promise<{ default: AbstractIntlMessages }>>;
 
 export default getRequestConfig(async () => {
-  const locale = (cookies().get(LOCALE_KEY)?.value as Locale) || defaultLocale;
+  const locale = cookies().get(LOCALE_KEY)?.value as Locale;
+
+  if (!locales.some((l) => l === locale)) {
+    return {
+      locale: "es",
+      formats,
+      messages: (await messageImports.es()).default,
+    };
+  }
+
   const messages = (await messageImports[locale]()).default;
 
   return {

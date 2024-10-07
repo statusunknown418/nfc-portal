@@ -193,7 +193,9 @@
       "questionFour": "How do I use it?",
       "answerFour": "You can use ConCard to share your contact information with others without them needing to install additional apps. Just tap it on someone's phone and share your page, including your contact information!",
       "questionFive": "What if someone finds my profile by accident?",
-      "answerFive": "Don't worry, we take your privacy very seriously and have designed a system to protect your private information. All pages are encrypted and are only accessible when you explicitly open them by tapping your card on someone's phone."
+      "answerFive": "Don't worry, we take your privacy very seriously and have designed a system to protect your private information. All pages are encrypted and are only accessible when you explicitly open them by tapping your card on someone's phone.",
+      "questionSix": "Where can I get my card shipped?",
+      "answerSix": "We offer FREE shipping to  Lima, for other cities the shipping is free for purchases over S/. 100 PEN. Finally, we also offer shipping to all Latin America, but the cost depends on the provider, for more information and pricing, please contact us!"
     },
     "footer": {
       "getStarted": "Get started here",
@@ -385,13 +387,105 @@
           "descriptionPart1": "Your purchase means a lot to us. Your support is heavily appreciated and will help us build a better product for our customers!.",
           "descriptionPart2": "You will receive a confirmation email shortly. If nothing arrives try checking your spam folder or contact us directly, we're happy to help."
         }
+      },
+      "banners": {
+        "pending": {
+          "title": "Onboarding incomplete!",
+          "description": "It is strongly recommended to complete the onboarding process, this way you can complete every step and get your portal active and linked to your business card.",
+          "pickUp": "Pick up where you left off!"
+        },
+        "done": {
+          "title": "Your page is LIVE!"
+        },
+        "continueModal": {
+          "title": "Continue onboarding?",
+          "description": "We've noticed you haven't finished the onboarding process. It is strongly recommended to complete the onboarding process, this way you can get the most out of ConCard.",
+          "takeMeThere": "Take me there",
+          "doNotShowAgain": "Don't show again"
+        }
+      }
+    },
+    "sidebar": {
+      "links": {
+        "title": "Links",
+        "description": "Links and contact information"
+      },
+      "themes": {
+        "title": "Themes",
+        "description": "Customize your portal"
+      },
+      "emails": {
+        "title": "Digital signatures",
+        "description": "Use digital signatures in your mails"
+      },
+      "settings": {
+        "title": "Settings",
+        "description": "Manage your account"
+      }
+    },
+    "dashboard": {
+      "navigation": {
+        "crumbOne": "Dashboard",
+        "crumbTwo": "Links and contact information"
+      },
+      "welcome": "Welcome",
+      "title": "Dashboard",
+      "description": "Here you can manage everything that shows up on your NFC portal page",
+      "banners": {
+        "card": {
+          "title": "Business Card",
+          "description": "Current status:",
+          "awaitingPurchase": "We noticed you haven't purchased a card yet,",
+          "awaitingPurchasePart2": "please purchase one to unlock all features!",
+          "purchased": "Purchased"
+        }
+      },
+      "tabs": {
+        "contact": "Contact",
+        "links": "Links"
+      },
+      "actions": {
+        "addLink": "Add link",
+        "importLinks": "Import links"
+      }
+    },
+    "visual": {
+      "navigation": {
+        "crumbOne": "Dashboard",
+        "crumbTwo": "Customization"
+      },
+      "title": "Customize your portal",
+      "description": "Choose colors, font styles and more, we'll add more options soon!"
+    },
+    "portal": {
+      "tabs": {
+        "contact": "Contact",
+        "links": "Links"
+      },
+      "empty": {
+        "title": "No links added yet!",
+        "description": "If this is your first time here, you can add some links to your profile."
+      },
+      "shareLink": {
+        "title": "Share this link",
+        "description": "You can get a similar page like this through our app!",
+        "copyLink": "Copy link",
+        "shareViaEmail": "Share via email",
+        "shareViaTwitter": "Share via Twitter",
+        "getYours": "Get yours",
+        "getYoursDescription": "You can have it up and running in less than 10 minutes!"
       }
     }
   },
   "common": {
     "comingSoon": "Coming soon!",
+    "requestAction": "Request this feature earlier, just click here",
+    "requestFeature": "Request a feature",
+    "requestFeatureDescription": "We're always looking for ways to improve ConCard, if you have a feature request, please let us know!",
     "errors": {
-      "somethingWentWrong": "Something went wrong"
+      "somethingWentWrong": "Something went wrong",
+      "recognitionFailed": "Looks like we were unable to recognize your identity",
+      "usernameNotFound": "We couldn't find your username, please refresh the page or try again 😢"
     }
   }
 }

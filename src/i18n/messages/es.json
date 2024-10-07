@@ -173,7 +173,7 @@
       "firstIncluded": "1 tarjeta de presentación incluida",
       "secondIncluded": "¡Envío gratuito! (Lima)",
       "thirdIncluded": "Todas las opciones de personalización de la página",
-      "fourthIncluded": "Enlaces sociales/profesionales",
+      "fourthIncluded": "Links sociales/profesionales",
       "fifthIncluded": "Alta seguridad para tu información",
       "sixthIncluded": "Firmas de correo electrónico",
       "seventhIncluded": "¡Y mucho más!",
@@ -193,7 +193,9 @@
       "questionFour": "¿Cómo lo uso?",
       "answerFour": "ConCard te permite compartir tu información de contacto sin que otros necesiten instalar aplicaciones. Simplemente acerca tu tarjeta al teléfono de alguien y comparte tu página, incluida tu información de contacto!",
       "questionFive": "¿Qué pasa si alguien encuentra mi perfil por accidente?",
-      "answerFive": "No te preocupes, tomamos muy en serio tu privacidad. Hemos diseñado un sistema robusto para proteger tu información. Todas las páginas están encriptadas y solo son accesibles cuando tú permites que lo hagan al acercar tu tarjeta."
+      "answerFive": "No te preocupes, tomamos muy en serio tu privacidad. Hemos diseñado un sistema robusto para proteger tu información. Todas las páginas están encriptadas y solo son accesibles cuando tú permites que lo hagan al acercar tu tarjeta.",
+      "questionSix": "A que partes del Perú tienen envíos disponibles?",
+      "answerSix": "Realizamos envíos GRATIS a todo Lima, para provincias el envío es gratis por compras mayores a S/. 100 PEN. Finalmente ofrecemos envíos a todo Latinoamérica, pero el costo depende el proveedor, para más información y cotizaciones no dudes en contactarnos. "
     },
     "footer": {
       "getStarted": "Empieza aquí",
@@ -302,10 +304,10 @@
           "bio": "Biografía",
           "bioDescription": "Escribe lo que quieras compartir sobre ti a los demás. Esto se mostrará en tu perfil. (0/100 caracteres máx.)",
           "avatarUpload": "Subir un avatar (opcional)",
-          "generated": "Reemplaza con avatar auto-generado",
-          "remove": "Eliminar Avatar",
+          "generated": "Utilizar  auto-generado",
+          "remove": "Remover",
           "themeCustomization": {
-            "title": "Personalización del porta;",
+            "title": "Personalización del portal",
             "description": "Elige colores, estilos de fuente y más!",
             "colors": {
               "title": "Paleta de colores",
@@ -326,10 +328,10 @@
                 "dotted": "Punteado"
               },
               "shape": {
-                "label": "Forma",
-                "pill": "Redondeado total",
-                "rounded": "Redondeado mínimo",
-                "small": "Redondeado pequeño",
+                "label": "Redondeado",
+                "pill": "Completo",
+                "rounded": "Medio",
+                "small": "Pequeño",
                 "square": "Cuadrado"
               }
             },
@@ -342,7 +344,7 @@
                 "normal": "Normal",
                 "medium": "Medio",
                 "bold": "Negrita",
-                "black": "Negro"
+                "black": "Extra negrita"
               },
               "styles": {
                 "normal": "Normal",
@@ -385,13 +387,102 @@
           "descriptionPart1": "Tu compra significa mucho para nosotros. Tu apoyo es muy apreciado y nos ayudará a construir un mejor producto para nuestros clientes!.",
           "descriptionPart2": "Recibirás un correo de confirmación en breve. Si nada llega, intenta comprobar tu carpeta de spam o contáctenos directamente, estamos encantados de ayudarte."
         }
+      },
+      "banners": {
+        "pending": {
+          "title": "Onboarding incompleto!",
+          "description": "Es altamente recomendado completar el proceso de onboarding, de esta manera podrás  tener tu portal activado y vinculado a tu tarjeta NFC.",
+          "pickUp": "Continua donde lo dejaste"
+        },
+        "continueModal": {
+          "title": "Continuar con el onboarding?",
+          "description": "Notamos que no has completado el proceso de onboarding. Es altamente recomendado completar este proceso, de esta manera podrás sacar el mayor provecho de ConCard.",
+          "takeMeThere": "Continúa aquí",
+          "doNotShowAgain": "No mostrar de nuevo"
+        },
+        "done": {
+          "title": "Tu página está ACTIVA!"
+        }
+      }
+    },
+    "sidebar": {
+      "links": {
+        "title": "Links",
+        "description": "Links e información de contacto"
+      },
+      "themes": {
+        "title": "Temas",
+        "description": "Personaliza tu portal"
+      },
+      "emails": {
+        "title": "Firmas digitales",
+        "description": "Firmas digitales para tus emails"
+      },
+      "settings": {
+        "title": "Ajustes",
+        "description": "Configuración de la app"
+      }
+    },
+    "dashboard": {
+      "navigation": {
+        "crumbOne": "Dashboard",
+        "crumbTwo": "Links e información de contacto"
+      },
+      "welcome": "Bienvenido",
+      "title": "Dashboard",
+      "description": "En esta página puedes gestionar todo lo que aparece en tu página personal",
+      "tabs": {
+        "contact": "Contacto",
+        "links": "Links"
+      },
+      "actions": {
+        "addLink": "Añadir link",
+        "importLinks": "Importar links"
+      },
+      "banners": {
+        "card": {
+          "title": "Tarjeta NFC",
+          "description": "Estado actual:",
+          "awaitingPurchase": "Hemos notado que aún no has comprado una tarjeta,",
+          "awaitingPurchasePart2": "por favor adquiere una para desbloquear todas las funciones!",
+          "purchased": "Adquirida"
+        }
+      }
+    },
+    "visual": {
+      "navigation": {
+        "crumbOne": "Dashboard",
+        "crumbTwo": "Personalización"
+      },
+      "title": "Personaliza tu portal",
+      "description": "Escoge colores, estilos de fuente y más, añadiremos más opciones pronto!"
+    },
+    "portal": {
+      "tabs": {
+        "contact": "Contacto",
+        "links": "Links"
+      },
+      "empty": {
+        "title": "No hay links aún!",
+        "description": "Si estás aquí por primera vez, puedes añadir algunos enlaces a tu perfil."
+      },
+      "shareLink": {
+        "title": "Compartir este link",
+        "description": "Puedes obtener una página similar a esta a través de nuestra aplicación!",
+        "copyLink": "Copiar link",
+        "shareViaEmail": "Compartir por email",
+        "shareViaTwitter": "Compartir en Twitter",
+        "getYours": "Consigue tu página!",
+        "getYoursDescription": "¡Puedes tenerla lista en menos de 10 minutos!"
       }
     }
   },
   "common": {
     "comingSoon": "¡Próximamente!",
     "errors": {
-      "somethingWentWrong": "Oops, algo salió mal"
+      "somethingWentWrong": "Oops, algo salió mal",
+      "recognitionFailed": "No se pudo reconocer tu identidad",
+      "usernameNotFound": "No se encontró tu usuario, por favor recarga la página o intenta de nuevo 😢"
     }
   }
 }

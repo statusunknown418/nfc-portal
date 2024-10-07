@@ -1,7 +1,6 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { env } from "./env";
-import { defaultLocale } from "./i18n/config";
 
 export const PORTAL_KEY = "portal-password";
 export const PORTAL_QUERY = "ktp";
@@ -14,15 +13,6 @@ export default clerkMiddleware(
   (auth, req) => {
     const headers = new Headers(req.headers);
     const nextUrl = req.nextUrl;
-
-    const locale =
-      headers.get("accept-language")?.split(",")?.[0]?.split("-")?.[0]?.toLowerCase() ??
-      defaultLocale;
-
-    headers.set(LOCALE_KEY, locale);
-    headers.set(INCOMING_URL, req.nextUrl.pathname);
-    headers.set("x-locale", locale);
-    headers.set("set-cookie", `${LOCALE_KEY}=${locale}`);
 
     if (isProtectedRoute(req)) {
       auth().protect();
