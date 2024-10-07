@@ -479,7 +479,7 @@
   },
   "common": {
     "comingSoon": "Coming soon!",
-    "requestAction": "Request this feature earlier, just click here",
+    "requestAction": "To request this feature earlier, just click here",
     "requestFeature": "Request a feature",
     "requestFeatureDescription": "We're always looking for ways to improve ConCard, if you have a feature request, please let us know!",
     "errors": {
