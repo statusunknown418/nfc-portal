@@ -20,7 +20,87 @@
     },
     "testimonials": {
       "heading": "Trusted by professionals in all industries",
-      "privacyDisclaimer": "We hide full names and personal information for privacy reasons"
+      "privacyDisclaimer": "We hide full names and personal information for privacy reasons",
+      "clients": {
+        "juan": {
+          "name": "@ju.pa****",
+          "username": "Biomedical engineer",
+          "body": "Even while being  a student, this has improved my access to better job opportunities.",
+          "img": "https://avatar.vercel.sh/jose?text=jose.h"
+        },
+        "rw": {
+          "name": "@rw.****",
+          "username": "Mechanical engineer",
+          "body": "This has improved much of my professional profile. I highly recommend it!",
+          "img": "https://avatar.vercel.sh/rodrigo?text=ra"
+        },
+        "jos": {
+          "name": "@jos****",
+          "username": "Product engineer in AV****",
+          "body": "This is the best solution for improving networking.",
+          "img": "https://avatar.vercel.sh/joseph?text=jm"
+        },
+        "bdi": {
+          "name": "@bdi****",
+          "username": "CEO in CI** Peru",
+          "body": "Sharing my contact with new people never has been so easy!",
+          "img": "https://avatar.vercel.sh/jill?text=boris.d"
+        },
+        "mar": {
+          "name": "@mar****",
+          "username": "Marketing leader in PEP****",
+          "body": "We are missing words. This is incredible. I love it.",
+          "img": "https://avatar.vercel.sh/john?text=martina.m"
+        },
+        "ari": {
+          "name": "@ari.****",
+          "username": "Abogado in M****",
+          "body": "This product can actually change the way we communicate.",
+          "img": "https://avatar.vercel.sh/jane?text=JO"
+        },
+        "kim": {
+          "name": "@kim****",
+          "username": "Engineer in NT****",
+          "body": "I love this product because it has helped me to stay focused.",
+          "img": "https://avatar.vercel.sh/kimberly?text=kimberly.c"
+        },
+        "fra": {
+          "name": "@fr.****",
+          "username": "Physics researcher in PU**",
+          "body": "Improving our personal brand definitely opens many doors.",
+          "img": "https://avatar.vercel.sh/francisco?text=FD"
+        },
+        "the_ar": {
+          "name": "@the.ar****",
+          "username": "CEO in Sta****",
+          "body": "Simple, easy, and effective for highlighting!",
+          "img": "https://avatar.vercel.sh/john?text=TA"
+        },
+        "j_a": {
+          "name": "@j.a.****",
+          "username": "Civil engineer in V**",
+          "body": "Using ConCard on social events makes you stand out among the crowd.",
+          "img": "https://avatar.vercel.sh/john?text=JA"
+        },
+        "er_d": {
+          "name": "@er.d.****",
+          "username": "Doctor in Hosp**** *****",
+          "body": "I used to think networking was for me, but ConCard changed that!",
+          "img": "https://avatar.vercel.sh/john?text=JA"
+        },
+        "sej": {
+          "name": "@sej.****",
+          "username": "Marketing manager in Via**** ****",
+          "body": "We've been needing something like this for years, and finally it's here!",
+          "img": "https://avatar.vercel.sh/john?text=JL"
+        },
+        "diego": {
+          "name": "@diego.****",
+          "username": "Biomedical engineer in Cl**** *****",
+          "body": "I always love networking, but this is definitely better!",
+          "img": "https://avatar.vercel.sh/john?text=DR"
+        }
+      }
     },
     "features": {
       "subheading": "Features",

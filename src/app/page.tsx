@@ -12,7 +12,7 @@ import {
   QuestionMarkCircledIcon,
   Share1Icon,
 } from "@radix-ui/react-icons";
-import { useTranslations } from "next-intl";
+import { useMessages, useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
@@ -43,93 +43,20 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "~/comp
 import { cn } from "~/lib/utils";
 import { HydrateClient } from "~/trpc/server";
 
-const reviews = [
-  {
-    name: "@ju.pa****",
-    username: "Ingeniero Biomédico",
-    body: "Incluso siendo estudiante, esto ha mejorado mi acceso a mejores oportunidades laborales.",
-    img: "https://avatar.vercel.sh/jose?text=jose.h",
-  },
-  {
-    name: "@rw.****",
-    username: "Ingeniero Mecánico",
-    body: "Esto ha mejorado mucho mi perfil profesional. ¡Lo recomiendo totalmente!",
-    img: "https://avatar.vercel.sh/rodrigo?text=ra",
-  },
-  {
-    name: "@jos****",
-    username: "Ingeniero de Producto en AV****",
-    body: "Esta es la mejor solución para mejorar el networking.",
-    img: "https://avatar.vercel.sh/joseph?text=jm",
-  },
-  {
-    name: "@bdi****",
-    username: "CEO en CI** Perú",
-    body: "¡Compartir mi contacto con nuevas personas nunca ha sido tan fácil!",
-    img: "https://avatar.vercel.sh/jill?text=boris.d",
-  },
-  {
-    name: "@mar****",
-    username: "Líder de Marketing en PEP****",
-    body: "Me faltan las palabras. Esto es increíble. Me encanta.",
-    img: "https://avatar.vercel.sh/john?text=martina.m",
-  },
-  {
-    name: "@ari.****",
-    username: "Abogado en M****",
-    body: "Este producto puede realmente cambiar la forma en que nos comunicamos.",
-    img: "https://avatar.vercel.sh/jane?text=JO",
-  },
-  {
-    name: "@kim****",
-    username: "Ingeniera de Software en NT****",
-    body: "He estado usando este producto durante semanas y ha sido un cambio radical.",
-    img: "https://avatar.vercel.sh/kimberly?text=kimberly.c",
-  },
-  {
-    name: "@fr.****",
-    username: "Investigador en Física en PU**",
-    body: "Mejorar nuestra marca personal definitivamente abre muchas puertas.",
-    img: "https://avatar.vercel.sh/francisco?text=FD",
-  },
-  {
-    name: "@the.ar****",
-    username: "CEO en Sta****",
-    body: "¡Simple, fácil y efectivo para destacar!",
-    img: "https://avatar.vercel.sh/john?text=TA",
-  },
-  {
-    name: "@j.a.****",
-    username: "Ingeniero Civil en V**",
-    body: "Usar ConCard en eventos sociales te hace destacar entre la multitud.",
-    img: "https://avatar.vercel.sh/john?text=JA",
-  },
-  {
-    name: "@er.d.****",
-    username: "Médico en Hosp**** *****",
-    body: "Solía pensar que el networking no era para mí, ¡pero ConCard cambió eso!",
-    img: "https://avatar.vercel.sh/john?text=JA",
-  },
-  {
-    name: "@sej.****",
-    username: "Gerente de Marketing en Via**** ****",
-    body: "¡Llevábamos años necesitando algo como esto, y por fin está aquí!",
-    img: "https://avatar.vercel.sh/john?text=JL",
-  },
-  {
-    name: "@diego.****",
-    username: "Ingeniero Biomédico en Cl**** *****",
-    body: "Siempre me ha encantado el networking, ¡pero esto es definitivamente mejor!",
-    img: "https://avatar.vercel.sh/john?text=DR",
-  },
-];
-
-const firstRow = reviews.slice(0, reviews.length / 2);
-const secondRow = reviews.slice(reviews.length / 2);
-
 export default function Home() {
   const { sessionClaims } = auth();
+
   const t = useTranslations("landing");
+  const messages = useMessages() as IntlMessages;
+  const reviews = Object.values(
+    messages.landing.testimonials.clients as Record<
+      string,
+      { name: string; username: string; body: string; img: string }
+    >,
+  );
+
+  const firstRow = reviews.slice(0, reviews.length / 2);
+  const secondRow = reviews.slice(reviews.length / 2);
 
   return (
     <HydrateClient>
@@ -159,6 +86,10 @@ export default function Home() {
               <Button asChild variant="ghost">
                 <Link href={"#pricing"}>{t("navbar.pricing")}</Link>
               </Button>
+
+              <Suspense>
+                <LocaleSwitcherWrapper />
+              </Suspense>
             </ul>
 
             {!sessionClaims?.username && (
@@ -166,10 +97,6 @@ export default function Home() {
                 <Skeleton className="h-9 w-28" />
               </ClerkLoading>
             )}
-
-            <Suspense>
-              <LocaleSwitcherWrapper />
-            </Suspense>
 
             <SignedIn>
               <Button asChild className="rounded-full">
