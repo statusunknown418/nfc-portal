@@ -1,6 +1,8 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { ChevronDownIcon } from "@radix-ui/react-icons";
+import { usePathname } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Button } from "~/components/ui/button";
 import {
@@ -16,19 +18,24 @@ import { changeViewerLocale } from "~/lib/cookies.actions";
 
 export const LocaleSwitcher = ({ initial }: { initial: Locale }) => {
   const router = useRouter();
+  const pathname = usePathname();
 
   const handleChange = async (locale: Locale) => {
     await changeViewerLocale(locale);
     router.refresh();
+    redirect(pathname);
   };
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost">{initial === "en" ? "🇺🇸 English" : "🇪🇸 Español"}</Button>
+        <Button variant="ghost">
+          {initial === "en" ? "🇺🇸 English" : "🇪🇸 Español"}
+          <ChevronDownIcon className="h-4 w-4" />
+        </Button>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent>
+      <DropdownMenuContent align="start">
         <DropdownMenuLabel>Language</DropdownMenuLabel>
 
         <DropdownMenuSeparator />

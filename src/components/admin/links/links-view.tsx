@@ -21,15 +21,20 @@ import { LinksWrapperLoader, LinksWrapperRSC } from "./links-list/links-wrapper"
 import { NewLinkDrawer } from "./new-link";
 import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
 import { Switch } from "~/components/ui/switch";
+import { useTranslations } from "next-intl";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "~/components/ui/tooltip";
 
 export const LinksViewRSC = ({ jwt }: { jwt: CustomJwtSessionClaims }) => {
+  const t = useTranslations("admin.dashboard");
+  const common = useTranslations("common");
+
   return (
     <div className="flex flex-col items-center gap-4">
       <Breadcrumb className="self-start">
         <BreadcrumbList>
-          <BreadcrumbItem>Dashboard</BreadcrumbItem>
+          <BreadcrumbItem>{t("navigation.crumbOne")}</BreadcrumbItem>
           <BreadcrumbSeparator />
-          <BreadcrumbPage>Links and contact information</BreadcrumbPage>
+          <BreadcrumbPage>{t("navigation.crumbTwo")}</BreadcrumbPage>
         </BreadcrumbList>
       </Breadcrumb>
 
@@ -43,14 +48,14 @@ export const LinksViewRSC = ({ jwt }: { jwt: CustomJwtSessionClaims }) => {
             value="contact"
             className="h-[36px] min-w-32 flex-grow rounded-full border border-transparent data-[state=active]:border-indigo-500 data-[state=active]:bg-indigo-100 data-[state=active]:font-semibold data-[state=active]:text-indigo-600"
           >
-            Contact
+            {t("tabs.contact")}
           </TabsTrigger>
 
           <TabsTrigger
             value="links"
             className="h-[36px] min-w-32 flex-grow rounded-full border border-transparent data-[state=active]:border-indigo-500 data-[state=active]:bg-indigo-100 data-[state=active]:font-semibold data-[state=active]:text-indigo-600"
           >
-            Links
+            {t("tabs.links")}
           </TabsTrigger>
         </TabsList>
 
@@ -58,10 +63,27 @@ export const LinksViewRSC = ({ jwt }: { jwt: CustomJwtSessionClaims }) => {
           <article className="absolute right-0 top-1 flex w-1/2 flex-col items-center gap-2 sm:flex-row sm:justify-start sm:gap-0">
             <NewLinkDrawer username={jwt.username} />
 
-            <Button size="lg" variant="outline" className="w-full sm:rounded-l-none">
-              <PlusIcon />
-              Import links
-            </Button>
+            <TooltipProvider>
+              <Tooltip delayDuration={0}>
+                <TooltipTrigger asChild>
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="w-full opacity-50 sm:rounded-l-none"
+                  >
+                    <PlusIcon />
+                    {t("actions.importLinks")}
+                  </Button>
+                </TooltipTrigger>
+
+                <TooltipContent className="text-sm">
+                  {common("comingSoon")}{" "}
+                  <Button variant="link" className="text-sm">
+                    {common("requestAction")}
+                  </Button>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </article>
 
           <Alert variant="success" className="flex gap-4 p-4">

@@ -21,6 +21,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "../../ui/dialog";
+import { useTranslations } from "next-intl";
 
 export const PageEnabled = ({
   initialData,
@@ -30,6 +31,7 @@ export const PageEnabled = ({
   const [data] = api.viewer.shouldShowLive.useSuspenseQuery(undefined, { initialData });
   const [onboardingPending, setOnboard] = useState(!data?.hasCompletedOnboarding);
   const utils = api.useUtils();
+  const t = useTranslations("admin");
 
   const { mutate: forceCompletion } = api.viewer.setOnboardingStep.useMutation();
 
@@ -50,18 +52,15 @@ export const PageEnabled = ({
       <Alert variant="warning" className="relative mt-4">
         <ExclamationTriangleIcon className="h-5 w-5" />
 
-        <AlertTitle>Onboarding pending!</AlertTitle>
+        <AlertTitle>{t("onboarding.banners.pending.title")}</AlertTitle>
 
-        <AlertDescription>
-          It is strongly recommended to complete the onboarding process, this way you can complete
-          every step and get your portal active and linked to your business card.{" "}
-        </AlertDescription>
+        <AlertDescription>{t("onboarding.banners.pending.description")}</AlertDescription>
 
         <Link
           className="mt-1 flex items-center gap-1 text-muted-foreground underline hover:text-indigo-500 hover:text-primary"
           href={`/onboarding?step=${data.onboardingStep}`}
         >
-          Pick up where you left off! <ExternalLinkIcon />
+          {t("onboarding.banners.pending.pickUp")} <ExternalLinkIcon />
         </Link>
       </Alert>
     );
@@ -72,7 +71,7 @@ export const PageEnabled = ({
       <Alert variant="indigo" className="relative mt-4">
         <RocketIcon className="h-5 w-5" />
 
-        <AlertTitle className="text-foreground">Your page is LIVE!</AlertTitle>
+        <AlertTitle className="text-foreground">{t("onboarding.banners.done.title")}</AlertTitle>
 
         <AlertDescription className="flex items-center gap-1">
           <Link
@@ -96,29 +95,30 @@ export const PageEnabled = ({
 
   return (
     <article className="flex w-full flex-col">
-      <h1 className="text-2xl font-bold">Welcome {data.username}!</h1>
-      <p className="mt-1 text-sm text-muted-foreground">
-        Here you can manage everything that shows up on your NFC portal page.
-      </p>
+      <h1 className="text-2xl font-bold">
+        {t("dashboard.welcome")} {data.username}!
+      </h1>
+      <p className="mt-1 text-sm text-muted-foreground">{t("dashboard.description")}</p>
 
       <Alert className="relative mt-4">
         <IdCardIcon className="h-5 w-5" />
 
-        <AlertTitle className="text-foreground">Business Card</AlertTitle>
+        <AlertTitle className="text-foreground">{t("dashboard.banners.card.title")}</AlertTitle>
 
         <AlertDescription className="flex items-center gap-1">
-          Current status:
+          {t("dashboard.banners.card.description")}{" "}
           <strong>{purchaseStatusToText(data.cardShippingStatus ?? "awaiting_purchase")}</strong>
         </AlertDescription>
 
         {data.cardShippingStatus === "awaiting_purchase" && (
           <AlertDescription className="mt-1 text-muted-foreground">
-            We noticed you haven&apos;t purchased a card yet, please{" "}
+            <p className="inline-flex">{t("dashboard.banners.card.awaitingPurchase")}</p>{" "}
             <Link
               href="/admin/cards"
-              className="inline-flex items-center gap-1 underline underline-offset-1 transition-all hover:text-primary"
+              className="items-center gap-1 text-wrap underline underline-offset-1 transition-all hover:text-primary"
             >
-              purchase one to unlock all features! <ExternalLinkIcon />
+              {t("dashboard.banners.card.awaitingPurchasePart2")}{" "}
+              <ExternalLinkIcon className="inline-flex" />
             </Link>
           </AlertDescription>
         )}
@@ -129,22 +129,22 @@ export const PageEnabled = ({
       <Dialog open={onboardingPending} onOpenChange={setOnboard}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Continue onboarding?</DialogTitle>
+            <DialogTitle>{t("onboarding.banners.continueModal.title")}</DialogTitle>
 
             <DialogDescription>
-              We&apos;ve noticed you haven&apos;t finished the onboarding process. It is{" "}
-              <strong>strongly recommended</strong> that you complete it to get the most out of the
-              NFC portal.
+              {t("onboarding.banners.continueModal.description")}
             </DialogDescription>
           </DialogHeader>
 
           <DialogFooter>
             <Button className="w-full" asChild>
-              <Link href={`/onboarding?step=${data.onboardingStep}`}>Take me there</Link>
+              <Link href={`/onboarding?step=${data.onboardingStep}`}>
+                {t("onboarding.banners.continueModal.takeMeThere")}
+              </Link>
             </Button>
 
             <Button variant="destructive_ghost" className="w-full" onClick={handleClick}>
-              Don&apos;t show again
+              {t("onboarding.banners.continueModal.doNotShowAgain")}
             </Button>
           </DialogFooter>
         </DialogContent>

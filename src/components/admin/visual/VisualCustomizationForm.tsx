@@ -214,17 +214,6 @@ export const VisualCustomizationForm = ({
           </article>
         </section>
 
-        <article
-          className={cn("translate-y-0 transition-transform duration-300", {
-            "h-0 translate-y-10 opacity-0": !enableCustom,
-          })}
-        >
-          <h3 className="text-xl font-medium">{t("themeCustomization.title")}</h3>
-          <p className="mt-1 text-sm text-muted-foreground">
-            {t("themeCustomization.description")}
-          </p>
-        </article>
-
         <section
           className={cn(
             "flex translate-y-0 flex-col gap-4 rounded-lg border p-6 transition-transform duration-300",

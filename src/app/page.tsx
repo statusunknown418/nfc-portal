@@ -722,6 +722,16 @@ export default function Home() {
                   {t("faq.answerFive")}
                 </AccordionContent>
               </AccordionItem>
+
+              <AccordionItem value="shipping">
+                <AccordionTrigger className="h-28 text-2xl font-medium md:h-20">
+                  {t("faq.questionSix")}
+                </AccordionTrigger>
+
+                <AccordionContent className="text-lg font-light">
+                  {t("faq.answerSix")}
+                </AccordionContent>
+              </AccordionItem>
             </Accordion>
           </section>
         </article>

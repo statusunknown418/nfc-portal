@@ -1,4 +1,5 @@
 import { auth } from "@clerk/nextjs/server";
+import { getTranslations } from "next-intl/server";
 import { Suspense } from "react";
 import { LinksViewRSC } from "~/components/admin/links/links-view";
 import {
@@ -11,13 +12,14 @@ import { cn } from "~/lib/utils";
 
 export default async function AdminPage() {
   const { userId, sessionClaims } = auth();
+  const t = await getTranslations();
 
   if (!sessionClaims || !userId) {
     return (
       <section>
-        <h1>Something weird happened...</h1>
+        <h1>{t("common.errors.somethingWentWrong")} ...</h1>
         <p>
-          Looks like we were unable to recognize you. Please{" "}
+          {t("common.errors.recognitionFailed")} Please{" "}
           <a className="underline" href="/auth/login">
             login
           </a>{" "}
@@ -44,7 +46,7 @@ export default async function AdminPage() {
 
             {!username && (
               <Alert variant="destructive">
-                <AlertTitle>This is weird, we were unable to find your username</AlertTitle>
+                <AlertTitle>{t("common.errors.usernameNotFound")}</AlertTitle>
               </Alert>
             )}
           </Suspense>

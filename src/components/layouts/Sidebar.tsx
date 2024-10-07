@@ -12,14 +12,17 @@ import { Button } from "../ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
 import { ClerkLoaded, ClerkLoading, UserButton } from "@clerk/nextjs";
 import { Skeleton } from "../ui/skeleton";
+import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 export const Sidebar = () => {
   const selectedSegment = useSelectedLayoutSegment();
+  const t = useTranslations("admin.sidebar");
 
   return (
     <aside className="flex h-16 max-h-16 min-h-16 items-center justify-between overflow-x-auto border-t md:h-full md:max-h-full md:min-w-20 md:max-w-20 md:flex-col md:items-center md:rounded-r-2xl md:border-y md:border-r md:py-4">
-      <Button size="icon" className="h-[44px] w-[44px]">
-        <span>CC</span>
+      <Button size="icon" variant="ghost" className="h-[44px] w-[44px] overflow-hidden">
+        <Image src="/logo-light.png" alt="concard-logo" width={48} height={48} />
       </Button>
 
       <ul className="flex w-full flex-grow justify-center gap-2 md:flex-grow-0 md:flex-col md:items-center md:gap-4">
@@ -35,12 +38,14 @@ export const Sidebar = () => {
               >
                 <Link href="/admin">
                   <DashboardIcon className="h-5 w-5" />
-                  <span className="sr-only">Links</span>
+                  <span className="sr-only">{t("links.title")}</span>
                 </Link>
               </Button>
             </TooltipTrigger>
 
-            <TooltipContent side="right">Links and contact information</TooltipContent>
+            <TooltipContent side="right">
+              <span>{t("links.description")}</span>
+            </TooltipContent>
           </Tooltip>
 
           <Tooltip>
@@ -54,12 +59,12 @@ export const Sidebar = () => {
               >
                 <Link href="/admin/visual">
                   <RulerSquareIcon className="h-5 w-5" />
-                  <span className="sr-only">Theming</span>
+                  <span className="sr-only">{t("themes.title")}</span>
                 </Link>
               </Button>
             </TooltipTrigger>
 
-            <TooltipContent side="right">Portal customization</TooltipContent>
+            <TooltipContent side="right">{t("themes.description")}</TooltipContent>
           </Tooltip>
 
           <Tooltip>
@@ -73,12 +78,14 @@ export const Sidebar = () => {
               >
                 <Link href="/admin/signatures">
                   <EnvelopeClosedIcon className="h-5 w-5" />
-                  <span className="sr-only">Email signatures</span>
+                  <span className="sr-only">{t("emails.title")}</span>
                 </Link>
               </Button>
             </TooltipTrigger>
 
-            <TooltipContent side="right">Email signatures</TooltipContent>
+            <TooltipContent side="right">
+              <span>{t("emails.description")}</span>
+            </TooltipContent>
           </Tooltip>
 
           <Tooltip>
@@ -92,12 +99,14 @@ export const Sidebar = () => {
               >
                 <Link href="/admin/settings">
                   <GearIcon className="h-5 w-5" />
-                  <span className="sr-only">Settings</span>
+                  <span className="sr-only">{t("settings.title")}</span>
                 </Link>
               </Button>
             </TooltipTrigger>
 
-            <TooltipContent side="right">Account settings</TooltipContent>
+            <TooltipContent side="right">
+              <span>{t("settings.description")}</span>
+            </TooltipContent>
           </Tooltip>
         </TooltipProvider>
       </ul>
