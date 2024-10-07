@@ -13,22 +13,22 @@
     "features": {
       "heading": "Benefits, and why choose us?",
       "description": "Explore the benefits of using our product and why we are the best option for you",
-      "graphic 1.1": "Extremely easy to use,",
-      "graphic 1.2": "get started in just a few minutes",
-      "graphic 1.3": "and stand out from the competition",
-      "graphic 1.4": "by showcasing your profile in a unique and professional way.",
-      "graphic 1.5": "Share your ConCard URL anywhere!",
-      "graphic 2.1": "Highly customizable,",
-      "graphic 2.2": "we offer a wide range of options",
-      "graphic 2.3": "to make your portal and business card truly",
-      "graphic 2.4": "yours and unique",
-      "graphic 3.1": "No external apps required,",
-      "graphic 3.2": "works instantly",
-      "graphic 3.3": "on all iOS devices and",
-      "graphic 3.4": "most Android phones",
-      "graphic 4.1": "Secure information,",
-      "graphic 4.2": "no one can see your personal contact unless",
-      "graphic 4.3": "they tap one of your business cards."
+      "graphic_1.1": "Extremely easy to use,",
+      "graphic_1.2": "get started in just a few minutes",
+      "graphic_1.3": "and stand out from the competition",
+      "graphic_1.4": "by showcasing your profile in a unique and professional way.",
+      "graphic_1.5": "Share your ConCard URL anywhere!",
+      "graphic_2.1": "Highly customizable,",
+      "graphic_2.2": "we offer a wide range of options",
+      "graphic_2.3": "to make your portal and business card truly",
+      "graphic_2.4": "yours and unique",
+      "graphic_3.1": "No external apps required,",
+      "graphic_3.2": "works instantly",
+      "graphic_3.3": "on all iOS devices and",
+      "graphic_3.4": "most Android phones",
+      "graphic_4.1": "Secure information,",
+      "graphic_4.2": "no one can see your personal contact unless",
+      "graphic_4.3": "they tap one of your business cards."
     },
     "comparison": {
       "Compare": "Compare it yourself",
@@ -71,7 +71,7 @@
       "title": "Pricing",
       "description": "Clear and simple pricing, no hidden costs",
       "From": "We offer a single plan for all individual customers, so you can focus on what matters most.",
-      "plandescription": "A single affordable and flexible plan, perfect for everyone. Includes:",
+      "plan_description": "A single affordable and flexible plan, perfect for everyone. Includes:",
       "in1": "1 business card included",
       "in2": "Free shipping! (Lima)",
       "in3": "All page customization options",
@@ -83,7 +83,7 @@
     },
     "FAQ": {
       "subtitle": "Any questions?",
-      "messg": "If none of these answers resolve your doubts, feel free to contact us at",
+      "message": "If none of these answers resolve your doubts, feel free to contact us at",
       "Q1": "What is NFC technology?",
       "A1": "NFC stands for Near Field Communication, a technology that allows two devices to communicate at close range, which also powers Apple Pay and Google Pay. ConCard uses it so you can share any contact information with others without needing them to install additional apps.",
       "Q2": "How do I purchase a card?",
@@ -105,43 +105,43 @@
       "PP": "Privacy Policy",
       "Project": "A project by"
     },
-    "onboarding":{
-      "top":"Let's get you set up, ",
-      "buttonP":"Paso Anterior",
-      "buttonN":"Siguiente Paso",
-      "welcome":{
-        "title":"Welcome to ConCard!",
-        "message":"We are excited to have you on board. Before we get started (and to make everything smoother), you just need to follow these simple steps to get your account set up.",
-        "help1":"If there's anything you need help with, don't hesitate to reach out to us. We're here to help!",
-        "help2":"Contact us here",
-        "button":"Start onboarding"
+    "onboarding": {
+      "top": "Let's get you set up, ",
+      "buttonP": "Paso Anterior",
+      "buttonN": "Siguiente Paso",
+      "welcome": {
+        "title": "Welcome to ConCard!",
+        "message": "We are excited to have you on board. Before we get started (and to make everything smoother), you just need to follow these simple steps to get your account set up.",
+        "help1": "If there's anything you need help with, don't hesitate to reach out to us. We're here to help!",
+        "help2": "Contact us here",
+        "button": "Start onboarding"
       },
-      "Contact":{
-        "title":"Contact information",
-        "subtitle":"Fill in your public contact information, this is what every person you give your card to will see, additionally it is possible to hide it from your public page if needed.",
-        "visibility1":"Contact information visibility",
-        "visibility2":"If enabled your contact information will be visible when you share your portal through the NFC card",
-        "Name":"First name",
-        "Apellidos":"Last name",
-        "Posicion":"Position",
-        "Empresa":"Company",
-        "WebEmpresa":"Company website",
-        "Emails":"Email address(es) (5 max.)",
-        "Cel":"Phone number(s) (5 max.)",
-        "Direcciones":"Address(es) (2 max.)"
+      "Contact": {
+        "title": "Contact information",
+        "subtitle": "Fill in your public contact information, this is what every person you give your card to will see, additionally it is possible to hide it from your public page if needed.",
+        "visibility1": "Contact information visibility",
+        "visibility2": "If enabled your contact information will be visible when you share your portal through the NFC card",
+        "Name": "First name",
+        "Apellidos": "Last name",
+        "Position": "Position",
+        "Empresa": "Company",
+        "WebEmpresa": "Company website",
+        "Emails": "Email address(es) (5 max.)",
+        "Cel": "Phone number(s) (5 max.)",
+        "Direcciones": "Address(es) (2 max.)"
       },
-      "Portal":{
-        "title":"Portal customization",
-        "description":"You can customize your public page to your liking here, templates are also available",
-        "Themes":"Themes / presets are coming!",
-        "Tmess":"We're working hard to provide the best experiences with new features!, if you'd like to see it sooner please shoot us an email.",
-        "ProfileH":"Profile header",
-        "ProfileF":"A short title you want to show off",
-        "Bio":"Biography",
-        "footmess":"Anything you want to tell people about yourself. This will be displayed on your profile page.(0/100 characters max.)",
-        "AvatarUpl":"Upload an avatar (optional)",
-        "Generated":"Replace with generated",
-        "Remove":"Remove Avatar"
+      "Portal": {
+        "title": "Portal customization",
+        "description": "You can customize your public page to your liking here, templates are also available",
+        "Themes": "Themes / presets are coming!",
+        "ThemesMessage": "We're working hard to provide the best experiences with new features!, if you'd like to see it sooner please shoot us an email.",
+        "ProfileH": "Profile header",
+        "ProfileF": "A short title you want to show off",
+        "Bio": "Biography",
+        "FooterMessage": "Anything you want to tell people about yourself. This will be displayed on your profile page.(0/100 characters max.)",
+        "AvatarUpl": "Upload an avatar (optional)",
+        "Generated": "Replace with generated",
+        "Remove": "Remove Avatar"
       }
     }
   }
