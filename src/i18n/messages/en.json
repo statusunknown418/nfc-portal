@@ -4,7 +4,19 @@
       "heading": "Discover the new professional era, powered by NFC technology",
       "description": "Enhance your experience and stand out from the competition with our premium business cards. Just tap it on someone's phone and share your personalized page!",
       "primaryButton": "Get started now",
-      "secondaryButton": "Learn more"
+      "secondaryButton": "Learn more",
+      "banner": "Introducing premium cards",
+      "startNow": "Get started",
+      "why": "Why ConCard?",
+      "learnMore": "Learn more"
+    },
+    "navbar": {
+      "features": "Features",
+      "customers": "Customers",
+      "pricing": "Pricing",
+      "faq": "FAQ",
+      "dashboard": "Dashboard",
+      "joinNow": "Join now"
     },
     "testimonials": {
       "heading": "Trusted by professionals in all industries",

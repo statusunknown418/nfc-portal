@@ -1,4 +1,4 @@
-import type en from "~/lib/messages/en.json";
+import type en from "~/i18n/messages/en.json";
 import { type formats } from "~/i18n/request";
 
 export {};

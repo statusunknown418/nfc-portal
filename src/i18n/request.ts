@@ -19,7 +19,7 @@ const messageImports = {
 
 export default getRequestConfig(async () => {
   const locale = (cookies().get(LOCALE_KEY)?.value as Locale) || defaultLocale;
-  const messages = await messageImports[locale]();
+  const messages = (await messageImports[locale]()).default;
 
   return {
     locale,

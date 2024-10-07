@@ -4,7 +4,19 @@
       "heading": "Descubre una nueva era profesional impulsada por la tecnología NFC",
       "description": "Mejora tu experiencia y destaca frente a la competencia con nuestras tarjetas de presentación premium. Solo acerca tu tarjeta al teléfono de alguien y comparte tu página personalizada.",
       "primaryButton": "Empieza ahora",
-      "secondaryButton": "Más información"
+      "secondaryButton": "Más información",
+      "banner": "Ahora disponible tarjetas premium!",
+      "startNow": "Empieza ahora",
+      "why": "Por qué ConCard?",
+      "learnMore": "Más información"
+    },
+    "navbar": {
+      "features": "Features",
+      "customers": "Clientes",
+      "pricing": "Precios",
+      "faq": "Preguntas Frecuentes",
+      "dashboard": "App",
+      "joinNow": "Empieza ahora!"
     },
     "testimonials": {
       "heading": "Confiado por profesionales de todos los sectores",
