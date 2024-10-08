@@ -25,6 +25,7 @@ import {
   DrawerTrigger,
 } from "../ui/drawer";
 import { Divider } from "../ui/separator";
+import { useTranslations } from "next-intl";
 
 export const LinkViewer = ({
   link,
@@ -33,6 +34,7 @@ export const LinkViewer = ({
   link: RouterOutputs["links"]["all"][number];
   buttonStyles: ThemeType["buttons"];
 }) => {
+  const t = useTranslations("admin");
   const [hover, setHover] = useState(false);
   const [copied, setCopied] = useState(false);
 
@@ -145,10 +147,8 @@ export const LinkViewer = ({
 
         <DrawerContent className="mx-auto sm:max-w-4xl md:rounded-t-[40px]">
           <DrawerHeader>
-            <DrawerTitle className="text-xl">Share this link</DrawerTitle>
-            <DrawerDescription>
-              You can get a similar page like this through our app!
-            </DrawerDescription>
+            <DrawerTitle className="text-xl">{t("portal.shareLink.title")}</DrawerTitle>
+            <DrawerDescription>{t("portal.shareLink.description")}</DrawerDescription>
           </DrawerHeader>
 
           <ul className="m-4 flex flex-col overflow-hidden rounded-lg border bg-white p-0">
@@ -158,7 +158,7 @@ export const LinkViewer = ({
               className="justify-start rounded-l-none rounded-r-none rounded-t-lg border-0"
             >
               <CopyIcon />
-              Copy link
+              {t("portal.shareLink.copyLink")}
               {copied && <CheckCircledIcon className="ml-auto text-emerald-600" />}
             </Button>
 
@@ -169,7 +169,7 @@ export const LinkViewer = ({
               className="justify-start rounded-l-none rounded-r-none border-0"
             >
               <EnvelopeClosedIcon />
-              Share via email
+              {t("portal.shareLink.shareViaEmail")}
             </Button>
 
             <Divider className="my-0" />
@@ -179,18 +179,18 @@ export const LinkViewer = ({
               className="justify-start rounded-b-lg rounded-l-none rounded-r-none border-0"
             >
               <TwitterLogoIcon className="text-sky-600" />
-              Share via Twitter
+              {t("portal.shareLink.shareViaTwitter")}
             </Button>
           </ul>
 
           <DrawerFooter className="mb-6">
             <Button variant="primary" className="w-full">
               <LightningBoltIcon />
-              Get yours
+              {t("portal.shareLink.getYours")}
             </Button>
 
             <p className="text-center text-xs text-muted-foreground">
-              Have it up and running in less than 5 minutes!
+              {t("portal.shareLink.getYoursDescription")}
             </p>
           </DrawerFooter>
         </DrawerContent>

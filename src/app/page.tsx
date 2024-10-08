@@ -12,13 +12,16 @@ import {
   QuestionMarkCircledIcon,
   Share1Icon,
 } from "@radix-ui/react-icons";
+import { useMessages, useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
+import { Suspense } from "react";
 import AnimatedGridPattern from "~/components/magicui/animated-grid-pattern";
 import BlurFade from "~/components/magicui/blur-fade";
 import { BorderBeam } from "~/components/magicui/border-beam";
 import HyperText from "~/components/magicui/hyper-text";
 import Marquee from "~/components/magicui/marquee";
+import { LocaleSwitcherWrapper } from "~/components/shared/locale-switcher";
 import {
   Accordion,
   AccordionContent,
@@ -40,92 +43,20 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "~/comp
 import { cn } from "~/lib/utils";
 import { HydrateClient } from "~/trpc/server";
 
-const reviews = [
-  {
-    name: "@ju.pa****",
-    username: "Biomedical Engineer ",
-    body: "Even while being a student this has improved my exposure to better job opportunities.",
-    img: "https://avatar.vercel.sh/jose?text=jose.h",
-  },
-  {
-    name: "@rw.****",
-    username: "Mechanical Engineer ",
-    body: "This has highly improved my professional profile. Totally recommend it!.",
-    img: "https://avatar.vercel.sh/rodrigo?text=ra",
-  },
-  {
-    name: "@jos****",
-    username: "Product Engineer at AV****",
-    body: "This is the best solution for upgraded networking.",
-    img: "https://avatar.vercel.sh/joseph?text=jm",
-  },
-  {
-    name: "@bdi****",
-    username: "CEO at CI** Peru",
-    body: "Sharing my contact to new people has never been easier!",
-    img: "https://avatar.vercel.sh/jill?text=boris.d",
-  },
-  {
-    name: "@mar****",
-    username: "Marketing Lead at PEP****",
-    body: "I'm at a loss for words. This is amazing. I love it.",
-    img: "https://avatar.vercel.sh/john?text=martina.m",
-  },
-  {
-    name: "@ari.****",
-    username: "Lawyer at M****",
-    body: "This product can truly change the way we communicate with each other.",
-    img: "https://avatar.vercel.sh/jane?text=JO",
-  },
-  {
-    name: "@kim****",
-    username: "Software Engineer at NT****",
-    body: "I have been using this product for weeks now and it has been a game changer!",
-    img: "https://avatar.vercel.sh/kimberly?text=kimberly.c",
-  },
-  {
-    name: "@fr.****",
-    username: "Physics Researcher at PU**",
-    body: "Improving our personal brand does indeed open many doors.",
-    img: "https://avatar.vercel.sh/francisco?text=FD",
-  },
-  {
-    name: "@the.ar****",
-    username: "CEO at Sta****",
-    body: "Simple, easy and effective way to show off!",
-    img: "https://avatar.vercel.sh/john?text=TA",
-  },
-  {
-    name: "@j.a.****",
-    username: "Civil Engineer at V**",
-    body: "Using ConCard at social events makes you stand out from the crowd.",
-    img: "https://avatar.vercel.sh/john?text=JA",
-  },
-  {
-    name: "@er.d.****",
-    username: "Physician at Hosp**** *****",
-    body: "I used to think networking wasn't for me, but ConCard has changed that!",
-    img: "https://avatar.vercel.sh/john?text=JA",
-  },
-  {
-    name: "@sej.****",
-    username: "Marketing Manager at Via**** ****",
-    body: "We needed something like this for years, now it's finally here!",
-    img: "https://avatar.vercel.sh/john?text=JL",
-  },
-  {
-    name: "@diego.****",
-    username: "Biomedical Engineer at Cl**** *****",
-    body: "I've always loved networking but , this is definitely better!",
-    img: "https://avatar.vercel.sh/john?text=DR",
-  },
-];
-
-const firstRow = reviews.slice(0, reviews.length / 2);
-const secondRow = reviews.slice(reviews.length / 2);
-
-export default async function Home() {
+export default function Home() {
   const { sessionClaims } = auth();
+
+  const t = useTranslations("landing");
+  const messages = useMessages() as IntlMessages;
+  const reviews = Object.values(
+    messages.landing.testimonials.clients as Record<
+      string,
+      { name: string; username: string; body: string; img: string }
+    >,
+  );
+
+  const firstRow = reviews.slice(0, reviews.length / 2);
+  const secondRow = reviews.slice(reviews.length / 2);
 
   return (
     <HydrateClient>
@@ -145,16 +76,20 @@ export default async function Home() {
 
             <ul className="hidden md:flex">
               <Button asChild variant="ghost">
-                <Link href={"/#features"}>Features</Link>
+                <Link href={"/#features"}>{t("navbar.features")}</Link>
               </Button>
 
               <Button asChild variant="ghost">
-                <Link href={"/#customers"}>Customers</Link>
+                <Link href={"/#customers"}>{t("navbar.customers")}</Link>
               </Button>
 
               <Button asChild variant="ghost">
-                <Link href={"#pricing"}>Pricing</Link>
+                <Link href={"#pricing"}>{t("navbar.pricing")}</Link>
               </Button>
+
+              <Suspense>
+                <LocaleSwitcherWrapper />
+              </Suspense>
             </ul>
 
             {!sessionClaims?.username && (
@@ -166,7 +101,7 @@ export default async function Home() {
             <SignedIn>
               <Button asChild className="rounded-full">
                 <Link href="/admin">
-                  Dashboard <ChevronRightIcon />
+                  {t("navbar.dashboard")} <ChevronRightIcon />
                 </Link>
               </Button>
             </SignedIn>
@@ -174,7 +109,7 @@ export default async function Home() {
             <SignedOut>
               <SignUpButton>
                 <Button className="rounded-full">
-                  Join now <ArrowRightIcon />
+                  {t("navbar.joinNow")} <ArrowRightIcon />
                 </Button>
               </SignUpButton>
             </SignedOut>
@@ -199,25 +134,22 @@ export default async function Home() {
             <article className="flex flex-col items-center gap-7">
               <BlurFade delay={0.25 * 2}>
                 <Badge>
-                  ✨ Introducing premium cards <ArrowRightIcon />
+                  ✨ {t("hero.banner")} <ArrowRightIcon />
                 </Badge>
               </BlurFade>
 
               <BlurFade>
                 <h1 className="text-center text-5xl font-bold tracking-tight sm:text-6xl md:text-7xl">
-                  Discover a new era of networking, powered by{" "}
-                  <span className="bg-gradient-to-r from-indigo-700 via-violet-500 to-purple-400 bg-clip-text text-transparent">
+                  {t("hero.heading")}
+                  {/* <span className="bg-gradient-to-r from-indigo-700 via-violet-500 to-purple-400 bg-clip-text text-transparent">
                     NFC
-                  </span>{" "}
-                  technology
+                  </span>{" "} */}
                 </h1>
               </BlurFade>
 
               <BlurFade delay={0.25}>
                 <p className="max-w-sm text-pretty text-center text-muted-foreground sm:text-lg md:max-w-lg md:text-xl lg:max-w-4xl">
-                  Supercharge your experience and stand up to the competition with our premium
-                  business cards, simply approach it to someone&apos;s phone and share your own
-                  custom-made personal page!
+                  {t("hero.description")}
                 </p>
               </BlurFade>
 
@@ -231,7 +163,7 @@ export default async function Home() {
                       className="group w-full shadow-lg shadow-indigo-300 transition-all hover:shadow-xl hover:shadow-indigo-300 sm:w-auto"
                     >
                       <Link href="/admin">
-                        Get started
+                        {t("hero.startNow")}
                         <ChevronRightIcon className="transition-transform group-hover:translate-x-1" />
                       </Link>
                     </Button>
@@ -239,7 +171,7 @@ export default async function Home() {
 
                   <Button asChild variant="ghost" size="lg" className="group">
                     <Link href="#features">
-                      Why us?
+                      {t("hero.why")}
                       <QuestionMarkCircledIcon className="transition-transform group-hover:translate-x-1" />
                     </Link>
                   </Button>
@@ -258,14 +190,14 @@ export default async function Home() {
 
           <Button variant="ghost">
             <ArrowDownIcon />
-            Learn more
+            {t("hero.learnMore")}
           </Button>
         </div>
 
         <section className="bg-white py-24" id="customers">
           <article className="relative mx-auto max-w-7xl">
             <h3 className="text-center text-lg font-medium uppercase text-muted-foreground">
-              Trusted by professionals across all industries
+              {t("testimonials.heading")}
             </h3>
 
             <Marquee pauseOnHover className="mt-5 [--duration:30s]">
@@ -284,7 +216,7 @@ export default async function Home() {
             <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-white dark:from-background" />
 
             <p className="mt-4 text-center text-xs text-muted-foreground">
-              We hide full usernames and personal data for privacy reasons
+              {t("testimonials.privacyDisclaimer")}
             </p>
           </article>
         </section>
@@ -295,11 +227,9 @@ export default async function Home() {
             className="mx-auto flex w-full max-w-7xl flex-col gap-10 md:gap-14"
           >
             <header className="space-y-2 px-4 md:px-6">
-              <p className="font-medium text-emerald-400">An explanation</p>
-              <h2 className="text-4xl font-semibold tracking-tight">But how does it work?</h2>
-              <p className="text-lg text-muted-foreground">
-                We use a combination of technologies to make our product stand out
-              </p>
+              <p className="font-medium text-emerald-400">{t("stepByStep.title")}</p>
+              <h2 className="text-4xl font-semibold tracking-tight">{t("stepByStep.subtitle")}</h2>
+              <p className="text-lg text-muted-foreground">{t("stepByStep.subheading")}</p>
             </header>
 
             <div className="grid grid-cols-1 *:space-y-3 *:border-b *:border-border/20 *:px-4 *:py-6 md:grid-cols-2 md:justify-items-stretch md:gap-0 md:*:space-y-5 md:*:border-r md:*:px-8 md:*:py-10">
@@ -307,10 +237,8 @@ export default async function Home() {
                 <Badge variant="secondary">1</Badge>
 
                 <section>
-                  <h3 className="text-lg font-medium">Sign up and choose your username</h3>
-                  <p className="text-muted-foreground">
-                    You can use an email or social media account to sign up
-                  </p>
+                  <h3 className="text-lg font-medium">{t("stepByStep.stepOneTitle")}</h3>
+                  <p className="text-muted-foreground">{t("stepByStep.stepOneDescription")}</p>
                 </section>
 
                 <div className="flex h-52 w-full items-center justify-center bg-neutral-700">
@@ -322,10 +250,8 @@ export default async function Home() {
                 <Badge variant="secondary">2</Badge>
 
                 <section>
-                  <h3 className="text-lg font-medium">Add your contact information</h3>
-                  <p className="text-muted-foreground">
-                    Anything you want to share with your contacts
-                  </p>
+                  <h3 className="text-lg font-medium">{t("stepByStep.stepTwoTitle")}</h3>
+                  <p className="text-muted-foreground">{t("stepByStep.stepTwoDescription")}</p>
                 </section>
 
                 <div className="flex h-52 w-full items-center justify-center bg-neutral-700">
@@ -337,10 +263,8 @@ export default async function Home() {
                 <Badge variant="secondary">3</Badge>
 
                 <section>
-                  <h3 className="text-lg font-medium">Customize your page</h3>
-                  <p className="text-muted-foreground">
-                    You can add your own content and customize your page
-                  </p>
+                  <h3 className="text-lg font-medium">{t("stepByStep.stepThreeTitle")}</h3>
+                  <p className="text-muted-foreground">{t("stepByStep.stepThreeDescription")}</p>
                 </section>
 
                 <div className="flex h-52 w-full items-center justify-center bg-neutral-700">
@@ -352,8 +276,8 @@ export default async function Home() {
                 <Badge variant="secondary">4</Badge>
 
                 <section>
-                  <h3 className="text-lg font-medium">Purchase an NFC card</h3>
-                  <p className="text-muted-foreground">Choose from a variety of options</p>
+                  <h3 className="text-lg font-medium">{t("stepByStep.stepFourTitle")}</h3>
+                  <p className="text-muted-foreground">{t("stepByStep.stepFourDescription")}</p>
                 </section>
 
                 <div className="flex h-52 w-full items-center justify-center bg-neutral-700">
@@ -365,10 +289,9 @@ export default async function Home() {
                 <Badge variant="secondary">5</Badge>
 
                 <section>
-                  <h3 className="text-lg font-medium">Use it anywhere!</h3>
+                  <h3 className="text-lg font-medium">{t("stepByStep.stepFiveTitle")}</h3>
                   <p className="max-w-prose text-muted-foreground">
-                    No need to install anything, simply approach it to someone&apos;s phone and
-                    share your page, including your contact information!
+                    {t("stepByStep.stepFiveDescription")}
                   </p>
                 </section>
 
@@ -386,13 +309,12 @@ export default async function Home() {
         >
           <article className="w-full max-w-7xl space-y-8 rounded-[32px]">
             <div className="space-y-2">
-              <p className="font-semibold text-indigo-600">Features</p>
+              <p className="font-semibold text-indigo-600">{t("features.subheading")}</p>
 
-              <h2 className="text-4xl font-semibold tracking-tight">Benefits, and why us?</h2>
+              <h2 className="text-4xl font-semibold tracking-tight">{t("features.heading")}</h2>
 
               <p className="max-w-prose text-lg text-muted-foreground">
-                Explore countless benefits of using our product, and why we are the best choice for
-                you
+                {t("features.description")}
               </p>
             </div>
 
@@ -402,18 +324,18 @@ export default async function Home() {
 
                 <h2 className="text-2xl font-medium">
                   <span className="transition-all group-hover:text-indigo-400">
-                    Extremely easy to use,
+                    {t("features.firstGraphic")}
                   </span>{" "}
                   <span className="text-indigo-400 transition-all group-hover:text-inherit">
-                    get started in just a few minutes
+                    {t("features.secondGraphic")}
                   </span>{" "}
                   <span className="transition-all group-hover:text-indigo-400">
-                    and stand out from the competition{" "}
+                    {t("features.thirdGraphic")}
                   </span>
                   <span className="text-indigo-400 transition-all group-hover:text-inherit">
-                    by showcasing your profile in a unique and professional way.
+                    {t("features.fourthGraphic")}
                   </span>{" "}
-                  <span>Share your ConCard URL anywhere!</span>
+                  <span>{t("features.fifthGraphic")}</span>
                 </h2>
               </article>
 
@@ -431,10 +353,10 @@ export default async function Home() {
                 </section>
 
                 <h2 className="text-2xl font-medium">
-                  Highly customizable,{" "}
-                  <span className="text-pink-500">we offer a wide range of options</span> to make
-                  your portal and business card truly{" "}
-                  <span className="text-pink-500">yours and unique</span>
+                  {t("features.sixthGraphic")}{" "}
+                  <span className="text-pink-500">{t("features.seventhGraphic")}</span>
+                  {t("features.eighthGraphic")}{" "}
+                  <span className="text-pink-500">{t("features.ninthGraphic")}</span>
                 </h2>
               </article>
 
@@ -442,27 +364,23 @@ export default async function Home() {
                 <div>graphic 3</div>
 
                 <h2 className="text-2xl font-medium">
-                  No external applications required,{" "}
-                  <span className="text-emerald-500">it works right out of the box</span> on all iOS
-                  devices and <span className="text-emerald-500"> most Android phones</span>
+                  {t("features.tenthGraphic")}
+                  <span className="text-emerald-500">{t("features.eleventhGraphic")}</span>
+                  {t("features.twelfthGraphic")}{" "}
+                  <span className="text-emerald-500">{t("features.thirteenthGraphic")}</span>
                 </h2>
               </article>
 
               <article className="border border-neutral-50 bg-primary text-neutral-50 lg:col-span-8 lg:row-span-2">
                 <div>
                   <LockClosedIcon className="size-6" />
-                  <HyperText text="All contact info is encrypted" />
+                  <HyperText text={t("features.hyperText")} />
                 </div>
 
                 <h2 className="text-2xl font-medium">
-                  Secure information,{" "}
-                  <span className="text-muted-foreground">
-                    no one is able to see your personal contact unless you
-                  </span>{" "}
-                  <span>explicitly share it</span>{" "}
-                  <span className="text-muted-foreground">
-                    by approaching one of your business cards
-                  </span>
+                  {t("features.fourteenthGraphic")}{" "}
+                  <span className="text-muted-foreground">{t("features.fifteenthGraphic")}</span>{" "}
+                  <span>{t("features.sixteenthGraphic")}</span>
                 </h2>
               </article>
             </section>
@@ -475,38 +393,35 @@ export default async function Home() {
         >
           <article className="group w-full max-w-7xl space-y-10 rounded-[32px]">
             <section className="space-y-2">
-              <p className="font-medium text-blue-600">Compare it by yourself</p>
+              <p className="font-medium text-blue-600">{t("comparison.compare")}</p>
               <h2 className="text-4xl font-semibold tracking-tight">
-                The old way vs{" "}
+                {t("comparison.before")}{" "}
                 <span className="bg-gradient-to-r from-violet-700 to-purple-400 bg-clip-text text-transparent">
-                  New way
+                  {t("comparison.after")}
                 </span>
               </h2>
 
-              <p className="max-w-prose text-lg text-muted-foreground">
-                The usual way to share information is to send a text message or email. But what if
-                you want to share your contact information with someone without having to type it
-                out?
-              </p>
+              <p className="max-w-prose text-lg text-muted-foreground">{t("comparison.text")}</p>
             </section>
 
             <section className="grid grid-cols-1 gap-4 pb-10 md:grid-cols-2 md:gap-10">
               <Card className="rounded-[28px] border-dashed bg-zinc-100 p-3 shadow-none transition-all duration-300 group-hover:scale-95 group-hover:blur-sm md:p-6 md:group-hover:translate-x-1/2">
                 <CardHeader>
-                  <CardTitle className="text-xl">Others</CardTitle>
+                  <CardTitle className="text-xl">{t("comparison.usualSubheading")}</CardTitle>
                   <CardDescription className="text-base">
-                    The usual way, nothing special
+                    {t("comparison.usualHeading")}
                   </CardDescription>
                 </CardHeader>
 
                 <CardContent>
                   <ul className="list-disc space-y-3 pl-4 text-lg font-light text-muted-foreground">
-                    <li>Plain link in bio (not always offered)</li>
-                    <li>Will most likely be require an app</li>
-                    <li>Not useful to show off</li>
-                    <li>Traditional printed cards may harm the environment</li>
+                    <li>{t("comparison.firstUsual")}</li>
+                    <li>{t("comparison.secondUsual")}</li>
+                    <li>{t("comparison.thirdUsual")}</li>
+                    <li>{t("comparison.fourthUsual")}</li>
                     <li>
-                      Works ... but it&apos;s <span className="font-medium italic">boring</span>
+                      {t("comparison.fifthUsualPart1")}
+                      <span className="font-medium italic">{t("comparison.fifthUsualPart2")}</span>
                     </li>
                   </ul>
                 </CardContent>
@@ -516,7 +431,7 @@ export default async function Home() {
                 <CardHeader>
                   <CardTitle className="text-2xl">ConCard</CardTitle>
                   <CardDescription className="text-base">
-                    Improve your professional profile
+                    {t("comparison.upgradeHeading")}
                   </CardDescription>
                 </CardHeader>
 
@@ -524,43 +439,43 @@ export default async function Home() {
                   <ul className="space-y-3 text-lg font-light text-zinc-200">
                     <li className="flex gap-3">
                       <Badge variant="violet">1</Badge>
-                      <p>Customizable NFC business card ✨</p>
+                      <p>{t("comparison.firstUpgrade")}</p>
                     </li>
 
                     <li className="flex gap-3">
                       <Badge variant="violet">2</Badge>
-                      <p>Make your own public personal page</p>
+                      <p>{t("comparison.secondUpgrade")}</p>
                     </li>
 
                     <li className="flex gap-3">
                       <Badge variant="violet">3</Badge>
-                      <p>Add all the links you want to share</p>
+                      <p>{t("comparison.thirdUpgrade")}</p>
                     </li>
 
                     <li className="flex gap-3">
                       <Badge variant="violet">4</Badge>
-                      <p>Secure information</p>
+                      <p>{t("comparison.fourthUpgrade")}</p>
                     </li>
 
                     <li className="flex gap-3">
                       <Badge variant="violet">5</Badge>
-                      <p>No need to install anything</p>
+                      <p>{t("comparison.fifthUpgrade")}</p>
                     </li>
 
                     <li className="flex gap-3">
                       <Badge variant="violet">6</Badge>
-                      <p>Enhance and showcase your brand</p>
+                      <p>{t("comparison.sixthUpgrade")}</p>
                     </li>
 
                     <li className="flex gap-3">
                       <Badge variant="violet">7</Badge>
-                      <p>Buy one ... or a lot!</p>
+                      <p>{t("comparison.seventhUpgrade")}</p>
                     </li>
                   </ul>
                 </CardContent>
 
                 <CardFooter className="text-muted-foreground">
-                  <p className="text-sm">Think of LinkTree but much better</p>
+                  <p className="text-sm">{t("comparison.bottomText")}</p>
                 </CardFooter>
 
                 <BorderBeam size={100} duration={10} delay={5} borderWidth={2} />
@@ -575,14 +490,9 @@ export default async function Home() {
         >
           <article className="w-full max-w-7xl space-y-14 rounded-[32px]">
             <div className="flex flex-col items-center justify-center space-y-2 text-center">
-              <p className="font-semibold text-indigo-600">Pricing</p>
-              <h2 className="text-4xl font-semibold tracking-tight">
-                Dead simple pricing, no hidden costs
-              </h2>
-              <p className="text-lg text-muted-foreground">
-                We offer a single plan for all our individual customers, so you can focus on what
-                matters most
-              </p>
+              <p className="font-semibold text-indigo-600">{t("pricing.title")}</p>
+              <h2 className="text-4xl font-semibold tracking-tight">{t("pricing.description")}</h2>
+              <p className="text-lg text-muted-foreground">{t("pricing.subheading")}</p>
             </div>
 
             <section className="group grid grid-cols-1 place-items-center gap-4 md:grid-cols-3">
@@ -626,7 +536,7 @@ export default async function Home() {
 
               <Card className="relative z-10 h-full w-full rounded-[24px] border border-indigo-400 bg-gradient-to-br from-primary to-indigo-950 text-primary-foreground shadow-xl shadow-indigo-400 transition-all duration-300 group-hover:translate-y-5 group-hover:scale-105 md:p-4">
                 <CardHeader>
-                  <p className="text-muted-foreground">Starting from</p>
+                  <p className="text-muted-foreground">{t("pricing.startingFrom")}</p>
 
                   <div className="flex items-center gap-2">
                     <p className="text-xl font-light text-green-600 line-through">S/. 69.90</p>
@@ -638,7 +548,7 @@ export default async function Home() {
                         </TooltipTrigger>
 
                         <TooltipContent className="text-sm">
-                          🚀 Launch event only offer
+                          {t("pricing.offerExplanation")}
                         </TooltipContent>
                       </Tooltip>
                     </TooltipProvider>
@@ -646,9 +556,9 @@ export default async function Home() {
                   <CardTitle className="text-2xl font-medium tabular-nums text-green-400">
                     S/. 49.90 PEN
                   </CardTitle>
-                  <CardTitle className="text-2xl">Professional</CardTitle>
+                  <CardTitle className="text-2xl">{t("pricing.planName")}</CardTitle>
                   <CardDescription className="text-base">
-                    Single, affordable and flexible plan, perfect for everyone, it includes:
+                    {t("pricing.planDescription")}
                   </CardDescription>
                 </CardHeader>
 
@@ -656,40 +566,37 @@ export default async function Home() {
                   <ul className="space-y-4 font-light text-zinc-200 md:text-lg">
                     <li className="flex gap-3">
                       <Badge variant="secondary">1</Badge>
-                      <p>
-                        1 <strong className="font-semibold">fully customizable</strong> business
-                        card included
-                      </p>
+                      <p>{t("pricing.firstIncluded")}</p>
                     </li>
 
                     <li className="flex gap-3">
                       <Badge variant="secondary">2</Badge>
-                      <p>Free shipping! (Lima)</p>
+                      <p>{t("pricing.secondIncluded")}</p>
                     </li>
 
                     <li className="flex gap-3">
                       <Badge variant="secondary">3</Badge>
-                      <p>Highly customizable personal page (portal)</p>
+                      <p>{t("pricing.thirdIncluded")}</p>
                     </li>
 
                     <li className="flex gap-3">
                       <Badge variant="secondary">4</Badge>
-                      <p>Social / professional links </p>
+                      <p>{t("pricing.fourthIncluded")}</p>
                     </li>
 
                     <li className="flex gap-3">
                       <Badge variant="secondary">5</Badge>
-                      <p>High security for your information</p>
+                      <p>{t("pricing.fifthIncluded")}</p>
                     </li>
 
                     <li className="flex gap-3">
                       <Badge variant="secondary">6</Badge>
-                      <p>Email signatures</p>
+                      <p>{t("pricing.sixthIncluded")}</p>
                     </li>
 
                     <li className="flex gap-3">
                       <Badge variant="secondary">7</Badge>
-                      <p>And more!</p>
+                      <p>{t("pricing.seventhIncluded")}</p>
                     </li>
                   </ul>
                 </CardContent>
@@ -698,7 +605,7 @@ export default async function Home() {
                   <SignUpButton>
                     <Button variant="primary" className="w-full" size="lg">
                       <MagicWandIcon className="h-5 w-5" />
-                      Start now!
+                      {t("pricing.primaryButton")}
                     </Button>
                   </SignUpButton>
                 </CardFooter>
@@ -751,9 +658,9 @@ export default async function Home() {
           <section id="security" className="mx-auto w-full max-w-7xl">
             <header className="space-y-2">
               <p className="font-medium text-pink-700">FAQ</p>
-              <h2 className="text-4xl font-semibold tracking-tight">Any doubts?</h2>
+              <h2 className="text-4xl font-semibold tracking-tight">{t("faq.subheading")}</h2>
               <p className="text-muted-foreground">
-                If none of these answers your question, feel free to contact us at{" "}
+                {t("faq.message")}{" "}
                 <Link href="mailto:help@stackkstudios.com" className="text-primary underline">
                   help@stackkstudios.com
                 </Link>
@@ -763,66 +670,66 @@ export default async function Home() {
             <Accordion type="single" collapsible className="mt-8 w-full">
               <AccordionItem value="explain-nfc">
                 <AccordionTrigger className="h-20 text-2xl font-medium md:h-20">
-                  What is NFC technology?
+                  {t("faq.questionOne")}
                 </AccordionTrigger>
 
                 <AccordionContent className="text-lg font-light" accessKey="explain-nfc">
-                  NFC stands for Near Field Communication, which is a technology that allows two
-                  devices to communicate with each other over a short distance, aka what powers
-                  Apple Pay and Google Pay. ConCard uses it to enable you to share any contact
-                  information with others without the need for them to install any additional
-                  applications.
+                  {t("faq.answerOne")}
                 </AccordionContent>
               </AccordionItem>
 
               <AccordionItem value="purchases">
                 <AccordionTrigger className="h-24 text-2xl font-medium md:h-20">
-                  How do I purchase a card?
+                  {t("faq.questionTwo")}
                 </AccordionTrigger>
+
                 <AccordionContent className="text-lg font-light" accessKey="purchases">
-                  To purchase a card, you can{" "}
+                  {t("faq.answerTwoPart1")}{" "}
                   <SignUpButton>
                     <button className="font-medium underline underline-offset-2 hover:text-indigo-700">
-                      start here
+                      {t("faq.answerTwoPart2")}
                     </button>
                   </SignUpButton>{" "}
-                  and follow the onboarding steps, it is simple and straightforward, you can
-                  complete it in less than 10 minutes.
+                  {t("faq.answerTwoPart3")}
                 </AccordionContent>
               </AccordionItem>
 
               <AccordionItem value="compatibility">
                 <AccordionTrigger className="h-24 text-2xl font-medium md:h-20">
-                  What devices are compatible?
+                  {t("faq.questionThree")}
                 </AccordionTrigger>
 
                 <AccordionContent className="text-lg font-light" accessKey="how-it-works">
-                  ConCard is compatible with all iOS devices and most Android devices (i.e from 2020
-                  onwards), if the device is not compatible or you are unsure, you can still share
-                  your contact info and links by scanning the QR code.
+                  {t("faq.answerThree")}
                 </AccordionContent>
               </AccordionItem>
 
               <AccordionItem value="how-it-works">
                 <AccordionTrigger className="h-20 text-2xl font-medium md:h-20">
-                  How do I make it work?
+                  {t("faq.questionFour")}
                 </AccordionTrigger>
                 <AccordionContent className="text-lg font-light" accessKey="how-it-works">
-                  You can use ConCard to share your contact information with others without the need
-                  for them to install any additional applications. Just approach it to
-                  someone&apos;s phone and share your page, including your contact information!
+                  {t("faq.answerFour")}
                 </AccordionContent>
               </AccordionItem>
 
               <AccordionItem value="security">
                 <AccordionTrigger className="h-28 text-2xl font-medium md:h-20">
-                  What if someone finds out my username by accident?
+                  {t("faq.questionFive")}
                 </AccordionTrigger>
 
                 <AccordionContent className="text-lg font-light">
-                  Don&apos;t worry, we take your privacy seriously and have architected a system to
-                  secure your private information, all pages are encrypted and only accessible when
-                  you explicitly open it by approaching your card to someone&apos;s phone.
+                  {t("faq.answerFive")}
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="shipping">
+                <AccordionTrigger className="h-28 text-2xl font-medium md:h-20">
+                  {t("faq.questionSix")}
+                </AccordionTrigger>
+
+                <AccordionContent className="text-lg font-light">
+                  {t("faq.answerSix")}
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
@@ -837,7 +744,7 @@ export default async function Home() {
               className="group text-base hover:text-primary-foreground"
             >
               <Link href="/admin">
-                Get started
+                {t("footer.getStarted")}
                 <LightningBoltIcon className="transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>
@@ -847,7 +754,7 @@ export default async function Home() {
               variant="link"
               className="group text-base hover:text-primary-foreground"
             >
-              <Link href="mailto:help@stackkstudios.com">Contact</Link>
+              <Link href="mailto:help@stackkstudios.com">{t("footer.contact")}</Link>
             </Button>
 
             <Button
@@ -855,7 +762,7 @@ export default async function Home() {
               variant="link"
               className="group text-base hover:text-primary-foreground"
             >
-              <Link href="/">About us</Link>
+              <Link href="/">{t("footer.aboutUs")}</Link>
             </Button>
 
             <Button
@@ -863,7 +770,7 @@ export default async function Home() {
               variant="link"
               className="group text-base hover:text-primary-foreground"
             >
-              <Link href="/">Terms of service</Link>
+              <Link href="/">{t("footer.termsOfService")}</Link>
             </Button>
 
             <Button
@@ -871,7 +778,7 @@ export default async function Home() {
               variant="link"
               className="group text-base hover:text-primary-foreground"
             >
-              <Link href="/">Privacy policy</Link>
+              <Link href="/">{t("footer.privacyPolicy")}</Link>
             </Button>
           </section>
 

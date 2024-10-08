@@ -21,11 +21,14 @@ import {
 } from "../ui/dropdown-menu";
 import { Skeleton } from "../ui/skeleton";
 import { env } from "~/env";
+import { useTranslations } from "next-intl";
 
 export const ShareLink = ({ username, pageHashKey }: { username: string; pageHashKey: string }) => {
   const baseUrl = env.NEXT_PUBLIC_BASE_URL;
   const fullUrl = `${baseUrl}/${username}`;
   const withHash = `${fullUrl}?ktp=${pageHashKey}`;
+
+  const t = useTranslations();
 
   const [copied, setCopied] = useState(false);
 
@@ -43,7 +46,7 @@ export const ShareLink = ({ username, pageHashKey }: { username: string; pageHas
 
   const handleLinkedInShare = () => {
     window.open(
-      `https://www.linkedin.com/sharing/share-offsite/?url=${withHash}&text=Check my NFC portal! ${fullUrl}`,
+      `https://www.linkedin.com/sharing/share-offsite/?url=${withHash}&text=Check out my ConCard portal page! ${fullUrl}`,
       "_blank",
       "noopener,noreferrer",
     );
@@ -51,7 +54,7 @@ export const ShareLink = ({ username, pageHashKey }: { username: string; pageHas
 
   const handleXShare = () => {
     window.open(
-      `https://x.com/share/?url=${withHash}&text=Check my NFC portal!`,
+      `https://x.com/share/?url=${withHash}&text=Check out my ConCard portal page!`,
       "_blank",
       "noopener,noreferrer",
     );
@@ -62,12 +65,14 @@ export const ShareLink = ({ username, pageHashKey }: { username: string; pageHas
       <DropdownMenuTrigger asChild>
         <Button className="w-full" variant="primary_ghost">
           <Share2Icon />
-          Share portal
+          {t("admin.onboarding.steps.finale.banners.sharePortal.action")}
         </Button>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="w-[320px]" sideOffset={10}>
-        <DropdownMenuLabel className="text-lg">Share link</DropdownMenuLabel>
+        <DropdownMenuLabel className="text-lg">
+          {t("admin.portal.shareLink.title")}
+        </DropdownMenuLabel>
 
         <DropdownMenuSeparator className="mb-0" />
 
@@ -87,19 +92,19 @@ export const ShareLink = ({ username, pageHashKey }: { username: string; pageHas
         <DropdownMenuGroup>
           <DropdownMenuItem onSelect={handleCopy} className="text-base">
             <CopyIcon />
-            Copy link
+            {t("admin.portal.shareLink.copyLink")}
             {copied && <CheckCircledIcon className="ml-auto text-emerald-600" />}
           </DropdownMenuItem>
 
           <DropdownMenuItem onSelect={handleXShare} className="text-base">
             <TwitterLogoIcon />
-            Share to X
+            {t("admin.portal.shareLink.shareViaTwitter")}
             <ChevronRightIcon className="ml-auto" />
           </DropdownMenuItem>
 
           <DropdownMenuItem onSelect={handleLinkedInShare} className="text-base">
             <LinkedInLogoIcon />
-            Share to LinkedIn
+            {t("admin.portal.shareLink.shareViaLinkedIn")}
             <ChevronRightIcon className="ml-auto" />
           </DropdownMenuItem>
         </DropdownMenuGroup>

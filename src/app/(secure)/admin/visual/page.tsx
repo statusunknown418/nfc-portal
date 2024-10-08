@@ -1,4 +1,5 @@
 import { auth } from "@clerk/nextjs/server";
+import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import {
@@ -18,6 +19,7 @@ import { cn } from "~/lib/utils";
 
 export default async function VisualCustomizationPage() {
   const { sessionClaims, userId } = auth();
+  const t = await getTranslations("admin.visual");
 
   if (!sessionClaims || !userId) {
     return redirect("/");
@@ -28,17 +30,15 @@ export default async function VisualCustomizationPage() {
       <section className="flex flex-col gap-4">
         <Breadcrumb className="self-start">
           <BreadcrumbList>
-            <BreadcrumbItem>Dashboard</BreadcrumbItem>
+            <BreadcrumbItem>{t("navigation.crumbOne")}</BreadcrumbItem>
             <BreadcrumbSeparator />
-            <BreadcrumbPage>Contact</BreadcrumbPage>
+            <BreadcrumbPage>{t("navigation.crumbTwo")}</BreadcrumbPage>
           </BreadcrumbList>
         </Breadcrumb>
 
         <header>
-          <h1 className="text-2xl font-bold">Visual customization</h1>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Customize your portal page here, we plan on adding more options in the future!.
-          </p>
+          <h1 className="text-2xl font-bold">{t("title")}</h1>
+          <p className="mt-1 text-sm text-muted-foreground">{t("description")}</p>
         </header>
 
         <Suspense fallback={<VisualWrapperLoader />}>

@@ -11,9 +11,11 @@ import { ShoppingBagIcon } from "lucide-react";
 import { useQueryStates } from "nuqs";
 import { cn } from "~/lib/utils";
 import { type Keys, onboardingParsers } from "./onboarding.parsers";
+import { useTranslations } from "next-intl";
 
 export const Stepper = () => {
   const [{ step }] = useQueryStates(onboardingParsers, { history: "push" });
+  const t = useTranslations("admin.onboarding.stepper");
 
   const stepsItems: {
     key: Keys;
@@ -30,10 +32,8 @@ export const Stepper = () => {
           )}
         >
           <div className="space-y-1 text-left">
-            <h2 className="font-medium">Welcome</h2>
-            <p className="text-balance text-sm text-muted-foreground">
-              Quick information about the process
-            </p>
+            <h2 className="font-medium">{t("welcome.title")}</h2>
+            <p className="text-balance text-sm text-muted-foreground">{t("welcome.description")}</p>
           </div>
         </section>
       ),
@@ -53,10 +53,8 @@ export const Stepper = () => {
           )}
         >
           <div className="space-y-1 text-left">
-            <h2 className="font-medium">Contact information</h2>
-            <p className="text-balance text-sm text-muted-foreground">
-              Fill in your public contact information
-            </p>
+            <h2 className="font-medium">{t("contact.title")}</h2>
+            <p className="text-balance text-sm text-muted-foreground">{t("contact.description")}</p>
           </div>
         </section>
       ),
@@ -76,10 +74,8 @@ export const Stepper = () => {
           )}
         >
           <div className="space-y-1 text-left">
-            <h2 className="font-medium">Public portal</h2>
-            <p className="text-wrap text-sm text-muted-foreground">
-              Customize your public page or use a template
-            </p>
+            <h2 className="font-medium">{t("portal.title")}</h2>
+            <p className="text-wrap text-sm text-muted-foreground">{t("portal.description")}</p>
           </div>
         </section>
       ),
@@ -99,9 +95,9 @@ export const Stepper = () => {
           )}
         >
           <div className="space-y-1 text-left">
-            <h2 className="font-medium">NFC card</h2>
+            <h2 className="font-medium">{t("nfc-card.title")}</h2>
             <p className="text-balance text-sm text-muted-foreground">
-              Customize your physical card and get it ready
+              {t("nfc-card.description")}
             </p>
           </div>
         </section>
@@ -122,10 +118,8 @@ export const Stepper = () => {
           )}
         >
           <div className="space-y-1 text-left">
-            <h2 className="font-medium">Purchase your card</h2>
-            <p className="text-sm text-muted-foreground">
-              Get it with your preferred payment method
-            </p>
+            <h2 className="font-medium">{t("purchase.title")}</h2>
+            <p className="text-sm text-muted-foreground">{t("purchase.description")}</p>
           </div>
         </section>
       ),
@@ -145,8 +139,8 @@ export const Stepper = () => {
           )}
         >
           <div className="space-y-1 text-left">
-            <h2 className="font-medium">Finale</h2>
-            <p className="text-sm text-muted-foreground">All done! You&apos;re ready to roll</p>
+            <h2 className="font-medium">{t("finale.title")}</h2>
+            <p className="text-sm text-muted-foreground">{t("finale.description")}</p>
           </div>
         </section>
       ),

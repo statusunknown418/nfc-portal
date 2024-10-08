@@ -8,6 +8,7 @@ import {
   Pencil2Icon,
   TrashIcon,
 } from "@radix-ui/react-icons";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { toast } from "sonner";
 import { Button } from "~/components/ui/button";
@@ -36,6 +37,7 @@ export const LinkActions = ({
   username: string;
 }) => {
   const utils = api.useUtils();
+  const t = useTranslations("admin.dashboard");
 
   const toggleActive = api.links.toggleActive.useMutation({
     onMutate: (vars) => {
@@ -125,32 +127,32 @@ export const LinkActions = ({
               </DropdownMenuTrigger>
             </TooltipTrigger>
 
-            <TooltipContent>Actions</TooltipContent>
+            <TooltipContent>{t("actions.label")}</TooltipContent>
           </Tooltip>
         </TooltipProvider>
 
         <DropdownMenuContent align="start">
           <DropdownMenuItem onClick={handleToggleActive}>
             {link.isActive ? <EyeNoneIcon /> : <EyeOpenIcon />}
-            {link.isActive ? "Hide" : "Show"}
+            {link.isActive ? t("actions.hide") : t("actions.show")}
           </DropdownMenuItem>
 
           <DropdownMenuItem onClick={() => setOpen(false)}>
             <Pencil2Icon />
-            Edit
+            {t("actions.editLink")}
           </DropdownMenuItem>
 
-          <DropdownMenuItem onClick={() => setOpen(false)}>
+          {/* <DropdownMenuItem onClick={() => setOpen(false)}>
             <ArchiveIcon />
-            Archive
-          </DropdownMenuItem>
+            {t("actions.archive")}
+          </DropdownMenuItem> */}
 
           <DropdownMenuItem
             onClick={handleDelete}
             className="text-destructive focus:bg-destructive/10 focus:text-destructive"
           >
             <TrashIcon />
-            Delete
+            {t("actions.delete")}
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -167,7 +169,7 @@ export const LinkActions = ({
 
       <DrawerContent>
         <DrawerHeader className="my-4">
-          <DrawerTitle>Actions</DrawerTitle>
+          <DrawerTitle>{t("actions.label")}</DrawerTitle>
         </DrawerHeader>
 
         <div className="flex w-full flex-col gap-2 px-2 pb-8">
@@ -182,7 +184,7 @@ export const LinkActions = ({
             ) : (
               <EyeOpenIcon className="h-5 w-5" />
             )}
-            {link.isActive ? "Hide" : "Show"}
+            {link.isActive ? t("actions.hide") : t("actions.show")}
           </Button>
 
           <Button
@@ -192,7 +194,7 @@ export const LinkActions = ({
             onClick={() => setOpen(false)}
           >
             <Pencil2Icon className="h-5 w-5" />
-            Edit
+            {t("actions.editLink")}
           </Button>
 
           <Button
@@ -202,7 +204,7 @@ export const LinkActions = ({
             onClick={() => setOpen(false)}
           >
             <ArchiveIcon className="h-5 w-5" />
-            Archive
+            {t("actions.archive")}
           </Button>
 
           <Button
@@ -212,7 +214,7 @@ export const LinkActions = ({
             className="justify-start gap-3 px-4 text-base"
           >
             <TrashIcon className="h-5 w-5" />
-            Delete
+            {t("actions.delete")}
           </Button>
         </div>
       </DrawerContent>

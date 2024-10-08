@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Cross2Icon, PlusIcon } from "@radix-ui/react-icons";
 import { SaveIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -42,6 +43,7 @@ export const ContactDataForm = ({
   user: CustomJwtSessionClaims;
 }) => {
   const utils = api.useUtils();
+  const t = useTranslations("admin.onboarding.steps.contact");
 
   const { data } = api.vCard.get.useQuery(undefined, { initialData });
 
@@ -174,11 +176,8 @@ export const ContactDataForm = ({
           <Switch defaultChecked={!isHidden} onCheckedChange={handleToggle} />
 
           <div className="flex flex-col gap-2">
-            <h3>Contact information visibility</h3>
-            <p className="text-muted-foreground">
-              If enabled your contact information will be visible when you share your portal through
-              the NFC card
-            </p>
+            <h3>{t("visibilityOptionOne")}</h3>
+            <p className="text-muted-foreground">{t("visibilityOptionTwo")}</p>
           </div>
         </Label>
       </div>
@@ -191,9 +190,9 @@ export const ContactDataForm = ({
           <Alert variant="indigo">
             <SaveIcon size={16} />
 
-            <AlertTitle>This form auto-saves!</AlertTitle>
+            <AlertTitle>{t("autosave")}</AlertTitle>
             <AlertDescription>
-              <p>Just wait a few moments and your changes will be automatically saved.</p>
+              <p>{t("autosaveDescription")}</p>
 
               {isPending && (
                 <Badge variant="outline" className="absolute right-4 top-2 h-7 animate-pulse">
@@ -211,7 +210,7 @@ export const ContactDataForm = ({
                 name="name.first"
                 render={({ field }) => (
                   <FormItem className="flex-grow">
-                    <FormLabel>First name</FormLabel>
+                    <FormLabel>{t("firstName")}</FormLabel>
 
                     <FormControl>
                       <Input autoComplete="given-name" {...field} />
@@ -225,7 +224,7 @@ export const ContactDataForm = ({
                 name="name.last"
                 render={({ field }) => (
                   <FormItem className="flex-grow">
-                    <FormLabel>Last name</FormLabel>
+                    <FormLabel>{t("lastName")}</FormLabel>
 
                     <FormControl>
                       <Input autoComplete="family-name" {...field} />
@@ -241,7 +240,7 @@ export const ContactDataForm = ({
                 control={form.control}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Position</FormLabel>
+                    <FormLabel>{t("position")}</FormLabel>
 
                     <FormControl>
                       <Input placeholder="CEO" autoComplete="organization-title" {...field} />
@@ -255,7 +254,7 @@ export const ContactDataForm = ({
                 name="company.name"
                 render={({ field }) => (
                   <FormItem className="flex-grow">
-                    <FormLabel>Company</FormLabel>
+                    <FormLabel>{t("company")}</FormLabel>
 
                     <FormControl>
                       <Input placeholder="ACME Corp." {...field} />
@@ -269,7 +268,7 @@ export const ContactDataForm = ({
                 name="url"
                 render={({ field }) => (
                   <FormItem className="flex-grow">
-                    <FormLabel>Company website</FormLabel>
+                    <FormLabel>{t("companyWebsite")}</FormLabel>
 
                     <FormControl>
                       <Input placeholder="acme.com" {...field} />
@@ -282,7 +281,7 @@ export const ContactDataForm = ({
 
           <section className="grid w-full grid-cols-1 gap-3">
             <Label asChild>
-              <p>Email address(es) (5 max.)</p>
+              <p>{t("emails.label")}</p>
             </Label>
 
             {emailFields.map((email, idx) => (
@@ -298,9 +297,10 @@ export const ContactDataForm = ({
                         </SelectTrigger>
 
                         <SelectContent>
-                          <SelectItem value="PREF">Primary</SelectItem>
-                          <SelectItem value="WORK">Work</SelectItem>
-                          <SelectItem value="HOME">Home</SelectItem>
+                          <SelectItem value="PREF">{t("emails.types.PREF")}</SelectItem>
+                          <SelectItem value="WORK">{t("emails.types.WORK")}</SelectItem>
+                          <SelectItem value="HOME">{t("emails.types.HOME")}</SelectItem>
+                          <SelectItem value="OTHER">{t("emails.types.OTHER")}</SelectItem>
                         </SelectContent>
                       </Select>
                     </FormItem>
@@ -352,7 +352,7 @@ export const ContactDataForm = ({
 
           <section className="grid grid-cols-1 gap-3">
             <Label asChild>
-              <p>Phone number(s) (5 max.)</p>
+              <p>{t("phoneNumbers.label")}</p>
             </Label>
 
             {phoneFields.map((phone, idx) => (
@@ -382,14 +382,14 @@ export const ContactDataForm = ({
                         </SelectTrigger>
 
                         <SelectContent>
-                          <SelectItem value="PREF">Preferred</SelectItem>
-                          <SelectItem value="WORK">Work</SelectItem>
-                          <SelectItem value="HOME">Home</SelectItem>
-                          <SelectItem value="FAX">Fax</SelectItem>
-                          <SelectItem value="MSG">Messages</SelectItem>
-                          <SelectItem value="CELL">Cellular</SelectItem>
-                          <SelectItem value="BBS">Bulletin Board</SelectItem>
-                          <SelectItem value="VIDEO">Video</SelectItem>
+                          <SelectItem value="PREF">{t("phoneNumbers.types.PREF")}</SelectItem>
+                          <SelectItem value="WORK">{t("phoneNumbers.types.WORK")}</SelectItem>
+                          <SelectItem value="HOME">{t("phoneNumbers.types.HOME")}</SelectItem>
+                          <SelectItem value="FAX">{t("phoneNumbers.types.FAX")}</SelectItem>
+                          <SelectItem value="MSG">{t("phoneNumbers.types.MSG")}</SelectItem>
+                          <SelectItem value="CELL">{t("phoneNumbers.types.CELL")}</SelectItem>
+                          <SelectItem value="BBS">{t("phoneNumbers.types.BBS")}</SelectItem>
+                          <SelectItem value="VIDEO">{t("phoneNumbers.types.VIDEO")}</SelectItem>
                         </SelectContent>
                       </Select>
                     </FormItem>
@@ -427,7 +427,7 @@ export const ContactDataForm = ({
 
           <section className="grid w-full grid-cols-1 gap-3">
             <Label asChild>
-              <p>Address(es) (2 max.)</p>
+              <p>{t("addresses.label")}</p>
             </Label>
 
             {addressFields.map((address, idx) => (
@@ -444,10 +444,10 @@ export const ContactDataForm = ({
                           </SelectTrigger>
 
                           <SelectContent>
-                            <SelectItem value="DOM">Primary</SelectItem>
-                            <SelectItem value="HOME">Home</SelectItem>
-                            <SelectItem value="WORK">Work</SelectItem>
-                            <SelectItem value="POSTAL">Postal</SelectItem>
+                            <SelectItem value="DOM">{t("addresses.types.DOM")}</SelectItem>
+                            <SelectItem value="HOME">{t("addresses.types.HOME")}</SelectItem>
+                            <SelectItem value="WORK">{t("addresses.types.WORK")}</SelectItem>
+                            <SelectItem value="POSTAL">{t("addresses.types.POSTAL")}</SelectItem>
                           </SelectContent>
                         </Select>
                       </FormItem>
@@ -548,7 +548,7 @@ export const ContactDataForm = ({
                       })
                     }
                   >
-                    <PlusIcon /> Add another
+                    <PlusIcon /> {t("addLabel")}
                   </Button>
 
                   <Button
@@ -559,7 +559,7 @@ export const ContactDataForm = ({
                     disabled={idx === 0}
                     onClick={() => idx !== 0 && removeAddress(idx)}
                   >
-                    <Cross2Icon /> Remove
+                    <Cross2Icon /> {t("removeLabel")}
                   </Button>
                 </div>
               </article>

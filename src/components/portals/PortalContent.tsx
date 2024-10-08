@@ -1,10 +1,14 @@
 "use client";
 
+import { ArrowLeftIcon, ArrowRightIcon, ExclamationTriangleIcon } from "@radix-ui/react-icons";
+import { useTranslations } from "next-intl";
+import Link from "next/link";
 import { useFrameSyncReceiver } from "~/lib/hooks/use-frame-sync";
 import { cn } from "~/lib/utils";
 import { api, type RouterOutputs } from "~/trpc/react";
 import { Spinner } from "../shared/Spinner";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
+import { Button } from "../ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import { ContactInfo } from "./ContactInfo";
 import { GetYours } from "./GetYours";
@@ -19,6 +23,7 @@ export const PortalContent = ({
   selectedTab: "links" | "contact";
 }) => {
   const utils = api.useUtils();
+  const t = useTranslations("admin");
 
   const {
     data: portal,
@@ -34,7 +39,31 @@ export const PortalContent = ({
   }) as string;
 
   if (!portal.data) {
-    return;
+    return (
+      <div className="grid h-full grid-cols-1 place-items-center">
+        <section className="flex max-w-sm flex-col items-center gap-2 rounded-3xl border bg-white p-6 text-center shadow-lg">
+          <ExclamationTriangleIcon className="h-10 w-10 text-destructive" />
+          <h2 className="text-2xl font-bold">User not found</h2>
+          <p>Try approaching the NFC card again or double check the URL.</p>
+
+          <div className="mt-4 flex w-full flex-col items-center justify-center gap-1">
+            <Button asChild variant="secondary_ghost" className="w-full">
+              <Link href="/">
+                <ArrowLeftIcon />
+                Go back home
+              </Link>
+            </Button>
+
+            <Button asChild className="w-full">
+              <Link href="/">
+                Go to app
+                <ArrowRightIcon />
+              </Link>
+            </Button>
+          </div>
+        </section>
+      </div>
+    );
   }
 
   if (isRefetching) {
@@ -113,7 +142,7 @@ export const PortalContent = ({
                 value="contact"
                 className={cn("h-10 min-w-24 flex-grow rounded-full mix-blend-difference")}
               >
-                Contact
+                {t("portal.tabs.contact")}
               </TabsTrigger>
             )}
 
@@ -121,7 +150,7 @@ export const PortalContent = ({
               value="links"
               className={cn("h-10 min-w-24 flex-grow rounded-full mix-blend-difference")}
             >
-              Links
+              {t("portal.tabs.links")}
             </TabsTrigger>
           </TabsList>
 
@@ -150,10 +179,10 @@ export const PortalContent = ({
                   style={{ borderColor: portal.data.theme.colors.border }}
                 >
                   <AlertTitle className="text-center text-base font-semibold">
-                    No links added yet
+                    {t("portal.empty.title")}
                   </AlertTitle>
                   <AlertDescription className="text-center">
-                    If this is your first time here, you can add some links to your profile.
+                    {t("portal.empty.description")}
                   </AlertDescription>
                 </Alert>
               )}

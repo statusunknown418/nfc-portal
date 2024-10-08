@@ -11,6 +11,7 @@ import {
 } from "@radix-ui/react-icons";
 import { RadioGroupItem } from "@radix-ui/react-radio-group";
 import { type TRPCError } from "@trpc/server";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -50,6 +51,7 @@ export function AddEditLinkForm({
   username: string;
 }) {
   const isEditing = !!defaultValues;
+  const t = useTranslations("admin.dashboard");
 
   const [parent] = useAutoAnimate();
   const setOptimisticItemPosition = positionsStore((s) => s.getPosition);
@@ -76,6 +78,23 @@ export function AddEditLinkForm({
   const thumbnail = form.watch("thumbnail");
 
   const utils = api.useUtils();
+
+  const toggleLinkVisibility = api.links.toggleActive.useMutation({
+    onMutate: async (vars) => {
+      void utils.links.all.cancel();
+
+      form.reset({
+        ...vars,
+      });
+    },
+    onSuccess: async () => {
+      await Promise.all([
+        utils.links.all.invalidate(),
+        utils.viewer.previewPortal.invalidate(),
+        utils.portals.get.invalidate({ username: username }),
+      ]);
+    },
+  });
 
   const editLink = api.links.edit.useMutation({
     onMutate: async (vars) => {
@@ -200,7 +219,7 @@ export function AddEditLinkForm({
                   )}
                 >
                   <FormLabel className="flex items-center gap-1">
-                    {isActive ? "Active!" : "Deactivated link"}{" "}
+                    {isActive ? t("editLinkModal.activeLink") : t("editLinkModal.inactiveLink")}
                     {isActive && <LightningBoltIcon className="text-amber-600" />}
                   </FormLabel>
 
@@ -250,7 +269,7 @@ export function AddEditLinkForm({
               content={{
                 label: () => (
                   <span className="cursor-default rounded-sm bg-muted px-3 py-0.5 text-sm">
-                    Upload a thumbnail (optional)
+                    {t("editLinkModal.uploadThumbnail")}
                   </span>
                 ),
                 uploadIcon: () => <></>,
@@ -263,7 +282,7 @@ export function AddEditLinkForm({
             name="displayText"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Title</FormLabel>
+                <FormLabel>{t("editLinkModal.displayText")}</FormLabel>
 
                 <FormControl>
                   <Input placeholder="My website" {...field} value={field.value ?? ""} />
@@ -278,7 +297,7 @@ export function AddEditLinkForm({
             render={({ field }) => (
               <FormItem>
                 <div className="flex h-5 items-center gap-1">
-                  <FormLabel>Link</FormLabel>
+                  <FormLabel>{t("editLinkModal.url")}</FormLabel>
 
                   {isValidURL && (
                     <span className="rounded-full bg-green-100">
@@ -297,9 +316,7 @@ export function AddEditLinkForm({
                   <Input placeholder="https://example.com" {...field} value={field.value ?? ""} />
                 </FormControl>
 
-                <FormDescription>
-                  Any valid URL, if set to deployable, this will be the button inside the modal
-                </FormDescription>
+                <FormDescription>{t("editLinkModal.urlDescription")}</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -310,7 +327,7 @@ export function AddEditLinkForm({
             control={form.control}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Type</FormLabel>
+                <FormLabel>{t("editLinkModal.type")}</FormLabel>
 
                 <FormControl>
                   <RadioGroup
@@ -325,11 +342,11 @@ export function AddEditLinkForm({
                           className="flex min-h-12 w-full items-center justify-center gap-2 rounded-md border border-border/50 text-sm transition-all duration-200 data-[state=checked]:border-indigo-500 data-[state=checked]:bg-indigo-50 data-[state=checked]:text-indigo-700"
                         >
                           <ExternalLinkIcon />
-                          Basic
+                          {t("editLinkModal.basic")}
                         </RadioGroupItem>
                       </FormControl>
 
-                      <FormDescription>Simple button that redirects to a URL</FormDescription>
+                      <FormDescription>{t("editLinkModal.basicDescription")}</FormDescription>
                     </div>
 
                     <div className="flex flex-col items-center gap-2">
@@ -339,12 +356,12 @@ export function AddEditLinkForm({
                           className="flex min-h-12 w-full items-center justify-center gap-2 rounded-md border border-border/50 text-sm transition-all duration-200 data-[state=checked]:border-indigo-500 data-[state=checked]:bg-indigo-50 data-[state=checked]:text-indigo-700"
                         >
                           <FileTextIcon />
-                          Deployable
+                          {t("editLinkModal.deployable")}
                         </RadioGroupItem>
                       </FormControl>
 
                       <FormDescription className="text-center">
-                        A customizable modal that reveals itself
+                        {t("editLinkModal.deployableDescription")}
                       </FormDescription>
                     </div>
                   </RadioGroup>
@@ -359,7 +376,7 @@ export function AddEditLinkForm({
               name="description"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Description</FormLabel>
+                  <FormLabel>{t("editLinkModal.descriptionLabel")}</FormLabel>
 
                   <FormControl>
                     <Textarea
@@ -369,9 +386,7 @@ export function AddEditLinkForm({
                     />
                   </FormControl>
 
-                  <FormDescription>
-                    This will be shown inside the modal, when the link is clicked.
-                  </FormDescription>
+                  <FormDescription>{t("editLinkModal.descriptionText")}</FormDescription>
                 </FormItem>
               )}
             />
@@ -383,7 +398,7 @@ export function AddEditLinkForm({
               name="buttonLabel"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Button Label</FormLabel>
+                  <FormLabel>{t("editLinkModal.buttonLabel")}</FormLabel>
 
                   <FormControl>
                     <Input
@@ -394,9 +409,7 @@ export function AddEditLinkForm({
                     />
                   </FormControl>
 
-                  <FormDescription>
-                    This will be shown on the button, below the description.
-                  </FormDescription>
+                  <FormDescription>{t("editLinkModal.buttonLabelDescription")}</FormDescription>
                 </FormItem>
               )}
             />
@@ -408,7 +421,7 @@ export function AddEditLinkForm({
             disabled={form.formState.isSubmitting || editLink.isPending}
           >
             {form.formState.isSubmitting && <Spinner className="text-primary-foreground" />}
-            {isEditing ? "Save" : "Add it!"}
+            {isEditing ? t("editLinkModal.save") : t("actions.addLink")}
           </Button>
         </form>
       </div>

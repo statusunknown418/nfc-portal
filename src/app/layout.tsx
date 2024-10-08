@@ -8,6 +8,8 @@ import NextTopLoader from "nextjs-toploader";
 import { TRPCReactProvider } from "~/trpc/react";
 import { Toaster } from "~/components/ui/sonner";
 import { type Viewport } from "next";
+import { getLocale, getMessages } from "next-intl/server";
+import { NextIntlClientProvider } from "next-intl";
 
 export const metadata: Metadata = {
   title: "ConCard",
@@ -34,19 +36,24 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const locale = await getLocale();
+  const messages = await getMessages();
+
   return (
     <ClerkProvider>
-      <html lang="en" className={`${GeistSans.variable} md:text-sm`}>
-        <body className="h-screen">
-          <NextTopLoader showSpinner={false} color="#4338ca" height={5} />
+      <html lang={locale} className={`${GeistSans.variable} md:text-sm`}>
+        <NextIntlClientProvider messages={messages}>
+          <body className="h-screen">
+            <NextTopLoader showSpinner={false} color="#4338ca" height={5} />
 
-          <TRPCReactProvider>{children}</TRPCReactProvider>
+            <TRPCReactProvider>{children}</TRPCReactProvider>
 
-          <Toaster />
+            <Toaster />
 
-          <SpeedInsights />
-        </body>
+            <SpeedInsights />
+          </body>
+        </NextIntlClientProvider>
       </html>
     </ClerkProvider>
   );

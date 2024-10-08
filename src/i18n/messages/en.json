@@ -1,0 +1,557 @@
+{
+  "landing": {
+    "hero": {
+      "heading": "Discover the new professional era, powered by NFC technology",
+      "description": "Enhance your experience and stand out from the competition with our premium business cards. Just tap it on someone's phone and share your personalized page!",
+      "primaryButton": "Get started now",
+      "secondaryButton": "Learn more",
+      "banner": "Introducing premium cards",
+      "startNow": "Get started",
+      "why": "Why ConCard?",
+      "learnMore": "Learn more"
+    },
+    "navbar": {
+      "features": "Features",
+      "customers": "Customers",
+      "pricing": "Pricing",
+      "faq": "FAQ",
+      "dashboard": "Dashboard",
+      "joinNow": "Join now"
+    },
+    "testimonials": {
+      "heading": "Trusted by professionals in all industries",
+      "privacyDisclaimer": "We hide full names and personal information for privacy reasons",
+      "clients": {
+        "juan": {
+          "name": "@ju.pa****",
+          "username": "Biomedical engineer",
+          "body": "Even while being  a student, this has improved my access to better job opportunities.",
+          "img": "https://avatar.vercel.sh/jose?text=jose.h"
+        },
+        "rw": {
+          "name": "@rw.****",
+          "username": "Mechanical engineer",
+          "body": "This has improved much of my professional profile. I highly recommend it!",
+          "img": "https://avatar.vercel.sh/rodrigo?text=ra"
+        },
+        "jos": {
+          "name": "@jos****",
+          "username": "Product engineer in AV****",
+          "body": "This is the best solution for improving networking.",
+          "img": "https://avatar.vercel.sh/joseph?text=jm"
+        },
+        "bdi": {
+          "name": "@bdi****",
+          "username": "CEO in CI** Peru",
+          "body": "Sharing my contact with new people never has been so easy!",
+          "img": "https://avatar.vercel.sh/jill?text=boris.d"
+        },
+        "mar": {
+          "name": "@mar****",
+          "username": "Marketing leader in PEP****",
+          "body": "We are missing words. This is incredible. I love it.",
+          "img": "https://avatar.vercel.sh/john?text=martina.m"
+        },
+        "ari": {
+          "name": "@ari.****",
+          "username": "Abogado in M****",
+          "body": "This product can actually change the way we communicate.",
+          "img": "https://avatar.vercel.sh/jane?text=JO"
+        },
+        "kim": {
+          "name": "@kim****",
+          "username": "Engineer in NT****",
+          "body": "I love this product because it has helped me to stay focused.",
+          "img": "https://avatar.vercel.sh/kimberly?text=kimberly.c"
+        },
+        "fra": {
+          "name": "@fr.****",
+          "username": "Physics researcher in PU**",
+          "body": "Improving our personal brand definitely opens many doors.",
+          "img": "https://avatar.vercel.sh/francisco?text=FD"
+        },
+        "the_ar": {
+          "name": "@the.ar****",
+          "username": "CEO in Sta****",
+          "body": "Simple, easy, and effective for highlighting!",
+          "img": "https://avatar.vercel.sh/john?text=TA"
+        },
+        "j_a": {
+          "name": "@j.a.****",
+          "username": "Civil engineer in V**",
+          "body": "Using ConCard on social events makes you stand out among the crowd.",
+          "img": "https://avatar.vercel.sh/john?text=JA"
+        },
+        "er_d": {
+          "name": "@er.d.****",
+          "username": "Doctor in Hosp**** *****",
+          "body": "I used to think networking was for me, but ConCard changed that!",
+          "img": "https://avatar.vercel.sh/john?text=JA"
+        },
+        "sej": {
+          "name": "@sej.****",
+          "username": "Marketing manager in Via**** ****",
+          "body": "We've been needing something like this for years, and finally it's here!",
+          "img": "https://avatar.vercel.sh/john?text=JL"
+        },
+        "diego": {
+          "name": "@diego.****",
+          "username": "Biomedical engineer in Cl**** *****",
+          "body": "I always love networking, but this is definitely better!",
+          "img": "https://avatar.vercel.sh/john?text=DR"
+        }
+      }
+    },
+    "features": {
+      "subheading": "Features",
+      "heading": "Benefits, and why choose us?",
+      "description": "Explore the benefits of using our product and why we are the best option for you!",
+      "firstGraphic": "Extremely easy to use,",
+      "secondGraphic": "get started in just a few minutes",
+      "thirdGraphic": "and stand out from the competition",
+      "fourthGraphic": "by showcasing your profile in a unique and professional way.",
+      "fifthGraphic": "Share your ConCard URL anywhere!",
+      "sixthGraphic": "Highly customizable,",
+      "seventhGraphic": "we offer a wide range of options",
+      "eighthGraphic": "to make your portal and business card truly",
+      "ninthGraphic": "yours and unique",
+      "tenthGraphic": "No external apps required,",
+      "eleventhGraphic": "works instantly",
+      "twelfthGraphic": "on all iOS devices and",
+      "thirteenthGraphic": "most Android phones",
+      "fourteenthGraphic": "Secure information,",
+      "fifteenthGraphic": "no one can see your personal contact unless",
+      "sixteenthGraphic": "they tap one of your business cards.",
+      "hyperText": "All your information is encrypted"
+    },
+    "comparison": {
+      "compare": "Compare it yourself",
+      "before": "Before vs",
+      "after": "After",
+      "text": "The traditional way of sharing your information is by handing over a business card or writing your details on paper. But what if you could share your contact instantly and hassle-free, without resorting to paper?",
+      "usualSubheading": "Others",
+      "usualHeading": "The usual way, nothing special",
+      "firstUsual": "Simple link in bio (not always available)",
+      "secondUsual": "Most likely requires an app",
+      "thirdUsual": "Not useful to stand out",
+      "fourthUsual": "Printed business cards can harm the environment",
+      "fifthUsualPart1": "It works... but it's",
+      "fifthUsualPart2": "boring",
+      "upgradeHeading": "Upgrade your professional profile",
+      "firstUpgrade": "Customizable NFC business card ✨",
+      "secondUpgrade": "Create your own public personal page",
+      "thirdUpgrade": "Add all the links you want to share",
+      "fourthUpgrade": "Secure information",
+      "fifthUpgrade": "No need to install anything",
+      "sixthUpgrade": "Enhance and showcase your brand",
+      "seventhUpgrade": "Buy one... or many!",
+      "bottomText": "Think of it as a LinkTree, but way better!"
+    },
+    "stepByStep": {
+      "title": "An explanation",
+      "subtitle": "How does it work?",
+      "subheading": "We combine top technologies to ensure our product delivers the quality you're looking for",
+      "stepOneTitle": "Sign up and choose your username",
+      "stepOneDescription": "You can sign up using an email or social media account",
+      "stepTwoTitle": "Add your contact information",
+      "stepTwoDescription": "Anything you want to share with your contacts.",
+      "stepThreeTitle": "Customize your page",
+      "stepThreeDescription": "You can add your own content and personalize your page.",
+      "stepFourTitle": "Purchase your card",
+      "stepFourDescription": "Choose from a variety of options or create your own design",
+      "stepFiveTitle": "You're all set!",
+      "stepFiveDescription": "No need to install anything, just tap it on someone's phone and share your page, including your contact information!"
+    },
+    "pricing": {
+      "title": "Pricing",
+      "description": "Clear and simple pricing, no hidden costs",
+      "subheading": "We offer a single plan for all individual customers, so you can focus on what matters most.",
+      "startingFrom": "Starting from",
+      "offerExplanation": "🚀 Launch event only offer",
+      "planName": "Professional",
+      "planDescription": "A single affordable and flexible plan, perfect for everyone. Includes:",
+      "firstIncluded": "1 fully customizable business card included",
+      "secondIncluded": "Free shipping! (Lima)",
+      "thirdIncluded": "All page customization options",
+      "fourthIncluded": "Social / professional links",
+      "fifthIncluded": "High security for your information",
+      "sixthIncluded": "Email signatures",
+      "seventhIncluded": "And more!",
+      "primaryButton": "Get started now!"
+    },
+    "faq": {
+      "subheading": "Any questions?",
+      "message": "If none of these answers resolve your doubts, feel free to contact us at",
+      "questionOne": "What is NFC technology?",
+      "answerOne": "NFC stands for Near Field Communication, a technology that allows two devices to communicate at close range, which also powers Apple Pay and Google Pay. ConCard uses it so you can share any contact information with others without needing them to install additional apps.",
+      "questionTwo": "How do I purchase a card?",
+      "answerTwoPart1": "To purchase a card, simply",
+      "answerTwoPart2": "start here",
+      "answerTwoPart3": "and follow the onboarding steps, it's simple and straightforward, you can complete it in less than 10 minutes.",
+      "questionThree": "What devices are compatible?",
+      "answerThree": "ConCard is compatible with all iOS devices and most Android devices (i.e., 2020 onwards). If the device isn't compatible or you have doubts, you can still share your contact information and links by scanning the QR code.",
+      "questionFour": "How do I use it?",
+      "answerFour": "You can use ConCard to share your contact information with others without them needing to install additional apps. Just tap it on someone's phone and share your page, including your contact information!",
+      "questionFive": "What if someone finds my profile by accident?",
+      "answerFive": "Don't worry, we take your privacy very seriously and have designed a system to protect your private information. All pages are encrypted and are only accessible when you explicitly open them by tapping your card on someone's phone.",
+      "questionSix": "Where can I get my card shipped?",
+      "answerSix": "We offer FREE shipping to  Lima, for other cities the shipping is free for purchases over S/. 100 PEN. Finally, we also offer shipping to all Latin America, but the cost depends on the provider, for more information and pricing, please contact us!"
+    },
+    "footer": {
+      "getStarted": "Get started here",
+      "contact": "Contact",
+      "aboutUs": "About Us",
+      "termsOfService": "Terms of Service",
+      "privacyPolicy": "Privacy Policy",
+      "projectBy": "A project by"
+    }
+  },
+  "admin": {
+    "onboarding": {
+      "topText": "Let's get you set up",
+      "previousButton": "Previous Step",
+      "nextButton": "Next Step",
+      "return": "Back to dashboard",
+      "completeOnboarding": "Complete onboarding",
+      "stepper": {
+        "welcome": {
+          "title": "Welcome",
+          "description": "Quick information about the process"
+        },
+        "contact": {
+          "title": "Contact information",
+          "description": "Fill in your public contact information"
+        },
+        "portal": {
+          "title": "Public portal",
+          "description": "Customize your public page or use a template"
+        },
+        "nfc-card": {
+          "title": "NFC card",
+          "description": "Customize your physical card and get it ready"
+        },
+        "purchase": {
+          "title": "Purchase your card",
+          "description": "Get it with your preferred payment method",
+          "purchase": "Purchase"
+        },
+        "finale": {
+          "title": "Finale",
+          "description": "All done! You're ready to roll"
+        }
+      },
+      "steps": {
+        "welcome": {
+          "title": "Welcome to ConCard!",
+          "message": "We are excited to have you on board. Before we get started (and to make everything smoother), you just need to follow these simple steps to get your account set up.",
+          "helpOne": "If there's anything you need help with, don't hesitate to reach out to us. We're here to help!",
+          "helpTwo": "Contact us here",
+          "startButton": "Start onboarding"
+        },
+        "contact": {
+          "title": "Contact information",
+          "autosave": "This form auto-saves!",
+          "autosaveDescription": "Just wait a few moments and your changes will be automatically saved.",
+          "subtitle": "Fill in your public contact information, this is what every person you give your card to will see, additionally it is possible to hide it from your public page if needed.",
+          "visibilityOptionOne": "Contact information visibility",
+          "visibilityOptionTwo": "If enabled your contact information will be visible when you share your portal through the NFC card",
+          "firstName": "First name",
+          "lastName": "Last name",
+          "position": "Position",
+          "company": "Company",
+          "companyWebsite": "Company website",
+          "addLabel": "Add another",
+          "removeLabel": "Remove",
+          "emails": {
+            "label": "Email address(es) (5 max.)",
+            "types": {
+              "PREF": "Primary",
+              "WORK": "Work",
+              "HOME": "Home",
+              "OTHER": "Other"
+            }
+          },
+          "phoneNumbers": {
+            "label": "Phone number(s) (5 max.)",
+            "types": {
+              "PREF": "Preferred",
+              "WORK": "Work",
+              "HOME": "Home",
+              "FAX": "Fax",
+              "MSG": "Messages",
+              "CELL": "Cellular",
+              "BBS": "Bulletin Board",
+              "VIDEO": "Video"
+            }
+          },
+          "addresses": {
+            "label": "Address(es) (2 max.)",
+            "types": {
+              "DOM": "Primary",
+              "HOME": "Home",
+              "WORK": "Work",
+              "POSTAL": "Postal"
+            }
+          }
+        },
+        "portal": {
+          "title": "Portal customization",
+          "description": "You can customize your public page to your liking here, templates are also available",
+          "themes": "Themes / presets are coming!",
+          "themesMessage": "We're working hard to provide the best experiences with new features!, if you'd like to see it sooner please shoot us an email.",
+          "profileHeader": "Profile header",
+          "profileFooter": "A short title you want to show off",
+          "bio": "Biography",
+          "bioDescription": "Anything you want to tell people about yourself. This will be displayed on your profile page.(0/100 characters max.)",
+          "avatarUpload": "Upload an avatar (optional)",
+          "generated": "Replace with generated",
+          "remove": "Remove Avatar",
+          "themeCustomization": {
+            "title": "Theme customization",
+            "description": "Choose colors, font styles and more!",
+            "colors": {
+              "title": "Color palette",
+              "background": "Background color",
+              "textColor": "Text color",
+              "accent": "Accent (subtle)",
+              "border": "Border color"
+            },
+            "buttons": {
+              "title": "Buttons (and links)",
+              "background": "Background color",
+              "textColor": "Text color",
+              "borderColor": "Border color",
+              "borderStyle": "Border style",
+              "styles": {
+                "solid": "Solid",
+                "dashed": "Dashed",
+                "dotted": "Dotted"
+              },
+              "shape": {
+                "label": "Shape",
+                "pill": "Pill rounding",
+                "rounded": "Medium",
+                "small": "Small",
+                "square": "No rounding"
+              }
+            },
+            "fonts": {
+              "weight": "Font weight",
+              "style": "Font style",
+              "weights": {
+                "thin": "Thin",
+                "light": "Light",
+                "normal": "Normal",
+                "medium": "Medium",
+                "bold": "Bold",
+                "black": "Black"
+              },
+              "styles": {
+                "normal": "Normal",
+                "italic": "Italic"
+              }
+            }
+          }
+        },
+        "cardPreferences": {
+          "title": "Customize your business card",
+          "description": "Improve your personal brand and make it stand out from the crowd.",
+          "avatar": "Avatar",
+          "avatarDescription": "Choose an avatar that you like!",
+          "variant": {
+            "label": "Choose a card variant",
+            "basic": "Classic Edition",
+            "custom": "Professional Edition (custom)",
+            "metallic": "Metallic Edition"
+          },
+          "banners": {
+            "headsUp": {
+              "title": "Heads up!",
+              "description": "By choosing this option you are able fully customize the appearance of your card, however it will be delivered AS IS, so make sure you add all the details you want to be visible on the card."
+            }
+          },
+          "templates": {
+            "title": "Templates",
+            "details": "See both sides",
+            "detailsTitle": "Detailed view",
+            "front": "Front card preview",
+            "back": "Back card preview",
+            "close": "Close"
+          },
+          "frontDesign": "Front card design",
+          "backDesign": "Back card design",
+          "removeDesign": "Remove design",
+          "removeLogo": "Remove logo",
+          "details": {
+            "title": "What should it show?",
+            "description": "The contact info you added in the first step will be used to personalize the card as you see fit.",
+            "name": "Your name",
+            "jobTitle": "Job title / Position",
+            "company": "Company",
+            "companyWebsite": "Company website",
+            "companyLogo": "Company logo",
+            "front": "Front",
+            "back": "Back"
+          }
+        },
+        "purchaseCard": {
+          "title": "Purchase your NFC card",
+          "description": "Your NFC card will be delivered as soon as possible and the way it was customized in the previous step.",
+          "address": "Shipping address",
+          "purchase": "Purchase",
+          "redirection": "You will be redirected to our payment provider to securely complete the payment",
+          "alreadyBought": "Already purchased, want another?",
+          "buyNow": "Buy now!",
+          "shippingStatus": "{status, select, awaiting_purchase {Not purchased yet} in_progress {Shipping in progress} shipped {Shipped} failed {Failed} other {Unknown}}"
+        },
+        "finale": {
+          "title": "You're all done!",
+          "descriptionPart1": "Your purchase means a lot to us. Your support is heavily appreciated and will help us build a better product for our customers!.",
+          "descriptionPart2": "You will receive a confirmation email shortly. If nothing arrives try checking your spam folder or contact us directly, we're happy to help.",
+          "banners": {
+            "sharePortal": {
+              "title": "Your page is ready!",
+              "description": "Share it with anyone but remember that based on the previous steps your contact information may be visible, so just be cautious!",
+              "action": "Share your page"
+            },
+            "warning": {
+              "title": "Warning! Portal inactive",
+              "description": "You need to purchase a card to activate and share your portal, you can do it by going one step back and purchasing a card!"
+            }
+          }
+        }
+      },
+      "banners": {
+        "pending": {
+          "title": "Onboarding incomplete!",
+          "description": "It is strongly recommended to complete the onboarding process, this way you can complete every step and get your portal active and linked to your business card.",
+          "pickUp": "Pick up where you left off!"
+        },
+        "done": {
+          "title": "Your page is LIVE!"
+        },
+        "continueModal": {
+          "title": "Continue onboarding?",
+          "description": "We've noticed you haven't finished the onboarding process. It is strongly recommended to complete the onboarding process, this way you can get the most out of ConCard.",
+          "takeMeThere": "Take me there",
+          "doNotShowAgain": "Don't show again"
+        }
+      }
+    },
+    "sidebar": {
+      "links": {
+        "title": "Links",
+        "description": "Links and contact information"
+      },
+      "themes": {
+        "title": "Themes",
+        "description": "Customize your portal"
+      },
+      "emails": {
+        "title": "Digital signatures",
+        "description": "Use digital signatures in your mails"
+      },
+      "settings": {
+        "title": "Settings",
+        "description": "Manage your account"
+      }
+    },
+    "dashboard": {
+      "navigation": {
+        "crumbOne": "Dashboard",
+        "crumbTwo": "Links and contact information"
+      },
+      "welcome": "Welcome",
+      "title": "Dashboard",
+      "description": "Here you can manage everything that shows up on your NFC portal page",
+      "banners": {
+        "card": {
+          "title": "Business Card",
+          "description": "Current status:",
+          "awaitingPurchase": "We noticed you haven't purchased a card yet,",
+          "awaitingPurchasePart2": "please purchase one to unlock all features!",
+          "purchased": "Purchased"
+        }
+      },
+      "tabs": {
+        "contact": "Contact",
+        "links": "Links"
+      },
+      "actions": {
+        "addLink": "Add link",
+        "importLinks": "Import links",
+        "editLink": "Edit",
+        "label": "Actions",
+        "hide": "Hide",
+        "show": "Show",
+        "delete": "Delete",
+        "archive": "Archive"
+      },
+      "editLinkModal": {
+        "title": "Edit this link",
+        "description": "Remember to click save when you're done.",
+        "displayText": "Title",
+        "url": "Link",
+        "urlDescription": "Any valid URL, if set to deployable, this will be where the button links inside the modal",
+        "type": "Type",
+        "basic": "Basic",
+        "basicDescription": "Simple button that redirects to a URL",
+        "deployable": "Deployable",
+        "deployableDescription": "A modal that can contain more information",
+        "buttonLabel": "Button Label",
+        "buttonLabelDescription": "This will be shown on the button, below the description.",
+        "descriptionLabel": "Description",
+        "descriptionText": "This will be shown inside the modal, when the link is clicked.",
+        "save": "Save",
+        "cancel": "Cancel",
+        "activeLink": "Active",
+        "inactiveLink": "Inactive link",
+        "uploadThumbnail": "Upload a thumbnail (optional)"
+      }
+    },
+    "visual": {
+      "navigation": {
+        "crumbOne": "Dashboard",
+        "crumbTwo": "Customization"
+      },
+      "title": "Customize your portal",
+      "description": "Choose colors, font styles and more, we'll add more options soon!"
+    },
+    "portal": {
+      "tabs": {
+        "contact": "Contact",
+        "links": "Links"
+      },
+      "empty": {
+        "title": "No links added yet!",
+        "description": "If this is your first time here, you can add some links to your profile."
+      },
+      "shareLink": {
+        "title": "Share link",
+        "description": "You can get a similar page like this through our app!",
+        "copyLink": "Copy link",
+        "shareViaEmail": "Share via email",
+        "shareViaTwitter": "Share via Twitter",
+        "shareViaLinkedIn": "Share via LinkedIn",
+        "postPlaceholder": "Check out my ConCard page!",
+        "getYours": "Get yours",
+        "getYoursDescription": "You can have it up and running in less than 10 minutes!"
+      }
+    }
+  },
+  "common": {
+    "comingSoon": "Coming soon!",
+    "askHelp": "Ask for help",
+    "requestAction": "To request this feature earlier, just click here",
+    "requestFeature": "Request a feature",
+    "requestFeatureDescription": "We're always looking for ways to improve ConCard, if you have a feature request, please let us know!",
+    "errors": {
+      "somethingWentWrong": "Something went wrong",
+      "recognitionFailed": "Looks like we were unable to recognize your identity",
+      "usernameNotFound": "We couldn't find your username, please refresh the page or try again 😢"
+    },
+    "redirection": {
+      "admin": "Go to admin panel"
+    }
+  }
+}

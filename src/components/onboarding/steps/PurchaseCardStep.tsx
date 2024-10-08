@@ -1,16 +1,17 @@
 import { ShoppingBagIcon, SparklesIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { toast } from "sonner";
-import { nfcPreferencesStore } from "~/lib/stores/nfcPreferences";
-import { purchaseStatusToText } from "~/lib/utils";
-import { api, type RouterOutputs } from "~/trpc/react";
 import { CardPreview } from "~/components/admin/contact/CardPreview";
 import { Spinner } from "~/components/shared/Spinner";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import { FormItem } from "~/components/ui/form";
+import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 import { Textarea } from "~/components/ui/textarea";
+import { nfcPreferencesStore } from "~/lib/stores/nfcPreferences";
+import { api, type RouterOutputs } from "~/trpc/react";
 
 export const PurchaseCardStep = ({
   initialData,
@@ -18,17 +19,19 @@ export const PurchaseCardStep = ({
   initialData: RouterOutputs["vCard"]["get"];
 }) => {
   const preferences = nfcPreferencesStore((s) => s.preferencesData);
+  const t = useTranslations("admin.onboarding.steps.purchaseCard");
+  const messages = useTranslations("common");
 
   const { data, isLoading } = api.purchases.getStatus.useQuery();
   const { mutate, isPending } = api.purchases.withPreferences.useMutation({
     onError: (err) => {
-      toast.error("Something went wrong", {
+      toast.error(messages("errors.somethingWentWrong"), {
         description: err.message,
       });
     },
     onSuccess: (data) => {
       if (!data.sandbox_init_point) {
-        toast.error("Something went wrong", {
+        toast.error(messages("errors.somethingWentWrong"), {
           description: "Unable to redirect to payment provider",
         });
       }
@@ -38,6 +41,8 @@ export const PurchaseCardStep = ({
   });
 
   const [shippingAddress, setShippingAddress] = useState("");
+  const [region, setRegion] = useState("");
+  const [country, setCountry] = useState("");
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -46,6 +51,8 @@ export const PurchaseCardStep = ({
       metadata: {
         ...preferences,
         shippingAddress,
+        region,
+        country,
       },
       title: `NFC card | ${preferences.cardVariant.toLocaleUpperCase()} Edition`,
       cardVariant: preferences.cardVariant,
@@ -55,11 +62,8 @@ export const PurchaseCardStep = ({
 
   return (
     <section className="flex min-h-full flex-col gap-1 pb-24">
-      <h3 className="text-xl font-semibold tracking-wide">Purchase your NFC card</h3>
-      <p className="text-muted-foreground">
-        Your card will be delivered as soon as possible and the way you customized it in the
-        previous step.
-      </p>
+      <h3 className="text-xl font-semibold tracking-wide">{t("title")}</h3>
+      <p className="text-muted-foreground">{t("description")}</p>
 
       <div className="my-4 h-[400px]">
         <CardPreview cardData={initialData?.contactJSON ?? undefined} />
@@ -71,7 +75,7 @@ export const PurchaseCardStep = ({
       >
         {!isLoading && data?.cardShippingStatus ? (
           <Badge className="my-4 h-7 justify-self-center">
-            {purchaseStatusToText(data.cardShippingStatus)}{" "}
+            {t("shippingStatus", { status: data.cardShippingStatus })}{" "}
             {data.cardShippingStatus === "in_progress" && (
               <SparklesIcon size={15} className="ml-2 text-amber-500" />
             )}
@@ -83,7 +87,7 @@ export const PurchaseCardStep = ({
         )}
 
         <FormItem className="w-full max-w-sm">
-          <Label>Shipping address</Label>
+          <Label>{t("address")}</Label>
 
           <Textarea
             required
@@ -98,30 +102,60 @@ export const PurchaseCardStep = ({
           />
         </FormItem>
 
+        <div className="flex w-full justify-between gap-2">
+          <FormItem className="w-full max-w-sm">
+            <Label>City</Label>
+
+            <Input
+              required
+              placeholder="Lima"
+              autoCorrect="off"
+              autoCapitalize="off"
+              spellCheck="false"
+              autoComplete="address-level1"
+              value={region}
+              onChange={(e) => setRegion(e.currentTarget.value)}
+            />
+          </FormItem>
+
+          <FormItem className="w-full max-w-sm">
+            <Label>Country</Label>
+
+            <Input
+              required
+              placeholder="Peru"
+              autoCorrect="off"
+              autoCapitalize="off"
+              spellCheck="false"
+              autoComplete="country-name"
+              value={country}
+              onChange={(e) => setCountry(e.currentTarget.value)}
+            />
+          </FormItem>
+        </div>
+
         <Button
+          variant="primary"
+          size="lg"
+          className="mt-2 h-12 w-full max-w-sm self-center shadow-lg shadow-indigo-300"
           disabled={!shippingAddress}
           onClick={() =>
             mutate({
               metadata: preferences,
               title: `NFC card | ${preferences.cardVariant.toLocaleUpperCase()} Edition`,
               cardVariant: preferences.cardVariant,
-              description: `Purchase your NFC card`,
+              description: t("purchase"),
             })
           }
-          variant="primary"
-          size="lg"
-          className="h-12 w-full max-w-sm self-center shadow-lg shadow-indigo-300"
         >
           {isPending ? <Spinner className="text-white" /> : <ShoppingBagIcon size={15} />}
 
           {!isLoading && data?.cardShippingStatus !== "awaiting_purchase"
-            ? "Already purchased, want another?"
-            : "Buy now!"}
+            ? t("alreadyBought")
+            : t("buyNow")}
         </Button>
 
-        <p className="mt-2 text-center text-muted-foreground">
-          You will be redirected to our payment provider to securely complete the payment
-        </p>
+        <p className="mt-2 text-center text-muted-foreground">{t("redirection")}</p>
       </form>
     </section>
   );

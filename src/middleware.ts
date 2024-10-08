@@ -5,13 +5,14 @@ import { env } from "./env";
 export const PORTAL_KEY = "portal-password";
 export const PORTAL_QUERY = "ktp";
 export const INCOMING_URL = "x-current-url";
+export const LOCALE_KEY = "NEXT_LOCALE";
 
 const isProtectedRoute = createRouteMatcher(["/admin(.*)", "/business", "/onboarding(.*)"]);
 
 export default clerkMiddleware(
   (auth, req) => {
     const headers = new Headers(req.headers);
-    headers.set(INCOMING_URL, req.nextUrl.pathname);
+    const nextUrl = req.nextUrl;
 
     if (isProtectedRoute(req)) {
       auth().protect();
@@ -24,7 +25,6 @@ export default clerkMiddleware(
     const portalPassword = req.nextUrl.searchParams.get(PORTAL_QUERY);
     headers.set("set-cookie", `${PORTAL_KEY}=${portalPassword}; SameSite=Strict; HttpOnly`);
 
-    const nextUrl = req.nextUrl;
     nextUrl.searchParams.delete(PORTAL_QUERY);
 
     return NextResponse.redirect(nextUrl, {
