@@ -6,9 +6,9 @@ import {
   IdCardIcon,
   RocketIcon,
 } from "@radix-ui/react-icons";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useState } from "react";
-import { purchaseStatusToText } from "~/lib/utils";
 import { api, type RouterOutputs } from "~/trpc/react";
 import { Alert, AlertDescription, AlertTitle } from "../../ui/alert";
 import { Button } from "../../ui/button";
@@ -21,7 +21,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "../../ui/dialog";
-import { useTranslations } from "next-intl";
 
 export const PageEnabled = ({
   initialData,
@@ -107,7 +106,11 @@ export const PageEnabled = ({
 
         <AlertDescription className="flex items-center gap-1">
           {t("dashboard.banners.card.description")}{" "}
-          <strong>{purchaseStatusToText(data.cardShippingStatus ?? "awaiting_purchase")}</strong>
+          <strong>
+            {t("onboarding.steps.purchaseCard.shippingStatus", {
+              status: data.cardShippingStatus ?? "awaiting_purchase",
+            })}
+          </strong>
         </AlertDescription>
 
         {data.cardShippingStatus === "awaiting_purchase" && (

@@ -131,13 +131,9 @@ export const CardPreferencesForm = () => {
             )}
           >
             <Alert variant="warning" className="mb-2 max-w-lg">
-              <AlertTitle>Heads up!</AlertTitle>
+              <AlertTitle>{t("banners.headsUp.title")}</AlertTitle>
 
-              <AlertDescription>
-                By choosing this option you are able fully customize the appearance of your card,
-                however <strong>it will be delivered AS IS</strong>, so make sure you add all the
-                details you want to be visible on the card.
-              </AlertDescription>
+              <AlertDescription>{t("banners.headsUp.description")}</AlertDescription>
             </Alert>
 
             <article
@@ -148,7 +144,7 @@ export const CardPreferencesForm = () => {
             >
               <Label className="flex items-center gap-2">
                 <ResetIcon className="rotate-180" />
-                Front card design
+                {t("frontDesign")}
               </Label>
 
               <section
@@ -192,7 +188,7 @@ export const CardPreferencesForm = () => {
                 className="w-max self-center"
                 onClick={() => form.setValue("cardImageFront", undefined)}
               >
-                Remove design
+                {t("removeDesign")}
               </Button>
             </article>
 
@@ -206,7 +202,7 @@ export const CardPreferencesForm = () => {
             >
               <Label className="flex items-center gap-2">
                 <ResetIcon />
-                Back card design
+                {t("backDesign")}
               </Label>
 
               <section
@@ -250,7 +246,7 @@ export const CardPreferencesForm = () => {
                 className="w-max self-center"
                 onClick={() => form.setValue("cardImageBack", undefined)}
               >
-                Remove design
+                {t("removeDesign")}
               </Button>
             </article>
           </div>
@@ -263,12 +259,9 @@ export const CardPreferencesForm = () => {
           )}
         >
           <div className="space-y-1">
-            <h3 className="text-lg font-medium">What should it show?</h3>
+            <h3 className="text-lg font-medium">{t("details.title")}</h3>
 
-            <p className="text-sm font-normal text-muted-foreground">
-              The contact info you added in the first step will be used to personalize the card as
-              you see fit.
-            </p>
+            <p className="text-sm font-normal text-muted-foreground">{t("details.description")}</p>
           </div>
 
           <div className="grid w-full grid-cols-2 gap-4">
@@ -286,7 +279,7 @@ export const CardPreferencesForm = () => {
                       />
                     </FormControl>
 
-                    <FormLabel className="text-base">Your name</FormLabel>
+                    <FormLabel className="text-base">{t("details.name")}</FormLabel>
                   </div>
                 </FormItem>
               )}
@@ -304,7 +297,7 @@ export const CardPreferencesForm = () => {
                         !field.value ? "opacity-100" : "opacity-0",
                       )}
                     >
-                      Back
+                      {t("details.back")}
                     </FormLabel>
 
                     <FormControl>
@@ -322,7 +315,7 @@ export const CardPreferencesForm = () => {
                         !!field.value ? "opacity-100" : "opacity-0",
                       )}
                     >
-                      Front
+                      {t("details.front")}
                     </FormLabel>
                   </div>
                 </FormItem>
@@ -343,7 +336,7 @@ export const CardPreferencesForm = () => {
                       />
                     </FormControl>
 
-                    <FormLabel className="text-base">Job title / Position</FormLabel>
+                    <FormLabel className="text-base">{t("details.jobTitle")}</FormLabel>
                   </div>
                 </FormItem>
               )}
@@ -361,7 +354,7 @@ export const CardPreferencesForm = () => {
                         !field.value ? "opacity-100" : "opacity-0",
                       )}
                     >
-                      Back
+                      {t("details.back")}
                     </FormLabel>
 
                     <FormControl>
@@ -379,7 +372,7 @@ export const CardPreferencesForm = () => {
                         !!field.value ? "opacity-100" : "opacity-0",
                       )}
                     >
-                      Front
+                      {t("details.front")}
                     </FormLabel>
                   </div>
                 </FormItem>
@@ -400,7 +393,7 @@ export const CardPreferencesForm = () => {
                       />
                     </FormControl>
 
-                    <FormLabel className="text-base">Company name</FormLabel>
+                    <FormLabel className="text-base">{t("details.company")}</FormLabel>
                   </div>
                 </FormItem>
               )}
@@ -418,7 +411,7 @@ export const CardPreferencesForm = () => {
                         !field.value ? "opacity-100" : "opacity-0",
                       )}
                     >
-                      Back
+                      {t("details.back")}
                     </FormLabel>
 
                     <FormControl>
@@ -436,7 +429,7 @@ export const CardPreferencesForm = () => {
                         !!field.value ? "opacity-100" : "opacity-0",
                       )}
                     >
-                      Front
+                      {t("details.front")}
                     </FormLabel>
                   </div>
                 </FormItem>
@@ -457,7 +450,7 @@ export const CardPreferencesForm = () => {
                       />
                     </FormControl>
 
-                    <FormLabel className="text-base">Company logo</FormLabel>
+                    <FormLabel className="text-base">{t("details.companyLogo")}</FormLabel>
                   </div>
                 </FormItem>
               )}
@@ -475,7 +468,7 @@ export const CardPreferencesForm = () => {
                         !field.value ? "opacity-100" : "opacity-0",
                       )}
                     >
-                      Back
+                      {t("details.back")}
                     </FormLabel>
 
                     <FormControl>
@@ -493,7 +486,7 @@ export const CardPreferencesForm = () => {
                         !!field.value ? "opacity-100" : "opacity-0",
                       )}
                     >
-                      Front
+                      {t("details.front")}
                     </FormLabel>
                   </div>
                 </FormItem>
@@ -546,7 +539,7 @@ export const CardPreferencesForm = () => {
                 variant="destructive_ghost"
                 onClick={() => form.setValue("companyLogoURL", undefined)}
               >
-                Remove logo
+                {t("removeLogo")}
               </Button>
             </div>
           </div>

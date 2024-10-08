@@ -17,6 +17,7 @@ export const FinaleStep = ({
 }) => {
   const confettiRef = useRef<ConfettiRef>(null);
   const t = useTranslations("admin.onboarding.steps.finale");
+  const common = useTranslations("common");
 
   const { mutate } = api.viewer.setOnboardingStep.useMutation();
   const { data, isLoading } = api.viewer.shouldShowLive.useQuery();
@@ -61,11 +62,10 @@ export const FinaleStep = ({
     if (!!data?.hasPurchasedCard) {
       return (
         <Alert variant="indigo" className="z-10 mt-4 max-w-lg">
-          <AlertTitle>Your portal page!</AlertTitle>
+          <AlertTitle>{t("banners.sharePortal.title")}</AlertTitle>
 
           <AlertDescription className="mb-4">
-            Share it with anyone but remember that based on the previous steps your contact
-            information may be visible, so just be cautious!
+            {t("banners.sharePortal.description")}
           </AlertDescription>
 
           {initialData?.username && (
@@ -77,18 +77,15 @@ export const FinaleStep = ({
 
     return (
       <Alert variant="warning" className="z-10 mt-4 max-w-lg">
-        <AlertTitle>Warning! Portal inactive</AlertTitle>
+        <AlertTitle>{t("banners.warning.title")}</AlertTitle>
 
-        <AlertDescription className="mb-4">
-          You need to purchase a card to activate and share your portal, you can do it by going one
-          step back and purchasing a card!
-        </AlertDescription>
+        <AlertDescription className="mb-4">{t("banners.warning.description")}</AlertDescription>
       </Alert>
     );
   };
 
   return (
-    <section className="relative mx-auto flex h-full flex-col items-center justify-center gap-4">
+    <section className="relative mx-auto flex min-h-[calc(100svh-20rem)] flex-col items-center justify-center gap-4">
       <CheckCircledIcon className="h-12 w-12 text-emerald-600 md:h-12 md:w-12" />
 
       <h2 className="text-2xl font-bold tracking-wide md:text-4xl">{t("title")}</h2>
@@ -112,12 +109,14 @@ export const FinaleStep = ({
         asChild
       >
         <Link href="/admin">
-          Go to admin panel <ArrowRightIcon />
+          {common("redirection.admin")}
+
+          <ArrowRightIcon />
         </Link>
       </Button>
 
       <Button className="z-10" size="sm" variant="link" asChild>
-        <Link href="mailto:support@stackkstudios.com">Ask for help</Link>
+        <Link href="mailto:support@stackkstudios.com">{common("askHelp")}</Link>
       </Button>
 
       <Confetti

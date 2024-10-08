@@ -17,6 +17,7 @@ import { PublicPortalStep } from "./steps/PublicPortalStep";
 import { PurchaseCardStep } from "./steps/PurchaseCardStep";
 import { WelcomeStep } from "./steps/WelcomeStep";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 
 export const StepperSelector = ({
   session,
@@ -36,6 +37,8 @@ export const StepperSelector = ({
   const [{ step }, changeStep] = useQueryStates(onboardingParsers);
   const { mutate } = api.viewer.setOnboardingStep.useMutation();
   const utils = api.useUtils();
+  const router = useRouter();
+
   const t = useTranslations("admin.onboarding");
 
   const StepComponents: Record<Keys, ReactNode> = {
@@ -67,6 +70,7 @@ export const StepperSelector = ({
       mutate({ step: newStep }),
       changeStep({ step: newStep }),
       utils.viewer.shouldShowLive.invalidate(),
+      router.refresh(),
     ]);
   };
 
@@ -77,6 +81,7 @@ export const StepperSelector = ({
       mutate({ step: newStep, forceCompleted: newStep === "finale" }),
       changeStep({ step: newStep }),
       utils.viewer.shouldShowLive.invalidate(),
+      router.refresh(),
     ]);
   };
 

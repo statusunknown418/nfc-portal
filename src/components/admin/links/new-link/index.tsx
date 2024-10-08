@@ -23,10 +23,12 @@ import {
 } from "~/components/ui/drawer";
 import { useMediaQuery } from "~/lib/hooks/use-media-query";
 import { AddEditLinkForm } from "./AddEditLinkForm";
+import { useTranslations } from "next-intl";
 
 export function NewLinkDrawer({ username }: { username: string }) {
   const [open, setOpen] = useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
+  const t = useTranslations("admin.dashboard");
 
   if (isDesktop) {
     return (
@@ -37,7 +39,7 @@ export function NewLinkDrawer({ username }: { username: string }) {
             className="w-full min-w-40 shadow-xl shadow-indigo-100 transition-all duration-300 hover:shadow-indigo-400 sm:rounded-r-none"
           >
             <PlusIcon />
-            Add link
+            {t("actions.addLink")}
           </Button>
         </DialogTrigger>
 
@@ -63,7 +65,7 @@ export function NewLinkDrawer({ username }: { username: string }) {
           className="w-full min-w-40 shadow-xl shadow-indigo-100 transition-all duration-300 hover:shadow-indigo-400 sm:rounded-r-none"
         >
           <PlusIcon />
-          Add link
+          {t("actions.addLink")}
         </Button>
       </DrawerTrigger>
 

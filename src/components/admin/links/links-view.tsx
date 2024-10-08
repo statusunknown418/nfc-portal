@@ -1,5 +1,7 @@
-import { PlusIcon } from "@radix-ui/react-icons";
+import { UploadIcon } from "@radix-ui/react-icons";
+import { useTranslations } from "next-intl";
 import { Suspense } from "react";
+import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -8,7 +10,9 @@ import {
   BreadcrumbSeparator,
 } from "~/components/ui/breadcrumb";
 import { Button } from "~/components/ui/button";
+import { Switch } from "~/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "~/components/ui/tooltip";
 import {
   ContactDataLoading,
   ContactDataWrapper,
@@ -19,10 +23,6 @@ import {
 } from "../enabled-banner/page-enabled-wrapper";
 import { LinksWrapperLoader, LinksWrapperRSC } from "./links-list/links-wrapper";
 import { NewLinkDrawer } from "./new-link";
-import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
-import { Switch } from "~/components/ui/switch";
-import { useTranslations } from "next-intl";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "~/components/ui/tooltip";
 
 export const LinksViewRSC = ({ jwt }: { jwt: CustomJwtSessionClaims }) => {
   const t = useTranslations("admin.dashboard");
@@ -71,7 +71,7 @@ export const LinksViewRSC = ({ jwt }: { jwt: CustomJwtSessionClaims }) => {
                     variant="outline"
                     className="w-full opacity-50 sm:rounded-l-none"
                   >
-                    <PlusIcon />
+                    <UploadIcon />
                     {t("actions.importLinks")}
                   </Button>
                 </TooltipTrigger>

@@ -208,7 +208,7 @@
   },
   "admin": {
     "onboarding": {
-      "topText": "Vamos a alistar todo,",
+      "topText": "Vamos a alistar todo",
       "return": "Regresar a la app",
       "previousButton": "Paso anterior",
       "nextButton": "Siguiente paso",
@@ -364,6 +364,27 @@
             "custom": "Edición profesional (personalizada)",
             "metallic": "Edición Metálica"
           },
+          "banners": {
+            "headsUp": {
+              "title": "Información importante!",
+              "description": "Al escoger esta opción puedes personalizar de cualquier manera tu tarjeta, pero ten en cuenta que será entregada COMO SE VE, entonces asegúrate de añadir todos los detalles que quieras que aparezcan en tu tarjeta."
+            }
+          },
+          "frontDesign": "Diseño frontal",
+          "backDesign": "Diseño trasera",
+          "removeDesign": "Eliminar diseño",
+          "removeLogo": "Eliminar logo",
+          "details": {
+            "title": "Qué se mostrará en tu tarjeta?",
+            "description": "La información de contacto que agregaste en el PRIMER paso será utilizada para personalizar tu tarjeta como decidas.",
+            "name": "Tu nombre",
+            "jobTitle": "Cargo / Puesto",
+            "company": "Empresa",
+            "companyWebsite": "Sitio web de la empresa",
+            "companyLogo": "Logo de la empresa",
+            "front": "Frontal",
+            "back": "Posterior"
+          },
           "templates": {
             "title": "Plantillas",
             "details": "Ver ambos lados",
@@ -380,12 +401,24 @@
           "purchase": "Compra tu tarjeta",
           "redirection": "Serás redirigido a nuestro proveedor de pagos para completar el pago de manera segura",
           "alreadyPurchased": "Ya compraste una, ¿necesitas otra?",
-          "buyNow": "Comprar ahora!"
+          "buyNow": "Proceder al pago",
+          "shippingStatus": "{status, select, awaiting_purchase {No comprado aún} in_progress {Envío en progreso} shipped {Enviado} failed {Fallido} other {Desconocido}}"
         },
         "finale": {
           "title": "Ya está todo listo!",
           "descriptionPart1": "Tu compra significa mucho para nosotros. Tu apoyo es muy apreciado y nos ayudará a construir un mejor producto para nuestros clientes!.",
-          "descriptionPart2": "Recibirás un correo de confirmación en breve. Si nada llega, intenta comprobar tu carpeta de spam o contáctenos directamente, estamos encantados de ayudarte."
+          "descriptionPart2": "Recibirás un correo de confirmación en breve. Si nada llega, intenta comprobar tu carpeta de spam o contáctenos directamente, estamos encantados de ayudarte.",
+          "banners": {
+            "sharePortal": {
+              "title": "¡Tu página está lista!",
+              "description": "Compártela con cualquiera pero recuerda que en base a los pasos previos puede que tu información de contacto sea visible, así que se precavido!",
+              "action": "Comparte tu página"
+            },
+            "warning": {
+              "title": "¡Advertencia! Portal inactivo",
+              "description": "Necesitas comprar una tarjeta para activar y compartir tu portal, puedes hacerlo haciendo un paso atrás y comprando una tarjeta!"
+            }
+          }
         }
       },
       "banners": {
@@ -437,14 +470,41 @@
       },
       "actions": {
         "addLink": "Añadir link",
-        "importLinks": "Importar links"
+        "importLinks": "Importar links",
+        "editLink": "Editar",
+        "label": "Opciones",
+        "hide": "Ocultar",
+        "show": "Mostrar",
+        "delete": "Eliminar",
+        "archive": "Archivar"
+      },
+      "editLinkModal": {
+        "title": "Editar este link",
+        "description": "Recuerda guardar tus cambios!",
+        "displayText": "Título",
+        "url": "Link",
+        "urlDescription": "Cualquier URL válida, si escoges el tipo desplegable, esto será a donde se redirigirá a través del botón dentro del modal",
+        "type": "Variante",
+        "basic": "Básico",
+        "basicDescription": "Botón simple que redirige a una URL",
+        "deployable": "Desplegable",
+        "deployableDescription": "Una modal que puede contener más información",
+        "buttonLabel": "Texto del botón",
+        "buttonLabelDescription": "Esto será mostrado en el botón, debajo de la descripción.",
+        "descriptionLabel": "Descripción",
+        "descriptionText": "Esto será mostrado dentro del modal, cuando se haga click en el botón.",
+        "save": "Guardar",
+        "cancel": "Cancelar",
+        "activeLink": "Activo",
+        "inactiveLink": "Link desactivado",
+        "uploadThumbnail": "Subir una miniatura (opcional)"
       },
       "banners": {
         "card": {
           "title": "Tarjeta NFC",
           "description": "Estado actual:",
           "awaitingPurchase": "Hemos notado que aún no has comprado una tarjeta,",
-          "awaitingPurchasePart2": "por favor adquiere una para desbloquear todas las funciones!",
+          "awaitingPurchasePart2": "por favor adquiere una aquí para desbloquear todas las funciones!",
           "purchased": "Adquirida"
         }
       }
@@ -467,11 +527,13 @@
         "description": "Si estás aquí por primera vez, puedes añadir algunos enlaces a tu perfil."
       },
       "shareLink": {
-        "title": "Compartir este link",
+        "title": "Compartir link",
         "description": "Puedes obtener una página similar a esta a través de nuestra aplicación!",
         "copyLink": "Copiar link",
         "shareViaEmail": "Compartir por email",
         "shareViaTwitter": "Compartir en Twitter",
+        "shareViaLinkedIn": "Compartir en LinkedIn",
+        "postPlaceholder": "Observen mi portal en ConCard!",
         "getYours": "Consigue tu página!",
         "getYoursDescription": "¡Puedes tenerla lista en menos de 10 minutos!"
       }
@@ -482,10 +544,14 @@
     "requestAction": "Para tener esta funcionalidad antes haz click aquí",
     "requestFeature": "Solicitar una funcionalidad",
     "requestFeatureDescription": "Siempre buscamos maneras de mejorar ConCard, si tienes una solicitud de funcionalidad, por favor háznoslo saber!",
+    "askHelp": "Pedir ayuda",
     "errors": {
       "somethingWentWrong": "Oops, algo salió mal",
       "recognitionFailed": "No se pudo reconocer tu identidad",
       "usernameNotFound": "No se encontró tu usuario, por favor recarga la página o intenta de nuevo 😢"
+    },
+    "redirection": {
+      "admin": "Ir al dashboard"
     }
   }
 }

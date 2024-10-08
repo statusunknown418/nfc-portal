@@ -23,6 +23,7 @@ import {
 import { useMediaQuery } from "~/lib/hooks/use-media-query";
 import { type RouterOutputs } from "~/trpc/react";
 import { AddEditLinkForm } from "../new-link/AddEditLinkForm";
+import { useTranslations } from "next-intl";
 
 export function EditLinkDrawer({
   data,
@@ -35,6 +36,7 @@ export function EditLinkDrawer({
 }) {
   const [open, setOpen] = useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
+  const t = useTranslations("admin.dashboard");
 
   if (isDesktop) {
     return (
@@ -43,8 +45,8 @@ export function EditLinkDrawer({
 
         <DialogContent className="sm:max-w-xl">
           <DialogHeader>
-            <DialogTitle>Edit link</DialogTitle>
-            <DialogDescription>Remember to click save when you&apos;re done.</DialogDescription>
+            <DialogTitle>{t("editLinkModal.title")}</DialogTitle>
+            <DialogDescription>{t("editLinkModal.description")}</DialogDescription>
           </DialogHeader>
 
           <AddEditLinkForm
@@ -65,8 +67,8 @@ export function EditLinkDrawer({
       <DrawerTrigger asChild>{children}</DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="text-left">
-          <DrawerTitle>Edit link</DrawerTitle>
-          <DrawerDescription>Remember to click save when you&apos;re done.</DrawerDescription>
+          <DrawerTitle>{t("editLinkModal.title")}</DrawerTitle>
+          <DrawerDescription>{t("editLinkModal.description")}</DrawerDescription>
         </DrawerHeader>
 
         <AddEditLinkForm
@@ -81,7 +83,7 @@ export function EditLinkDrawer({
 
         <DrawerFooter className="pt-2">
           <DrawerClose asChild>
-            <Button variant="outline">Cancel</Button>
+            <Button variant="outline">{t("editLinkModal.cancel")}</Button>
           </DrawerClose>
         </DrawerFooter>
       </DrawerContent>

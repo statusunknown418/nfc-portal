@@ -208,7 +208,7 @@
   },
   "admin": {
     "onboarding": {
-      "topText": "Let's get you set up, ",
+      "topText": "Let's get you set up",
       "previousButton": "Previous Step",
       "nextButton": "Next Step",
       "return": "Back to dashboard",
@@ -364,6 +364,12 @@
             "custom": "Professional Edition (custom)",
             "metallic": "Metallic Edition"
           },
+          "banners": {
+            "headsUp": {
+              "title": "Heads up!",
+              "description": "By choosing this option you are able fully customize the appearance of your card, however it will be delivered AS IS, so make sure you add all the details you want to be visible on the card."
+            }
+          },
           "templates": {
             "title": "Templates",
             "details": "See both sides",
@@ -371,6 +377,21 @@
             "front": "Front card preview",
             "back": "Back card preview",
             "close": "Close"
+          },
+          "frontDesign": "Front card design",
+          "backDesign": "Back card design",
+          "removeDesign": "Remove design",
+          "removeLogo": "Remove logo",
+          "details": {
+            "title": "What should it show?",
+            "description": "The contact info you added in the first step will be used to personalize the card as you see fit.",
+            "name": "Your name",
+            "jobTitle": "Job title / Position",
+            "company": "Company",
+            "companyWebsite": "Company website",
+            "companyLogo": "Company logo",
+            "front": "Front",
+            "back": "Back"
           }
         },
         "purchaseCard": {
@@ -380,12 +401,24 @@
           "purchase": "Purchase",
           "redirection": "You will be redirected to our payment provider to securely complete the payment",
           "alreadyBought": "Already purchased, want another?",
-          "buyNow": "Buy now!"
+          "buyNow": "Buy now!",
+          "shippingStatus": "{status, select, awaiting_purchase {Not purchased yet} in_progress {Shipping in progress} shipped {Shipped} failed {Failed} other {Unknown}}"
         },
         "finale": {
           "title": "You're all done!",
           "descriptionPart1": "Your purchase means a lot to us. Your support is heavily appreciated and will help us build a better product for our customers!.",
-          "descriptionPart2": "You will receive a confirmation email shortly. If nothing arrives try checking your spam folder or contact us directly, we're happy to help."
+          "descriptionPart2": "You will receive a confirmation email shortly. If nothing arrives try checking your spam folder or contact us directly, we're happy to help.",
+          "banners": {
+            "sharePortal": {
+              "title": "Your page is ready!",
+              "description": "Share it with anyone but remember that based on the previous steps your contact information may be visible, so just be cautious!",
+              "action": "Share your page"
+            },
+            "warning": {
+              "title": "Warning! Portal inactive",
+              "description": "You need to purchase a card to activate and share your portal, you can do it by going one step back and purchasing a card!"
+            }
+          }
         }
       },
       "banners": {
@@ -446,7 +479,34 @@
       },
       "actions": {
         "addLink": "Add link",
-        "importLinks": "Import links"
+        "importLinks": "Import links",
+        "editLink": "Edit",
+        "label": "Actions",
+        "hide": "Hide",
+        "show": "Show",
+        "delete": "Delete",
+        "archive": "Archive"
+      },
+      "editLinkModal": {
+        "title": "Edit this link",
+        "description": "Remember to click save when you're done.",
+        "displayText": "Title",
+        "url": "Link",
+        "urlDescription": "Any valid URL, if set to deployable, this will be where the button links inside the modal",
+        "type": "Type",
+        "basic": "Basic",
+        "basicDescription": "Simple button that redirects to a URL",
+        "deployable": "Deployable",
+        "deployableDescription": "A modal that can contain more information",
+        "buttonLabel": "Button Label",
+        "buttonLabelDescription": "This will be shown on the button, below the description.",
+        "descriptionLabel": "Description",
+        "descriptionText": "This will be shown inside the modal, when the link is clicked.",
+        "save": "Save",
+        "cancel": "Cancel",
+        "activeLink": "Active",
+        "inactiveLink": "Inactive link",
+        "uploadThumbnail": "Upload a thumbnail (optional)"
       }
     },
     "visual": {
@@ -467,11 +527,13 @@
         "description": "If this is your first time here, you can add some links to your profile."
       },
       "shareLink": {
-        "title": "Share this link",
+        "title": "Share link",
         "description": "You can get a similar page like this through our app!",
         "copyLink": "Copy link",
         "shareViaEmail": "Share via email",
         "shareViaTwitter": "Share via Twitter",
+        "shareViaLinkedIn": "Share via LinkedIn",
+        "postPlaceholder": "Check out my ConCard page!",
         "getYours": "Get yours",
         "getYoursDescription": "You can have it up and running in less than 10 minutes!"
       }
@@ -479,6 +541,7 @@
   },
   "common": {
     "comingSoon": "Coming soon!",
+    "askHelp": "Ask for help",
     "requestAction": "To request this feature earlier, just click here",
     "requestFeature": "Request a feature",
     "requestFeatureDescription": "We're always looking for ways to improve ConCard, if you have a feature request, please let us know!",
@@ -486,6 +549,9 @@
       "somethingWentWrong": "Something went wrong",
       "recognitionFailed": "Looks like we were unable to recognize your identity",
       "usernameNotFound": "We couldn't find your username, please refresh the page or try again 😢"
+    },
+    "redirection": {
+      "admin": "Go to admin panel"
     }
   }
 }
