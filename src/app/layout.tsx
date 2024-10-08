@@ -44,15 +44,17 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     <ClerkProvider>
       <html lang={locale} className={`${GeistSans.variable} md:text-sm`}>
         <NextIntlClientProvider messages={messages}>
-          <body className="h-screen">
-            <NextTopLoader showSpinner={false} color="#4338ca" height={5} />
+          <TRPCReactProvider>
+            <body className="h-screen">
+              <NextTopLoader showSpinner={false} color="#4338ca" height={5} />
 
-            <TRPCReactProvider>{children}</TRPCReactProvider>
+              {children}
 
-            <Toaster />
+              <Toaster />
 
-            <SpeedInsights />
-          </body>
+              <SpeedInsights />
+            </body>
+          </TRPCReactProvider>
         </NextIntlClientProvider>
       </html>
     </ClerkProvider>
