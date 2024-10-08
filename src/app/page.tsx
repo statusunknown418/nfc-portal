@@ -42,8 +42,6 @@ import { Skeleton } from "~/components/ui/skeleton";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "~/components/ui/tooltip";
 import { cn } from "~/lib/utils";
 
-export const dynamic = "force-static";
-
 export default function Home() {
   const t = useTranslations("landing");
   const messages = useMessages() as IntlMessages;
