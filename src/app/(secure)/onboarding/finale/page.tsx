@@ -5,7 +5,7 @@ import { api, HydrateClient } from "~/trpc/server";
 
 export default async function FinalePage() {
   const t = await getTranslations("admin.onboarding.steps.finale");
-  api.viewer.shouldShowLive.prefetch();
+  void api.viewer.shouldShowLive.prefetch();
 
   return (
     <HydrateClient>
