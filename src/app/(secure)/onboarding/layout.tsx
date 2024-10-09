@@ -30,7 +30,7 @@ export default function OnboardingLayout({ children }: { children: React.ReactNo
         <UserButton />
       </nav>
 
-      <div className="relative flex w-full max-w-[1500px] flex-col gap-8 overflow-auto py-4 md:py-6">
+      <div className="relative mx-auto flex w-full max-w-[1500px] flex-col items-center gap-8 overflow-auto py-4 md:py-6">
         <Stepper />
 
         <section className="mx-auto w-full max-w-6xl px-2 md:px-0 md:py-6">{children}</section>
