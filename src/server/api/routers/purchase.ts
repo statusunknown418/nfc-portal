@@ -61,7 +61,9 @@ export const purchasesRouter = createTRPCRouter({
         });
       }
 
-      return paymentData;
+      return env.NODE_ENV === "development"
+        ? paymentData.sandbox_init_point
+        : paymentData.init_point;
     }),
   getStatus: protectedProcedure.query(async ({ ctx }) => {
     return await ctx.db.query.users.findFirst({

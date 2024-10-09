@@ -2,7 +2,6 @@
 
 import { ShoppingBagIcon, SparklesIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { getTranslations } from "next-intl/server";
 import { useState } from "react";
 import { toast } from "sonner";
 import { CardPreview } from "~/components/admin/contact/CardPreview";
@@ -29,14 +28,14 @@ export default function PurchasePage() {
         description: err.message,
       });
     },
-    onSuccess: (data) => {
-      if (!data.sandbox_init_point) {
+    onSuccess: (paymentRedirectLink) => {
+      if (!paymentRedirectLink) {
         toast.error(messages("errors.somethingWentWrong"), {
           description: "Unable to redirect to payment provider",
         });
       }
 
-      window.open(data.sandbox_init_point, "_self");
+      window.open(paymentRedirectLink, "_self");
     },
   });
 
