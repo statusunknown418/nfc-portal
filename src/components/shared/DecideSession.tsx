@@ -21,7 +21,7 @@ export const DecideSession = () => {
   }
 
   return (
-    <SignUpButton>
+    <SignUpButton signInFallbackRedirectUrl={"/admin"}>
       <Button className="rounded-full">
         {t("navbar.joinNow")} <ArrowRightIcon />
       </Button>

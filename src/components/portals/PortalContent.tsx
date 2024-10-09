@@ -9,7 +9,6 @@ import { api, type RouterOutputs } from "~/trpc/react";
 import { Spinner } from "../shared/Spinner";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { Button } from "../ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import { ContactInfo } from "./ContactInfo";
 import { GetYours } from "./GetYours";
 import { LinkViewer } from "./LinkViewer";
@@ -91,10 +90,10 @@ export const PortalContent = ({
         color: portal.data.theme.colors.foreground,
       }}
     >
-      <article className="flex h-full w-full max-w-[580px] flex-col items-center gap-4 sm:shadow-lg xl:rounded-3xl xl:border xl:border-border/50">
+      <article className="flex h-full w-full max-w-[400px] flex-col items-center gap-4 sm:shadow-lg lg:max-w-[580px] xl:rounded-3xl xl:border xl:border-border/50">
         <section
           className={cn(
-            "relative z-0 max-h-[400px] min-h-[400px] w-full max-w-[580px] overflow-hidden bg-cover bg-center bg-no-repeat sm:min-h-[320px] md:min-h-[350px]",
+            "relative z-0 aspect-square min-h-[300px] overflow-hidden bg-cover bg-center bg-no-repeat md:min-h-[400px] lg:min-h-[580px] lg:rounded-t-xl",
             {
               "rounded-full": portal.data.avatarShape === "circle",
               "rounded-none": portal.data.avatarShape === "square",
@@ -115,7 +114,7 @@ export const PortalContent = ({
 
         <header
           className={cn(
-            "z-10 -mt-24 flex w-full flex-col px-4 text-center",
+            "z-10 -mt-20 flex w-full flex-col px-4 text-center lg:-mt-24",
             portal.data.profileHeader && "-mt-28",
           )}
         >
@@ -130,69 +129,42 @@ export const PortalContent = ({
           )}
         </header>
 
-        <Tabs
-          // Note: To avoid adding too many checks I'll just disable eslint here. Don't worry it's actually fine
-          // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-          defaultValue={portal.data?.hasContactInfoLocked || !portal.unlocked ? "links" : "contact"}
-          className="z-10 w-full px-4"
-        >
-          <TabsList className="mx-auto mb-6 mt-2 flex h-11 max-w-max rounded-full border px-0.5 mix-blend-difference">
-            {!portal.data.hasContactInfoLocked && (
-              <TabsTrigger
-                value="contact"
-                className={cn("h-10 min-w-24 flex-grow rounded-full mix-blend-difference")}
-              >
-                {t("portal.tabs.contact")}
-              </TabsTrigger>
-            )}
-
-            <TabsTrigger
-              value="links"
-              className={cn("h-10 min-w-24 flex-grow rounded-full mix-blend-difference")}
-            >
-              {t("portal.tabs.links")}
-            </TabsTrigger>
-          </TabsList>
-
+        <section className="grid w-full grid-cols-1 gap-4 px-4">
           {!portal.data.hasContactInfoLocked && (
-            <TabsContent value="contact">
-              <ContactInfo
-                unlocked={portal.unlocked}
-                data={portal.data?.contactJSON}
-                theme={portal.data?.theme}
-                profilePicture={portal.data.image}
-              />
-            </TabsContent>
+            <ContactInfo
+              unlocked={portal.unlocked}
+              data={portal.data?.contactJSON}
+              theme={portal.data?.theme}
+              profilePicture={portal.data.image}
+            />
           )}
 
-          <TabsContent value="links">
-            <ul className="flex w-full flex-col gap-2">
-              {!portal.data.links.length && (
-                <Alert
-                  className={cn(
-                    "border-dashed",
-                    portal.data.theme.buttons.variant === "pill" && "rounded-[34px]",
-                    portal.data.theme.buttons.variant === "rounded" && "rounded-lg",
-                    portal.data.theme.buttons.variant === "square" && "rounded-none",
-                    portal.data.theme.buttons.variant === "small-radius" && "rounded-sm",
-                  )}
-                  style={{ borderColor: portal.data.theme.colors.border }}
-                >
-                  <AlertTitle className="text-center text-base font-semibold">
-                    {t("portal.empty.title")}
-                  </AlertTitle>
-                  <AlertDescription className="text-center">
-                    {t("portal.empty.description")}
-                  </AlertDescription>
-                </Alert>
-              )}
+          <ul className="flex w-full flex-col gap-2">
+            {!portal.data.links.length && (
+              <Alert
+                className={cn(
+                  "border-dashed",
+                  portal.data.theme.buttons.variant === "pill" && "rounded-[34px]",
+                  portal.data.theme.buttons.variant === "rounded" && "rounded-lg",
+                  portal.data.theme.buttons.variant === "square" && "rounded-none",
+                  portal.data.theme.buttons.variant === "small-radius" && "rounded-sm",
+                )}
+                style={{ borderColor: portal.data.theme.colors.border }}
+              >
+                <AlertTitle className="text-center text-base font-semibold">
+                  {t("portal.empty.title")}
+                </AlertTitle>
+                <AlertDescription className="text-center">
+                  {t("portal.empty.description")}
+                </AlertDescription>
+              </Alert>
+            )}
 
-              {portal.data.links.map((link) => (
-                <LinkViewer link={link} key={link.id} buttonStyles={portal.data.theme.buttons} />
-              ))}
-            </ul>
-          </TabsContent>
-        </Tabs>
+            {portal.data.links.map((link) => (
+              <LinkViewer link={link} key={link.id} buttonStyles={portal.data.theme.buttons} />
+            ))}
+          </ul>
+        </section>
 
         <GetYours />
       </article>

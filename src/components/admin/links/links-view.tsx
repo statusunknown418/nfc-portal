@@ -1,7 +1,6 @@
 import { UploadIcon } from "@radix-ui/react-icons";
 import { useTranslations } from "next-intl";
 import { Suspense } from "react";
-import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -10,7 +9,6 @@ import {
   BreadcrumbSeparator,
 } from "~/components/ui/breadcrumb";
 import { Button } from "~/components/ui/button";
-import { Switch } from "~/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "~/components/ui/tooltip";
 import {
@@ -23,6 +21,7 @@ import {
 } from "../enabled-banner/page-enabled-wrapper";
 import { LinksWrapperLoader, LinksWrapperRSC } from "./links-list/links-wrapper";
 import { NewLinkDrawer } from "./new-link";
+import { AddSocialLinks } from "./social-links";
 
 export const LinksViewRSC = ({ jwt }: { jwt: CustomJwtSessionClaims }) => {
   const t = useTranslations("admin.dashboard");
@@ -60,33 +59,32 @@ export const LinksViewRSC = ({ jwt }: { jwt: CustomJwtSessionClaims }) => {
         </TabsList>
 
         <TabsContent value="links">
-          <article className="absolute right-0 top-1 flex w-1/2 flex-col items-center gap-2 sm:flex-row sm:justify-start sm:gap-0">
-            <NewLinkDrawer username={jwt.username} />
+          <article className="flex flex-col gap-2 sm:flex-row sm:items-center">
+            <AddSocialLinks username={jwt.username} />
 
-            <TooltipProvider>
-              <Tooltip delayDuration={0}>
-                <TooltipTrigger asChild>
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="w-full opacity-50 sm:rounded-l-none"
-                  >
-                    <UploadIcon />
-                    {t("actions.importLinks")}
-                  </Button>
-                </TooltipTrigger>
+            <div className="flex items-center gap-2">
+              <NewLinkDrawer username={jwt.username} />
 
-                <TooltipContent className="text-sm">
-                  {common("comingSoon")}{" "}
-                  <Button variant="link" className="text-sm">
-                    {common("requestAction")}
-                  </Button>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+              <TooltipProvider>
+                <Tooltip delayDuration={0}>
+                  <TooltipTrigger asChild>
+                    <Button size="iconXl" variant="outline" className="opacity-50">
+                      <UploadIcon />
+                    </Button>
+                  </TooltipTrigger>
+
+                  <TooltipContent className="text-sm">
+                    {common("comingSoon")}{" "}
+                    <Button variant="link" className="text-sm">
+                      {common("requestAction")}
+                    </Button>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            </div>
           </article>
 
-          <Alert variant="success" className="flex gap-4 p-4">
+          {/* <Alert variant="success" className="flex gap-4 p-4">
             <Switch />
 
             <div>
@@ -99,7 +97,7 @@ export const LinksViewRSC = ({ jwt }: { jwt: CustomJwtSessionClaims }) => {
                 here.
               </AlertDescription>
             </div>
-          </Alert>
+          </Alert> */}
 
           <article className="mt-4 flex h-full w-full flex-col gap-4">
             <Suspense fallback={<LinksWrapperLoader />}>

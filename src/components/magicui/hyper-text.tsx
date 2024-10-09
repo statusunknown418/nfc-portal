@@ -69,7 +69,7 @@ export default function HyperText({
       className="flex scale-100 cursor-default overflow-hidden py-2"
       onMouseEnter={triggerAnimation}
     >
-      <AnimatePresence mode="wait">
+      <AnimatePresence>
         {displayText.map((letter, i) => (
           <motion.h1
             key={i}

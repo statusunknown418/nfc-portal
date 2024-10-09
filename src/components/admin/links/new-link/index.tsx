@@ -1,6 +1,7 @@
 "use client";
 
 import { PlusIcon } from "@radix-ui/react-icons";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Button } from "~/components/ui/button";
 import {
@@ -23,7 +24,6 @@ import {
 } from "~/components/ui/drawer";
 import { useMediaQuery } from "~/lib/hooks/use-media-query";
 import { AddEditLinkForm } from "./AddEditLinkForm";
-import { useTranslations } from "next-intl";
 
 export function NewLinkDrawer({ username }: { username: string }) {
   const [open, setOpen] = useState(false);
@@ -34,12 +34,8 @@ export function NewLinkDrawer({ username }: { username: string }) {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button
-            size="lg"
-            className="w-full min-w-40 shadow-xl shadow-indigo-100 transition-all duration-300 hover:shadow-indigo-400 sm:rounded-r-none"
-          >
-            <PlusIcon />
-            {t("actions.addLink")}
+          <Button size="iconXl">
+            <PlusIcon className="size-5" />
           </Button>
         </DialogTrigger>
 
@@ -47,7 +43,7 @@ export function NewLinkDrawer({ username }: { username: string }) {
           <DialogHeader>
             <DialogTitle className="text-xl">New link</DialogTitle>
             <DialogDescription>
-              Choose from the list of available layouts and customize the link to your liking.
+              Choose from the list of the predefined links or create a new one.
             </DialogDescription>
           </DialogHeader>
 
@@ -60,12 +56,8 @@ export function NewLinkDrawer({ username }: { username: string }) {
   return (
     <Drawer open={open} onOpenChange={setOpen} shouldScaleBackground={false}>
       <DrawerTrigger asChild>
-        <Button
-          size="lg"
-          className="w-full min-w-40 shadow-xl shadow-indigo-100 transition-all duration-300 hover:shadow-indigo-400 sm:rounded-r-none"
-        >
-          <PlusIcon />
-          {t("actions.addLink")}
+        <Button size="iconXl">
+          <PlusIcon className="size-5" />
         </Button>
       </DrawerTrigger>
 

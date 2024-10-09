@@ -1,15 +1,14 @@
 import "~/styles/globals.css";
 
+import { ClerkProvider, GoogleOneTap } from "@clerk/nextjs";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GeistSans } from "geist/font/sans";
-import { type Metadata } from "next";
-import { ClerkProvider } from "@clerk/nextjs";
-import NextTopLoader from "nextjs-toploader";
-import { TRPCReactProvider } from "~/trpc/react";
-import { Toaster } from "~/components/ui/sonner";
-import { type Viewport } from "next";
-import { getLocale, getMessages } from "next-intl/server";
+import { type Metadata, type Viewport } from "next";
 import { NextIntlClientProvider } from "next-intl";
+import { getLocale, getMessages } from "next-intl/server";
+import NextTopLoader from "nextjs-toploader";
+import { Toaster } from "~/components/ui/sonner";
+import { TRPCReactProvider } from "~/trpc/react";
 
 export const metadata: Metadata = {
   title: "ConCard",
@@ -46,6 +45,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         <NextIntlClientProvider messages={messages}>
           <TRPCReactProvider>
             <body className="h-screen">
+              <GoogleOneTap />
               <NextTopLoader showSpinner={false} color="#4338ca" height={5} />
 
               {children}

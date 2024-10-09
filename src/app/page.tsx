@@ -58,7 +58,7 @@ export default function Home() {
   return (
     <main className="relative flex flex-col items-stretch gap-10">
       <div className="sticky inset-0 z-30 flex h-16 w-full items-end justify-center px-2">
-        <header className="flex h-12 w-full max-w-7xl scroll-mt-2 items-center justify-between rounded-full border border-border/50 bg-white px-2 py-2 backdrop-blur-lg backdrop-filter">
+        <header className="flex h-12 w-full max-w-7xl items-center justify-between rounded-full border border-border/50 bg-white px-2 py-2 backdrop-blur-lg backdrop-filter">
           <Link href={"/"} className="flex items-center gap-2 font-medium">
             <Image
               src="/logo-light.png"

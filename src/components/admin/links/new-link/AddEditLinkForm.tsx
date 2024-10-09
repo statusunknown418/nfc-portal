@@ -79,23 +79,6 @@ export function AddEditLinkForm({
 
   const utils = api.useUtils();
 
-  const toggleLinkVisibility = api.links.toggleActive.useMutation({
-    onMutate: async (vars) => {
-      void utils.links.all.cancel();
-
-      form.reset({
-        ...vars,
-      });
-    },
-    onSuccess: async () => {
-      await Promise.all([
-        utils.links.all.invalidate(),
-        utils.viewer.previewPortal.invalidate(),
-        utils.portals.get.invalidate({ username: username }),
-      ]);
-    },
-  });
-
   const editLink = api.links.edit.useMutation({
     onMutate: async (vars) => {
       void utils.links.all.cancel();
@@ -143,6 +126,7 @@ export function AddEditLinkForm({
             userId: vars.userId ?? "",
             description: vars.description ?? null,
             buttonLabel: vars.buttonLabel ?? null,
+            socialType: null,
           },
         ]),
       );
