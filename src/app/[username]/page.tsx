@@ -28,6 +28,9 @@ export async function generateMetadata(
         ...previousImages,
       ],
     },
+    formatDetection: {
+      telephone: true,
+    },
   };
 }
 

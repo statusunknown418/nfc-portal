@@ -99,7 +99,7 @@ export const PageEnabled = ({
       </h1>
       <p className="mt-1 text-sm text-muted-foreground">{t("dashboard.description")}</p>
 
-      <Alert className="relative mt-4">
+      <Alert className="relative mt-4" variant={data.hasPurchasedCard ? "default" : "destructive"}>
         <IdCardIcon className="h-5 w-5" />
 
         <AlertTitle className="text-foreground">{t("dashboard.banners.card.title")}</AlertTitle>

@@ -1,10 +1,13 @@
 "use client";
 
+import { CellTower, Envelope, Mailbox, PhoneCall } from "@phosphor-icons/react";
 import { IdCardIcon } from "@radix-ui/react-icons";
 import vCardBuilder from "vcard-creator";
 import { cn } from "~/lib/utils";
 import { type ContactVCardType, type ThemeType } from "~/server/db/schema";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
+import { Button } from "../ui/button";
+import Link from "next/link";
 
 export const ContactInfo = ({
   unlocked,
@@ -91,7 +94,7 @@ export const ContactInfo = ({
   }
 
   return (
-    <article className="flex flex-col gap-2">
+    <article className="flex flex-col gap-4">
       <button
         onClick={handleImport}
         className={cn(
@@ -112,6 +115,75 @@ export const ContactInfo = ({
         <IdCardIcon className="h-5 w-5" />
         Import contact
       </button>
+
+      <section className="flex justify-between gap-1">
+        <article className="flex gap-1">
+          <Link
+            href={`https://wa.me/${data.phoneNumbers?.find((p) => p.type === "PREF")?.number}`}
+            target="_blank"
+            rel="external"
+          >
+            <Button size="iconXl" className="rounded-full" asChild>
+              <div>
+                <PhoneCall size={28} />
+                <span className="sr-only">Personal phone</span>
+              </div>
+            </Button>
+
+            <p className="font-xs text-sm">Personal</p>
+          </Link>
+
+          <Link
+            rel="external"
+            href={`https://wa.me/${data.phoneNumbers?.find((p) => p.type === "WORK")?.number}`}
+            className="flex flex-col items-center gap-1"
+            target="_blank"
+          >
+            <Button size="iconXl" className="rounded-full" asChild>
+              <div>
+                <CellTower size={28} />
+                <span className="sr-only">Work phone</span>
+              </div>
+            </Button>
+
+            <p className="font-xs text-sm">Work</p>
+          </Link>
+        </article>
+
+        <article className="flex gap-1">
+          <Link
+            rel="external"
+            href={`mailto:${data.email?.find((e) => e.type === "WORK")?.link}`}
+            className="flex flex-col items-center gap-1"
+            target="_blank"
+          >
+            <Button size="iconXl" className="rounded-full" asChild>
+              <div>
+                <Envelope size={28} />
+                <span className="sr-only">Work email</span>
+              </div>
+            </Button>
+
+            <p className="font-xs text-sm">Personal</p>
+          </Link>
+
+          <Link
+            rel="external"
+            href={`mailto:${data.email?.find((e) => e.type === "PREF")?.link}`}
+            className="flex flex-col items-center gap-1"
+            target="_blank"
+          >
+            <Button size="iconXl" className="rounded-full" asChild>
+              <div>
+                <Mailbox size={28} />
+                <span className="sr-only">Personal email</span>
+              </div>
+            </Button>
+
+            <p className="font-xs text-sm">Work</p>
+          </Link>
+        </article>
+      </section>
     </article>
   );
 };
