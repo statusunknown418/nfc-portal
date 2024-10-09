@@ -177,7 +177,7 @@ export const users = sqliteTable("user", {
   /** ----------------------------------------------------- */
   username: text("user_name", { length: 255 }).unique(),
   name: text("name", { length: 255 }),
-  email: text("email", { length: 255 }).notNull().unique(),
+  email: text("email", { length: 255 }).notNull(),
   emailVerified: int("email_verified", {
     mode: "timestamp",
   }).default(sql`(unixepoch())`),

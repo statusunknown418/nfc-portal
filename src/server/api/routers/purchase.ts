@@ -34,8 +34,8 @@ export const purchasesRouter = createTRPCRouter({
           back_urls: {
             success:
               env.NODE_ENV === "development"
-                ? "http://localhost:3000/onboarding?step=finale&payment=success"
-                : "https://concard.app/onboarding?step=finale&payment=success",
+                ? "http://localhost:3000/onboarding/finale&payment=success"
+                : "https://concard.app/onboarding/finale&payment=success",
           },
           items: [
             {
