@@ -25,6 +25,7 @@
     "@dnd-kit/utilities": "^3.2.2",
     "@formkit/auto-animate": "^0.8.2",
     "@hookform/resolvers": "^3.9.0",
+    "@icons-pack/react-simple-icons": "^10.0.0",
     "@libsql/client": "^0.6.2",
     "@maskito/core": "^3.0.3",
     "@maskito/react": "^3.0.3",

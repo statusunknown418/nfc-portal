@@ -49,6 +49,20 @@ export type ThemeType = {
   };
 };
 
+export const socialLinksTypes = [
+  "twitter",
+  "facebook",
+  "instagram",
+  "linkedin",
+  "github",
+  "tiktok",
+  "youtube",
+  "telegram",
+  "spotify",
+  "patreon",
+] as const;
+export type SocialLinkType = (typeof socialLinksTypes)[number];
+
 export const links = sqliteTable("links", {
   id: int("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
   displayText: text("display_text"),
@@ -58,6 +72,7 @@ export const links = sqliteTable("links", {
   thumbnail: text("thumbnail"),
   isActive: int("active", { mode: "boolean" }).default(true),
   type: text("type", { enum: linkTypes }).notNull().default("basic"),
+  socialType: text("social_type", { enum: socialLinksTypes }),
   layout: text("layout", { enum: linkLayoutTypes }).notNull().default("basic"),
   position: int("position", { mode: "number" }).notNull().default(0),
   createdAt: int("created_at", { mode: "timestamp" })
