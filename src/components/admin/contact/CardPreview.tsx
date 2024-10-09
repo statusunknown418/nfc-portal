@@ -19,7 +19,7 @@ export const CardPreview = ({
   return (
     <article
       className={cn(
-        "relative mt-4 flex min-h-full w-full flex-col items-center justify-center rounded-lg lg:mt-0",
+        "relative mt-4 flex h-full w-full flex-col items-center justify-center rounded-lg lg:mt-0",
         className,
       )}
     >

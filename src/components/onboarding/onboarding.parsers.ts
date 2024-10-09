@@ -1,10 +1,17 @@
 import { createSearchParamsCache, parseAsStringLiteral } from "nuqs/server";
 
-export const keys = ["start", "contact", "portal", "nfc-card", "purchase", "finale"] as const;
-export type Keys = (typeof keys)[number];
+export const onboardingKeys = [
+  "start",
+  "contact",
+  "portal",
+  "nfc-card",
+  "purchase",
+  "finale",
+] as const;
+export type OnboardingKeys = (typeof onboardingKeys)[number];
 
 export const onboardingParsers = {
-  step: parseAsStringLiteral<Keys>(keys).withDefault("start"),
+  step: parseAsStringLiteral<OnboardingKeys>(onboardingKeys).withDefault("start"),
 };
 
 export const onboardingParsesCache = createSearchParamsCache(onboardingParsers);

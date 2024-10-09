@@ -40,7 +40,21 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   const messages = await getMessages();
 
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      appearance={{
+        userProfile: {
+          elements: {
+            profileSectionPrimaryButton__username: "hidden",
+          },
+        },
+        elements: {
+          userButtonTrigger: "aspect-square",
+          userButtonAvatarBox: "w-10 h-10",
+          profileSectionPrimaryButton__username: "hidden",
+          userPreviewSecondaryIdentifier: "font-semibold tracking-wide",
+        },
+      }}
+    >
       <html lang={locale} className={`${GeistSans.variable} md:text-sm`}>
         <NextIntlClientProvider messages={messages}>
           <TRPCReactProvider>

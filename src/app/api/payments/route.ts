@@ -84,7 +84,13 @@ export const POST = async (req: NextRequest) => {
       }),
     });
   } catch (err) {
-    console.error(err);
+    await resend.emails.send({
+      to: "help@stackkstudios.com",
+      from: "NFC Portal <no-reply@concard.app>",
+      subject: "NFC Portal - Error",
+      text: `Error on payments for ${metadata.user_email} -> ${metadata.app_user_id}`,
+      html: `Error on payments for ${metadata.user_email} -> ${metadata.app_user_id}`,
+    });
   }
 
   await db

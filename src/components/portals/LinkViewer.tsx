@@ -6,11 +6,12 @@ import {
   LightningBoltIcon,
   TwitterLogoIcon,
 } from "@radix-ui/react-icons";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import { type ComponentProps, type MouseEventHandler, useState } from "react";
 import { toast } from "sonner";
-import { cn, newShade, preventBackdropClick } from "~/lib/utils";
+import { cn, preventBackdropClick } from "~/lib/utils";
 import { type ThemeType } from "~/server/db/schema";
 import { type RouterOutputs } from "~/trpc/react";
 import { Button } from "../ui/button";
@@ -25,7 +26,6 @@ import {
   DrawerTrigger,
 } from "../ui/drawer";
 import { Divider } from "../ui/separator";
-import { useTranslations } from "next-intl";
 
 export const LinkViewer = ({
   link,
@@ -35,7 +35,6 @@ export const LinkViewer = ({
   buttonStyles: ThemeType["buttons"];
 }) => {
   const t = useTranslations("admin");
-  const [hover, setHover] = useState(false);
   const [copied, setCopied] = useState(false);
 
   const commonProps: Pick<ComponentProps<"div">, "className" | "style"> = {
@@ -43,7 +42,7 @@ export const LinkViewer = ({
       borderWidth: "1px",
       borderColor: buttonStyles.borderColor ?? "transparent",
       borderStyle: buttonStyles.borderStyle,
-      background: hover ? newShade(buttonStyles.background, 20) : buttonStyles.background,
+      backgroundColor: buttonStyles.background,
     },
     className: cn(
       "flex h-16 w-full transition-all hover:scale-105 items-center cursor-pointer justify-between gap-2 text-sm active:ring active:ring-ring active:ring-offset-1 sm:text-base md:h-20 md:px-4 lg:px-6",
@@ -70,12 +69,7 @@ export const LinkViewer = ({
   const Component = ({ children }: { children: React.ReactNode }) => {
     if (link.url && link.type !== "deployable") {
       return (
-        <Link
-          href={{ pathname: link.url }}
-          onMouseEnter={() => setHover(true)}
-          onMouseLeave={() => setHover(false)}
-          {...commonProps}
-        >
+        <Link href={{ pathname: link.url }} {...commonProps}>
           {children}
         </Link>
       );

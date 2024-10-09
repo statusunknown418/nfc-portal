@@ -1,19 +1,16 @@
+import { RedirectToSignIn } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
+import { Divider } from "~/components/ui/separator";
+import { Skeleton } from "~/components/ui/skeleton";
 import { api } from "~/trpc/server";
 import { VisualCustomizationForm } from "./VisualCustomizationForm";
-import { Skeleton } from "~/components/ui/skeleton";
-import { Divider } from "~/components/ui/separator";
-import { redirect } from "next/navigation";
-import { auth } from "@clerk/nextjs/server";
 
 export const VisualWrapper = async () => {
   const data = await api.visuals.get();
   const { sessionClaims, userId } = auth();
 
-  /**
-   * TODO: Probably change this to something better
-   */
   if (!sessionClaims || !userId) {
-    return redirect("/");
+    return <RedirectToSignIn />;
   }
 
   return <VisualCustomizationForm defaultValues={data} username={sessionClaims.username} />;

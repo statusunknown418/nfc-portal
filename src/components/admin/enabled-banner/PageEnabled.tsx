@@ -57,7 +57,7 @@ export const PageEnabled = ({
 
         <Link
           className="mt-1 flex items-center gap-1 text-muted-foreground underline hover:text-indigo-500 hover:text-primary"
-          href={`/onboarding?step=${data.onboardingStep}`}
+          href={`/onboarding/${data.onboardingStep ?? "start"}`}
         >
           {t("onboarding.banners.pending.pickUp")} <ExternalLinkIcon />
         </Link>
@@ -141,7 +141,7 @@ export const PageEnabled = ({
 
           <DialogFooter>
             <Button className="w-full" asChild>
-              <Link href={`/onboarding?step=${data.onboardingStep}`}>
+              <Link href={`/onboarding/${data.onboardingStep ?? "start"}`}>
                 {t("onboarding.banners.continueModal.takeMeThere")}
               </Link>
             </Button>

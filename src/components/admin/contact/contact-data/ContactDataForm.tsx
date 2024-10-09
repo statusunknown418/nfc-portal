@@ -38,9 +38,11 @@ import { api, type RouterOutputs } from "~/trpc/react";
 export const ContactDataForm = ({
   initialData,
   user,
+  className,
 }: {
   initialData: RouterOutputs["vCard"]["get"];
   user: CustomJwtSessionClaims;
+  className?: string;
 }) => {
   const utils = api.useUtils();
   const t = useTranslations("admin.onboarding.steps.contact");
@@ -165,7 +167,7 @@ export const ContactDataForm = ({
   useAutoSaveFormData(500, form, (data) => void onSubmit(data), []);
 
   return (
-    <section className="grid grid-cols-1 gap-4 pb-24">
+    <section className={cn("grid grid-cols-1 gap-4 pb-24", className)}>
       <div
         className={cn(
           "rounded-lg border border-dashed p-4",

@@ -9,7 +9,7 @@ import { cn } from "~/lib/utils";
 import { api, type RouterOutputs } from "~/trpc/react";
 import { ContactDataForm } from "../admin/contact/contact-data/ContactDataForm";
 import { Button } from "../ui/button";
-import { keys, onboardingParsers, type Keys } from "./onboarding.parsers";
+import { onboardingKeys, onboardingParsers, type OnboardingKeys } from "./onboarding.parsers";
 import { ContactStep } from "./steps/ContactStep";
 import { FinaleStep } from "./steps/FinaleStep";
 import { NFCPreferencesStep } from "./steps/NFCPreferencesStep";
@@ -41,7 +41,7 @@ export const StepperSelector = ({
 
   const t = useTranslations("admin.onboarding");
 
-  const StepComponents: Record<Keys, ReactNode> = {
+  const StepComponents: Record<OnboardingKeys, ReactNode> = {
     start: <WelcomeStep />,
     contact: (
       <ContactStep>
@@ -64,7 +64,7 @@ export const StepperSelector = ({
       return;
     }
 
-    const newStep = keys[keys.indexOf(step) - 1];
+    const newStep = onboardingKeys[onboardingKeys.indexOf(step) - 1];
 
     void Promise.all([
       mutate({ step: newStep }),
@@ -75,7 +75,7 @@ export const StepperSelector = ({
   };
 
   const forwardStep = () => {
-    const newStep = keys[keys.indexOf(step) + 1];
+    const newStep = onboardingKeys[onboardingKeys.indexOf(step) + 1];
 
     void Promise.all([
       mutate({ step: newStep, forceCompleted: newStep === "finale" }),
