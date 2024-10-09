@@ -20,7 +20,7 @@ export default function PurchasePage() {
   const t = useTranslations("admin.onboarding.steps.purchaseCard");
   const messages = useTranslations("common");
 
-  const { data: vCard, isLoading: vCardLoading } = api.vCard.get.useQuery();
+  const { data: vCard } = api.vCard.get.useQuery();
   const { data, isLoading } = api.purchases.getStatus.useQuery();
   const { mutate, isPending } = api.purchases.withPreferences.useMutation({
     onError: (err) => {
