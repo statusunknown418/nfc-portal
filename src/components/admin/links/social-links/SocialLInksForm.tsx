@@ -1,15 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  SiFacebook,
-  SiPatreon,
-  SiSpotify,
-  SiTelegram,
-  SiTiktok,
-  SiYoutube,
-} from "@icons-pack/react-simple-icons";
-import { GlobeIcon, InstagramLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
+import { GlobeIcon } from "@radix-ui/react-icons";
 import { RadioGroup, RadioGroupItem } from "@radix-ui/react-radio-group";
 import { type ReactNode, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -23,11 +15,24 @@ import {
   FormLabel,
   FormMessage,
 } from "~/components/ui/form";
-import { Icons } from "~/components/ui/icons";
+import { type IconProps, Icons } from "~/components/ui/icons";
 import { Input } from "~/components/ui/input";
 import { cn } from "~/lib/utils";
 import { newLinkSchema, type NewLinkSchema, type SocialLinkType } from "~/server/db/schema";
 import { api } from "~/trpc/react";
+
+export const SocialIcons: Record<SocialLinkType, (props: IconProps) => ReactNode> = {
+  twitter: Icons.twitter,
+  linkedin: Icons.linkedin,
+  facebook: Icons.facebook,
+  instagram: Icons.instagram,
+  github: Icons.gitHub,
+  tiktok: Icons.tikTok,
+  youtube: Icons.youtube,
+  telegram: Icons.telegram,
+  patreon: Icons.patreon,
+  spotify: Icons.spotify,
+};
 
 const socialLinks: Array<{
   name: string;
@@ -37,61 +42,61 @@ const socialLinks: Array<{
 }> = [
   {
     name: "Twitter",
-    icon: <Icons.twitter className="size-8" />,
+    icon: <SocialIcons.twitter className="size-10" />,
     key: "twitter",
     url: (username: string) => `https://x.com/${username}`,
   },
   {
     name: "LinkedIn",
-    icon: <LinkedInLogoIcon className="size-8" />,
+    icon: <SocialIcons.linkedin className="size-10" />,
     key: "linkedin",
     url: (username: string) => `https://linkedin.com/in/${username}`,
   },
   {
     name: "Facebook",
-    icon: <SiFacebook className="size-8" />,
+    icon: <SocialIcons.facebook className="size-10" />,
     key: "facebook",
     url: (username: string) => `https://facebook.com/${username}`,
   },
   {
     name: "Instagram",
-    icon: <InstagramLogoIcon className="size-8" />,
+    icon: <SocialIcons.instagram className="size-10" />,
     key: "instagram",
     url: (username: string) => `https://instagram.com/${username}`,
   },
   {
     name: "Github",
-    icon: <Icons.gitHub className="size-8" />,
+    icon: <SocialIcons.github className="size-10" />,
     key: "github",
     url: (username: string) => `https://github.com/${username}`,
   },
   {
     name: "TikTok",
-    icon: <SiTiktok className="size-8" />,
+    icon: <SocialIcons.tiktok className="size-10" />,
     key: "tiktok",
     url: (username: string) => `https://tiktok.com/${username}`,
   },
   {
     name: "Youtube",
-    icon: <SiYoutube className="size-8" />,
+    icon: <SocialIcons.youtube className="size-10" />,
     key: "youtube",
     url: (username: string) => `https://youtube.com/${username}`,
   },
   {
     name: "Telegram",
-    icon: <SiTelegram className="size-8" />,
+    icon: <SocialIcons.telegram className="size-10" />,
     key: "telegram",
     url: (username: string) => `https://t.me/${username}`,
   },
   {
     name: "Patreon",
-    icon: <SiPatreon className="size-8" />,
+    icon: <SocialIcons.patreon className="size-10" />,
     key: "patreon",
     url: (username: string) => `https://patreon.com/${username}`,
   },
   {
     name: "Spotify",
-    icon: <SiSpotify className="size-8" />,
+    icon: <SocialIcons.spotify className="size-10" />,
     key: "spotify",
     url: (username: string) => `https://open.spotify.com/artist/${username}`,
   },

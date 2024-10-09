@@ -117,13 +117,13 @@ export const ContactInfo = ({
       </button>
 
       <section className="flex justify-between gap-1">
-        <article className="flex gap-1">
+        <article className="flex gap-2">
           <Link
             href={`https://wa.me/${data.phoneNumbers?.find((p) => p.type === "PREF")?.number}`}
             target="_blank"
             rel="external"
           >
-            <Button size="iconXl" className="rounded-full" asChild>
+            <Button className="size-16 rounded-full p-0" asChild>
               <div>
                 <PhoneCall size={28} />
                 <span className="sr-only">Personal phone</span>
@@ -139,7 +139,7 @@ export const ContactInfo = ({
             className="flex flex-col items-center gap-1"
             target="_blank"
           >
-            <Button size="iconXl" className="rounded-full" asChild>
+            <Button className="size-16 rounded-full p-0" asChild>
               <div>
                 <CellTower size={28} />
                 <span className="sr-only">Work phone</span>
@@ -150,14 +150,14 @@ export const ContactInfo = ({
           </Link>
         </article>
 
-        <article className="flex gap-1">
+        <article className="flex gap-2">
           <Link
             rel="external"
             href={`mailto:${data.email?.find((e) => e.type === "WORK")?.link}`}
             className="flex flex-col items-center gap-1"
             target="_blank"
           >
-            <Button size="iconXl" className="rounded-full" asChild>
+            <Button className="size-16 rounded-full p-0" asChild>
               <div>
                 <Envelope size={28} />
                 <span className="sr-only">Work email</span>
@@ -173,7 +173,7 @@ export const ContactInfo = ({
             className="flex flex-col items-center gap-1"
             target="_blank"
           >
-            <Button size="iconXl" className="rounded-full" asChild>
+            <Button className="size-16 rounded-full p-0" asChild>
               <div>
                 <Mailbox size={28} />
                 <span className="sr-only">Personal email</span>

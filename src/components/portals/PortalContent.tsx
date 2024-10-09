@@ -12,6 +12,9 @@ import { Button } from "../ui/button";
 import { ContactInfo } from "./ContactInfo";
 import { GetYours } from "./GetYours";
 import { LinkViewer } from "./LinkViewer";
+import { SocialIcons } from "../admin/links/social-links/SocialLInksForm";
+import { Divider } from "../ui/separator";
+import Image from "next/image";
 
 export const PortalContent = ({
   initialData,
@@ -93,7 +96,7 @@ export const PortalContent = ({
       <article className="flex h-full w-full max-w-[400px] flex-col items-center gap-4 sm:shadow-lg lg:max-w-[580px] xl:rounded-3xl xl:border xl:border-border/50">
         <section
           className={cn(
-            "relative z-0 aspect-square min-h-[300px] overflow-hidden bg-cover bg-center bg-no-repeat md:min-h-[400px] lg:min-h-[580px] lg:rounded-t-xl",
+            "relative z-0 aspect-square min-h-[330px] overflow-hidden bg-cover bg-center bg-no-repeat md:min-h-[400px] lg:min-h-[580px] lg:rounded-t-xl",
             {
               "rounded-full": portal.data.avatarShape === "circle",
               "rounded-none": portal.data.avatarShape === "square",
@@ -139,7 +142,7 @@ export const PortalContent = ({
             />
           )}
 
-          <ul className="flex w-full flex-col gap-2">
+          <section className="flex w-full flex-col gap-2">
             {!portal.data.links.length && (
               <Alert
                 className={cn(
@@ -160,10 +163,54 @@ export const PortalContent = ({
               </Alert>
             )}
 
-            {portal.data.links.map((link) => (
-              <LinkViewer link={link} key={link.id} buttonStyles={portal.data.theme.buttons} />
-            ))}
-          </ul>
+            <article className="grid grid-cols-4 gap-2 *:w-full">
+              {portal.data.links
+                .filter((item) => item.socialType)
+                .map((link) => (
+                  <Link
+                    target="_blank"
+                    rel="external"
+                    className="flex aspect-square items-center justify-center overflow-hidden rounded-full border bg-white p-0.5"
+                    href={{ pathname: link.url }}
+                    key={link.id}
+                  >
+                    {link.socialType === "twitter" && <SocialIcons.twitter className="size-14" />}
+                    {link.socialType === "linkedin" && <SocialIcons.linkedin className="size-14" />}
+                    {link.socialType === "facebook" && <SocialIcons.facebook className="size-14" />}
+
+                    {link.socialType === "instagram" && (
+                      <Image
+                        src="/instagram-logo.png"
+                        alt="Instagram logo"
+                        width={48}
+                        height={48}
+                        className="size-12"
+                      />
+                    )}
+
+                    {link.socialType === "github" && <SocialIcons.github className="size-14" />}
+
+                    {link.socialType === "tiktok" && <SocialIcons.tiktok className="size-14" />}
+
+                    {link.socialType === "youtube" && <SocialIcons.youtube className="size-14" />}
+
+                    {link.socialType === "telegram" && <SocialIcons.telegram className="size-14" />}
+
+                    {link.socialType === "patreon" && <SocialIcons.patreon className="size-14" />}
+
+                    {link.socialType === "spotify" && <SocialIcons.spotify className="size-14" />}
+                  </Link>
+                ))}
+            </article>
+
+            <Divider className="my-4 text-xs">All other links</Divider>
+
+            {portal.data.links
+              .filter((item) => !item.socialType)
+              .map((link) => (
+                <LinkViewer link={link} key={link.id} buttonStyles={portal.data.theme.buttons} />
+              ))}
+          </section>
         </section>
 
         <GetYours />

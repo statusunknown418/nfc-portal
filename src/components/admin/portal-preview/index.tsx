@@ -55,7 +55,7 @@ export const PortalPreviewWrapperRSC = async ({
 
       <article
         id="portal-device-preview"
-        className="relative max-h-[740px] min-h-[640px] w-full min-w-[310px] max-w-[330px] self-center justify-self-center overflow-hidden overscroll-y-contain rounded-[52px] border-[6px] border-primary/80 shadow-lg shadow-black"
+        className="relative max-h-[740px] min-h-[640px] w-full min-w-[330px] max-w-[330px] self-center justify-self-center overflow-hidden overscroll-y-contain rounded-[52px] border-[6px] border-primary/80 shadow-lg shadow-black"
       >
         <PortalPreview initialData={portal} username={username} bypassKey={bypassKey} />
       </article>
