@@ -1,16 +1,16 @@
 "use client";
 
-import { api, RouterOutputs } from "~/trpc/react";
-import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
-import { ShareLink } from "../admin/ShareLink";
+import { TrackNextIcon } from "@radix-ui/react-icons";
+import confetti from "canvas-confetti";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
+import { useEffect, useRef } from "react";
+import { api } from "~/trpc/react";
+import { ShareLink } from "../admin/ShareLink";
+import Confetti, { type ConfettiRef } from "../magicui/confetti";
+import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { Button } from "../ui/button";
 import { Skeleton } from "../ui/skeleton";
-import { useEffect, useRef } from "react";
-import Confetti, { ConfettiRef } from "../magicui/confetti";
-import confetti from "canvas-confetti";
-import { TrackNextIcon } from "@radix-ui/react-icons";
-import Link from "next/link";
 
 export const FinaleClientAlert = () => {
   const [data, { isLoading }] = api.viewer.shouldShowLive.useSuspenseQuery();
@@ -88,7 +88,7 @@ export const FinaleClientAlert = () => {
       <Confetti ref={confettiRef} className="absolute left-0 top-0 z-0 size-full" />
 
       {data?.hasPurchasedCard ? (
-        <Button size="lg" variant="primary_ghost">
+        <Button size="lg" variant="primary_ghost" className="z-10">
           Complete onboarding
         </Button>
       ) : (
