@@ -22,7 +22,12 @@ export const ContactInfo = ({
       <Alert variant="destructive">
         <AlertTitle className="text-center">🔒 Contact info not visible</AlertTitle>
 
-        <AlertDescription className="text-sm">
+        <AlertDescription
+          className="text-sm"
+          style={{
+            color: theme.colors.foreground,
+          }}
+        >
           This will be automatically unlocked when the owner&apos;s card is approached to your
           phone.
         </AlertDescription>
@@ -62,7 +67,7 @@ export const ContactInfo = ({
           address.type,
         ),
     );
-    vCard.addNote("Created with https://concard.app");
+    vCard.addNote("\nCreated with https://concard.app");
 
     const fullVCard = vCard.buildVCard();
 
@@ -84,7 +89,12 @@ export const ContactInfo = ({
       <Alert style={{ borderColor: theme.colors.border }}>
         <AlertTitle className="text-center">No contact info added yet</AlertTitle>
 
-        <AlertDescription className="text-center">
+        <AlertDescription
+          className="text-center"
+          style={{
+            color: theme.colors.foreground,
+          }}
+        >
           You can add your contact info from the <strong>Portal customization</strong>
         </AlertDescription>
       </Alert>

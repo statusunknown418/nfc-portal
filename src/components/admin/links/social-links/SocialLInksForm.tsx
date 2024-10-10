@@ -206,12 +206,12 @@ export const SocialLInksForm = ({
             control={form.control}
             name="displayText"
             render={({ field }) => (
-              <FormItem className="col-span-3">
+              <FormItem className="col-span-3 mt-4">
                 <FormLabel>Username or handle</FormLabel>
 
                 <div className="flex h-11 items-center">
                   <p className="flex h-full items-center rounded-l-lg border border-r-0 bg-muted px-4 text-sm text-muted-foreground">
-                    https://{selectedPredefined}.com/{selectedPredefined === "linkedin" ? "in" : ""}
+                    {socialLinks.find((link) => link.key === selectedPredefined)?.url("")}
                   </p>
 
                   <Input

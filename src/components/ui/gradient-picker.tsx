@@ -113,7 +113,7 @@ export function GradientPicker({
         <Button
           variant={"outline"}
           className={cn(
-            "h-[36px] w-full justify-start text-left font-normal md:w-[240px]",
+            "lg:w-[240px h-[36px] w-full justify-start text-left font-normal md:w-[200px]",
             !background && "text-muted-foreground",
             className,
           )}

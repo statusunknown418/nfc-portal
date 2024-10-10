@@ -1,27 +1,29 @@
 "use client";
 
+import { ClerkLoaded, ClerkLoading, UserButton } from "@clerk/nextjs";
+import { AddressBook } from "@phosphor-icons/react";
+import { Flag } from "@phosphor-icons/react/dist/ssr";
 import {
   DashboardIcon,
   EnvelopeClosedIcon,
   GearIcon,
   RulerSquareIcon,
 } from "@radix-ui/react-icons";
+import { useTranslations } from "next-intl";
+import Image from "next/image";
 import Link from "next/link";
 import { useSelectedLayoutSegment } from "next/navigation";
 import { Button } from "../ui/button";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
-import { ClerkLoaded, ClerkLoading, UserButton } from "@clerk/nextjs";
 import { Skeleton } from "../ui/skeleton";
-import Image from "next/image";
-import { useTranslations } from "next-intl";
-import { AddressBook } from "@phosphor-icons/react";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
 
 export const Sidebar = () => {
   const selectedSegment = useSelectedLayoutSegment();
   const t = useTranslations("admin.sidebar");
+  const common = useTranslations("common");
 
   return (
-    <nav className="sticky top-0 z-10 flex h-14 max-h-14 min-h-14 w-full justify-center border-b bg-background/50 backdrop-blur-sm md:sticky md:top-0">
+    <nav className="sticky top-0 z-10 flex h-14 w-full justify-center border-b bg-background/50 py-0 backdrop-blur-sm md:sticky md:top-0">
       <div className="grid w-full max-w-[1400px] grid-cols-3 items-center justify-between overflow-x-auto px-4 md:grid-cols-6">
         <Button variant="ghost" className="h-10 w-10 overflow-hidden p-0 md:w-max md:px-1">
           <Image
@@ -43,7 +45,7 @@ export const Sidebar = () => {
                   asChild
                   variant={!selectedSegment ? "primary_ghost" : "ghost"}
                   aria-selected={!selectedSegment}
-                  className="h-[44px] w-[44px] py-1 aria-selected:rounded-none aria-selected:border-x-0 aria-selected:border-b-2 aria-selected:border-t-0 aria-selected:bg-transparent md:h-10 md:w-max"
+                  className="h-[44px] w-[44px] rounded-none border-2 !border-x-transparent !border-t-transparent py-1 aria-selected:border-b-current aria-selected:bg-transparent aria-selected:hover:bg-primary/5 md:h-12 md:w-max"
                 >
                   <Link href="/admin">
                     <DashboardIcon className="size-6 md:size-5" />
@@ -64,7 +66,7 @@ export const Sidebar = () => {
                   asChild
                   variant={selectedSegment === "contact" ? "primary_ghost" : "ghost"}
                   aria-selected={selectedSegment === "contact"}
-                  className="h-[44px] w-[44px] py-1 aria-selected:rounded-none aria-selected:border-x-0 aria-selected:border-b-2 aria-selected:border-t-0 aria-selected:bg-transparent md:h-10 md:w-max"
+                  className="h-[44px] w-[44px] rounded-none border-2 !border-x-transparent !border-t-transparent py-1 aria-selected:border-b-current aria-selected:bg-transparent aria-selected:hover:bg-primary/5 md:h-12 md:w-max"
                 >
                   <Link href="/admin/contact">
                     <AddressBook className="size-6 md:size-5" />
@@ -83,7 +85,7 @@ export const Sidebar = () => {
                   asChild
                   variant={selectedSegment === "visual" ? "primary_ghost" : "ghost"}
                   aria-selected={selectedSegment === "visual"}
-                  className="h-[44px] w-[44px] py-1 aria-selected:rounded-none aria-selected:border-x-0 aria-selected:border-b-2 aria-selected:border-t-0 aria-selected:bg-transparent md:h-10 md:w-max"
+                  className="h-[44px] w-[44px] rounded-none border-2 border-x-transparent border-t-transparent py-1 aria-selected:border-b-current aria-selected:bg-transparent aria-selected:hover:bg-primary/5 md:h-12 md:w-max"
                 >
                   <Link href="/admin/visual">
                     <RulerSquareIcon className="size-6 md:size-5" />
@@ -102,7 +104,7 @@ export const Sidebar = () => {
                   asChild
                   variant={selectedSegment === "signatures" ? "primary_ghost" : "ghost"}
                   aria-selected={selectedSegment === "signatures"}
-                  className="h-[44px] w-[44px] py-1 aria-selected:rounded-none aria-selected:border-x-0 aria-selected:border-b-2 aria-selected:border-t-0 aria-selected:bg-transparent md:h-10 md:w-max"
+                  className="h-[44px] w-[44px] rounded-none border-2 !border-x-transparent !border-t-transparent py-1 aria-selected:border-b-current aria-selected:bg-transparent aria-selected:hover:bg-primary/5 md:h-12 md:w-max"
                 >
                   <Link href="/admin/signatures">
                     <EnvelopeClosedIcon className="size-6 md:size-5" />
@@ -123,7 +125,7 @@ export const Sidebar = () => {
                   asChild
                   variant={selectedSegment === "settings" ? "primary_ghost" : "ghost"}
                   aria-selected={selectedSegment === "settings"}
-                  className="h-[44px] w-[44px] py-1 aria-selected:rounded-none aria-selected:border-x-0 aria-selected:border-b-2 aria-selected:border-t-0 aria-selected:bg-transparent md:h-10 md:w-max"
+                  className="h-[44px] w-[44px] rounded-none border-2 !border-x-transparent !border-t-transparent py-1 aria-selected:border-b-current aria-selected:bg-transparent aria-selected:hover:bg-primary/5 md:h-12 md:w-max"
                 >
                   <Link href="/admin/settings">
                     <GearIcon className="size-6 md:size-5" />
@@ -161,7 +163,15 @@ export const Sidebar = () => {
                   userPreviewSecondaryIdentifier: "font-semibold tracking-wide",
                 },
               }}
-            />
+            >
+              <UserButton.MenuItems>
+                <UserButton.Link
+                  label={common("changeLanguage")}
+                  href="/admin/settings"
+                  labelIcon={<Flag weight="duotone" size={16} />}
+                />
+              </UserButton.MenuItems>
+            </UserButton>
           </ClerkLoaded>
         </div>
       </div>

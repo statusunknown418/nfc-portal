@@ -473,6 +473,14 @@
           "purchased": "Purchased"
         }
       },
+      "socialLinks": {
+        "title": "Add social links",
+        "modal": {
+          "title": "New social link",
+          "description": "Choose from our list of available social links",
+          "message": "A valid URL for the selected platform"
+        }
+      },
       "tabs": {
         "contact": "Contact",
         "links": "Links"
@@ -541,6 +549,7 @@
   },
   "common": {
     "comingSoon": "Coming soon!",
+    "changeLanguage": "Change language",
     "askHelp": "Ask for help",
     "requestAction": "To request this feature earlier, just click here",
     "requestFeature": "Request a feature",

@@ -1,7 +1,7 @@
 "use client";
 
 import { Perspective } from "@phosphor-icons/react";
-import { BackpackIcon, ChevronDownIcon } from "@radix-ui/react-icons";
+import { ChevronDownIcon } from "@radix-ui/react-icons";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Button } from "~/components/ui/button";
@@ -36,31 +36,21 @@ export const AddSocialLinks = ({ username }: { username: string }) => {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <Button
-            asChild
             size="lg"
-            className="h-14 cursor-pointer select-none items-start gap-2 px-4 py-2 shadow-lg shadow-indigo-200 transition-all hover:shadow-indigo-300 md:items-center md:gap-5"
+            className="h-14 cursor-pointer select-none shadow-lg shadow-indigo-200 transition-all hover:shadow-indigo-300 md:items-center md:gap-5"
           >
-            <section>
-              <Perspective className="size-5 text-indigo-300 md:size-7" />
+            <Perspective className="size-5 text-indigo-300 md:size-7" />
 
-              <div className="flex flex-grow flex-col gap-0 text-wrap">
-                <h3 className="text-base">Add social links</h3>
-                <p className="text-xs font-normal text-muted-foreground">
-                  Choose from a list of available predefined social links
-                </p>
-              </div>
+            <h3 className="flex-grow text-left text-base">{t("socialLinks.title")}</h3>
 
-              <ChevronDownIcon className="size-5" />
-            </section>
+            <ChevronDownIcon className="size-5" />
           </Button>
         </DialogTrigger>
 
         <DialogContent className="sm:max-w-2xl">
-          <DialogHeader>
-            <DialogTitle className="text-xl">Add social links</DialogTitle>
-            <DialogDescription>
-              Choose from the list of the predefined links or create a new one.
-            </DialogDescription>
+          <DialogHeader className="space-y-1">
+            <DialogTitle className="text-xl">{t("socialLinks.modal.title")}</DialogTitle>
+            <DialogDescription>{t("socialLinks.modal.description")}</DialogDescription>
           </DialogHeader>
 
           <SocialLInksForm username={username} onClose={() => setOpen(false)} />
@@ -70,41 +60,35 @@ export const AddSocialLinks = ({ username }: { username: string }) => {
   }
 
   return (
-    <Drawer open={open} onOpenChange={setOpen} shouldScaleBackground={false}>
+    <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
         <Button
-          asChild
           size="lg"
-          className="h-auto cursor-pointer select-none items-start gap-2 px-4 py-2 shadow-lg shadow-indigo-200 transition-all hover:shadow-indigo-300 md:items-center md:gap-5"
+          className="h-14 cursor-pointer select-none gap-2 shadow-lg shadow-indigo-200 transition-all hover:shadow-indigo-300 md:items-center md:gap-5"
         >
-          <section>
-            <Perspective className="size-5 text-indigo-300 md:size-7" />
+          <Perspective className="size-5 text-indigo-300 md:size-7" />
 
-            <div className="flex flex-grow flex-col text-wrap">
-              <h3 className="text-base">Add social links</h3>
-              <p className="text-xs font-normal text-muted-foreground md:text-sm">
-                Choose from the list of available predefined social links
-              </p>
-            </div>
-          </section>
+          <h3 className="flex-grow text-left text-base">{t("socialLinks.title")}</h3>
+
+          <ChevronDownIcon className="size-5" />
         </Button>
       </DrawerTrigger>
 
       <DrawerContent>
         <DrawerHeader className="text-left">
-          <DrawerTitle>Add social links</DrawerTitle>
-          <DrawerDescription>
-            Choose from the list of the predefined links or create a new one.
-          </DrawerDescription>
+          <DrawerTitle>{t("socialLinks.modal.title")}</DrawerTitle>
+          <DrawerDescription>{t("socialLinks.modal.description")}</DrawerDescription>
         </DrawerHeader>
 
-        <div className="px-4">
+        <div className="mb-4 px-4">
           <SocialLInksForm username={username} onClose={() => setOpen(false)} />
         </div>
 
         <DrawerFooter className="pt-2">
           <DrawerClose asChild>
-            <Button variant="outline">Cancel</Button>
+            <Button variant="outline" size="lg">
+              {t("editLinkModal.cancel")}
+            </Button>
           </DrawerClose>
         </DrawerFooter>
       </DrawerContent>

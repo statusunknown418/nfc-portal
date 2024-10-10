@@ -26,8 +26,8 @@ export default async function VisualCustomizationPage() {
   }
 
   return (
-    <section className="relative grid w-full grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-10">
-      <section className="flex flex-col gap-4">
+    <section className="relative grid w-full grid-cols-1 gap-4 lg:grid-cols-2 xl:gap-10">
+      <section className="flex w-full flex-col gap-4">
         <Breadcrumb className="self-start">
           <BreadcrumbList>
             <BreadcrumbItem>{t("navigation.crumbOne")}</BreadcrumbItem>
@@ -46,7 +46,7 @@ export default async function VisualCustomizationPage() {
         </Suspense>
       </section>
 
-      <aside className="hidden flex-grow gap-4 py-6 pl-6 ring-0 lg:sticky lg:inset-0 lg:block lg:h-[calc(100vh-64px)]">
+      <aside className="hidden flex-grow gap-4 py-6 ring-0 lg:sticky lg:inset-0 lg:block lg:h-[calc(100vh-64px)]">
         <section className="relative flex h-full flex-col items-center justify-center gap-4">
           <Suspense>
             <Suspense fallback={<PortalPreviewWrapperLoader />}>

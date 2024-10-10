@@ -415,7 +415,7 @@ export const VisualCustomizationForm = ({
                 <Label>{t("themeCustomization.buttons.shape.label")}</Label>
 
                 <RadioGroup
-                  className="flex items-center gap-4 pt-2"
+                  className="flex flex-wrap items-center gap-4 pt-2"
                   value={field.value}
                   onValueChange={field.onChange}
                 >
