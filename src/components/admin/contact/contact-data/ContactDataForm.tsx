@@ -198,7 +198,7 @@ export const ContactDataForm = ({
 
               {isPending && (
                 <Badge variant="outline" className="absolute right-4 top-2 h-7 animate-pulse">
-                  <Spinner className="mr-2" />
+                  <Spinner className="mr-1 size-5 animate-spin" />
                   Saving ...
                 </Badge>
               )}

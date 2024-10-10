@@ -160,27 +160,6 @@ export const VisualCustomizationForm = ({
           <article className="flex flex-grow flex-col gap-4">
             <FormField
               control={form.control}
-              name="profileHeader"
-              render={({ field }) => (
-                <FormItem className="w-full">
-                  <FormLabel className="text-lg font-semibold">{t("profileHeader")}</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      {...field}
-                      rows={2}
-                      value={field.value ?? ""}
-                      className="resize-none"
-                      placeholder="Software Engineer"
-                    />
-                  </FormControl>
-
-                  <FormDescription>{t("profileFooter")}</FormDescription>
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
               name="bio"
               render={({ field }) => (
                 <FormItem className="w-full">

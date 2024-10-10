@@ -1,7 +1,7 @@
-import { z } from "zod";
-import { createTRPCRouter, protectedProcedure } from "../trpc";
-import { users } from "~/server/db/schema";
 import { eq } from "drizzle-orm";
+import { z } from "zod";
+import { users } from "~/server/db/schema";
+import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { editViewerContactSchema } from "../schemas.zod";
 
 export const vCardsRouter = createTRPCRouter({
@@ -32,26 +32,30 @@ export const vCardsRouter = createTRPCRouter({
         id: true,
         contactJSON: true,
         hasContactInfoLocked: true,
+        profileHeader: true,
       },
     });
   }),
-  edit: protectedProcedure.input(editViewerContactSchema).mutation(async ({ ctx, input }) => {
-    const [updatedContact] = await Promise.all([
-      ctx.db
-        .update(users)
-        .set({
-          contactJSON: input,
-        })
-        .where(eq(users.id, ctx.userId))
-        .returning(),
-      ctx.db
-        .update(users)
-        .set({
-          name: `${input.name?.first} ${input.name?.last}`,
-        })
-        .where(eq(users.id, ctx.userId)),
-    ]);
+  edit: protectedProcedure
+    .input(editViewerContactSchema)
+    .mutation(async ({ ctx, input: { profileHeader, ...contact } }) => {
+      const [updatedContact] = await Promise.all([
+        ctx.db
+          .update(users)
+          .set({
+            contactJSON: contact,
+            profileHeader,
+          })
+          .where(eq(users.id, ctx.userId))
+          .returning(),
+        ctx.db
+          .update(users)
+          .set({
+            name: `${contact.name?.first} ${contact.name?.last}`,
+          })
+          .where(eq(users.id, ctx.userId)),
+      ]);
 
-    return updatedContact;
-  }),
+      return updatedContact;
+    }),
 });

@@ -2,12 +2,12 @@
 
 import { CellTower, Envelope, Mailbox, PhoneCall } from "@phosphor-icons/react";
 import { IdCardIcon } from "@radix-ui/react-icons";
+import Link from "next/link";
 import vCardBuilder from "vcard-creator";
-import { cn } from "~/lib/utils";
+import { cn, newShade } from "~/lib/utils";
 import { type ContactVCardType, type ThemeType } from "~/server/db/schema";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { Button } from "../ui/button";
-import Link from "next/link";
 
 export const ContactInfo = ({
   unlocked,
@@ -65,6 +65,7 @@ export const ContactInfo = ({
           address.type,
         ),
     );
+    vCard.addNote("Created with https://concard.app");
 
     const fullVCard = vCard.buildVCard();
 
@@ -98,92 +99,20 @@ export const ContactInfo = ({
       <button
         onClick={handleImport}
         className={cn(
-          "flex h-14 w-full items-center justify-center gap-2",
-          theme.buttons.variant === "pill" && "rounded-[34px]",
-          theme.buttons.variant === "rounded" && "rounded-lg",
-          theme.buttons.variant === "square" && "rounded-none",
-          theme.buttons.variant === "small-radius" && "rounded-sm",
+          "flex h-14 w-full items-center justify-center gap-2 rounded-md font-medium",
+          // theme.buttons.variant === "pill" && "rounded-[34px]",
+          // theme.buttons.variant === "rounded" && "rounded-lg",
+          // theme.buttons.variant === "square" && "rounded-none",
+          // theme.buttons.variant === "small-radius" && "rounded-sm",
         )}
         style={{
-          background: theme.buttons.background,
-          color: theme.buttons.textColor,
-          fontWeight: theme.buttons.fontWeight,
-          fontStyle: theme.buttons.fontStyle,
-          border: `1px ${theme.buttons.borderStyle} ${theme.buttons.borderColor}`,
+          border: `1px ${theme.buttons.borderStyle} ${theme.colors.subtle}`,
+          color: theme.colors.subtle,
         }}
       >
         <IdCardIcon className="h-5 w-5" />
         Import contact
       </button>
-
-      <section className="flex justify-between gap-1">
-        <article className="flex gap-2">
-          <Link
-            href={`https://wa.me/${data.phoneNumbers?.find((p) => p.type === "PREF")?.number}`}
-            target="_blank"
-            rel="external"
-          >
-            <Button className="size-16 rounded-full p-0" asChild>
-              <div>
-                <PhoneCall size={28} />
-                <span className="sr-only">Personal phone</span>
-              </div>
-            </Button>
-
-            <p className="font-xs text-sm">Personal</p>
-          </Link>
-
-          <Link
-            rel="external"
-            href={`https://wa.me/${data.phoneNumbers?.find((p) => p.type === "WORK")?.number}`}
-            className="flex flex-col items-center gap-1"
-            target="_blank"
-          >
-            <Button className="size-16 rounded-full p-0" asChild>
-              <div>
-                <CellTower size={28} />
-                <span className="sr-only">Work phone</span>
-              </div>
-            </Button>
-
-            <p className="font-xs text-sm">Work</p>
-          </Link>
-        </article>
-
-        <article className="flex gap-2">
-          <Link
-            rel="external"
-            href={`mailto:${data.email?.find((e) => e.type === "WORK")?.link}`}
-            className="flex flex-col items-center gap-1"
-            target="_blank"
-          >
-            <Button className="size-16 rounded-full p-0" asChild>
-              <div>
-                <Envelope size={28} />
-                <span className="sr-only">Work email</span>
-              </div>
-            </Button>
-
-            <p className="font-xs text-sm">Personal</p>
-          </Link>
-
-          <Link
-            rel="external"
-            href={`mailto:${data.email?.find((e) => e.type === "PREF")?.link}`}
-            className="flex flex-col items-center gap-1"
-            target="_blank"
-          >
-            <Button className="size-16 rounded-full p-0" asChild>
-              <div>
-                <Mailbox size={28} />
-                <span className="sr-only">Personal email</span>
-              </div>
-            </Button>
-
-            <p className="font-xs text-sm">Work</p>
-          </Link>
-        </article>
-      </section>
     </article>
   );
 };

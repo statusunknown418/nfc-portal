@@ -2,6 +2,7 @@ import { z } from "zod";
 import { type ThemeType } from "../db/schema";
 
 export const editViewerContactSchema = z.object({
+  profileHeader: z.string().optional(),
   url: z.string().optional(),
   jobTitle: z.string().optional(),
   notes: z.string().optional(),

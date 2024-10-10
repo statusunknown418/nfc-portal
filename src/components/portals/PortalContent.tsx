@@ -120,9 +120,9 @@ export const PortalContent = ({
             portal.data.profileHeader && "-mt-28",
           )}
         >
-          {portal.data.profileHeader && <p className="px-4 text-sm">{portal.data.profileHeader}</p>}
-
           <h2 className="text-2xl font-bold tracking-wide md:text-3xl">{portal.data.name}</h2>
+
+          {portal.data.profileHeader && <p className="px-4 text-sm">{portal.data.profileHeader}</p>}
 
           {portal.data.bio && (
             <p className="mt-1 line-clamp-4 px-2 text-xs mix-blend-difference md:text-sm">
@@ -130,6 +130,57 @@ export const PortalContent = ({
             </p>
           )}
         </header>
+
+        <article className="flex w-full flex-wrap justify-center gap-4">
+          {portal.data.links
+            .filter((item) => item.socialType)
+            .map((link) => (
+              <Link
+                target="_blank"
+                rel="external"
+                className="flex h-8 w-10 items-center justify-center overflow-hidden rounded-md transition-all active:scale-95"
+                style={{
+                  color: portal.data.theme.colors.subtle,
+                }}
+                href={{ pathname: link.url }}
+                key={link.id}
+              >
+                {link.socialType === "twitter" && (
+                  <OutlinedSocialIcons.twitter className="size-8" />
+                )}
+                {link.socialType === "linkedin" && (
+                  <OutlinedSocialIcons.linkedin className="size-8" />
+                )}
+                {link.socialType === "facebook" && (
+                  <OutlinedSocialIcons.facebook className="size-8" />
+                )}
+
+                {link.socialType === "instagram" && (
+                  <OutlinedSocialIcons.instagram className="size-8" />
+                )}
+
+                {link.socialType === "github" && <OutlinedSocialIcons.github className="size-8" />}
+
+                {link.socialType === "tiktok" && <OutlinedSocialIcons.tiktok className="size-8" />}
+
+                {link.socialType === "youtube" && (
+                  <OutlinedSocialIcons.youtube className="size-8" />
+                )}
+
+                {link.socialType === "telegram" && (
+                  <OutlinedSocialIcons.telegram className="size-8" />
+                )}
+
+                {link.socialType === "patreon" && (
+                  <OutlinedSocialIcons.patreon className="size-8" />
+                )}
+
+                {link.socialType === "spotify" && (
+                  <OutlinedSocialIcons.spotify className="size-8" />
+                )}
+              </Link>
+            ))}
+        </article>
 
         <section className="grid w-full grid-cols-1 gap-4 px-4">
           {!portal.data.hasContactInfoLocked && (
@@ -162,59 +213,7 @@ export const PortalContent = ({
               </Alert>
             )}
 
-            <article className="grid grid-cols-4 place-items-center">
-              {portal.data.links
-                .filter((item) => item.socialType)
-                .map((link) => (
-                  <Link
-                    target="_blank"
-                    rel="external"
-                    className="flex aspect-square size-14 items-center justify-center overflow-hidden rounded-md transition-all active:scale-95"
-                    href={{ pathname: link.url }}
-                    key={link.id}
-                  >
-                    {link.socialType === "twitter" && (
-                      <OutlinedSocialIcons.twitter className="size-16" />
-                    )}
-                    {link.socialType === "linkedin" && (
-                      <OutlinedSocialIcons.linkedin className="size-16" />
-                    )}
-                    {link.socialType === "facebook" && (
-                      <OutlinedSocialIcons.facebook className="size-16" />
-                    )}
-
-                    {link.socialType === "instagram" && (
-                      <OutlinedSocialIcons.instagram className="size-16" />
-                    )}
-
-                    {link.socialType === "github" && (
-                      <OutlinedSocialIcons.github className="size-16" />
-                    )}
-
-                    {link.socialType === "tiktok" && (
-                      <OutlinedSocialIcons.tiktok className="size-16" />
-                    )}
-
-                    {link.socialType === "youtube" && (
-                      <OutlinedSocialIcons.youtube className="size-16" />
-                    )}
-
-                    {link.socialType === "telegram" && (
-                      <OutlinedSocialIcons.telegram className="size-16" />
-                    )}
-
-                    {link.socialType === "patreon" && (
-                      <OutlinedSocialIcons.patreon className="size-16" />
-                    )}
-
-                    {link.socialType === "spotify" && (
-                      <OutlinedSocialIcons.spotify className="size-16" />
-                    )}
-                  </Link>
-                ))}
-            </article>
-
-            <Divider className="my-4 text-xs">All other links</Divider>
+            <Divider className="mb-4 mt-2 text-xs">All other links</Divider>
 
             {portal.data.links
               .filter((item) => !item.socialType)

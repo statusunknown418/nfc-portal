@@ -1,6 +1,6 @@
 import "~/styles/globals.css";
 
-import { ClerkProvider, GoogleOneTap } from "@clerk/nextjs";
+import { ClerkProvider } from "@clerk/nextjs";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GeistSans } from "geist/font/sans";
 import { type Metadata, type Viewport } from "next";
@@ -59,7 +59,6 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         <NextIntlClientProvider messages={messages}>
           <TRPCReactProvider>
             <body className="h-screen">
-              <GoogleOneTap />
               <NextTopLoader showSpinner={false} color="#4338ca" height={5} />
 
               {children}
