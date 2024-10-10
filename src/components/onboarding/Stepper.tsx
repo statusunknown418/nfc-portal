@@ -104,7 +104,7 @@ export const Stepper = () => {
         >
           <div
             className={cn(
-              "flex aspect-square w-16 flex-col items-center justify-center gap-1 rounded-full border",
+              "flex aspect-square w-12 flex-col items-center justify-center gap-1 rounded-full border sm:w-16",
               step !== key && "bg-muted",
               step === key && "border-indigo-500 bg-indigo-50",
               stepsItems.findIndex((i) => i.key === step) > idx && "border-border/50 bg-white",
@@ -113,7 +113,9 @@ export const Stepper = () => {
             <RenderIcon className={cn(step === key && "text-indigo-600")} />
           </div>
 
-          <Selector className={cn("text-center", step === key && "text-indigo-600")} />
+          <Selector
+            className={cn("hidden text-center sm:block", step === key && "text-indigo-600")}
+          />
         </li>
       ))}
     </ul>
