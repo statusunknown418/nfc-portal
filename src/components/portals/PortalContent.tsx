@@ -6,15 +6,14 @@ import Link from "next/link";
 import { useFrameSyncReceiver } from "~/lib/hooks/use-frame-sync";
 import { cn } from "~/lib/utils";
 import { api, type RouterOutputs } from "~/trpc/react";
+import { OutlinedSocialIcons } from "../admin/links/social-links/SocialLInksForm";
 import { Spinner } from "../shared/Spinner";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { Button } from "../ui/button";
+import { Divider } from "../ui/separator";
 import { ContactInfo } from "./ContactInfo";
 import { GetYours } from "./GetYours";
 import { LinkViewer } from "./LinkViewer";
-import { SocialIcons } from "../admin/links/social-links/SocialLInksForm";
-import { Divider } from "../ui/separator";
-import Image from "next/image";
 
 export const PortalContent = ({
   initialData,
@@ -163,42 +162,54 @@ export const PortalContent = ({
               </Alert>
             )}
 
-            <article className="grid grid-cols-4 gap-2 *:w-full">
+            <article className="grid grid-cols-4 place-items-center">
               {portal.data.links
                 .filter((item) => item.socialType)
                 .map((link) => (
                   <Link
                     target="_blank"
                     rel="external"
-                    className="flex aspect-square items-center justify-center overflow-hidden rounded-full border bg-white p-0.5"
+                    className="flex aspect-square size-14 items-center justify-center overflow-hidden rounded-md transition-all active:scale-95"
                     href={{ pathname: link.url }}
                     key={link.id}
                   >
-                    {link.socialType === "twitter" && <SocialIcons.twitter className="size-14" />}
-                    {link.socialType === "linkedin" && <SocialIcons.linkedin className="size-14" />}
-                    {link.socialType === "facebook" && <SocialIcons.facebook className="size-14" />}
-
-                    {link.socialType === "instagram" && (
-                      <Image
-                        src="/instagram-logo.png"
-                        alt="Instagram logo"
-                        width={48}
-                        height={48}
-                        className="size-12"
-                      />
+                    {link.socialType === "twitter" && (
+                      <OutlinedSocialIcons.twitter className="size-16" />
+                    )}
+                    {link.socialType === "linkedin" && (
+                      <OutlinedSocialIcons.linkedin className="size-16" />
+                    )}
+                    {link.socialType === "facebook" && (
+                      <OutlinedSocialIcons.facebook className="size-16" />
                     )}
 
-                    {link.socialType === "github" && <SocialIcons.github className="size-14" />}
+                    {link.socialType === "instagram" && (
+                      <OutlinedSocialIcons.instagram className="size-16" />
+                    )}
 
-                    {link.socialType === "tiktok" && <SocialIcons.tiktok className="size-14" />}
+                    {link.socialType === "github" && (
+                      <OutlinedSocialIcons.github className="size-16" />
+                    )}
 
-                    {link.socialType === "youtube" && <SocialIcons.youtube className="size-14" />}
+                    {link.socialType === "tiktok" && (
+                      <OutlinedSocialIcons.tiktok className="size-16" />
+                    )}
 
-                    {link.socialType === "telegram" && <SocialIcons.telegram className="size-14" />}
+                    {link.socialType === "youtube" && (
+                      <OutlinedSocialIcons.youtube className="size-16" />
+                    )}
 
-                    {link.socialType === "patreon" && <SocialIcons.patreon className="size-14" />}
+                    {link.socialType === "telegram" && (
+                      <OutlinedSocialIcons.telegram className="size-16" />
+                    )}
 
-                    {link.socialType === "spotify" && <SocialIcons.spotify className="size-14" />}
+                    {link.socialType === "patreon" && (
+                      <OutlinedSocialIcons.patreon className="size-16" />
+                    )}
+
+                    {link.socialType === "spotify" && (
+                      <OutlinedSocialIcons.spotify className="size-16" />
+                    )}
                   </Link>
                 ))}
             </article>
