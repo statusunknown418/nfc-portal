@@ -243,3 +243,8 @@ export const basicCardTemplates = [
     back: "https://picsum.photos/id/21/350/200",
   },
 ];
+
+export const PORTAL_KEY = "portal-password";
+export const PORTAL_QUERY = "ktp";
+export const INCOMING_URL = "x-current-url";
+export const LOCALE_KEY = "NEXT_LOCALE";

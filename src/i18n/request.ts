@@ -2,7 +2,7 @@ import { type AbstractIntlMessages, type Formats } from "next-intl";
 import { getRequestConfig } from "next-intl/server";
 import { locales, type Locale } from "./config";
 import { cookies } from "next/headers";
-import { LOCALE_KEY } from "~/middleware";
+import { LOCALE_KEY } from "~/lib/utils";
 
 export const formats = {
   list: {

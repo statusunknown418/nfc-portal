@@ -1,7 +1,7 @@
 "use client";
 
 import { ClerkLoading, UserButton } from "@clerk/nextjs";
-import { TvIcon } from "lucide-react";
+import { TelevisionSimple } from "@phosphor-icons/react";
 import Meteors from "~/components/magicui/meteors";
 import { Skeleton } from "~/components/ui/skeleton";
 
@@ -9,7 +9,7 @@ export default function SettingsPage() {
   return (
     <section className="grid h-full w-full place-items-center">
       <article className="flex flex-col items-center gap-2">
-        <TvIcon size={36} />
+        <TelevisionSimple size={36} />
 
         <h1 className="text-lg font-semibold">
           We will be adding more features and settings soon! Stay tuned!

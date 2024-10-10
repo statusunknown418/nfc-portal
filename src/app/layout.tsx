@@ -55,10 +55,10 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         },
       }}
     >
-      <html lang={locale} className={`${GeistSans.variable} md:text-sm`}>
+      <html lang={locale} className={`${GeistSans.variable} text-sm`}>
         <NextIntlClientProvider messages={messages}>
           <TRPCReactProvider>
-            <body className="h-screen">
+            <body className="h-svh">
               <NextTopLoader showSpinner={false} color="#4338ca" height={5} />
 
               {children}

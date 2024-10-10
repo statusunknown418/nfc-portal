@@ -1,9 +1,9 @@
 import { and, eq } from "drizzle-orm";
 import { cookies } from "next/headers";
 import { z } from "zod";
-import { PORTAL_KEY } from "~/middleware";
 import { links, userProfileSchema, users } from "~/server/db/schema";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
+import { PORTAL_KEY } from "~/lib/utils";
 
 export const portalsRouter = createTRPCRouter({
   edit: protectedProcedure.input(userProfileSchema).mutation(async ({ ctx, input }) => {

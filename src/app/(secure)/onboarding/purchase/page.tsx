@@ -1,6 +1,6 @@
 "use client";
 
-import { ShoppingBagIcon, SparklesIcon } from "lucide-react";
+import { ShoppingCart, Sparkle } from "@phosphor-icons/react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -76,7 +76,7 @@ export default function PurchasePage() {
           <Badge className="my-4 h-7 justify-self-center">
             {t("shippingStatus", { status: data.cardShippingStatus })}{" "}
             {data.cardShippingStatus === "in_progress" && (
-              <SparklesIcon size={15} className="ml-2 text-amber-500" />
+              <Sparkle size={15} className="ml-2 text-amber-500" />
             )}
           </Badge>
         ) : (
@@ -147,7 +147,7 @@ export default function PurchasePage() {
             })
           }
         >
-          {isPending ? <Spinner className="text-white" /> : <ShoppingBagIcon size={15} />}
+          {isPending ? <Spinner className="text-white" /> : <ShoppingCart size={15} />}
 
           {!isLoading && data?.cardShippingStatus !== "awaiting_purchase"
             ? t("alreadyBought")

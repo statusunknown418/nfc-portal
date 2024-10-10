@@ -11,7 +11,7 @@ await import("./src/env.js");
 /** @type {import("next").NextConfig} */
 const config = {
   experimental: {
-    typedRoutes: true,
+    // typedRoutes: true,
   },
   images: {
     dangerouslyAllowSVG: true,

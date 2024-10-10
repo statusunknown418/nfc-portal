@@ -1,10 +1,6 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-
-export const PORTAL_KEY = "portal-password";
-export const PORTAL_QUERY = "ktp";
-export const INCOMING_URL = "x-current-url";
-export const LOCALE_KEY = "NEXT_LOCALE";
+import { PORTAL_QUERY, PORTAL_KEY } from "./lib/utils";
 
 const isProtectedRoute = createRouteMatcher(["/admin(.*)", "/business", "/onboarding(.*)"]);
 
