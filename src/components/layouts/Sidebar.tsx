@@ -32,7 +32,7 @@ export const Sidebar = () => {
             height={32}
           />
 
-          <span className="hidden md:block">ConCard</span>
+          <span className="hidden lg:block">ConCard</span>
         </Button>
 
         <section className="flex w-full justify-center gap-2 md:col-span-4 md:flex-grow-0 md:items-center md:gap-4">

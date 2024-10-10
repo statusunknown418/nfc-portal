@@ -35,7 +35,7 @@ export const PortalPreviewWrapperRSC = async ({
   }
 
   return (
-    <div className="flex h-max flex-col items-center justify-center gap-4">
+    <div className="fixed top-40 flex h-max flex-col items-center justify-center gap-4">
       {!portal?.hasPurchasedCard && !hideAlerts && (
         <TooltipProvider delayDuration={0}>
           <Tooltip>

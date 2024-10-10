@@ -96,7 +96,7 @@ export const ContactInfo = ({
       <button
         onClick={handleImport}
         className={cn(
-          "flex h-14 items-center justify-center gap-3 self-center rounded-lg bg-gradient-to-r px-5 text-sm font-semibold uppercase tracking-tight",
+          "flex h-14 w-full items-center justify-center gap-3 self-center rounded-lg bg-gradient-to-r px-5 text-sm font-semibold uppercase tracking-tight",
           // theme.buttons.variant === "pill" && "rounded-[34px]",
           // theme.buttons.variant === "rounded" && "rounded-lg",
           // theme.buttons.variant === "square" && "rounded-none",

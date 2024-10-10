@@ -20,10 +20,9 @@ export default function ContactPage() {
         </Breadcrumb>
 
         <header>
-          <h1 className="text-2xl font-bold">Card customization</h1>
+          <h1 className="text-2xl font-bold">Contact info</h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            Manage what will be shown on your physical card, this will be delivered to you as soon
-            as purchased
+            Decide what information you want to share with your contacts.
           </p>
         </header>
       </section>

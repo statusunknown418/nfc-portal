@@ -120,12 +120,14 @@ export const PortalContent = ({
             portal.data.profileHeader && "-mt-28",
           )}
         >
-          <h2 className="text-2xl font-bold tracking-wide md:text-3xl">{portal.data.name}</h2>
+          <h2 className="text-2xl font-extrabold tracking-wide md:text-3xl">{portal.data.name}</h2>
 
-          {portal.data.profileHeader && <p className="px-4 text-sm">{portal.data.profileHeader}</p>}
+          {portal.data.profileHeader && (
+            <p className="px-4 font-semibold">{portal.data.profileHeader}</p>
+          )}
 
           {portal.data.bio && (
-            <p className="mt-1 line-clamp-4 px-2 text-xs mix-blend-difference md:text-sm">
+            <p className="mt-1 line-clamp-4 px-2 text-sm font-light mix-blend-difference">
               {portal.data.bio}
             </p>
           )}
