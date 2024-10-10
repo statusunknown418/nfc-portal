@@ -1,6 +1,7 @@
 "use client";
 
-import { BackpackIcon, PlusIcon } from "@radix-ui/react-icons";
+import { Perspective } from "@phosphor-icons/react";
+import { BackpackIcon, ChevronDownIcon } from "@radix-ui/react-icons";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Button } from "~/components/ui/button";
@@ -37,17 +38,19 @@ export const AddSocialLinks = ({ username }: { username: string }) => {
           <Button
             asChild
             size="lg"
-            className="h-auto cursor-pointer select-none items-start gap-2 px-4 py-2 shadow-lg shadow-indigo-200 transition-all hover:shadow-indigo-300 md:items-center md:gap-5"
+            className="h-14 cursor-pointer select-none items-start gap-2 px-4 py-2 shadow-lg shadow-indigo-200 transition-all hover:shadow-indigo-300 md:items-center md:gap-5"
           >
             <section>
-              <BackpackIcon className="mt-1 size-5 text-indigo-300 sm:mt-0 md:size-7" />
+              <Perspective className="size-5 text-indigo-300 md:size-7" />
 
-              <div className="flex flex-grow flex-col text-wrap">
+              <div className="flex flex-grow flex-col gap-0 text-wrap">
                 <h3 className="text-base">Add social links</h3>
-                <p className="text-xs font-normal text-muted-foreground md:text-sm">
-                  Choose from the list of available predefined social links
+                <p className="text-xs font-normal text-muted-foreground">
+                  Choose from a list of available predefined social links
                 </p>
               </div>
+
+              <ChevronDownIcon className="size-5" />
             </section>
           </Button>
         </DialogTrigger>
@@ -75,7 +78,7 @@ export const AddSocialLinks = ({ username }: { username: string }) => {
           className="h-auto cursor-pointer select-none items-start gap-2 px-4 py-2 shadow-lg shadow-indigo-200 transition-all hover:shadow-indigo-300 md:items-center md:gap-5"
         >
           <section>
-            <BackpackIcon className="mt-1 size-5 text-indigo-300 sm:mt-0 md:size-7" />
+            <Perspective className="size-5 text-indigo-300 md:size-7" />
 
             <div className="flex flex-grow flex-col text-wrap">
               <h3 className="text-base">Add social links</h3>
@@ -94,6 +97,10 @@ export const AddSocialLinks = ({ username }: { username: string }) => {
             Choose from the list of the predefined links or create a new one.
           </DrawerDescription>
         </DrawerHeader>
+
+        <div className="px-4">
+          <SocialLInksForm username={username} onClose={() => setOpen(false)} />
+        </div>
 
         <DrawerFooter className="pt-2">
           <DrawerClose asChild>

@@ -1,8 +1,8 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { FloppyDisk } from "@phosphor-icons/react/dist/ssr";
 import { Cross2Icon, PlusIcon } from "@radix-ui/react-icons";
-import { SaveIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
@@ -190,7 +190,7 @@ export const ContactDataForm = ({
           className="grid h-max grid-cols-1 gap-6 rounded-lg border bg-white/30 p-6"
         >
           <Alert variant="indigo">
-            <SaveIcon size={16} />
+            <FloppyDisk size={16} />
 
             <AlertTitle>{t("autosave")}</AlertTitle>
             <AlertDescription>

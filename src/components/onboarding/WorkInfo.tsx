@@ -1,23 +1,21 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Spinner } from "@phosphor-icons/react";
+import { ArrowLeftIcon } from "@radix-ui/react-icons";
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
 import { useQueryStates } from "nuqs";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { z } from "zod";
+import { type z } from "zod";
+import { useAutoSaveFormData } from "~/lib/hooks/use-auto-save";
 import { editViewerContactSchema } from "~/server/api/schemas.zod";
-import { RouterOutputs } from "~/trpc/react";
-import { api } from "~/trpc/react";
-import { contactStepParsers } from "./contactStep.parsers";
-import { Form, FormControl, FormField, FormItem, FormLabel } from "../ui/form";
-import { Input } from "../ui/input";
-import { Spinner } from "@phosphor-icons/react";
-import { SaveIcon } from "lucide-react";
-import { Alert, AlertTitle, AlertDescription } from "../ui/alert";
+import { api, type RouterOutputs } from "~/trpc/react";
+import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
-import { ArrowLeftIcon } from "@radix-ui/react-icons";
-import { useAutoSaveFormData } from "~/lib/hooks/use-auto-save";
+import { Form, FormControl, FormField, FormItem, FormLabel } from "../ui/form";
+import { Input } from "../ui/input";
+import { contactStepParsers } from "./contactStep.parsers";
+import { FloppyDisk } from "@phosphor-icons/react/dist/ssr";
 
 export const WorkInfo = ({ initialData }: { initialData: RouterOutputs["vCard"]["get"] }) => {
   const [_, update] = useQueryStates(contactStepParsers, { history: "push" });
@@ -85,7 +83,7 @@ export const WorkInfo = ({ initialData }: { initialData: RouterOutputs["vCard"][
           onSubmit={form.handleSubmit(onSubmit)}
         >
           <Alert variant="indigo" className="relative">
-            <SaveIcon size={16} />
+            <FloppyDisk size={16} />
 
             <AlertTitle>{t("autosave")}</AlertTitle>
 

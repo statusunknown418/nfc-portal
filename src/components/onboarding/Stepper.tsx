@@ -7,12 +7,11 @@ import {
   PersonIcon,
   RulerHorizontalIcon,
 } from "@radix-ui/react-icons";
-import { ShoppingBagIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useSelectedLayoutSegment } from "next/navigation";
 import { cn } from "~/lib/utils";
 import { type OnboardingKeys } from "./onboarding.parsers";
-import { Divider } from "../ui/separator";
+import { ShoppingCart } from "@phosphor-icons/react";
 
 export const Stepper = () => {
   const step = useSelectedLayoutSegment() as OnboardingKeys;
@@ -74,7 +73,7 @@ export const Stepper = () => {
       ),
       RenderIcon: ({ className }) => (
         <section className={cn("py-2", className)}>
-          <ShoppingBagIcon className="size-5 md:size-7" />
+          <ShoppingCart className="size-5 md:size-7" />
         </section>
       ),
     },

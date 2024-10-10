@@ -44,7 +44,7 @@ export const PortalPreview = ({
         onLoad={() => setLoaded(true)}
         src={`/${username}?ktp=${portal?.pageHashKey}&bypassKey=${bypassKey}`}
         loading="lazy"
-        className="h-full min-h-[640px] w-full"
+        className="min-h-[640px] w-full"
       />
     </>
   );

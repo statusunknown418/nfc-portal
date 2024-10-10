@@ -1,5 +1,6 @@
 "use client";
 
+import { ArrowLineRight } from "@phosphor-icons/react";
 import { TrackNextIcon } from "@radix-ui/react-icons";
 import confetti from "canvas-confetti";
 import { useTranslations } from "next-intl";
@@ -88,8 +89,11 @@ export const FinaleClientAlert = () => {
       <Confetti ref={confettiRef} className="absolute left-0 top-0 z-0 size-full" />
 
       {data?.hasPurchasedCard ? (
-        <Button size="lg" variant="primary_ghost" className="z-10">
-          Complete onboarding
+        <Button asChild size="lg" variant="primary_ghost" className="z-10">
+          <Link href="/admin">
+            Complete onboarding
+            <ArrowLineRight size={16} />
+          </Link>
         </Button>
       ) : (
         <div className="z-10 mt-4 flex gap-2">

@@ -1,10 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { api } from "~/trpc/react";
-import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
+import { api, type RouterOutputs } from "~/trpc/react";
 
-export const GetYours = ({ shouldShow = true }: { shouldShow?: boolean }) => {
+export const GetYours = ({
+  shouldShow = true,
+  colors,
+}: {
+  shouldShow?: boolean;
+  colors: RouterOutputs["visuals"]["get"];
+}) => {
   const [show, setShow] = useState(shouldShow);
   const _action = api.portals.removeJoinBanner.useMutation({
     onSuccess: () => {
@@ -17,20 +22,23 @@ export const GetYours = ({ shouldShow = true }: { shouldShow?: boolean }) => {
   }
 
   return (
-    <div className="w-full px-4">
-      <Alert
-        variant="indigo"
-        className="w-full text-center"
+    <div className="mt-4 w-full px-4">
+      <section
+        className="flex w-full flex-col items-center justify-center border p-3"
         style={{
-          borderRadius: "base",
+          border: `2px dashed ${colors?.theme.colors.border}`,
+          borderRadius: "1rem",
         }}
       >
-        <AlertTitle className="font-semibold">🚀 Powered by ConCard</AlertTitle>
-
-        <AlertDescription className="text-balance text-xs">
-          Get your own personalized NFC business card and digital portal!
-        </AlertDescription>
-      </Alert>
+        <h2
+          className="text-sm font-semibold uppercase"
+          style={{
+            color: colors?.theme.colors.subtle,
+          }}
+        >
+          🚀 Powered by ConCard
+        </h2>
+      </section>
     </div>
   );
 };

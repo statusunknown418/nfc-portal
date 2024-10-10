@@ -92,7 +92,7 @@ export const PortalContent = ({
         color: portal.data.theme.colors.foreground,
       }}
     >
-      <article className="flex h-full w-full max-w-[400px] flex-col items-center gap-4 sm:shadow-lg lg:max-w-[580px] xl:rounded-3xl xl:border xl:border-border/50">
+      <article className="flex h-full w-full max-w-[400px] flex-col items-center gap-4 sm:shadow-lg lg:max-w-[580px] xl:rounded-3xl">
         <section
           className={cn(
             "relative z-0 aspect-square min-h-[330px] overflow-hidden bg-cover bg-center bg-no-repeat md:min-h-[400px] lg:min-h-[580px] lg:rounded-t-xl",
@@ -102,7 +102,7 @@ export const PortalContent = ({
             },
           )}
           style={{
-            maskImage: "radial-gradient(100% 100% at center top, #ffffff 30%, transparent 90%)",
+            maskImage: "linear-gradient(to bottom, #ffffff 35%, transparent 100%)",
             backgroundImage: `url(${portal.data.image})`,
           }}
         >
@@ -131,6 +131,15 @@ export const PortalContent = ({
           )}
         </header>
 
+        {!portal.data.hasContactInfoLocked && (
+          <ContactInfo
+            unlocked={portal.unlocked}
+            data={portal.data?.contactJSON}
+            theme={portal.data?.theme}
+            profilePicture={portal.data.image}
+          />
+        )}
+
         <article className="flex w-full flex-wrap justify-center gap-4">
           {portal.data.links
             .filter((item) => item.socialType)
@@ -140,7 +149,7 @@ export const PortalContent = ({
                 rel="external"
                 className="flex h-8 w-10 items-center justify-center overflow-hidden rounded-md transition-all active:scale-95"
                 style={{
-                  color: portal.data.theme.colors.subtle,
+                  color: portal.data.theme.colors.border,
                 }}
                 href={{ pathname: link.url }}
                 key={link.id}
@@ -183,15 +192,6 @@ export const PortalContent = ({
         </article>
 
         <section className="grid w-full grid-cols-1 gap-4 px-4">
-          {!portal.data.hasContactInfoLocked && (
-            <ContactInfo
-              unlocked={portal.unlocked}
-              data={portal.data?.contactJSON}
-              theme={portal.data?.theme}
-              profilePicture={portal.data.image}
-            />
-          )}
-
           <section className="flex w-full flex-col gap-2">
             {!portal.data.links.length && (
               <Alert
@@ -218,12 +218,12 @@ export const PortalContent = ({
             {portal.data.links
               .filter((item) => !item.socialType)
               .map((link) => (
-                <LinkViewer link={link} key={link.id} buttonStyles={portal.data.theme.buttons} />
+                <LinkViewer link={link} key={link.id} styles={portal.data.theme} />
               ))}
           </section>
         </section>
 
-        <GetYours />
+        <GetYours colors={portal.data} />
       </article>
     </section>
   );

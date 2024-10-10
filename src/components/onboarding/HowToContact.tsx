@@ -1,7 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Spinner } from "@phosphor-icons/react";
+import { ArrowRight, Spinner } from "@phosphor-icons/react";
 import { ArrowLeftIcon, Cross2Icon, PlusIcon } from "@radix-ui/react-icons";
-import { ArrowRightIcon, SaveIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useQueryStates } from "nuqs";
@@ -19,6 +18,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { contactStepParsers } from "./contactStep.parsers";
 import { useAutoSaveFormData } from "~/lib/hooks/use-auto-save";
 import { Label } from "../ui/label";
+import { FloppyDisk } from "@phosphor-icons/react/dist/ssr";
 
 export const HowToContact = ({
   initialData,
@@ -121,7 +121,7 @@ export const HowToContact = ({
           onSubmit={form.handleSubmit(onSubmit)}
         >
           <Alert variant="indigo">
-            <SaveIcon size={16} />
+            <FloppyDisk size={16} />
 
             <AlertTitle>{t("autosave")}</AlertTitle>
             <AlertDescription>
@@ -301,7 +301,7 @@ export const HowToContact = ({
               }}
             >
               Finally some professional info
-              <ArrowRightIcon className="h-5 w-5" />
+              <ArrowRight className="h-5 w-5" />
             </Button>
           </article>
         </form>

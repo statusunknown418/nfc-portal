@@ -203,7 +203,7 @@ export const VisualCustomizationForm = ({
         >
           <h2 className="text-lg font-semibold">{t("themeCustomization.colors.title")}</h2>
 
-          <article className="grid grid-cols-2 gap-4">
+          <article className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <FormField
               control={form.control}
               name="theme.colors.background"

@@ -41,50 +41,32 @@ export const LinksViewRSC = ({ jwt }: { jwt: CustomJwtSessionClaims }) => {
         <PageEnabledWrapperRSC />
       </Suspense>
 
-      <Tabs defaultValue="links" className="relative mt-4 flex w-full flex-col gap-2">
-        <TabsList className="h-[44px] w-max justify-start rounded-full border border-primary/20">
-          <TabsTrigger
-            value="contact"
-            className="h-[36px] min-w-32 flex-grow rounded-full border border-transparent data-[state=active]:border-indigo-500 data-[state=active]:bg-indigo-100 data-[state=active]:font-semibold data-[state=active]:text-indigo-600"
-          >
-            {t("tabs.contact")}
-          </TabsTrigger>
+      <article className="mt-4 flex w-full flex-col gap-2 sm:flex-row sm:items-center">
+        <AddSocialLinks username={jwt.username} />
 
-          <TabsTrigger
-            value="links"
-            className="h-[36px] min-w-32 flex-grow rounded-full border border-transparent data-[state=active]:border-indigo-500 data-[state=active]:bg-indigo-100 data-[state=active]:font-semibold data-[state=active]:text-indigo-600"
-          >
-            {t("tabs.links")}
-          </TabsTrigger>
-        </TabsList>
+        <div className="flex items-center gap-2">
+          <NewLinkDrawer username={jwt.username} />
 
-        <TabsContent value="links">
-          <article className="flex flex-col gap-2 sm:flex-row sm:items-center">
-            <AddSocialLinks username={jwt.username} />
+          <TooltipProvider>
+            <Tooltip delayDuration={0}>
+              <TooltipTrigger asChild>
+                <Button size="iconXl" variant="outline" className="opacity-50">
+                  <UploadIcon />
+                </Button>
+              </TooltipTrigger>
 
-            <div className="flex items-center gap-2">
-              <NewLinkDrawer username={jwt.username} />
+              <TooltipContent className="text-sm">
+                {common("comingSoon")}{" "}
+                <Button variant="link" className="text-sm">
+                  {common("requestAction")}
+                </Button>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </div>
+      </article>
 
-              <TooltipProvider>
-                <Tooltip delayDuration={0}>
-                  <TooltipTrigger asChild>
-                    <Button size="iconXl" variant="outline" className="opacity-50">
-                      <UploadIcon />
-                    </Button>
-                  </TooltipTrigger>
-
-                  <TooltipContent className="text-sm">
-                    {common("comingSoon")}{" "}
-                    <Button variant="link" className="text-sm">
-                      {common("requestAction")}
-                    </Button>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-            </div>
-          </article>
-
-          {/* <Alert variant="success" className="flex gap-4 p-4">
+      {/* <Alert variant="success" className="flex gap-4 p-4">
             <Switch />
 
             <div>
@@ -99,19 +81,15 @@ export const LinksViewRSC = ({ jwt }: { jwt: CustomJwtSessionClaims }) => {
             </div>
           </Alert> */}
 
-          <article className="mt-4 flex h-full w-full flex-col gap-4">
-            <Suspense fallback={<LinksWrapperLoader />}>
-              <LinksWrapperRSC />
-            </Suspense>
-          </article>
-        </TabsContent>
-
-        <TabsContent value="contact">
-          <Suspense fallback={<ContactDataLoading />}>
-            <ContactDataWrapper />
-          </Suspense>
-        </TabsContent>
-      </Tabs>
+      <article className="mt-2 flex h-full w-full flex-col gap-4">
+        <Suspense fallback={<LinksWrapperLoader />}>
+          <LinksWrapperRSC />
+        </Suspense>
+      </article>
+      {/* 
+      <Suspense fallback={<ContactDataLoading />}>
+        <ContactDataWrapper />
+      </Suspense> */}
     </div>
   );
 };

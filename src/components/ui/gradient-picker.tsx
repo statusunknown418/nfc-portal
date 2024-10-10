@@ -1,4 +1,4 @@
-import { Paintbrush, Pipette } from "lucide-react";
+import { Eyedropper, PaintBrush } from "@phosphor-icons/react";
 import { useCallback, useMemo } from "react";
 import { toast } from "sonner";
 import useEyeDropper from "use-eye-dropper";
@@ -32,27 +32,28 @@ export function GradientPicker({
     "#ffffff",
     "#FFFEF6",
     "#E2E2E2",
-    "#ff75c3",
-    "#ffa647",
-    "#ffe83f",
-    "#9fff5b",
     "#70e2ff",
-    "#cd93ff",
-    "#09203f",
-    "#4338ca",
-    "#0c2c2c",
     "#00c6ff",
     "#4facfe",
-    "#0ba360",
-    "#fdfc47",
-    "#8a2be2",
     "#40e0d0",
-    "#fcc5e4",
+    "#9fff5b",
+    "#0ba360",
+    "#ffa647",
+    "#ffe83f",
+    "#fdfc47",
+    "#ff75c3",
     "#ff7882",
+    "#fcc5e4",
     "#c8699e",
+    "#cd93ff",
     "#7046aa",
+    "#8a2be2",
     "#0c1db8",
     "#020f75",
+    "#4338ca",
+    "#09203f",
+    "#0c2c2c",
+    "#09090b",
   ];
 
   const gradients = [
@@ -112,7 +113,7 @@ export function GradientPicker({
         <Button
           variant={"outline"}
           className={cn(
-            "h-[36px] w-[240px] justify-start text-left font-normal",
+            "h-[36px] w-full justify-start text-left font-normal md:w-[240px]",
             !background && "text-muted-foreground",
             className,
           )}
@@ -124,7 +125,7 @@ export function GradientPicker({
                 style={{ background }}
               ></div>
             ) : (
-              <Paintbrush className="h-5 w-5" />
+              <PaintBrush className="h-5 w-5" />
             )}
             <div className="flex-1 truncate">{background ? background : "Pick a color"}</div>
           </div>
@@ -192,7 +193,7 @@ export function GradientPicker({
 
         {isSupported() ? (
           <Button onClick={pickColor} className="mt-2 w-full" size="sm" variant="outline">
-            <Pipette size={14} />
+            <Eyedropper size={14} />
             Pick another color
           </Button>
         ) : (

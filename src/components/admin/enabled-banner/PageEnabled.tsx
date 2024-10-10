@@ -76,7 +76,7 @@ export const PageEnabled = ({
           <Link
             target="_blank"
             href={`https://concard.app/${data.username}?ktp=${data.pageHashKey}`}
-            className="text-base underline-offset-1 hover:text-indigo-500 hover:underline"
+            className="underline-offset-1 hover:text-indigo-500 hover:underline"
             onCopy={(e) => {
               e.stopPropagation();
               e.preventDefault();

@@ -1,13 +1,10 @@
 "use client";
 
-import { CellTower, Envelope, Mailbox, PhoneCall } from "@phosphor-icons/react";
-import { IdCardIcon } from "@radix-ui/react-icons";
-import Link from "next/link";
+import { DownloadIcon, IdCardIcon, Share2Icon } from "@radix-ui/react-icons";
 import vCardBuilder from "vcard-creator";
 import { cn, newShade } from "~/lib/utils";
 import { type ContactVCardType, type ThemeType } from "~/server/db/schema";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
-import { Button } from "../ui/button";
 
 export const ContactInfo = ({
   unlocked,
@@ -95,22 +92,23 @@ export const ContactInfo = ({
   }
 
   return (
-    <article className="flex flex-col gap-4">
+    <article className="flex w-full flex-col gap-4 px-4">
       <button
         onClick={handleImport}
         className={cn(
-          "flex h-14 w-full items-center justify-center gap-2 rounded-md font-medium",
+          "flex h-14 items-center justify-center gap-3 self-center rounded-lg bg-gradient-to-r px-5 text-sm font-semibold uppercase tracking-tight",
           // theme.buttons.variant === "pill" && "rounded-[34px]",
           // theme.buttons.variant === "rounded" && "rounded-lg",
           // theme.buttons.variant === "square" && "rounded-none",
           // theme.buttons.variant === "small-radius" && "rounded-sm",
         )}
         style={{
-          border: `1px ${theme.buttons.borderStyle} ${theme.colors.subtle}`,
-          color: theme.colors.subtle,
+          color: theme.buttons.textColor,
+          fontStyle: theme.buttons.fontStyle,
+          background: theme.buttons.background,
         }}
       >
-        <IdCardIcon className="h-5 w-5" />
+        <IdCardIcon className="size-[22px]" />
         Import contact
       </button>
     </article>

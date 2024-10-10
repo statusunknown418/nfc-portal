@@ -14,9 +14,8 @@ import { Button } from "../ui/button";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel } from "../ui/form";
 import { Input } from "../ui/input";
 import { contactStepParsers } from "./contactStep.parsers";
-import { Spinner } from "@phosphor-icons/react";
+import { FloppyDisk, Spinner } from "@phosphor-icons/react";
 import { Alert, AlertTitle, AlertDescription } from "../ui/alert";
-import { SaveIcon } from "lucide-react";
 import { Badge } from "../ui/badge";
 import { useRouter } from "next/navigation";
 
@@ -81,7 +80,7 @@ export const PersonalInfoForm = ({
           onSubmit={form.handleSubmit(onSubmit)}
         >
           <Alert variant="indigo">
-            <SaveIcon size={16} />
+            <FloppyDisk size={16} />
 
             <AlertTitle>{t("autosave")}</AlertTitle>
             <AlertDescription>

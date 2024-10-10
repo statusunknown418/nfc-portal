@@ -29,10 +29,10 @@ import { Divider } from "../ui/separator";
 
 export const LinkViewer = ({
   link,
-  buttonStyles,
+  styles,
 }: {
   link: RouterOutputs["links"]["all"][number];
-  buttonStyles: ThemeType["buttons"];
+  styles: ThemeType;
 }) => {
   const t = useTranslations("admin");
   const [copied, setCopied] = useState(false);
@@ -40,15 +40,15 @@ export const LinkViewer = ({
   const commonProps: Pick<ComponentProps<"div">, "className" | "style"> = {
     style: {
       borderWidth: "1px",
-      borderColor: buttonStyles.borderColor ?? "transparent",
-      borderStyle: buttonStyles.borderStyle,
-      backgroundColor: buttonStyles.background,
+      borderColor: styles.buttons.borderColor ?? "transparent",
+      borderStyle: styles.buttons.borderStyle,
+      background: styles.colors.subtle,
     },
     className: cn(
-      "flex h-16 w-full transition-all hover:scale-105 items-center cursor-pointer justify-between gap-2 text-sm active:ring active:ring-ring active:ring-offset-1 sm:text-base md:h-20 md:px-4 lg:px-6",
-      buttonStyles.variant === "square" && "rounded-none px-2",
-      buttonStyles.variant === "pill" && "rounded-[34px] px-2.5",
-      buttonStyles.variant === "rounded" && "rounded-lg px-2",
+      "flex h-12 w-full transition-all hover:scale-105 items-center cursor-pointer justify-between gap-2 text-sm active:ring active:ring-ring active:ring-offset-1 sm:text-base md:h-20 md:px-4 lg:px-6",
+      styles.buttons.variant === "square" && "rounded-none px-2",
+      styles.buttons.variant === "pill" && "rounded-[34px] px-2.5",
+      styles.buttons.variant === "rounded" && "rounded-lg px-2",
     ),
   };
 
@@ -119,9 +119,9 @@ export const LinkViewer = ({
       <div
         className="flex flex-grow justify-center text-center"
         style={{
-          color: buttonStyles.textColor,
-          fontStyle: buttonStyles.fontStyle,
-          fontWeight: buttonStyles.fontWeight,
+          color: styles.buttons.textColor,
+          fontStyle: styles.buttons.fontStyle,
+          fontWeight: styles.buttons.fontWeight,
         }}
       >
         {link.displayText}
