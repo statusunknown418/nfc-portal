@@ -95,7 +95,7 @@ export const PortalContent = ({
       <article className="flex h-full w-full max-w-[400px] flex-col items-center gap-4 sm:shadow-lg lg:max-w-[580px] xl:rounded-3xl">
         <section
           className={cn(
-            "relative z-0 aspect-square min-h-[330px] overflow-hidden bg-cover bg-center bg-no-repeat md:min-h-[400px] lg:min-h-[580px] lg:rounded-t-xl",
+            "relative z-0 min-h-[330px] w-full overflow-hidden bg-cover bg-center bg-no-repeat md:min-h-[400px] lg:min-h-[580px] lg:rounded-t-xl",
             {
               "rounded-full": portal.data.avatarShape === "circle",
               "rounded-none": portal.data.avatarShape === "square",
@@ -140,7 +140,7 @@ export const PortalContent = ({
           />
         )}
 
-        <article className="flex w-full flex-wrap justify-center gap-4">
+        <article className="flex w-full max-w-[calc(100%-30px)] flex-wrap justify-center gap-4">
           {portal.data.links
             .filter((item) => item.socialType)
             .map((link) => (

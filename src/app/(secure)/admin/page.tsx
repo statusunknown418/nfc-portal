@@ -35,7 +35,7 @@ export default async function AdminPage() {
     <section className="flex flex-col gap-4 lg:grid lg:grid-cols-2 lg:justify-between">
       <LinksViewRSC jwt={sessionClaims} />
 
-      <aside className="hidden flex-grow gap-4 py-6 pl-6 ring-0 lg:fixed lg:inset-0 lg:top-10">
+      <aside className="relative hidden flex-grow gap-4 py-6 pl-6 ring-0 lg:relative lg:block">
         <section className="flex h-full flex-col items-center justify-center gap-8">
           <Suspense>
             {!!username && (
