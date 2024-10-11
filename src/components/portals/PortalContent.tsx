@@ -14,6 +14,7 @@ import { Divider } from "../ui/separator";
 import { ContactInfo } from "./ContactInfo";
 import { GetYours } from "./GetYours";
 import { LinkViewer } from "./LinkViewer";
+import Image from "next/image";
 
 export const PortalContent = ({
   initialData,
@@ -101,11 +102,16 @@ export const PortalContent = ({
               "rounded-none": portal.data.avatarShape === "square",
             },
           )}
-          style={{
-            maskImage: "linear-gradient(to bottom, #ffffff 35%, transparent 100%)",
-            backgroundImage: `url(${portal.data.image})`,
-          }}
         >
+          <Image
+            src={portal.data.image ?? ""}
+            alt="portal-avatar"
+            layout="fill"
+            style={{
+              maskImage: "linear-gradient(to bottom, #ffffff 35%, transparent 100%)",
+            }}
+          />
+
           <div
             className="absolute bottom-0 left-0 right-0 h-2/3 w-full"
             style={{
