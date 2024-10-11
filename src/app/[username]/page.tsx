@@ -5,7 +5,7 @@ import { api } from "~/trpc/server";
 
 type Props = {
   params: { username: string };
-  searchParams: Record<string, string | string[] | undefined>;
+  searchParams: { ktp: string };
 };
 
 export async function generateMetadata(
@@ -39,9 +39,9 @@ export async function generateMetadata(
   };
 }
 
-export async function generateViewport({ params }: Props): Promise<Viewport> {
+export async function generateViewport({ params, searchParams }: Props): Promise<Viewport> {
   const username = decodeURIComponent(params.username);
-  const portal = await api.portals.get({ username: username });
+  const portal = await api.portals.get({ username: username, fallbackPassword: searchParams.ktp });
 
   if (!portal.data) {
     return {
@@ -68,19 +68,13 @@ export default async function UsernamePage({
   params: { username: string };
 }) {
   const username = decodeURIComponent(params.username);
-  const portal = await api.portals.get({ username: username });
+  const portal = await api.portals.get({ username: username, fallbackPassword: searchParams.ktp });
 
-  const tab = searchParams.selectedTab as "contact" | "links";
-
-  if (!portal.data?.hasPageActive && searchParams.bypassKey !== portal.data?.id) {
+  if (!portal.data?.hasPageActive && !searchParams.ktp) {
     return <NotFound />;
   }
 
   return (
-    <PortalContent
-      username={username}
-      initialData={portal}
-      selectedTab={(tab ?? portal.data?.hasContactInfoLocked) ? "links" : "contact"}
-    />
+    <PortalContent username={username} initialData={portal} fallbackPassword={searchParams.ktp} />
   );
 }
