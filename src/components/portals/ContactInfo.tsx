@@ -5,6 +5,7 @@ import vCardBuilder from "vcard-creator";
 import { cn } from "~/lib/utils";
 import { type ContactVCardType, type ThemeType } from "~/server/db/schema";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
+import { useTranslations } from "next-intl";
 
 export const ContactInfo = ({
   unlocked,
@@ -17,10 +18,12 @@ export const ContactInfo = ({
   theme: ThemeType;
   profilePicture: string | null;
 }) => {
+  const t = useTranslations("common");
+
   if (!unlocked) {
     return (
       <Alert variant="destructive">
-        <AlertTitle className="text-center">🔒 Contact info not visible</AlertTitle>
+        <AlertTitle className="text-center">🔒 {t("contactLocked.title")}</AlertTitle>
 
         <AlertDescription
           className="text-sm"
@@ -28,8 +31,7 @@ export const ContactInfo = ({
             color: theme.colors.foreground,
           }}
         >
-          This will be automatically unlocked when the owner&apos;s card is approached to your
-          phone.
+          {t("contactLocked.description")}
         </AlertDescription>
       </Alert>
     );

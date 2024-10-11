@@ -1,5 +1,6 @@
 "use client";
 
+import { SignUpButton } from "@clerk/nextjs";
 import { useState } from "react";
 import { api, type RouterOutputs } from "~/trpc/react";
 
@@ -22,23 +23,20 @@ export const GetYours = ({
   }
 
   return (
-    <div className="mt-4 w-full px-4">
-      <section
-        className="flex w-full flex-col items-center justify-center border p-3"
-        style={{
-          border: `2px dashed ${colors?.theme.colors.border}`,
-          borderRadius: "1rem",
-        }}
-      >
-        <h2
-          className="text-sm font-semibold uppercase"
+    <div className="px-4">
+      <SignUpButton>
+        <button
+          className="flex w-full flex-col items-center justify-center border p-3"
           style={{
-            color: colors?.theme.colors.subtle,
+            border: `1px dashed ${colors?.theme.buttons.borderColor}`,
+            background: colors?.theme.buttons.background,
+            color: colors?.theme.buttons.textColor,
+            borderRadius: "9999px",
           }}
         >
-          🚀 Powered by ConCard
-        </h2>
-      </section>
+          🚀 Join
+        </button>
+      </SignUpButton>
     </div>
   );
 };

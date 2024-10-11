@@ -562,6 +562,10 @@
     "requestFeatureDescription": "Siempre buscamos maneras de mejorar ConCard, si tienes una solicitud de funcionalidad, por favor háznoslo saber!",
     "askHelp": "Pedir ayuda",
     "saving": "Guardando",
+    "contactLocked": {
+      "title": "Información de contacto oculta",
+      "description": "La información de contact de esta persona está oculta y solo será visible al leer su tarjeta directamente o escanear el código QR"
+    },
     "errors": {
       "somethingWentWrong": "Oops, algo salió mal",
       "recognitionFailed": "No se pudo reconocer tu identidad",

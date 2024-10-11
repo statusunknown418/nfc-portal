@@ -562,6 +562,10 @@
     "requestFeature": "Request a feature",
     "saving": "Saving",
     "requestFeatureDescription": "We're always looking for ways to improve ConCard, if you have a feature request, please let us know!",
+    "contactLocked": {
+      "title": "Contact info locked",
+      "description": "This person's contact info is hidden and will only be visible when reading their card directly or scanning the QR code"
+    },
     "errors": {
       "somethingWentWrong": "Something went wrong",
       "recognitionFailed": "Looks like we were unable to recognize your identity",
