@@ -45,7 +45,7 @@ export const LinkViewer = ({
       background: styles.colors.subtle,
     },
     className: cn(
-      "flex h-12 w-full transition-all hover:scale-105 items-center cursor-pointer justify-between gap-2 text-sm active:ring active:ring-ring active:ring-offset-1 sm:text-base md:h-20 md:px-4 lg:px-6",
+      "flex h-14 w-full transition-all hover:scale-105 items-center cursor-pointer justify-between gap-2 text-sm active:ring active:ring-ring active:ring-offset-1 sm:text-base md:h-20 md:px-4 lg:px-6",
       styles.buttons.variant === "square" && "rounded-none px-2",
       styles.buttons.variant === "pill" && "rounded-[34px] px-2.5",
       styles.buttons.variant === "rounded" && "rounded-lg px-2",
