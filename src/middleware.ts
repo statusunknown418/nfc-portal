@@ -11,10 +11,6 @@ export default clerkMiddleware((auth, req) => {
     auth().protect();
   }
 
-  // if (!req.nextUrl.searchParams.has(PORTAL_QUERY)) {
-  //   return NextResponse.next({ headers });
-  // }
-
   const portalPassword = req.nextUrl.searchParams.get(PORTAL_QUERY);
   headers.set("set-cookie", `${PORTAL_KEY}=${portalPassword}; SameSite=Strict; HttpOnly`);
 

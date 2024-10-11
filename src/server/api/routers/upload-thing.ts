@@ -1,12 +1,13 @@
 import { getAuth } from "@clerk/nextjs/server";
 import { and, eq } from "drizzle-orm";
 import { createUploadthing } from "uploadthing/next";
-import { UploadThingError } from "uploadthing/server";
+import { UploadThingError, UTApi } from "uploadthing/server";
 import { z } from "zod";
 import { db } from "~/server/db";
 import { links, users } from "~/server/db/schema";
 
 const f = createUploadthing();
+export const utAPI = new UTApi();
 
 export const uploadThingRouter = {
   thumbnails: f({ image: { maxFileSize: "4MB", minFileCount: 1, maxFileCount: 1 } })

@@ -121,7 +121,7 @@ export const ContactInfo = ({
         }}
       >
         <IdCardIcon className="size-[22px]" />
-        Import contact
+        {t("importContact")}
       </button>
     </article>
   );

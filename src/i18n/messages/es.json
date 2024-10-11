@@ -382,7 +382,7 @@
           "removeDesign": "Eliminar diseño",
           "removeLogo": "Eliminar logo",
           "details": {
-            "title": "Qué se mostrará en tu tarjeta?",
+            "title": "Elige los detalles que quieres mostrar",
             "description": "La información de contacto que agregaste en el PRIMER paso será utilizada para personalizar tu tarjeta como decidas.",
             "name": "Tu nombre",
             "jobTitle": "Cargo / Puesto",
@@ -393,7 +393,7 @@
             "back": "Posterior"
           },
           "templates": {
-            "title": "Plantillas",
+            "title": "Escoge un diseño",
             "details": "Ver ambos lados",
             "detailsTitle": "Vista detallada",
             "front": "Vista previa frontal",
@@ -562,6 +562,7 @@
     "requestFeatureDescription": "Siempre buscamos maneras de mejorar ConCard, si tienes una solicitud de funcionalidad, por favor háznoslo saber!",
     "askHelp": "Pedir ayuda",
     "saving": "Guardando",
+    "importContact": "Guardar contacto",
     "contactLocked": {
       "title": "Información de contacto oculta",
       "description": "La información de contact de esta persona está oculta y solo será visible al leer su tarjeta directamente o escanear el código QR"

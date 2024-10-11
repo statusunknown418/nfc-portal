@@ -93,7 +93,9 @@ export const LinkViewer = ({
           <DrawerFooter>
             <DrawerClose asChild>
               <Button asChild>
-                <Link href={{ pathname: link.url }}>{link.buttonLabel}</Link>
+                <Link href={{ pathname: link.url }}>
+                  {!!link.buttonLabel ? link.buttonLabel : "See more"}
+                </Link>
               </Button>
             </DrawerClose>
           </DrawerFooter>

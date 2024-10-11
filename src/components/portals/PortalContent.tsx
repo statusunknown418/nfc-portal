@@ -2,6 +2,7 @@
 
 import { ArrowLeftIcon, ArrowRightIcon, ExclamationTriangleIcon } from "@radix-ui/react-icons";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 import Link from "next/link";
 import { useFrameSyncReceiver } from "~/lib/hooks/use-frame-sync";
 import { cn } from "~/lib/utils";
@@ -14,15 +15,15 @@ import { Divider } from "../ui/separator";
 import { ContactInfo } from "./ContactInfo";
 import { GetYours } from "./GetYours";
 import { LinkViewer } from "./LinkViewer";
-import Image from "next/image";
 
 export const PortalContent = ({
   initialData,
   username,
+  fallbackPassword,
 }: {
   initialData: RouterOutputs["portals"]["get"];
   username: string;
-  selectedTab: "links" | "contact";
+  fallbackPassword?: string;
 }) => {
   const utils = api.useUtils();
   const t = useTranslations("admin");
@@ -32,13 +33,13 @@ export const PortalContent = ({
     isRefetching,
     refetch,
   } = api.portals.get.useQuery(
-    { username: username },
+    { username: username, fallbackPassword },
     { initialData, refetchOnWindowFocus: false, refetchOnMount: false },
   );
 
   useFrameSyncReceiver(() => {
     void Promise.all([utils.viewer.previewPortal.refetch(), refetch()]);
-  }) as string;
+  });
 
   if (!portal.data) {
     return (
@@ -96,7 +97,7 @@ export const PortalContent = ({
       <article className="flex h-full w-full max-w-[430px] flex-col items-center gap-4 sm:shadow-lg lg:max-w-[580px] xl:rounded-3xl">
         <section
           className={cn(
-            "relative z-0 aspect-[4/3] min-h-[330px] w-full overflow-hidden bg-cover bg-center bg-no-repeat md:min-h-[400px] lg:min-h-[580px] lg:rounded-t-xl",
+            "relative z-0 min-h-[330px] w-full overflow-hidden bg-cover bg-center bg-no-repeat md:min-h-[400px] lg:min-h-[580px] lg:rounded-t-xl",
             {
               "rounded-full": portal.data.avatarShape === "circle",
               "rounded-none": portal.data.avatarShape === "square",
@@ -107,6 +108,7 @@ export const PortalContent = ({
             src={portal.data.image ?? ""}
             alt="portal-avatar"
             layout="fill"
+            className="object-cover"
             style={{
               maskImage: "linear-gradient(to bottom, #ffffff 35%, transparent 100%)",
             }}
