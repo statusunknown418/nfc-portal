@@ -1,11 +1,11 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
+import { PORTAL_KEY, PORTAL_QUERY } from "./lib/utils";
 
 const isProtectedRoute = createRouteMatcher(["/admin(.*)", "/business", "/onboarding(.*)"]);
 
 export default clerkMiddleware((auth, req) => {
   const headers = new Headers(req.headers);
-  const nextUrl = req.nextUrl;
 
   if (isProtectedRoute(req)) {
     auth().protect();
@@ -15,14 +15,10 @@ export default clerkMiddleware((auth, req) => {
   //   return NextResponse.next({ headers });
   // }
 
-  // const portalPassword = req.nextUrl.searchParams.get(PORTAL_QUERY);
-  // headers.set("set-cookie", `${PORTAL_KEY}=${portalPassword}; SameSite=Strict; HttpOnly`);
+  const portalPassword = req.nextUrl.searchParams.get(PORTAL_QUERY);
+  headers.set("set-cookie", `${PORTAL_KEY}=${portalPassword}; SameSite=Strict; HttpOnly`);
 
-  // nextUrl.searchParams.delete(PORTAL_QUERY);
-
-  return NextResponse.redirect(nextUrl, {
-    headers,
-  });
+  return NextResponse.next({ headers });
 });
 
 export const config = {

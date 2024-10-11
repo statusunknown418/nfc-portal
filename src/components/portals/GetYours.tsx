@@ -26,7 +26,7 @@ export const GetYours = ({
     <div className="px-4">
       <SignUpButton>
         <button
-          className="flex w-full flex-col items-center justify-center border p-3"
+          className="flex w-full flex-col items-center justify-center border p-3 font-medium"
           style={{
             border: `1px dashed ${colors?.theme.buttons.borderColor}`,
             background: colors?.theme.buttons.background,
@@ -34,7 +34,7 @@ export const GetYours = ({
             borderRadius: "9999px",
           }}
         >
-          🚀 Join
+          🚀 Join Concard
         </button>
       </SignUpButton>
     </div>
