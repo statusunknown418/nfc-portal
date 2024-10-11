@@ -4,7 +4,7 @@ import { CardPreview } from "~/components/admin/contact/CardPreview";
 import { api } from "~/trpc/server";
 
 export default async function NFCCardPage() {
-  const data = await api.vCard.get();
+  const [data, viewer] = await Promise.all([api.vCard.get(), api.viewer.get()]);
   const t = await getTranslations("admin.onboarding.steps.cardPreferences");
 
   return (
@@ -20,7 +20,10 @@ export default async function NFCCardPage() {
       </article>
 
       <div className="h-[calc(svh-100px)] md:h-[calc(svh-20rem)]">
-        <CardPreview cardData={data?.contactJSON ?? undefined} />
+        <CardPreview
+          cardData={data?.contactJSON ?? undefined}
+          urlQREncoder={`https://concard.app/${viewer?.username}?ktp=${viewer?.pageHashKey}`}
+        />
       </div>
     </section>
   );

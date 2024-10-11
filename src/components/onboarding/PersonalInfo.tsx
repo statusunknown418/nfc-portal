@@ -76,7 +76,7 @@ export const PersonalInfoForm = ({
 
       <Form {...form}>
         <form
-          className="relative flex w-full flex-col gap-4 rounded-lg border p-6"
+          className="relative flex w-full flex-col gap-4 rounded-t-xl border p-6"
           onSubmit={form.handleSubmit(onSubmit)}
         >
           <Alert variant="indigo">

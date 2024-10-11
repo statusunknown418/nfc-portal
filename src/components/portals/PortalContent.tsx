@@ -92,7 +92,7 @@ export const PortalContent = ({
         color: portal.data.theme.colors.foreground,
       }}
     >
-      <article className="flex h-full w-full max-w-[400px] flex-col items-center gap-4 sm:shadow-lg lg:max-w-[580px] xl:rounded-3xl">
+      <article className="flex h-full w-full max-w-[430px] flex-col items-center gap-4 sm:shadow-lg lg:max-w-[580px] xl:rounded-3xl">
         <section
           className={cn(
             "relative z-0 aspect-[4/3] min-h-[330px] w-full overflow-hidden bg-cover bg-center bg-no-repeat md:min-h-[400px] lg:min-h-[580px] lg:rounded-t-xl",
@@ -133,14 +133,16 @@ export const PortalContent = ({
           )}
         </header>
 
-        {!portal.data.hasContactInfoLocked && (
-          <ContactInfo
-            unlocked={portal.unlocked}
-            data={portal.data?.contactJSON}
-            theme={portal.data?.theme}
-            profilePicture={portal.data.image}
-          />
-        )}
+        <div className="w-full px-4">
+          {!portal.data.hasContactInfoLocked && (
+            <ContactInfo
+              unlocked={portal.unlocked}
+              data={portal.data?.contactJSON}
+              theme={portal.data?.theme}
+              profilePicture={portal.data.image}
+            />
+          )}
+        </div>
 
         <article className="flex w-full max-w-[75%] flex-wrap justify-center gap-4">
           {portal.data.links

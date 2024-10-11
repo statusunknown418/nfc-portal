@@ -5,6 +5,7 @@ import Link from "next/link";
 import { extractRouterConfig } from "uploadthing/server";
 import { ForwardRewindButtons } from "~/components/onboarding/ForwardRewindButtons";
 import { Stepper } from "~/components/onboarding/Stepper";
+import { LocaleSwitcherWrapper } from "~/components/shared/locale-switcher";
 import { Button } from "~/components/ui/button";
 import { uploadThingRouter } from "~/server/api/routers/upload-thing";
 
@@ -27,13 +28,17 @@ export default function OnboardingLayout({ children }: { children: React.ReactNo
           </Link>
         </Button>
 
-        <UserButton />
+        <div className="flex items-center gap-4">
+          <LocaleSwitcherWrapper />
+
+          <UserButton />
+        </div>
       </nav>
 
       <div className="relative mx-auto flex w-full max-w-[1500px] flex-col items-center gap-8 overflow-auto py-4 md:py-6">
         <Stepper />
 
-        <section className="mx-auto w-full max-w-6xl px-2 md:px-0 md:py-6">{children}</section>
+        <section className="w-full max-w-7xl px-4 md:px-0 md:py-6">{children}</section>
 
         <ForwardRewindButtons />
       </div>

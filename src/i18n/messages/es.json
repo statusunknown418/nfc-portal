@@ -250,6 +250,13 @@
         },
         "contact": {
           "title": "Información de contacto",
+          "howToContactTitle": "Como te gustaría ser contactado por tus clientes?",
+          "howToContactDescription": "Puedes añadir algunos números de teléfono y correos electrónicos",
+          "howToContact": "¿Cómo se comunicarán tus clientes?",
+          "nameDescription": "Puedes decidir si incluir solo un nombre o dos",
+          "lastNameDescription": "No es necesario incluir tus apellidos si así lo prefieres",
+          "optionalFields": "Nota: todos los campos son opcionales, pero completarlos te ayudará a dar una mejor experiencia a tus clientes.",
+          "professionalInfo": "Información profesional",
           "autosave": "Los datos se guardarán automáticamente!",
           "autosaveDescription": "Solo espera unos momentos y tus cambios se guardarán automáticamente.",
           "subtitle": "Completa tu información  de contacto, esto  será visible para las personas a las que acerques tu tarjeta. También puedes ocultarla de tu página pública (portal) si lo prefieres.",
@@ -371,7 +378,7 @@
             }
           },
           "frontDesign": "Diseño frontal",
-          "backDesign": "Diseño trasera",
+          "backDesign": "Diseño del reverso",
           "removeDesign": "Eliminar diseño",
           "removeLogo": "Eliminar logo",
           "details": {
@@ -554,6 +561,7 @@
     "requestFeature": "Solicitar una funcionalidad",
     "requestFeatureDescription": "Siempre buscamos maneras de mejorar ConCard, si tienes una solicitud de funcionalidad, por favor háznoslo saber!",
     "askHelp": "Pedir ayuda",
+    "saving": "Guardando",
     "errors": {
       "somethingWentWrong": "Oops, algo salió mal",
       "recognitionFailed": "No se pudo reconocer tu identidad",

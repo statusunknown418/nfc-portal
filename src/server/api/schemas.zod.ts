@@ -124,6 +124,8 @@ export const themeSchema: z.ZodType<ThemeType> = z.object({
   }),
 });
 
+export const cardTemplates = ["simple-logos", "edge-to-edge", "minimal-logos"] as const;
+export type CardTemplatesType = (typeof cardTemplates)[number];
 export const saveNFCPreferencesSchema = z.object({
   showName: z.boolean(),
   showJobTitle: z.boolean(),
@@ -134,7 +136,7 @@ export const saveNFCPreferencesSchema = z.object({
   showCompanyLogo: z.boolean(),
   companyLogoOnFront: z.boolean(),
   cardVariant: z.enum(["basic", "custom", "metallic"]),
-  cardTemplate: z.string().optional(),
+  cardTemplate: z.enum(cardTemplates).optional(),
   companyLogoURL: z.string().url().optional(),
   cardImageFront: z.string().url().optional(),
   cardImageBack: z.string().url().optional(),

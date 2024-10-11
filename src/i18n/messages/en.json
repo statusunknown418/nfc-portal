@@ -249,6 +249,13 @@
           "startButton": "Start onboarding"
         },
         "contact": {
+          "howToContact": "How to contact you?",
+          "howToContactTitle": "How do you want to be contacted?",
+          "howToContactDescription": "Add some phone numbers and emails",
+          "nameDescription": "You can decide if you want to include only a name or both",
+          "lastNameDescription": "It is not necessary to include your last names if you prefer to do so",
+          "optionalFields": "Heads up, all fields are optional, but completing them will help you to give a better experience to your clients.",
+          "professionalInfo": "Professional information",
           "title": "Contact information",
           "autosave": "This form auto-saves!",
           "autosaveDescription": "Just wait a few moments and your changes will be automatically saved.",
@@ -553,6 +560,7 @@
     "askHelp": "Ask for help",
     "requestAction": "To request this feature earlier, just click here",
     "requestFeature": "Request a feature",
+    "saving": "Saving",
     "requestFeatureDescription": "We're always looking for ways to improve ConCard, if you have a feature request, please let us know!",
     "errors": {
       "somethingWentWrong": "Something went wrong",

@@ -8,13 +8,16 @@ import { api } from "~/trpc/server";
 import { PortalPreview } from "./PortalPreview";
 import Link from "next/link";
 import { Button } from "~/components/ui/button";
+import { cn } from "~/lib/utils";
 
 export const PortalPreviewWrapperRSC = async ({
   username,
   hideAlerts = false,
+  className,
 }: {
   username: string;
   hideAlerts?: boolean;
+  className?: string;
 }) => {
   const portal = await api.viewer.previewPortal();
   const bypassKey = auth().userId;
@@ -35,7 +38,12 @@ export const PortalPreviewWrapperRSC = async ({
   }
 
   return (
-    <div className="fixed top-40 flex h-max flex-col items-center justify-center gap-4">
+    <div
+      className={cn(
+        "fixed top-40 flex h-max flex-col items-center justify-center gap-4",
+        className,
+      )}
+    >
       {!portal?.hasPurchasedCard && !hideAlerts && (
         <TooltipProvider delayDuration={0}>
           <Tooltip>
@@ -55,7 +63,7 @@ export const PortalPreviewWrapperRSC = async ({
 
       <article
         id="portal-device-preview"
-        className="max-h-[740px] min-h-[640px] w-full min-w-[330px] max-w-[330px] self-center justify-self-center overflow-hidden overscroll-y-contain rounded-[52px] border-[6px] border-primary/80 shadow-lg shadow-black"
+        className="relative h-full max-h-[740px] min-h-[640px] w-full min-w-[330px] max-w-[330px] self-center justify-self-center overflow-hidden overscroll-y-contain rounded-[52px] border-[6px] border-primary/80 shadow-lg shadow-black"
       >
         <PortalPreview initialData={portal} username={username} bypassKey={bypassKey} />
       </article>
@@ -77,7 +85,7 @@ export const PortalPreviewWrapperLoader = () => {
   return (
     <article
       id="portal-device-preview"
-      className="mx-auto flex h-full max-h-[640px] w-full min-w-[310px] max-w-[330px] items-center justify-center overflow-y-auto overscroll-y-contain rounded-[40px] border-4 shadow-lg"
+      className="fixed top-40 flex h-[640px] w-[330px] items-center justify-center rounded-[40px] border-4 shadow-lg"
     >
       <Spinner />
     </article>

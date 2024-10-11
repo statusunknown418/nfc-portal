@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { type CardTemplatesType } from "~/server/api/schemas.zod";
 import { type CardShippingStatus, type ThemeType } from "~/server/db/schema";
 
 export function cn(...inputs: ClassValue[]) {
@@ -229,8 +230,8 @@ export const imageURLToBase64 = async (url: string) => {
 export const basicCardTemplates = [
   {
     value: "simple-logos",
-    front: "https://picsum.photos/id/10/350/200",
-    back: "https://picsum.photos/id/11/350/200",
+    front: "/basic-templates/simple-logos.png",
+    back: "/basic-templates/simple-logos-back.png",
   },
   {
     value: "edge-to-edge",
@@ -242,7 +243,11 @@ export const basicCardTemplates = [
     front: "https://picsum.photos/id/20/350/200",
     back: "https://picsum.photos/id/21/350/200",
   },
-];
+] as {
+  value: CardTemplatesType;
+  front: string;
+  back: string;
+}[];
 
 export const PORTAL_KEY = "portal-password";
 export const PORTAL_QUERY = "ktp";

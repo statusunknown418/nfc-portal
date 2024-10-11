@@ -1,8 +1,8 @@
 "use client";
 
-import { DownloadIcon, IdCardIcon, Share2Icon } from "@radix-ui/react-icons";
+import { IdCardIcon } from "@radix-ui/react-icons";
 import vCardBuilder from "vcard-creator";
-import { cn, newShade } from "~/lib/utils";
+import { cn } from "~/lib/utils";
 import { type ContactVCardType, type ThemeType } from "~/server/db/schema";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 
@@ -102,7 +102,7 @@ export const ContactInfo = ({
   }
 
   return (
-    <article className="flex w-full flex-col gap-4 px-4">
+    <article className="flex w-full flex-col gap-4">
       <button
         onClick={handleImport}
         className={cn(

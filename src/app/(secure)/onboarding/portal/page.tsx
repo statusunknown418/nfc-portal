@@ -23,7 +23,12 @@ export default function PortalPage() {
 
       <article className="flex flex-col gap-4 overflow-auto lg:flex-row lg:gap-12">
         <VisualWrapper />
-        <PortalPreviewWrapperRSC hideAlerts username={sessionClaims.username} />
+
+        <PortalPreviewWrapperRSC
+          hideAlerts
+          username={sessionClaims.username}
+          className="relative"
+        />
       </article>
     </section>
   );

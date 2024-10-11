@@ -35,7 +35,7 @@ export default async function AdminPage() {
     <section className="flex flex-col gap-4 lg:grid lg:grid-cols-2 lg:justify-between">
       <LinksViewRSC jwt={sessionClaims} />
 
-      <aside className="hidden flex-grow gap-4 py-6 pl-6 ring-0 lg:relative lg:block">
+      <aside className="relative hidden flex-grow gap-4 py-6 pl-6 ring-0 lg:block">
         <section className="flex h-full flex-col items-center justify-center gap-8">
           <Suspense>
             {!!username && (
@@ -52,12 +52,14 @@ export default async function AdminPage() {
           </Suspense>
         </section>
 
-        <GridPattern
-          className={cn(
-            "[mask-image:radial-gradient(700px_circle_at_center,white,transparent)]",
-            "absolute inset-0 -z-10 size-full skew-y-12",
-          )}
-        />
+        <div className="fixed inset-0 -z-10">
+          <GridPattern
+            className={cn(
+              "[mask-image:radial-gradient(600px_circle_at_center,white,transparent)]",
+              "size-full skew-y-12",
+            )}
+          />
+        </div>
       </aside>
     </section>
   );

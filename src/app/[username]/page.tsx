@@ -22,9 +22,14 @@ export async function generateMetadata(
     description: portal.data?.metaDescription ?? "Custom pages for your NFC business card",
     openGraph: {
       images: [
-        portal.data?.image ?? {
-          url: "https://nfc-portal.vercel.app/opengraph-image.png",
-        },
+        portal.data?.image
+          ? {
+              url: portal.data?.image,
+              username: username,
+            }
+          : {
+              url: "https://concard.app/opengraph-image.png",
+            },
         ...previousImages,
       ],
     },

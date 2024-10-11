@@ -13,7 +13,11 @@ import { useAutoSaveFormData } from "~/lib/hooks/use-auto-save";
 import { nfcPreferencesStore } from "~/lib/stores/nfcPreferences";
 import { UploadDropzone } from "~/lib/uploadthing";
 import { basicCardTemplates, cn } from "~/lib/utils";
-import { type SaveNFCPreferences, saveNFCPreferencesSchema } from "~/server/api/schemas.zod";
+import {
+  type CardTemplatesType,
+  type SaveNFCPreferences,
+  saveNFCPreferencesSchema,
+} from "~/server/api/schemas.zod";
 import { Button } from "../ui/button";
 import { Checkbox } from "../ui/checkbox";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "../ui/form";
@@ -100,18 +104,15 @@ export const CardPreferencesForm = () => {
                 <Label className="text-lg">{t("templates.title")}</Label>
 
                 <RadioGroupRadix value={field.value} onValueChange={field.onChange}>
-                  <div className="relative flex min-h-40 min-w-full gap-2">
-                    {basicCardTemplates.map((template, idx) => (
+                  <div className="relative flex min-h-40 min-w-full flex-wrap gap-4">
+                    {basicCardTemplates.map((template) => (
                       <TemplateCard
                         key={template.value}
-                        style={{
-                          left: `${idx * 120}px`,
-                        }}
                         value={template.value}
                         className={cn(
                           selectedTemplate === template.value &&
                             "z-10 opacity-100 ring ring-ring ring-offset-1",
-                          "absolute top-0 transition-all hover:z-20 hover:translate-x-10 hover:translate-y-10",
+                          "transition-all",
                         )}
                         front={template.front}
                         back={template.back}
@@ -438,6 +439,28 @@ export const CardPreferencesForm = () => {
 
             <FormField
               control={form.control}
+              name="includeQRCode"
+              render={({ field }) => (
+                <FormItem>
+                  <div className="flex items-center gap-3">
+                    <FormControl>
+                      <Checkbox
+                        className="h-5 w-5"
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                      />
+                    </FormControl>
+
+                    <FormLabel className="text-base">Include QR code</FormLabel>
+                  </div>
+                </FormItem>
+              )}
+            />
+
+            <div />
+
+            <FormField
+              control={form.control}
               name="showCompanyLogo"
               render={({ field }) => (
                 <FormItem>
@@ -588,7 +611,7 @@ const TemplateCard = ({
             backgroundImage: `url(${front})`,
           }}
           className={cn(
-            "h-40 w-64 rounded-lg border bg-cover bg-center bg-no-repeat p-4 shadow-md transition-all hover:scale-125 hover:opacity-100",
+            "h-[160px] w-[280px] rounded-lg border bg-cover bg-center bg-no-repeat p-4 shadow-md transition-all hover:scale-105 hover:opacity-100",
             currentTemplate && "opacity-80",
             className,
           )}
@@ -639,7 +662,7 @@ const TemplateCard = ({
               if (currentTemplate === value) {
                 form.setValue("cardTemplate", undefined);
               } else {
-                form.setValue("cardTemplate", value);
+                form.setValue("cardTemplate", value as CardTemplatesType);
               }
             }}
           >

@@ -71,6 +71,7 @@ export const HowToContact = ({
   });
 
   const t = useTranslations("admin.onboarding.steps.contact");
+  const common = useTranslations("common");
 
   const utils = api.useUtils();
   const { mutate, isPending } = api.vCard.edit.useMutation({
@@ -111,18 +112,17 @@ export const HowToContact = ({
   return (
     <>
       <article className="w-full">
-        <h3 className="text-2xl font-semibold tracking-wide">How do we contact you?</h3>
-        <p className="mt-1 text-muted-foreground">Add some phone numbers and emails</p>
+        <h3 className="text-2xl font-semibold tracking-wide">{t("howToContactTitle")}</h3>
+        <p className="mt-1 text-muted-foreground">{t("howToContactDescription")}</p>
       </article>
 
       <Form {...form}>
         <form
-          className="relative flex w-full flex-col gap-4 rounded-lg border p-6"
+          className="relative flex w-full flex-col gap-4 rounded-t-xl border p-6"
           onSubmit={form.handleSubmit(onSubmit)}
         >
           <Alert variant="indigo">
             <FloppyDisk size={16} />
-
             <AlertTitle>{t("autosave")}</AlertTitle>
             <AlertDescription>
               <p>{t("autosaveDescription")}</p>
@@ -130,7 +130,7 @@ export const HowToContact = ({
               {isPending && (
                 <Badge variant="outline" className="absolute right-4 top-2 h-7 animate-pulse">
                   <Spinner className="mr-2 animate-spin" />
-                  Saving ...
+                  {common("saving")}...
                 </Badge>
               )}
             </AlertDescription>
@@ -300,7 +300,7 @@ export const HowToContact = ({
                 router.refresh();
               }}
             >
-              Finally some professional info
+              {t("professionalInfo")}
               <ArrowRight className="h-5 w-5" />
             </Button>
           </article>
