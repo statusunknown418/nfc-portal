@@ -1,4 +1,4 @@
-import { CardPreferencesForm } from "~/components/admin/CardPreferencesForm";
+import { CardPreferencesForm } from "~/components/admin/card-preferences/CardPreferencesForm";
 
 export default async function CardsPage() {
   return (

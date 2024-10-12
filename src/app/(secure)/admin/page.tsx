@@ -6,9 +6,7 @@ import {
   PortalPreviewWrapperLoader,
   PortalPreviewWrapperRSC,
 } from "~/components/admin/portal-preview";
-import GridPattern from "~/components/magicui/grid-pattern";
 import { Alert, AlertTitle } from "~/components/ui/alert";
-import { cn } from "~/lib/utils";
 
 export default async function AdminPage() {
   const { userId, sessionClaims } = auth();
@@ -53,12 +51,12 @@ export default async function AdminPage() {
         </section>
 
         <div className="fixed inset-0 -z-10">
-          <GridPattern
+          {/* <GridPattern
             className={cn(
               "[mask-image:radial-gradient(600px_circle_at_center,white,transparent)]",
               "size-full skew-y-12",
             )}
-          />
+          /> */}
         </div>
       </aside>
     </section>

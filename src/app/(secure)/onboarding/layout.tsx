@@ -14,7 +14,7 @@ export default function OnboardingLayout({ children }: { children: React.ReactNo
     <main className="h-full overscroll-none">
       <NextSSRPlugin routerConfig={extractRouterConfig(uploadThingRouter)} />
 
-      <nav className="sticky inset-0 z-20 flex justify-between gap-2 border-b bg-white p-4 py-1">
+      <nav className="sticky inset-0 z-20 flex h-14 justify-between gap-2 border-b bg-white p-4 py-1">
         <Button asChild variant="unstyled" className="items-center p-1 text-base">
           <Link href={"/onboarding/start"}>
             <Image
@@ -35,7 +35,8 @@ export default function OnboardingLayout({ children }: { children: React.ReactNo
         </div>
       </nav>
 
-      <div className="relative mx-auto flex w-full max-w-[1500px] flex-col items-center gap-8 overflow-auto py-4 md:py-6">
+      {/* This specific div needs to know the height of the navbar to prevent a sh****ty double scrolling */}
+      <div className="relative mx-auto flex h-[calc(100svh-3.5rem)] w-full max-w-[1500px] flex-col items-center gap-8 overflow-auto py-4 md:py-6">
         <Stepper />
 
         <section className="w-full max-w-7xl px-4 md:px-0 md:py-6">{children}</section>

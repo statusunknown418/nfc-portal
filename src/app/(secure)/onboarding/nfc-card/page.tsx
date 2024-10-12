@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import { CardPreferencesForm } from "~/components/admin/CardPreferencesForm";
+import { CardPreferencesForm } from "~/components/admin/card-preferences/CardPreferencesForm";
 import { CardPreview } from "~/components/admin/contact/CardPreview";
 import { api } from "~/trpc/server";
 
@@ -21,7 +21,7 @@ export default async function NFCCardPage() {
 
       <div className="h-[calc(svh-100px)] md:h-[calc(svh-20rem)]">
         <CardPreview
-          cardData={data?.contactJSON ?? undefined}
+          cardData={data}
           urlQREncoder={`https://concard.app/${viewer?.username}?ktp=${viewer?.pageHashKey}`}
         />
       </div>
