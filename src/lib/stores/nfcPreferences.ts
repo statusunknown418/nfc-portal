@@ -21,6 +21,9 @@ export const DEFAULT_PREFERENCES: SaveNFCPreferences = {
   cardVariant: "basic",
   cardTemplate: undefined,
   includeQRCode: true,
+  cardColorFront: undefined,
+  cardColorBack: undefined,
+  profileImageUrl: undefined,
 };
 
 export const nfcPreferencesStore = create(

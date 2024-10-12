@@ -1,7 +1,21 @@
+import {
+  FacebookLogo,
+  GithubLogo,
+  InstagramLogo,
+  LinkedinLogo,
+  PatreonLogo,
+  SpotifyLogo,
+  TelegramLogo,
+  TiktokLogo,
+  TwitterLogo,
+  YoutubeLogo,
+} from "@phosphor-icons/react/dist/ssr";
 import { type ClassValue, clsx } from "clsx";
+import { type ReactNode } from "react";
 import { twMerge } from "tailwind-merge";
+import { type IconProps, Icons } from "~/components/ui/icons";
 import { type CardTemplatesType } from "~/server/api/schemas.zod";
-import { type CardShippingStatus, type ThemeType } from "~/server/db/schema";
+import { type CardShippingStatus, type SocialLinkType, type ThemeType } from "~/server/db/schema";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -253,3 +267,45 @@ export const PORTAL_KEY = "portal-password";
 export const PORTAL_QUERY = "ktp";
 export const INCOMING_URL = "x-current-url";
 export const LOCALE_KEY = "NEXT_LOCALE";
+
+export const OutlinedSocialIcons = (props: IconProps & { type: SocialLinkType }) => {
+  const { type, ...rest } = props;
+
+  switch (type) {
+    case "twitter":
+      return <TwitterLogo {...rest} />;
+    case "linkedin":
+      return <LinkedinLogo {...rest} />;
+    case "facebook":
+      return <FacebookLogo {...rest} />;
+    case "instagram":
+      return <InstagramLogo {...rest} />;
+    case "github":
+      return <GithubLogo {...rest} />;
+    case "tiktok":
+      return <TiktokLogo {...rest} />;
+    case "youtube":
+      return <YoutubeLogo {...rest} />;
+    case "telegram":
+      return <TelegramLogo {...rest} />;
+    case "patreon":
+      return <PatreonLogo {...rest} />;
+    case "spotify":
+      return <SpotifyLogo {...rest} />;
+    default:
+      return <TwitterLogo {...rest} />;
+  }
+};
+
+export const SocialIcons: Record<SocialLinkType, (props: IconProps) => ReactNode> = {
+  twitter: Icons.twitter,
+  linkedin: Icons.linkedin,
+  facebook: Icons.facebook,
+  instagram: Icons.instagram,
+  github: Icons.gitHub,
+  tiktok: Icons.tikTok,
+  youtube: Icons.youtube,
+  telegram: Icons.telegram,
+  patreon: Icons.patreon,
+  spotify: Icons.spotify,
+};
