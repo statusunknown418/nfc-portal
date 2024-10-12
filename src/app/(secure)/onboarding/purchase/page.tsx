@@ -65,7 +65,7 @@ export default function PurchasePage() {
       <p className="text-muted-foreground">{t("description")}</p>
 
       <div className="my-4 h-[400px]">
-        <CardPreview cardData={vCard?.contactJSON ?? undefined} />
+        <CardPreview cardData={vCard} />
       </div>
 
       <form
