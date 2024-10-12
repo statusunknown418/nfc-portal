@@ -20,11 +20,13 @@ import {
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { EmptyState } from "~/components/shared/EmptyState";
+import { Divider } from "~/components/ui/separator";
+import { positionsStore } from "~/lib/stores/positions";
 import { arrayMove, cn } from "~/lib/utils";
 import { api, type RouterOutputs } from "~/trpc/react";
 import { SortableItem } from "../../SortableItem";
-import { positionsStore } from "~/lib/stores/positions";
 import { LinkItem } from "../LinkItem";
+import { SocialLinkItem } from "../SocialLinkItem";
 
 export const LinksSortableList = ({
   initialData,
@@ -119,42 +121,81 @@ export const LinksSortableList = ({
   }
 
   return (
-    <DndContext
-      id="links-sortable-context"
-      sensors={sensors}
-      collisionDetection={closestCenter}
-      onDragStart={handleDragStart}
-      onDragOver={handleDragOver}
-      onDragEnd={handleDragEnd}
-    >
-      <SortableContext
-        id="links-sortable-list"
-        items={allLinks.map((item) => item.id)}
-        strategy={verticalListSortingStrategy}
-      >
-        {allLinks.map((item) => (
-          <SortableItem key={item.id} id={item.id}>
-            {({ active, attributes, listeners }) => (
-              <LinkItem
-                username={username}
-                key={item.id}
-                data={item}
-                className={cn("w-full", active?.id === item.id && "opacity-0")}
-                attributes={attributes}
-                listeners={listeners}
-                aria-describedby={`link-handle-${item.id}-describedby`}
-              />
-            )}
-          </SortableItem>
-        ))}
-      </SortableContext>
+    <>
+      <Divider>Social links</Divider>
 
-      <DragOverlay>
-        {activeIndex !== null && (
-          /** We know the element will exist so using `!` is safe */
-          <LinkItem data={allLinks[activeIndex]!} username={username} />
-        )}
-      </DragOverlay>
-    </DndContext>
+      <DndContext
+        id="links-sortable-context"
+        sensors={sensors}
+        collisionDetection={closestCenter}
+        onDragStart={handleDragStart}
+        onDragOver={handleDragOver}
+        onDragEnd={handleDragEnd}
+      >
+        <SortableContext
+          id="social-links-sortable-list"
+          items={allLinks.filter((item) => !!item.socialType).map((item) => item.id)}
+        >
+          <div className="flex w-full flex-wrap gap-4">
+            {allLinks
+              .filter((item) => !!item.socialType)
+              .map((item) => (
+                <SortableItem key={item.id} id={item.id} className="w-max">
+                  {({ attributes, listeners }) => (
+                    <SocialLinkItem
+                      data={item}
+                      username={username}
+                      key={item.id}
+                      attributes={attributes}
+                      listeners={listeners}
+                      aria-describedby={`social-link-handle-${item.id}-describedby`}
+                    />
+                  )}
+                </SortableItem>
+              ))}
+          </div>
+        </SortableContext>
+      </DndContext>
+
+      <Divider>Other links</Divider>
+
+      <DndContext
+        id="links-sortable-context"
+        sensors={sensors}
+        collisionDetection={closestCenter}
+        onDragStart={handleDragStart}
+        onDragOver={handleDragOver}
+        onDragEnd={handleDragEnd}
+      >
+        <SortableContext
+          id="links-sortable-list"
+          items={allLinks.filter((item) => !item.socialType).map((item) => item.id)}
+          strategy={verticalListSortingStrategy}
+        >
+          {allLinks
+            .filter((item) => !item.socialType)
+            .map((item) => (
+              <SortableItem key={item.id} id={item.id}>
+                {({ active, attributes, listeners }) => (
+                  <LinkItem
+                    username={username}
+                    key={item.id}
+                    data={item}
+                    className={cn("w-full", active?.id === item.id && "opacity-0")}
+                    attributes={attributes}
+                    listeners={listeners}
+                    aria-describedby={`link-handle-${item.id}-describedby`}
+                  />
+                )}
+              </SortableItem>
+            ))}
+        </SortableContext>
+
+        <DragOverlay>
+          {/** We know the element will exist so using `!` is safe */}
+          {activeIndex !== null && <LinkItem data={allLinks[activeIndex]!} username={username} />}
+        </DragOverlay>
+      </DndContext>
+    </>
   );
 };

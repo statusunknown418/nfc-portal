@@ -1,7 +1,7 @@
+import { auth } from "@clerk/nextjs/server";
+import { Skeleton } from "~/components/ui/skeleton";
 import { api, HydrateClient } from "~/trpc/server";
 import { LinksSortableList } from "./LinksList";
-import { Skeleton } from "~/components/ui/skeleton";
-import { auth } from "@clerk/nextjs/server";
 
 export async function LinksWrapperRSC() {
   const data = await api.links.all();

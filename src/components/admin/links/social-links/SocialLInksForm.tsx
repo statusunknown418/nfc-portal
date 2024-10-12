@@ -1,21 +1,9 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  FacebookLogo,
-  GithubLogo,
-  InstagramLogo,
-  LinkedinLogo,
-  PatreonLogo,
-  SpotifyLogo,
-  TelegramLogo,
-  TiktokLogo,
-  TwitterLogo,
-  YoutubeLogo,
-} from "@phosphor-icons/react";
 import { GlobeIcon } from "@radix-ui/react-icons";
 import { RadioGroup, RadioGroupItem } from "@radix-ui/react-radio-group";
-import { type ReactNode, useState } from "react";
+import { useState, type ReactNode } from "react";
 import { useForm } from "react-hook-form";
 import { Spinner } from "~/components/shared/Spinner";
 import { Button } from "~/components/ui/button";
@@ -27,37 +15,10 @@ import {
   FormLabel,
   FormMessage,
 } from "~/components/ui/form";
-import { Icons, type IconProps } from "~/components/ui/icons";
 import { Input } from "~/components/ui/input";
-import { cn } from "~/lib/utils";
+import { cn, SocialIcons } from "~/lib/utils";
 import { newLinkSchema, type NewLinkSchema, type SocialLinkType } from "~/server/db/schema";
 import { api } from "~/trpc/react";
-
-export const OutlinedSocialIcons: Record<SocialLinkType, (props: IconProps) => ReactNode> = {
-  twitter: TwitterLogo,
-  linkedin: LinkedinLogo,
-  facebook: FacebookLogo,
-  instagram: InstagramLogo,
-  github: GithubLogo,
-  tiktok: TiktokLogo,
-  youtube: YoutubeLogo,
-  telegram: TelegramLogo,
-  patreon: PatreonLogo,
-  spotify: SpotifyLogo,
-};
-
-export const SocialIcons: Record<SocialLinkType, (props: IconProps) => ReactNode> = {
-  twitter: Icons.twitter,
-  linkedin: Icons.linkedin,
-  facebook: Icons.facebook,
-  instagram: Icons.instagram,
-  github: Icons.gitHub,
-  tiktok: Icons.tikTok,
-  youtube: Icons.youtube,
-  telegram: Icons.telegram,
-  patreon: Icons.patreon,
-  spotify: Icons.spotify,
-};
 
 const socialLinks: Array<{
   name: string;

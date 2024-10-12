@@ -5,9 +5,8 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import { useFrameSyncReceiver } from "~/lib/hooks/use-frame-sync";
-import { cn } from "~/lib/utils";
+import { cn, OutlinedSocialIcons } from "~/lib/utils";
 import { api, type RouterOutputs } from "~/trpc/react";
-import { OutlinedSocialIcons } from "../admin/links/social-links/SocialLInksForm";
 import { Spinner } from "../shared/Spinner";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { Button } from "../ui/button";
@@ -105,9 +104,10 @@ export const PortalContent = ({
           )}
         >
           <Image
+            fill
+            loading="eager"
             src={portal.data.image ?? ""}
             alt="portal-avatar"
-            layout="fill"
             className="object-cover"
             style={{
               maskImage: "linear-gradient(to bottom, #ffffff 35%, transparent 100%)",
@@ -166,39 +166,7 @@ export const PortalContent = ({
                 href={{ pathname: link.url }}
                 key={link.id}
               >
-                {link.socialType === "twitter" && (
-                  <OutlinedSocialIcons.twitter className="size-8" />
-                )}
-                {link.socialType === "linkedin" && (
-                  <OutlinedSocialIcons.linkedin className="size-8" />
-                )}
-                {link.socialType === "facebook" && (
-                  <OutlinedSocialIcons.facebook className="size-8" />
-                )}
-
-                {link.socialType === "instagram" && (
-                  <OutlinedSocialIcons.instagram className="size-8" />
-                )}
-
-                {link.socialType === "github" && <OutlinedSocialIcons.github className="size-8" />}
-
-                {link.socialType === "tiktok" && <OutlinedSocialIcons.tiktok className="size-8" />}
-
-                {link.socialType === "youtube" && (
-                  <OutlinedSocialIcons.youtube className="size-8" />
-                )}
-
-                {link.socialType === "telegram" && (
-                  <OutlinedSocialIcons.telegram className="size-8" />
-                )}
-
-                {link.socialType === "patreon" && (
-                  <OutlinedSocialIcons.patreon className="size-8" />
-                )}
-
-                {link.socialType === "spotify" && (
-                  <OutlinedSocialIcons.spotify className="size-8" />
-                )}
+                <OutlinedSocialIcons type={link.socialType!} className="size-9" />
               </Link>
             ))}
         </article>

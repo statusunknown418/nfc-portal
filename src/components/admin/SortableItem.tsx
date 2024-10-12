@@ -12,6 +12,7 @@ type UseSortableReturn = Omit<
 
 export function SortableItem(props: {
   id: number;
+  className?: string;
   children: (args: UseSortableReturn) => React.ReactNode;
 }) {
   const { setNodeRef, transform, transition, isDragging, ...rest } = useSortable({
@@ -24,7 +25,11 @@ export function SortableItem(props: {
   };
 
   return (
-    <div ref={setNodeRef} style={style} className={cn("w-full", isDragging && "z-50 rounded-xl")}>
+    <div
+      ref={setNodeRef}
+      style={style}
+      className={cn("w-full", isDragging && "z-50 rounded-xl", props.className)}
+    >
       {props.children({ ...rest })}
     </div>
   );

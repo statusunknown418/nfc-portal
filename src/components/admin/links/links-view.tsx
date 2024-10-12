@@ -9,12 +9,7 @@ import {
   BreadcrumbSeparator,
 } from "~/components/ui/breadcrumb";
 import { Button } from "~/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "~/components/ui/tooltip";
-import {
-  ContactDataLoading,
-  ContactDataWrapper,
-} from "../contact/contact-data/contact-data-wrapper";
 import {
   PageEnabledWrapperLoader,
   PageEnabledWrapperRSC,
@@ -66,30 +61,11 @@ export const LinksViewRSC = ({ jwt }: { jwt: CustomJwtSessionClaims }) => {
         </div>
       </article>
 
-      {/* <Alert variant="success" className="flex gap-4 p-4">
-            <Switch />
-
-            <div>
-              <AlertTitle className="text-primary">
-                Include all your links in contact information
-              </AlertTitle>
-
-              <AlertDescription className="mt-1 text-muted-foreground">
-                When enabled your contact information (vCard) will contain all the links you add
-                here.
-              </AlertDescription>
-            </div>
-          </Alert> */}
-
       <article className="mt-2 flex h-full w-full flex-col gap-4">
         <Suspense fallback={<LinksWrapperLoader />}>
           <LinksWrapperRSC />
         </Suspense>
       </article>
-      {/* 
-      <Suspense fallback={<ContactDataLoading />}>
-        <ContactDataWrapper />
-      </Suspense> */}
     </div>
   );
 };
