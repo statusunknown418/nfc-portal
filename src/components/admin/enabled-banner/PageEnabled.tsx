@@ -21,13 +21,15 @@ import {
   DialogHeader,
   DialogTitle,
 } from "../../ui/dialog";
+import { Skeleton } from "~/components/ui/skeleton";
+import { toast } from "sonner";
 
 export const PageEnabled = ({
   initialData,
 }: {
   initialData: RouterOutputs["viewer"]["shouldShowLive"];
 }) => {
-  const [data] = api.viewer.shouldShowLive.useSuspenseQuery(undefined, { initialData });
+  const { data } = api.viewer.shouldShowLive.useQuery(undefined, { initialData });
   const [onboardingPending, setOnboard] = useState(!data?.hasCompletedOnboarding);
   const utils = api.useUtils();
   const t = useTranslations("admin");
@@ -41,10 +43,14 @@ export const PageEnabled = ({
   };
 
   const onCopy = async () => {
+    if (!data) return toast.error("We were unable to build your link, please try again now");
+
     await navigator.clipboard.writeText(
       `https://concard.app/${data.username}?ktp=${data.pageHashKey}`,
     );
   };
+
+  if (!data) return <Skeleton className="h-24 w-full" />;
 
   const WarningAlert = () => {
     return (
