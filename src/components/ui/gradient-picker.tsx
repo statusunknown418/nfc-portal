@@ -23,10 +23,14 @@ export function GradientPicker({
   background,
   setBackground,
   className,
+  hideGradients,
+  hideImages,
 }: {
-  background: string;
+  background?: string;
   setBackground: (background: string) => void;
   className?: string;
+  hideGradients?: boolean;
+  hideImages?: boolean;
 }) {
   const solids = [
     "#ffffff",
@@ -138,12 +142,18 @@ export function GradientPicker({
             <TabsTrigger className="flex-1" value="solid">
               Solid
             </TabsTrigger>
-            <TabsTrigger className="flex-1" value="gradient">
-              Gradient
-            </TabsTrigger>
-            <TabsTrigger className="flex-1" value="image">
-              Image
-            </TabsTrigger>
+
+            {!hideGradients && (
+              <TabsTrigger className="flex-1" value="gradient">
+                Gradient
+              </TabsTrigger>
+            )}
+
+            {!hideImages && (
+              <TabsTrigger className="flex-1" value="image">
+                Image
+              </TabsTrigger>
+            )}
           </TabsList>
 
           <TabsContent value="solid" className="mt-0 flex flex-wrap gap-1">

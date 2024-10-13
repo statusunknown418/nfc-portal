@@ -1,24 +1,20 @@
-import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogTitle,
-  DialogClose,
-} from "~/components/ui/dialog";
-import { ZoomInIcon, ResetIcon, CrossCircledIcon, CheckCircledIcon } from "@radix-ui/react-icons";
+import { CheckCircledIcon, CrossCircledIcon, ResetIcon, ZoomInIcon } from "@radix-ui/react-icons";
 import { useTranslations } from "next-intl";
-import { Button } from "~/components/ui/button";
+import Image from "next/image";
 import { useFormContext } from "react-hook-form";
 import { Badge } from "~/components/ui/badge";
-import { DialogHeader, DialogFooter } from "~/components/ui/dialog";
-import { cn } from "~/lib/utils";
+import { Button } from "~/components/ui/button";
 import {
-  type SaveNFCPreferences,
-  type CardTemplatesType,
-  cardTemplates,
-} from "~/server/api/schemas.zod";
-import Image from "next/image";
-import { nfcPreferencesStore } from "~/lib/stores/nfcPreferences";
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "~/components/ui/dialog";
+import { cn } from "~/lib/utils";
+import { type CardTemplatesType, type SaveNFCPreferences } from "~/server/api/schemas.zod";
 
 export const CardTemplateModal = ({
   className,
@@ -46,12 +42,12 @@ export const CardTemplateModal = ({
             backgroundImage: `url(${front})`,
           }}
           className={cn(
-            "h-[160px] w-[280px] rounded-lg border bg-cover bg-center bg-no-repeat p-4 shadow-md transition-all hover:scale-105 hover:opacity-100",
+            "flex h-[170px] w-[280px] flex-col items-center justify-center rounded-lg border bg-cover bg-center bg-no-repeat p-4 shadow-md transition-all hover:scale-105 hover:opacity-100",
             currentTemplate && "opacity-80",
             className,
           )}
         >
-          <Badge size="lg">
+          <Badge className="border-dashed border-neutral-500 bg-indigo-600/50 backdrop-blur-sm">
             <ZoomInIcon className="h-5 w-5" />
             {t("templates.details")}
           </Badge>
@@ -72,7 +68,7 @@ export const CardTemplateModal = ({
               alt="front-template-design"
               width={350}
               height={200}
-              className="rounded-lg border shadow-lg"
+              className={cn("rounded-lg shadow-lg")}
             />
           </div>
 
@@ -85,14 +81,15 @@ export const CardTemplateModal = ({
               alt="back-template-design"
               width={350}
               height={200}
-              className="rounded-lg border shadow-lg"
+              className={cn("rounded-lg shadow-lg")}
             />
           </div>
         </section>
 
         <p className="text-muted-foreground">
-          Este es un ejemplo de como puede quedar esta plantilla luego de ser personalizada, luego
-          de seleccionarla puedes cambiar el nombre, foto y otros detalles que se muestran.
+          Estas son imágenes referenciales del producto final al seleccionar esta plantilla y luego
+          de ser personalizada, los datos mostrados son pre-configurados con la información de tu
+          contacto que añadiste en el paso anterior.
         </p>
 
         <DialogFooter>

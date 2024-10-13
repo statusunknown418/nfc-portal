@@ -249,13 +249,13 @@ export const basicCardTemplates = [
   },
   {
     value: "edge-to-edge",
-    front: "https://picsum.photos/id/6/350/200",
-    back: "https://picsum.photos/id/7/350/200",
+    front: "/basic-templates/edge-to-edge.png",
+    back: "/basic-templates/edge-to-edge-back.png",
   },
   {
     value: "minimal-logos",
-    front: "https://picsum.photos/id/20/350/200",
-    back: "https://picsum.photos/id/21/350/200",
+    front: "/basic-templates/minimal-logos.png",
+    back: "/basic-templates/minimal-logos-back.png",
   },
 ] as {
   value: CardTemplatesType;
@@ -308,4 +308,12 @@ export const SocialIcons: Record<SocialLinkType, (props: IconProps) => ReactNode
   telegram: Icons.telegram,
   patreon: Icons.patreon,
   spotify: Icons.spotify,
+};
+
+export const computeInitials = (text: string) => {
+  const initials = text
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase())
+    .join("");
+  return initials;
 };

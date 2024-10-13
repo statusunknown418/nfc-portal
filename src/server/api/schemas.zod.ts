@@ -138,12 +138,13 @@ export const saveNFCPreferencesSchema = z.object({
   cardVariant: z.enum(["basic", "custom", "metallic"]),
   cardTemplate: z.enum(cardTemplates).optional(),
   companyLogoURL: z.string().url().optional(),
+  profileImageUrl: z.string().url().optional(),
   cardImageFront: z.string().url().optional(),
   cardImageBack: z.string().url().optional(),
   includeQRCode: z.boolean(),
   cardColorFront: z.string().optional(),
   cardColorBack: z.string().optional(),
-  profileImageUrl: z.string().url().optional(),
+  accentColor: z.string().optional(),
 });
 
 export type SaveNFCPreferences = z.infer<typeof saveNFCPreferencesSchema>;

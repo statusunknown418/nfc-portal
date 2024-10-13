@@ -103,13 +103,7 @@ export const VisualCustomizationForm = ({
                     },
                   )}
                 >
-                  <Image
-                    fill
-                    className="object-cover"
-                    placeholder="blur"
-                    alt={`profile-avatar`}
-                    src={avatar}
-                  />
+                  <Image fill className="object-cover" alt={`profile-avatar`} src={avatar} />
                 </div>
               )}
 

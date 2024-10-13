@@ -47,61 +47,59 @@ export const CardPreferencesForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)} className="flex w-full flex-col gap-8">
-        <section className="flex flex-col gap-2">
-          <h3 className="text-lg font-medium">1. {t("variant.label")}</h3>
+      <form onSubmit={form.handleSubmit(handleSubmit)} className="flex w-full flex-col gap-4">
+        <h3 className="text-lg font-medium">1. {t("variant.label")}</h3>
 
-          <FormField
-            name="cardVariant"
-            control={form.control}
-            render={({ field }) => (
+        <FormField
+          name="cardVariant"
+          control={form.control}
+          render={({ field }) => (
+            <RadioGroupRadix value={field.value} onValueChange={field.onChange}>
+              <div className="flex gap-4">
+                <DefaultCard />
+                <CustomCard />
+                <MetallicCard />
+              </div>
+            </RadioGroupRadix>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="cardTemplate"
+          render={({ field }) => (
+            <FormItem
+              className={cn(
+                "mt-4 h-auto opacity-100 transition-all",
+                cardVariant !== "basic" && "pointer-events-none hidden h-0 opacity-0",
+              )}
+            >
+              <Label className="text-lg">2. {t("templates.title")}</Label>
+
               <RadioGroupRadix value={field.value} onValueChange={field.onChange}>
-                <div className="flex gap-4">
-                  <DefaultCard />
-                  <CustomCard />
-                  <MetallicCard />
+                <div className="relative flex min-h-40 min-w-full flex-wrap gap-4">
+                  {basicCardTemplates.map((template) => (
+                    <CardTemplateModal
+                      key={template.value}
+                      value={template.value}
+                      front={template.front}
+                      back={template.back}
+                      className={cn(
+                        selectedTemplate === template.value &&
+                          "z-10 opacity-100 ring ring-ring ring-offset-1",
+                        "transition-all",
+                      )}
+                    />
+                  ))}
                 </div>
               </RadioGroupRadix>
-            )}
-          />
+            </FormItem>
+          )}
+        />
 
-          <FormField
-            control={form.control}
-            name="cardTemplate"
-            render={({ field }) => (
-              <FormItem
-                className={cn(
-                  "mt-4 h-auto opacity-100 transition-all",
-                  cardVariant !== "basic" && "pointer-events-none hidden h-0 opacity-0",
-                )}
-              >
-                <Label className="text-lg">2. {t("templates.title")}</Label>
+        <OptionsSelector />
 
-                <RadioGroupRadix value={field.value} onValueChange={field.onChange}>
-                  <div className="relative flex min-h-40 min-w-full flex-wrap gap-4">
-                    {basicCardTemplates.map((template) => (
-                      <CardTemplateModal
-                        key={template.value}
-                        value={template.value}
-                        front={template.front}
-                        back={template.back}
-                        className={cn(
-                          selectedTemplate === template.value &&
-                            "z-10 opacity-100 ring ring-ring ring-offset-1",
-                          "transition-all",
-                        )}
-                      />
-                    ))}
-                  </div>
-                </RadioGroupRadix>
-              </FormItem>
-            )}
-          />
-
-          <OptionsSelector />
-
-          <CustomCardDesignsSelector />
-        </section>
+        <CustomCardDesignsSelector />
       </form>
     </Form>
   );

@@ -19,6 +19,10 @@ const config = {
       },
     },
     extend: {
+      fontFamily: {
+        "instrument-sans": ["var(--font-instrument-sans)"],
+        cormorant: ["var(--font-cormorant)"],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

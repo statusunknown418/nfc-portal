@@ -14,6 +14,10 @@ import {
   SimpleLogosVariantFront,
 } from "../card-preferences/templates/SimpleLogosVariant";
 import { useTranslations } from "next-intl";
+import {
+  MinimalLogosVariantBack,
+  MinimalLogosVariantFront,
+} from "../card-preferences/templates/MinimalLogosVariant";
 
 export const CardPreview = ({
   className,
@@ -67,6 +71,7 @@ export const CardPreview = ({
               <>
                 <SimpleLogosVariantFront userData={cardData} />
                 <EdgeToEdgeTemplateFront cardData={cardData} />
+                <MinimalLogosVariantFront cardData={cardData} />
               </>
             </CardItem>
           </CardBody>
@@ -99,7 +104,8 @@ export const CardPreview = ({
             >
               <>
                 <SimpleLogosVariantBack userData={cardData} urlQREncoder={urlQREncoder} />
-                <EdgeToEdgeTemplateBack cardData={cardData} urlQREncoder={urlQREncoder} />
+                <EdgeToEdgeTemplateBack cardData={cardData} />
+                <MinimalLogosVariantBack cardData={cardData} urlQREncoder={urlQREncoder} />
               </>
             </CardItem>
           </CardBody>
