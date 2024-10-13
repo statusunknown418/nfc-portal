@@ -59,7 +59,7 @@ export const SimpleLogosVariantBack = ({
   userData?: RouterOutputs["vCard"]["get"];
 }) => {
   const preferences = nfcPreferencesStore((s) => s.preferencesData);
-  const colorBack = preferences.cardColorBack;
+  const colorBack = !!preferences.cardColorBack ? preferences.cardColorBack : "#d6d6d6";
   const { SVG } = useQRCode();
 
   if (preferences.cardTemplate !== "simple-logos" || preferences.cardVariant !== "basic") {
@@ -73,11 +73,11 @@ export const SimpleLogosVariantBack = ({
         preferences.includeQRCode && "grid-rows-2",
       )}
       style={{
-        background: colorBack ?? "#d6d6d6",
+        background: colorBack,
       }}
     >
       <div className="relative mt-auto flex w-full items-end justify-center gap-2">
-        {preferences.companyLogoURL && (
+        {preferences.companyLogoURL && !!preferences.showCompanyLogo && (
           <Image
             src={preferences.companyLogoURL}
             alt={`company-logo`}

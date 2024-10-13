@@ -1,4 +1,3 @@
-import { useQRCode } from "next-qrcode";
 import Image from "next/image";
 import { nfcPreferencesStore } from "~/lib/stores/nfcPreferences";
 import { cn } from "~/lib/utils";
@@ -10,133 +9,70 @@ export const EdgeToEdgeTemplateFront = ({
   cardData?: RouterOutputs["vCard"]["get"];
 }) => {
   const preferences = nfcPreferencesStore((s) => s.preferencesData);
+  const colorFront = !!preferences.cardColorFront ? preferences.cardColorFront : "#0D0D0D";
 
   if (preferences.cardVariant !== "basic" || preferences.cardTemplate !== "edge-to-edge") {
     return;
   }
 
   return (
-    <section className="grid h-full w-full grid-rows-3 p-6 text-sm">
-      <article className="flex justify-between">
-        <p
-          className={cn(
-            "text-base font-semibold tracking-wide text-primary-foreground opacity-0 transition-opacity",
-            preferences.showCompanyName && preferences.companyNameOnFront && "opacity-100",
-          )}
-        >
-          {cardData?.contactJSON?.company?.name}
-        </p>
-      </article>
-
-      <article className="flex items-center justify-center">
-        {preferences.showCompanyLogo &&
-          preferences.companyLogoOnFront &&
-          preferences.companyLogoURL && (
-            <Image
-              width={100}
-              height={100}
-              src={preferences.companyLogoURL}
-              alt={`company-logo`}
-              className="rounded-md object-cover"
-            />
-          )}
-      </article>
-
-      <article className="flex items-center justify-between self-end">
-        <p
-          className={cn(
-            "text-lg font-medium uppercase text-muted-foreground opacity-0 transition-opacity",
-            preferences.showJobTitle && preferences.jobTitleOnFront && "opacity-100",
-          )}
-        >
-          {cardData?.contactJSON?.jobTitle}
-        </p>
-
-        <p
-          className={cn(
-            "text-lg opacity-0 mix-blend-difference transition-all",
-            preferences.showName && preferences.nameOnFront && "opacity-100",
-          )}
-        >
+    <section
+      className={cn(
+        "font-instrument-sans grid h-full w-full grid-cols-1 place-items-center gap-0 p-6 text-sm",
+      )}
+      style={{
+        background: colorFront,
+      }}
+    >
+      <div className="flex flex-col items-center justify-center">
+        <h2 className="text-2xl font-bold">
           {cardData?.contactJSON?.name.first} {cardData?.contactJSON?.name.last}
-        </p>
-      </article>
+        </h2>
+
+        {cardData?.profileHeader && (
+          <h3 className="text-xl text-[#A2A2A2]">{cardData?.profileHeader}</h3>
+        )}
+      </div>
     </section>
   );
 };
 
 export const EdgeToEdgeTemplateBack = ({
   cardData,
-  urlQREncoder,
 }: {
   cardData?: RouterOutputs["vCard"]["get"];
-  urlQREncoder?: string;
 }) => {
   const preferences = nfcPreferencesStore((s) => s.preferencesData);
-  const { SVG } = useQRCode();
+  const colorFront = !!preferences.cardColorBack ? preferences.cardColorBack : "#0D0D0D";
 
   if (preferences.cardVariant !== "basic" || preferences.cardTemplate !== "edge-to-edge") {
     return;
   }
 
   return (
-    <section className="grid h-full w-full grid-rows-3 p-6">
-      <article className="flex justify-between">
-        <p
-          className={cn(
-            "text-base font-semibold tracking-wide text-primary-foreground opacity-0 transition-opacity",
-            preferences.showCompanyName && !preferences.companyNameOnFront && "opacity-100",
-          )}
-        >
-          {cardData?.contactJSON?.company?.name}
-        </p>
-      </article>
+    <section
+      className="font-instrument-sans grid h-full w-full grid-cols-1 place-items-center p-6"
+      style={{
+        background: colorFront,
+      }}
+    >
+      <article className="flex items-center justify-between gap-8">
+        <div>
+          <h2 className="text-xl font-semibold text-[#a2a2a2]">
+            {cardData?.contactJSON?.company?.name}
+          </h2>
+          <h2 className="text-lg text-[#a2a2a2]">{cardData?.contactJSON?.jobTitle}</h2>
+        </div>
 
-      <article className="flex items-center justify-center gap-4">
-        {preferences.showCompanyLogo &&
-          !preferences.companyLogoOnFront &&
-          preferences.companyLogoURL && (
-            <Image
-              width={120}
-              height={120}
-              src={preferences.companyLogoURL}
-              alt={`company-logo`}
-              className="rounded-md object-cover"
-            />
-          )}
-
-        {preferences.includeQRCode && !!urlQREncoder && (
-          <SVG
-            text={urlQREncoder}
-            options={{
-              width: 80,
-              color: {
-                dark: "#000000",
-                light: "#ffffff",
-              },
-            }}
+        {!!preferences.showCompanyLogo && preferences.companyLogoURL && (
+          <Image
+            width={108}
+            height={108}
+            src={preferences.companyLogoURL}
+            alt={`company-logo`}
+            className="rounded-md object-cover"
           />
         )}
-      </article>
-
-      <article className="flex items-center justify-between self-end">
-        <p
-          className={cn(
-            "text-lg font-medium uppercase text-muted-foreground opacity-0 transition-opacity",
-            preferences.showJobTitle && !preferences.jobTitleOnFront && "opacity-100",
-          )}
-        >
-          {cardData?.contactJSON?.jobTitle}
-        </p>
-
-        <p
-          className={cn(
-            "text-lg opacity-0 mix-blend-difference transition-all",
-            preferences.showName && !preferences.nameOnFront && "opacity-100",
-          )}
-        >
-          {cardData?.contactJSON?.name.first} {cardData?.contactJSON?.name.last}
-        </p>
       </article>
     </section>
   );
