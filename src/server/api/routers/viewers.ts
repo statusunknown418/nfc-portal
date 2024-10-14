@@ -3,6 +3,7 @@ import { z } from "zod";
 import { links, users } from "~/server/db/schema";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { and, eq } from "drizzle-orm";
+import sharp from "sharp";
 
 export const viewersRouter = createTRPCRouter({
   /**
@@ -98,5 +99,17 @@ export const viewersRouter = createTRPCRouter({
         },
       },
     });
+  }),
+  makeBase64: publicProcedure.input(z.string()).query(async ({ input }) => {
+    const imageData = await fetch(input).then((res) => res.arrayBuffer());
+    const image = sharp(imageData);
+
+    const buffered = await image
+      .jpeg({
+        quality: 50,
+      })
+      .toBuffer();
+
+    return buffered.toString("base64");
   }),
 });

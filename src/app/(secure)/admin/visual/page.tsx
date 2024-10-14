@@ -17,6 +17,10 @@ import {
 } from "~/components/ui/breadcrumb";
 import { cn } from "~/lib/utils";
 
+export const metadata = {
+  title: "Personalización",
+};
+
 export default async function VisualCustomizationPage() {
   const { sessionClaims, userId } = auth();
   const t = await getTranslations("admin.visual");

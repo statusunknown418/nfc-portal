@@ -1,4 +1,4 @@
-import { CardPreview } from "~/components/admin/contact/CardPreview";
+import { Metadata } from "next";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -6,6 +6,10 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "~/components/ui/breadcrumb";
+
+export const metadata: Metadata = {
+  title: "Información de contact",
+};
 
 export default function ContactPage() {
   return (
@@ -26,8 +30,6 @@ export default function ContactPage() {
           </p>
         </header>
       </section>
-
-      <CardPreview />
     </section>
   );
 }

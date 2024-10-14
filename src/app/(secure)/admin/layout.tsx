@@ -1,7 +1,15 @@
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
+import { Metadata } from "next";
 import { extractRouterConfig } from "uploadthing/server";
 import { Sidebar } from "~/components/layouts/Sidebar";
 import { uploadThingRouter } from "~/server/api/routers/upload-thing";
+
+export const metadata: Metadata = {
+  title: {
+    template: "%s - ConCard / App",
+    default: "ConCard / App",
+  },
+};
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (

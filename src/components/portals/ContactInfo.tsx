@@ -6,19 +6,31 @@ import { cn } from "~/lib/utils";
 import { type ContactVCardType, type ThemeType } from "~/server/db/schema";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { useTranslations } from "next-intl";
+import { api, type RouterOutputs } from "~/trpc/react";
+import { useState } from "react";
+import { Spinner } from "../shared/Spinner";
 
 export const ContactInfo = ({
   unlocked,
   data,
   profilePicture,
   theme,
+  allLinks,
 }: {
   unlocked?: boolean;
   data: ContactVCardType | null;
   theme: ThemeType;
   profilePicture: string | null;
+  allLinks: RouterOutputs["links"]["all"];
 }) => {
   const t = useTranslations("common");
+  const [exporting, setExporting] = useState(false);
+  const { data: newProfilePicture, isLoading } = api.viewer.makeBase64.useQuery(
+    profilePicture ?? "",
+    {
+      enabled: !!profilePicture,
+    },
+  );
 
   if (!unlocked) {
     return (
@@ -48,6 +60,7 @@ export const ContactInfo = ({
   }
 
   const handleImport = async () => {
+    setExporting(true);
     const vCard = new vCardBuilder();
 
     vCard.addName(data.name?.last, data.name?.first);
@@ -69,9 +82,29 @@ export const ContactInfo = ({
           address.type,
         ),
     );
-    vCard.addNote("\nCreated with https://concard.app");
+
+    allLinks
+      .filter((link) => !!link.socialType)
+      .forEach((link) => {
+        if (!link.socialType || !link.url || !link.displayText) return;
+
+        vCard.addSocial(link.url, link.socialType.toUpperCase(), link.displayText);
+      });
+
+    allLinks
+      .filter((link) => !link.socialType)
+      .forEach((link) => {
+        if (!link.url || !link.displayText) return;
+
+        vCard.addURL(link.url, "HOME");
+      });
+
+    vCard.addNote("---\nPowered by Concard - https://concard.app");
+
+    newProfilePicture && vCard.addPhoto(newProfilePicture, "jpeg");
 
     const fullVCard = vCard.buildVCard();
+    console.log(newProfilePicture);
 
     const blob = new Blob([fullVCard], {
       type: "text/vcard",
@@ -84,6 +117,7 @@ export const ContactInfo = ({
     link.download = `${data.name?.first ?? "user"}_${data.name?.last ?? "contact"}.vcf`;
 
     link.click();
+    setExporting(false);
   };
 
   if (!data.name.first && !data.name.last) {
@@ -120,7 +154,11 @@ export const ContactInfo = ({
           background: theme.buttons.background,
         }}
       >
-        <IdCardIcon className="size-[22px]" />
+        {isLoading || exporting ? (
+          <Spinner className="text-inherit" />
+        ) : (
+          <IdCardIcon className="size-[22px]" />
+        )}
         {t("importContact")}
       </button>
     </article>

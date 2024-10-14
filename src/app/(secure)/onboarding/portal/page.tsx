@@ -15,20 +15,24 @@ export default function PortalPage() {
   }
 
   return (
-    <section className="flex flex-col gap-4">
+    <section className="flex flex-col gap-4 px-4 xl:px-0">
       <article>
         <h3 className="text-2xl font-semibold tracking-wide">{t("title")}</h3>
         <p className="mt-1 text-muted-foreground">{t("description")}</p>
       </article>
 
       <article className="flex flex-col gap-4 overflow-auto lg:flex-row lg:gap-12">
-        <VisualWrapper />
+        <div className="lg:w-2/3">
+          <VisualWrapper />
+        </div>
 
-        <PortalPreviewWrapperRSC
-          hideAlerts
-          username={sessionClaims.username}
-          className="relative"
-        />
+        <div>
+          <PortalPreviewWrapperRSC
+            hideAlerts
+            username={sessionClaims.username}
+            className="md:!sticky md:!top-0"
+          />
+        </div>
       </article>
     </section>
   );
