@@ -462,7 +462,7 @@ export const OptionsSelector = () => {
           control={form.control}
           name="accentColor"
           render={({ field }) => (
-            <FormItem className={cn(selectedTemplate !== "minimal-logos" && "hidden")}>
+            <FormItem>
               <FormLabel>Color secundario</FormLabel>
               <GradientPicker
                 background={field.value}

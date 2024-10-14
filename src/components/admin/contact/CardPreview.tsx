@@ -4,7 +4,7 @@ import { CardBody, CardContainer, CardItem } from "~/components/aceternity/3d-ca
 import DotPattern from "~/components/magicui/dot-pattern";
 import { nfcPreferencesStore } from "~/lib/stores/nfcPreferences";
 import { cn } from "~/lib/utils";
-import { type RouterOutputs } from "~/trpc/react";
+import { api, type RouterOutputs } from "~/trpc/react";
 import {
   EdgeToEdgeTemplateBack,
   EdgeToEdgeTemplateFront,
@@ -30,6 +30,7 @@ export const CardPreview = ({
 }) => {
   const preferences = nfcPreferencesStore((s) => s.preferencesData);
   const t = useTranslations("admin");
+  const { data } = api.vCard.get.useQuery(undefined, { initialData: cardData });
 
   return (
     <article
@@ -44,7 +45,7 @@ export const CardPreview = ({
         </p>
 
         <CardContainer className="w-full" containerClassName={cn("w-full z-10")}>
-          <CardBody className="group/card flex h-max w-full flex-col items-start justify-center gap-2">
+          <CardBody className="group/card flex h-max w-full flex-col items-center justify-center gap-2">
             <CardItem
               translateZ={100}
               rotateX={15}
@@ -69,9 +70,9 @@ export const CardPreview = ({
               }}
             >
               <>
-                <SimpleLogosVariantFront userData={cardData} />
-                <EdgeToEdgeTemplateFront cardData={cardData} />
-                <MinimalLogosVariantFront cardData={cardData} />
+                <SimpleLogosVariantFront userData={data} />
+                <EdgeToEdgeTemplateFront cardData={data} />
+                <MinimalLogosVariantFront cardData={data} />
               </>
             </CardItem>
           </CardBody>
@@ -84,7 +85,7 @@ export const CardPreview = ({
         </p>
 
         <CardContainer className="w-full" containerClassName={cn("w-full")}>
-          <CardBody className="group/card-back flex h-max w-full flex-col items-start justify-center gap-2">
+          <CardBody className="group/card-back flex h-max w-full flex-col items-center justify-center gap-2">
             <CardItem
               translateZ={100}
               rotateX={15}
@@ -103,9 +104,9 @@ export const CardPreview = ({
               }}
             >
               <>
-                <SimpleLogosVariantBack userData={cardData} urlQREncoder={urlQREncoder} />
-                <EdgeToEdgeTemplateBack cardData={cardData} />
-                <MinimalLogosVariantBack cardData={cardData} urlQREncoder={urlQREncoder} />
+                <SimpleLogosVariantBack userData={data} urlQREncoder={urlQREncoder} />
+                <EdgeToEdgeTemplateBack cardData={data} />
+                <MinimalLogosVariantBack cardData={data} urlQREncoder={urlQREncoder} />
               </>
             </CardItem>
           </CardBody>

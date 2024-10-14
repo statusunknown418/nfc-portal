@@ -10,6 +10,7 @@ export const EdgeToEdgeTemplateFront = ({
 }) => {
   const preferences = nfcPreferencesStore((s) => s.preferencesData);
   const colorFront = !!preferences.cardColorFront ? preferences.cardColorFront : "#0D0D0D";
+  const accent = !!preferences.accentColor ? preferences.accentColor : "#000000";
 
   if (preferences.cardVariant !== "basic" || preferences.cardTemplate !== "edge-to-edge") {
     return;
@@ -22,6 +23,7 @@ export const EdgeToEdgeTemplateFront = ({
       )}
       style={{
         background: colorFront,
+        color: accent,
       }}
     >
       <div className="flex flex-col items-center justify-center">
@@ -29,9 +31,7 @@ export const EdgeToEdgeTemplateFront = ({
           {cardData?.contactJSON?.name.first} {cardData?.contactJSON?.name.last}
         </h2>
 
-        {cardData?.profileHeader && (
-          <h3 className="text-xl text-[#A2A2A2]">{cardData?.profileHeader}</h3>
-        )}
+        {cardData?.profileHeader && <h3 className="text-xl">{cardData?.profileHeader}</h3>}
       </div>
     </section>
   );
@@ -44,6 +44,7 @@ export const EdgeToEdgeTemplateBack = ({
 }) => {
   const preferences = nfcPreferencesStore((s) => s.preferencesData);
   const colorFront = !!preferences.cardColorBack ? preferences.cardColorBack : "#0D0D0D";
+  const accent = !!preferences.accentColor ? preferences.accentColor : "#000000";
 
   if (preferences.cardVariant !== "basic" || preferences.cardTemplate !== "edge-to-edge") {
     return;
@@ -54,14 +55,13 @@ export const EdgeToEdgeTemplateBack = ({
       className="font-instrument-sans grid h-full w-full grid-cols-1 place-items-center p-6"
       style={{
         background: colorFront,
+        color: accent,
       }}
     >
       <article className="flex items-center justify-between gap-8">
         <div>
-          <h2 className="text-xl font-semibold text-[#a2a2a2]">
-            {cardData?.contactJSON?.company?.name}
-          </h2>
-          <h2 className="text-lg text-[#a2a2a2]">{cardData?.contactJSON?.jobTitle}</h2>
+          <h2 className="text-xl font-semibold">{cardData?.contactJSON?.company?.name}</h2>
+          <h2 className="text-lg">{cardData?.contactJSON?.jobTitle}</h2>
         </div>
 
         {!!preferences.showCompanyLogo && preferences.companyLogoURL && (

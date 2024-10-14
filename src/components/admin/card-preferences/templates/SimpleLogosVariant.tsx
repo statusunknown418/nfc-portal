@@ -12,6 +12,7 @@ export const SimpleLogosVariantFront = ({
   const preferences = nfcPreferencesStore((s) => s.preferencesData);
   const colorFront = !preferences.cardColorFront ? "#d6d6d6" : preferences.cardColorFront;
   const profilePic = preferences.profileImageUrl ?? userData?.image;
+  const accent = !!preferences.accentColor ? preferences.accentColor : "#000000";
 
   if (preferences.cardVariant !== "basic" || preferences.cardTemplate !== "simple-logos") {
     return;
@@ -37,16 +38,16 @@ export const SimpleLogosVariantFront = ({
       </div>
 
       <div
-        className="flex flex-col items-end justify-center pr-6 mix-blend-difference"
+        className="flex flex-col items-center justify-center pr-6"
         style={{
-          color: "",
+          color: accent,
         }}
       >
         <h2 className="text-[24px]/8 font-bold">
           {userData?.contactJSON?.name.first} {userData?.contactJSON?.name.last}
         </h2>
 
-        <p className="text-lg">{userData?.profileHeader}</p>
+        <p className="text-xl">{userData?.profileHeader}</p>
       </div>
     </section>
   );
@@ -54,12 +55,14 @@ export const SimpleLogosVariantFront = ({
 
 export const SimpleLogosVariantBack = ({
   urlQREncoder,
+  userData,
 }: {
   urlQREncoder?: string;
   userData?: RouterOutputs["vCard"]["get"];
 }) => {
   const preferences = nfcPreferencesStore((s) => s.preferencesData);
   const colorBack = !!preferences.cardColorBack ? preferences.cardColorBack : "#d6d6d6";
+  const accent = !!preferences.accentColor ? preferences.accentColor : "#000000";
   const { SVG } = useQRCode();
 
   if (preferences.cardTemplate !== "simple-logos" || preferences.cardVariant !== "basic") {
@@ -74,18 +77,25 @@ export const SimpleLogosVariantBack = ({
       )}
       style={{
         background: colorBack,
+        color: accent,
       }}
     >
-      <div className="relative mt-auto flex w-full items-end justify-center gap-2">
-        {preferences.companyLogoURL && !!preferences.showCompanyLogo && (
-          <Image
-            src={preferences.companyLogoURL}
-            alt={`company-logo`}
-            width={200}
-            height={100}
-            className="h-[100px] w-[200px] rounded-md object-cover"
-          />
-        )}
+      <div className="relative flex w-full flex-col items-center justify-center self-end">
+        <article className="flex items-center gap-3">
+          {preferences.companyLogoURL && !!preferences.showCompanyLogo && (
+            <Image
+              src={preferences.companyLogoURL}
+              alt={`company-logo`}
+              width={50}
+              height={50}
+              className="h-[50px] w-[50px] rounded-md object-cover"
+            />
+          )}
+
+          <h2 className="text-4xl font-bold">{userData?.contactJSON?.company?.name}</h2>
+        </article>
+
+        <h3 className="text-xl">{userData?.contactJSON?.jobTitle}</h3>
       </div>
 
       <div className="relative flex w-full items-start justify-center">
