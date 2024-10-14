@@ -122,7 +122,7 @@ export const LinksSortableList = ({
 
   return (
     <>
-      <Divider>Social links</Divider>
+      <Divider>Redes sociales</Divider>
 
       <DndContext
         id="links-sortable-context"
@@ -140,7 +140,7 @@ export const LinksSortableList = ({
             {allLinks
               .filter((item) => !!item.socialType)
               .map((item) => (
-                <SortableItem key={item.id} id={item.id} className="w-max">
+                <SortableItem key={item.id} id={item.id} className="w-full sm:w-max">
                   {({ attributes, listeners }) => (
                     <SocialLinkItem
                       data={item}
@@ -157,7 +157,7 @@ export const LinksSortableList = ({
         </SortableContext>
       </DndContext>
 
-      <Divider>Other links</Divider>
+      <Divider>Otros links</Divider>
 
       <DndContext
         id="links-sortable-context"

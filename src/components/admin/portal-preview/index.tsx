@@ -40,7 +40,7 @@ export const PortalPreviewWrapperRSC = async ({
   return (
     <div
       className={cn(
-        "fixed top-40 flex h-max flex-col items-center justify-center gap-4 rounded-xl",
+        "flex h-max flex-col items-center justify-center gap-4 rounded-xl md:fixed md:top-40",
         className,
       )}
     >

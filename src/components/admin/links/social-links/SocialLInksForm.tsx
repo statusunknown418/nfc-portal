@@ -16,11 +16,11 @@ import {
   FormMessage,
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
-import { cn, SocialIcons } from "~/lib/utils";
+import { cn, PrettySocialIcons } from "~/lib/utils";
 import { newLinkSchema, type NewLinkSchema, type SocialLinkType } from "~/server/db/schema";
 import { api } from "~/trpc/react";
 
-const socialLinks: Array<{
+export const socialLinks: Array<{
   name: string;
   icon: ReactNode;
   key: SocialLinkType;
@@ -28,61 +28,61 @@ const socialLinks: Array<{
 }> = [
   {
     name: "Twitter",
-    icon: <SocialIcons.twitter className="size-10" />,
+    icon: <PrettySocialIcons type="twitter" className="size-10" />,
     key: "twitter",
     url: (username: string) => `https://x.com/${username}`,
   },
   {
     name: "LinkedIn",
-    icon: <SocialIcons.linkedin className="size-10" />,
+    icon: <PrettySocialIcons type="linkedin" className="size-10" />,
     key: "linkedin",
     url: (username: string) => `https://linkedin.com/in/${username}`,
   },
   {
     name: "Facebook",
-    icon: <SocialIcons.facebook className="size-10" />,
+    icon: <PrettySocialIcons type="facebook" className="size-10" />,
     key: "facebook",
     url: (username: string) => `https://facebook.com/${username}`,
   },
   {
     name: "Instagram",
-    icon: <SocialIcons.instagram className="size-10" />,
+    icon: <PrettySocialIcons type="instagram" className="size-10" />,
     key: "instagram",
     url: (username: string) => `https://instagram.com/${username}`,
   },
   {
     name: "Github",
-    icon: <SocialIcons.github className="size-10" />,
+    icon: <PrettySocialIcons type="github" className="size-10" />,
     key: "github",
     url: (username: string) => `https://github.com/${username}`,
   },
   {
     name: "TikTok",
-    icon: <SocialIcons.tiktok className="size-10" />,
+    icon: <PrettySocialIcons type="tiktok" className="size-10" />,
     key: "tiktok",
     url: (username: string) => `https://tiktok.com/${username}`,
   },
   {
     name: "Youtube",
-    icon: <SocialIcons.youtube className="size-10" />,
+    icon: <PrettySocialIcons type="youtube" className="size-10" />,
     key: "youtube",
     url: (username: string) => `https://youtube.com/${username}`,
   },
   {
     name: "Telegram",
-    icon: <SocialIcons.telegram className="size-10" />,
+    icon: <PrettySocialIcons type="telegram" className="size-10" />,
     key: "telegram",
     url: (username: string) => `https://t.me/${username}`,
   },
   {
     name: "Patreon",
-    icon: <SocialIcons.patreon className="size-10" />,
+    icon: <PrettySocialIcons type="patreon" className="size-10" />,
     key: "patreon",
     url: (username: string) => `https://patreon.com/${username}`,
   },
   {
     name: "Spotify",
-    icon: <SocialIcons.spotify className="size-10" />,
+    icon: <PrettySocialIcons type="spotify" className="size-10" />,
     key: "spotify",
     url: (username: string) => `https://open.spotify.com/artist/${username}`,
   },
@@ -168,7 +168,7 @@ export const SocialLInksForm = ({
             name="displayText"
             render={({ field }) => (
               <FormItem className="col-span-3 mt-4">
-                <FormLabel>Username or handle</FormLabel>
+                <FormLabel>Nombre de usuario</FormLabel>
 
                 <div className="flex h-11 items-center">
                   <p className="flex h-full items-center rounded-l-lg border border-r-0 bg-muted px-4 text-sm text-muted-foreground">

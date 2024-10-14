@@ -1,7 +1,12 @@
 "use client";
 
 import { type DraggableAttributes } from "@dnd-kit/core";
-import { DragHandleDots2Icon, HamburgerMenuIcon, TrashIcon } from "@radix-ui/react-icons";
+import {
+  DragHandleDots2Icon,
+  HamburgerMenuIcon,
+  Pencil2Icon,
+  TrashIcon,
+} from "@radix-ui/react-icons";
 import { useTranslations } from "next-intl";
 import { forwardRef } from "react";
 import { Button } from "~/components/ui/button";
@@ -12,8 +17,9 @@ import {
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
 import { cn, OutlinedSocialIcons } from "~/lib/utils";
-import { type RouterOutputs } from "~/trpc/react";
+import { api, type RouterOutputs } from "~/trpc/react";
 import { EditSocialLink } from "./social-links/EditSocialLink";
+import { toast } from "sonner";
 
 export const SocialLinkItem = forwardRef<
   HTMLDivElement,
@@ -23,11 +29,45 @@ export const SocialLinkItem = forwardRef<
     listeners?: Record<string, unknown>;
     username: string;
   }
->(({ data, className, listeners, attributes, ...props }, ref) => {
+>(({ data, username, className, listeners, attributes, ...props }, ref) => {
   const t = useTranslations();
 
+  const utils = api.useUtils();
+  const deleteLink = api.links.delete.useMutation({
+    onMutate: (vars) => {
+      const prevData = utils.links.all.getData();
+      const newData = prevData?.filter((item) => item.id !== vars.id);
+
+      utils.links.all.setData(undefined, newData);
+
+      return prevData;
+    },
+    onSuccess: async () => {
+      toast.success("Link deleted!");
+      await Promise.all([
+        utils.viewer.previewPortal.invalidate(),
+        utils.portals.get.invalidate({ username: username }),
+        utils.links.all.invalidate(),
+      ]);
+    },
+    onError: (err, _vars, context) => {
+      toast.error(err.message);
+      utils.links.all.setData(undefined, context);
+    },
+  });
+
+  const handleDelete = (e: React.MouseEvent<HTMLDivElement | HTMLButtonElement>) => {
+    e.stopPropagation();
+
+    toast.promise(deleteLink.mutateAsync({ id: data.id }), {
+      loading: "Deleting...",
+      success: `Removed ${data.displayText}`,
+      error: "Failed to delete link",
+    });
+  };
+
   return (
-    <EditSocialLink>
+    <EditSocialLink linkData={data} userName={username}>
       <section
         ref={ref}
         className={cn(
@@ -64,7 +104,12 @@ export const SocialLinkItem = forwardRef<
           </DropdownMenuTrigger>
 
           <DropdownMenuContent align="start">
-            <DropdownMenuItem className="text-destructive">
+            <DropdownMenuItem>
+              <Pencil2Icon />
+              {t("admin.dashboard.actions.editLink")}
+            </DropdownMenuItem>
+
+            <DropdownMenuItem className="text-destructive" onClick={handleDelete}>
               <TrashIcon />
               {t("admin.dashboard.actions.delete")}
             </DropdownMenuItem>

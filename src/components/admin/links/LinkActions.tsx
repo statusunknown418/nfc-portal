@@ -142,11 +142,6 @@ export const LinkActions = ({
             {t("actions.editLink")}
           </DropdownMenuItem>
 
-          {/* <DropdownMenuItem onClick={() => setOpen(false)}>
-            <ArchiveIcon />
-            {t("actions.archive")}
-          </DropdownMenuItem> */}
-
           <DropdownMenuItem
             onClick={handleDelete}
             className="text-destructive focus:bg-destructive/10 focus:text-destructive"

@@ -193,7 +193,7 @@ export const PortalContent = ({
               </Alert>
             )}
 
-            <Divider className="mb-4 mt-2 text-xs">All other links</Divider>
+            <Divider className="mb-4 mt-2 text-xs">Otros links</Divider>
 
             {portal.data.links
               .filter((item) => !item.socialType)

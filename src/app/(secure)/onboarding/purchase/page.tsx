@@ -64,7 +64,7 @@ export default function PurchasePage() {
       <h3 className="text-xl font-semibold tracking-wide">{t("title")}</h3>
       <p className="text-muted-foreground">{t("description")}</p>
 
-      <div className="my-4 h-[400px]">
+      <div className="my-4 h-[600px]">
         <CardPreview cardData={vCard} />
       </div>
 

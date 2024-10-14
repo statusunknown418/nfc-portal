@@ -6,6 +6,7 @@ import {
   PortalPreviewWrapperLoader,
   PortalPreviewWrapperRSC,
 } from "~/components/admin/portal-preview";
+import { MobilePreview } from "~/components/admin/portal-preview/MobilePreview";
 import { Alert, AlertTitle } from "~/components/ui/alert";
 
 export default async function AdminPage() {
@@ -30,8 +31,18 @@ export default async function AdminPage() {
   const username = sessionClaims.username;
 
   return (
-    <section className="flex flex-col gap-4 lg:grid lg:grid-cols-2 lg:justify-between">
+    <section className="relative flex flex-col gap-4 pb-10 sm:pb-0 lg:grid lg:grid-cols-2 lg:justify-between">
       <LinksViewRSC jwt={sessionClaims} />
+
+      <MobilePreview>
+        <Suspense>
+          {!!username && (
+            <Suspense fallback={<PortalPreviewWrapperLoader />}>
+              <PortalPreviewWrapperRSC username={sessionClaims.username} />
+            </Suspense>
+          )}
+        </Suspense>
+      </MobilePreview>
 
       <aside className="relative hidden flex-grow gap-4 py-6 pl-6 ring-0 lg:block">
         <section className="flex h-full flex-col items-center justify-center gap-8">

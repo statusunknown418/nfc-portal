@@ -11,9 +11,8 @@ import {
   YoutubeLogo,
 } from "@phosphor-icons/react/dist/ssr";
 import { type ClassValue, clsx } from "clsx";
-import { type ReactNode } from "react";
 import { twMerge } from "tailwind-merge";
-import { type IconProps, Icons } from "~/components/ui/icons";
+import { Icons, type IconProps } from "~/components/ui/icons";
 import { type CardTemplatesType } from "~/server/api/schemas.zod";
 import { type CardShippingStatus, type SocialLinkType, type ThemeType } from "~/server/db/schema";
 
@@ -297,17 +296,33 @@ export const OutlinedSocialIcons = (props: IconProps & { type: SocialLinkType })
   }
 };
 
-export const SocialIcons: Record<SocialLinkType, (props: IconProps) => ReactNode> = {
-  twitter: Icons.twitter,
-  linkedin: Icons.linkedin,
-  facebook: Icons.facebook,
-  instagram: Icons.instagram,
-  github: Icons.gitHub,
-  tiktok: Icons.tikTok,
-  youtube: Icons.youtube,
-  telegram: Icons.telegram,
-  patreon: Icons.patreon,
-  spotify: Icons.spotify,
+export const PrettySocialIcons = (props: IconProps & { type: SocialLinkType }) => {
+  const { type, ...rest } = props;
+
+  switch (type) {
+    case "twitter":
+      return <Icons.twitter {...rest} />;
+    case "linkedin":
+      return <Icons.linkedin {...rest} />;
+    case "facebook":
+      return <Icons.facebook {...rest} />;
+    case "instagram":
+      return <Icons.instagram {...rest} />;
+    case "github":
+      return <Icons.gitHub {...rest} />;
+    case "tiktok":
+      return <Icons.tikTok {...rest} />;
+    case "youtube":
+      return <Icons.youtube {...rest} />;
+    case "telegram":
+      return <Icons.telegram {...rest} />;
+    case "patreon":
+      return <Icons.patreon {...rest} />;
+    case "spotify":
+      return <Icons.spotify {...rest} />;
+    default:
+      return <Icons.twitter {...rest} />;
+  }
 };
 
 export const computeInitials = (text: string) => {
