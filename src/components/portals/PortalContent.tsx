@@ -144,6 +144,7 @@ export const PortalContent = ({
         <div className="w-full px-4">
           {!portal.data.hasContactInfoLocked && (
             <ContactInfo
+              allLinks={portal.data.links}
               unlocked={portal.unlocked}
               data={portal.data?.contactJSON}
               theme={portal.data?.theme}
