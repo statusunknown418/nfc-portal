@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { useState, type ReactNode } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { Spinner } from "~/components/shared/Spinner";
 import { Button } from "~/components/ui/button";
 import {
   Dialog,
@@ -23,13 +24,12 @@ import {
   DrawerTrigger,
 } from "~/components/ui/drawer";
 import { Form, FormDescription, FormField, FormItem, FormLabel } from "~/components/ui/form";
+import { PrettySocialIcons } from "~/components/ui/icons";
 import { Input } from "~/components/ui/input";
 import { useMediaQuery } from "~/lib/hooks/use-media-query";
-import { PrettySocialIcons } from "~/lib/utils";
 import { newLinkSchema, type NewLinkSchema } from "~/server/db/schema";
 import { api, type RouterOutputs } from "~/trpc/react";
 import { socialLinks } from "./SocialLInksForm";
-import { Spinner } from "~/components/shared/Spinner";
 
 export const EditSocialLink = ({
   children,

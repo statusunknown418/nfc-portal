@@ -15,8 +15,9 @@ import {
   FormLabel,
   FormMessage,
 } from "~/components/ui/form";
+import { PrettySocialIcons } from "~/components/ui/icons";
 import { Input } from "~/components/ui/input";
-import { cn, PrettySocialIcons } from "~/lib/utils";
+import { cn } from "~/lib/utils";
 import { newLinkSchema, type NewLinkSchema, type SocialLinkType } from "~/server/db/schema";
 import { api } from "~/trpc/react";
 
