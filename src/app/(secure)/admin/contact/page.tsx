@@ -4,7 +4,10 @@ import {
   ContactDataLoading,
   ContactDataWrapper,
 } from "~/components/admin/contact/contact-data/contact-data-wrapper";
-import { ContactPreviewWrapper } from "~/components/admin/contact/preview/contact-preview-wrapper";
+import {
+  ContactPreviewLoader,
+  ContactPreviewWrapper,
+} from "~/components/admin/contact/preview/contact-preview-wrapper";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -42,7 +45,7 @@ export default function ContactPage() {
           </Suspense>
         </article>
 
-        <Suspense>
+        <Suspense fallback={<ContactPreviewLoader />}>
           <ContactPreviewWrapper />
         </Suspense>
       </section>

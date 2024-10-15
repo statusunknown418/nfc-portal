@@ -85,7 +85,7 @@ export const Sidebar = () => {
                   asChild
                   variant={selectedSegment === "visual" ? "primary_ghost" : "ghost"}
                   aria-selected={selectedSegment === "visual"}
-                  className="h-[44px] w-[44px] rounded-none border-2 border-x-transparent border-t-transparent py-1 aria-selected:border-b-current aria-selected:bg-transparent aria-selected:hover:bg-primary/5 md:h-12 md:w-max"
+                  className="h-[44px] w-[44px] rounded-none border-2 !border-x-transparent !border-t-transparent py-1 aria-selected:border-b-current aria-selected:bg-transparent aria-selected:hover:bg-primary/5 md:h-12 md:w-max"
                 >
                   <Link href="/admin/visual">
                     <RulerSquareIcon className="size-6 md:size-5" />

@@ -1,14 +1,14 @@
 "use client";
 
 import { IdCardIcon } from "@radix-ui/react-icons";
+import { useTranslations } from "next-intl";
+import { useState } from "react";
 import vCardBuilder from "vcard-creator";
 import { cn } from "~/lib/utils";
 import { type ContactVCardType, type ThemeType } from "~/server/db/schema";
-import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
-import { useTranslations } from "next-intl";
 import { api, type RouterOutputs } from "~/trpc/react";
-import { useState } from "react";
 import { Spinner } from "../shared/Spinner";
+import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 
 export const ContactInfo = ({
   unlocked,
@@ -52,9 +52,9 @@ export const ContactInfo = ({
   if (!data) {
     return (
       <Alert style={{ background: theme.colors.subtle }}>
-        <AlertTitle className="text-center">No contact info found</AlertTitle>
+        <AlertTitle className="text-center">No se encontró información de contacto</AlertTitle>
 
-        <AlertDescription>The page owner hasn&apos;t added any contact info yet.</AlertDescription>
+        <AlertDescription>Este usuario aún no haa añadido información de contacto</AlertDescription>
       </Alert>
     );
   }
