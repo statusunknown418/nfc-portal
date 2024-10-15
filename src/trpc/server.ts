@@ -28,3 +28,7 @@ export const { trpc: api, HydrateClient } = createHydrationHelpers<AppRouter>(
   caller,
   getQueryClient,
 );
+
+export const cachedContactQuery = cache(
+  (props: { includeImagePalette?: boolean; includeLinks?: boolean }) => api.vCard.get(props),
+);

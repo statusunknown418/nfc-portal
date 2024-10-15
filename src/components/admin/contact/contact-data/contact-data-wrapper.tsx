@@ -1,12 +1,12 @@
-import { Skeleton } from "~/components/ui/skeleton";
-import { api } from "~/trpc/server";
-import { ContactDataForm } from "./ContactDataForm";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+import { Skeleton } from "~/components/ui/skeleton";
+import { cachedContactQuery } from "~/trpc/server";
+import { ContactDataForm } from "./ContactDataForm";
 
 export const ContactDataWrapper = async () => {
   const { sessionClaims } = auth();
-  const [data] = await Promise.all([api.vCard.get()]);
+  const data = await cachedContactQuery({});
 
   if (!sessionClaims) {
     return redirect("/");
@@ -18,7 +18,7 @@ export const ContactDataWrapper = async () => {
 export const ContactDataLoading = () => {
   return (
     <div className="grid w-full grid-cols-1 gap-4">
-      <Skeleton className="h-14 w-full" />
+      <Skeleton className="h-24 w-full" />
 
       <section className="grid grid-cols-1 gap-4 rounded-xl border p-4">
         <div className="mt-2 flex gap-2">
