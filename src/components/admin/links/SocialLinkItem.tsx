@@ -9,6 +9,7 @@ import {
 } from "@radix-ui/react-icons";
 import { useTranslations } from "next-intl";
 import { forwardRef } from "react";
+import { toast } from "sonner";
 import { Button } from "~/components/ui/button";
 import {
   DropdownMenu,
@@ -16,10 +17,10 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
-import { cn, OutlinedSocialIcons } from "~/lib/utils";
+import { OutlinedSocialIcons } from "~/components/ui/icons";
+import { cn } from "~/lib/utils";
 import { api, type RouterOutputs } from "~/trpc/react";
 import { EditSocialLink } from "./social-links/EditSocialLink";
-import { toast } from "sonner";
 
 export const SocialLinkItem = forwardRef<
   HTMLDivElement,

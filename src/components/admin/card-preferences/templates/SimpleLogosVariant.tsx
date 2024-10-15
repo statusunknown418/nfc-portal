@@ -43,9 +43,11 @@ export const SimpleLogosVariantFront = ({
           color: accent,
         }}
       >
-        <h2 className="text-[24px]/8 font-bold">
-          {userData?.contactJSON?.name.first} {userData?.contactJSON?.name.last}
-        </h2>
+        {preferences.showName && (
+          <h2 className="text-[24px]/8 font-bold">
+            {userData?.contactJSON?.name.first} {userData?.contactJSON?.name.last}
+          </h2>
+        )}
 
         <p className="text-xl">{userData?.profileHeader}</p>
       </div>
@@ -92,10 +94,12 @@ export const SimpleLogosVariantBack = ({
             />
           )}
 
-          <h2 className="text-4xl font-bold">{userData?.contactJSON?.company?.name}</h2>
+          <h2 className="text-4xl font-bold">
+            {preferences.showCompanyName && userData?.contactJSON?.company?.name}
+          </h2>
         </article>
 
-        <h3 className="text-xl">{userData?.contactJSON?.jobTitle}</h3>
+        <h3 className="text-xl">{preferences.showJobTitle && userData?.contactJSON?.jobTitle}</h3>
       </div>
 
       <div className="relative flex w-full items-start justify-center">

@@ -51,7 +51,7 @@ export const CustomCardDesignsSelector = () => {
             "relative flex h-[240px] w-[420px] flex-col justify-center bg-contain bg-center bg-no-repeat",
           )}
           style={{
-            backgroundImage: `url(${imageFront})`,
+            backgroundImage: imageFront ? `url(${imageFront})` : undefined,
           }}
         >
           <UploadDropzone
@@ -107,7 +107,7 @@ export const CustomCardDesignsSelector = () => {
             "relative flex h-[240px] w-[420px] flex-col justify-center bg-contain bg-center bg-no-repeat",
           )}
           style={{
-            backgroundImage: `url(${imageBack})`,
+            backgroundImage: imageBack ? `url(${imageBack})` : undefined,
           }}
         >
           <UploadDropzone

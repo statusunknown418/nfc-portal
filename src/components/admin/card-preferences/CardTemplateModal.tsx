@@ -34,12 +34,12 @@ export const CardTemplateModal = ({
   const t = useTranslations("admin.onboarding.steps.cardPreferences");
 
   return (
-    <Dialog modal>
+    <Dialog>
       <DialogTrigger asChild>
         <button
           style={{
             ...style,
-            backgroundImage: `url(${front})`,
+            backgroundImage: front ? `url(${front})` : undefined,
           }}
           className={cn(
             "flex h-[170px] w-[280px] flex-col items-center justify-center rounded-lg border bg-cover bg-center bg-no-repeat p-4 shadow-md transition-all hover:scale-105 hover:opacity-100",

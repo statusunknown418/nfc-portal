@@ -91,6 +91,30 @@ export const ContactDataForm = ({
     defaultValues: data?.contactJSON
       ? {
           ...data.contactJSON,
+          address: data.contactJSON.address
+            ? [
+                ...data.contactJSON.address,
+                {
+                  label: "",
+                  extended: "",
+                  street: "",
+                  city: "",
+                  region: "",
+                  postalCode: "",
+                  country: "",
+                },
+              ]
+            : [
+                {
+                  label: "",
+                  extended: "",
+                  street: "",
+                  city: "",
+                  region: "",
+                  postalCode: "",
+                  country: "",
+                },
+              ],
           name: {
             first: data.contactJSON.name.first ?? "",
             last: data.contactJSON.name.last ?? "",

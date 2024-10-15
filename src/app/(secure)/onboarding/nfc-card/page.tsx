@@ -22,7 +22,7 @@ export default async function NFCCardPage() {
   return (
     <section
       className={cn(
-        "flex max-h-full flex-grow flex-col gap-4 lg:flex-row lg:justify-between lg:gap-12",
+        "flex max-h-full flex-grow flex-col gap-4 px-4 lg:flex-row lg:justify-between lg:gap-12 xl:px-0",
         InstrumentSans.variable,
         CormorantFont.variable,
       )}

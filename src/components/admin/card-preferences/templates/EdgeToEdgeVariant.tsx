@@ -19,7 +19,7 @@ export const EdgeToEdgeTemplateFront = ({
   return (
     <section
       className={cn(
-        "font-instrument-sans grid h-full w-full grid-cols-1 place-items-center gap-0 p-6 text-sm",
+        "grid h-full w-full grid-cols-1 place-items-center gap-0 p-6 font-instrument-sans text-sm",
       )}
       style={{
         background: colorFront,
@@ -27,9 +27,11 @@ export const EdgeToEdgeTemplateFront = ({
       }}
     >
       <div className="flex flex-col items-center justify-center">
-        <h2 className="text-2xl font-bold">
-          {cardData?.contactJSON?.name.first} {cardData?.contactJSON?.name.last}
-        </h2>
+        {preferences.showName && (
+          <h2 className="text-2xl font-bold">
+            {cardData?.contactJSON?.name.first} {cardData?.contactJSON?.name.last}
+          </h2>
+        )}
 
         {cardData?.profileHeader && <h3 className="text-xl">{cardData?.profileHeader}</h3>}
       </div>
@@ -52,7 +54,7 @@ export const EdgeToEdgeTemplateBack = ({
 
   return (
     <section
-      className="font-instrument-sans grid h-full w-full grid-cols-1 place-items-center p-6"
+      className="grid h-full w-full grid-cols-1 place-items-center p-6 font-instrument-sans"
       style={{
         background: colorFront,
         color: accent,
@@ -60,8 +62,10 @@ export const EdgeToEdgeTemplateBack = ({
     >
       <article className="flex items-center justify-between gap-8">
         <div>
-          <h2 className="text-xl font-semibold">{cardData?.contactJSON?.company?.name}</h2>
-          <h2 className="text-lg">{cardData?.contactJSON?.jobTitle}</h2>
+          <h2 className="text-xl font-semibold">
+            {preferences.showCompanyName && cardData?.contactJSON?.company?.name}
+          </h2>
+          <h2 className="text-lg">{preferences.showJobTitle && cardData?.contactJSON?.jobTitle}</h2>
         </div>
 
         {!!preferences.showCompanyLogo && preferences.companyLogoURL && (

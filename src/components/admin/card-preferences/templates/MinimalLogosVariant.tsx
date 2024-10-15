@@ -19,7 +19,7 @@ export const MinimalLogosVariantFront = ({
 
   return (
     <section
-      className="font-cormorant grid h-[250px] w-full grid-cols-1 place-items-center gap-0 rounded-xl border-4 p-6 text-sm"
+      className="grid h-[250px] w-full grid-cols-1 place-items-center gap-0 rounded-xl border-4 p-6 font-cormorant text-sm"
       style={{
         borderColor: accentColor,
         background: colorFront,
@@ -30,9 +30,11 @@ export const MinimalLogosVariantFront = ({
         <h2 className="text-[84px]/[72px] font-light">DB</h2>
 
         <header className="flex flex-col items-center gap-0">
-          <h3 className="text-2xl">
-            {cardData?.contactJSON?.name.first} {cardData?.contactJSON?.name.last}
-          </h3>
+          {preferences.showName && (
+            <h3 className="text-2xl">
+              {cardData?.contactJSON?.name.first} {cardData?.contactJSON?.name.last}
+            </h3>
+          )}
 
           <Divider className="my-0" />
 
@@ -62,7 +64,7 @@ export const MinimalLogosVariantBack = ({
 
   return (
     <section
-      className="font-cormorant grid h-[250px] w-full grid-cols-1 place-items-center rounded-xl border-4 p-6"
+      className="grid h-[250px] w-full grid-cols-1 place-items-center rounded-xl border-4 p-6 font-cormorant"
       style={{
         borderColor: accentColor,
         background: colorBack,

@@ -13,6 +13,23 @@ import { TRPCReactProvider } from "~/trpc/react";
 export const metadata: Metadata = {
   title: "ConCard",
   description: "Custom pages for your NFC business card",
+  keywords: [
+    "nfc",
+    "technology",
+    "nfc technology",
+    "nfc-card",
+    "nfc-business-card",
+    "nfc-portal",
+    "concard",
+    "card",
+    "business card",
+    "portal",
+    "business cards",
+    "cards",
+    "presentations",
+    "presentation cards",
+    "presentation card",
+  ],
   icons: [{ rel: "icon", url: "/favicon.ico" }],
   authors: [
     {

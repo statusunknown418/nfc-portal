@@ -8,7 +8,7 @@ import { Checkbox } from "~/components/ui/checkbox";
 import { FormControl, FormDescription, FormField, FormItem, FormLabel } from "~/components/ui/form";
 import { GradientPicker } from "~/components/ui/gradient-picker";
 import { Label } from "~/components/ui/label";
-import { Switch } from "~/components/ui/switch";
+import { Divider } from "~/components/ui/separator";
 import { UploadDropzone } from "~/lib/uploadthing";
 import { cn } from "~/lib/utils";
 import { type SaveNFCPreferences } from "~/server/api/schemas.zod";
@@ -18,15 +18,12 @@ export const OptionsSelector = () => {
   const t = useTranslations("admin.onboarding.steps.cardPreferences");
 
   const cardVariant = form.watch("cardVariant");
-  const hasName = form.watch("showName");
-  const hasCompanyName = form.watch("showCompanyName");
-  const hasJobTitle = form.watch("showJobTitle");
   const hasCompanyLogo = form.watch("showCompanyLogo");
   const logoURL = form.watch("companyLogoURL");
   const selectedTemplate = form.watch("cardTemplate");
   const profilePicture = form.watch("profileImageUrl");
 
-  if (!selectedTemplate && cardVariant === "basic") {
+  if ((!selectedTemplate || !cardVariant) && cardVariant === "basic") {
     return;
   }
 
@@ -49,11 +46,11 @@ export const OptionsSelector = () => {
           className={cn("col-span-2 w-full", selectedTemplate !== "simple-logos" && "hidden")}
         >
           <ExclamationTriangleIcon />
-          <AlertTitle>Warning: Profile picture MUST have a transparent background</AlertTitle>
+          <AlertTitle>Warning: Tu foto de perfil debe tener un fondo transparente</AlertTitle>
           <AlertDescription>
-            If not, the background will be visible on the card, leading to a poor design, you can
-            either upload a PNG image with a transparent background OR choose an accurate background
-            color with the picker below.
+            Caso contrario el color de fondo se verá en la tarjeta, lo que puede llevar a un diseño
+            poco óptimo, puedes subir una imagen PNG con un fondo transparente o elegir un color de
+            fondo apropiado con el selector de color.
           </AlertDescription>
         </Alert>
 
@@ -62,31 +59,29 @@ export const OptionsSelector = () => {
           className={cn("col-span-2 w-full", selectedTemplate === "simple-logos" && "hidden")}
         >
           <ExclamationTriangleIcon />
-          <AlertTitle>Warning: Company Logo MUST have a transparent background</AlertTitle>
+          <AlertTitle>Warning: El logo de la empresa debe tener fondo transparente</AlertTitle>
           <AlertDescription>
-            If not, the background will be visible on the card, leading to a poor design, you can
-            either upload a PNG image with a transparent background OR choose an accurate background
-            color with the picker below.
+            Caso contrario el color de fondo se verá en la tarjeta, lo que puede llevar a un diseño
+            poco óptimo, puedes subir una imagen PNG con un fondo transparente o elegir un color de
+            fondo apropiado con el selector de color
           </AlertDescription>
         </Alert>
 
-        <FormItem
-          className={cn("col-span-2 space-y-0", selectedTemplate !== "simple-logos" && "hidden")}
-        >
+        <FormItem className={cn("col-span-2", selectedTemplate !== "simple-logos" && "hidden")}>
           <Label className="flex items-center gap-1 text-base">
             <UserCircle weight="duotone" className="size-6" />
-            Profile picture
+            Foto de perfil
           </Label>
 
-          <FormDescription>
-            We are using the profile picture you uploaded to the portal page. If you want to change
-            it, you can upload a new one.
+          <FormDescription className="text-sm">
+            Utilizamos la misma imagen que añadiste a tu portal, si quieres cambiarla, puedes subir
+            una distinta.
           </FormDescription>
         </FormItem>
 
         <article
           className={cn(
-            "flex flex-col gap-2 self-start rounded-lg bg-muted px-3 py-1 transition-all",
+            "col-span-2 flex w-max flex-col gap-2 self-start rounded-lg bg-muted px-3 py-1 transition-all",
             selectedTemplate !== "simple-logos" && "hidden",
           )}
         >
@@ -95,7 +90,7 @@ export const OptionsSelector = () => {
               "relative flex h-[140px] flex-col justify-center bg-contain bg-center bg-no-repeat",
             )}
             style={{
-              backgroundImage: `url(${profilePicture})`,
+              backgroundImage: profilePicture ? `url(${profilePicture})` : undefined,
             }}
           >
             <UploadDropzone
@@ -134,7 +129,7 @@ export const OptionsSelector = () => {
           </Button>
         </article>
 
-        {selectedTemplate === "simple-logos" && <div />}
+        <Divider className="col-span-2 my-3">Opciones</Divider>
 
         <FormField
           control={form.control}
@@ -156,40 +151,9 @@ export const OptionsSelector = () => {
           )}
         />
 
-        <FormField
-          control={form.control}
-          name="companyLogoOnFront"
-          render={({ field }) => (
-            <FormItem className={cn("opacity-0")}>
-              <div className={cn("flex items-center gap-3")}>
-                <FormLabel
-                  className={cn("transition-opacity", !field.value ? "opacity-100" : "opacity-0")}
-                >
-                  {t("details.back")}
-                </FormLabel>
-
-                <FormControl>
-                  <Switch
-                    disabled={!hasCompanyLogo}
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                    className="data-[state=unchecked]:bg-purple-500"
-                  />
-                </FormControl>
-
-                <FormLabel
-                  className={cn("transition-opacity", !!field.value ? "opacity-100" : "opacity-0")}
-                >
-                  {t("details.front")}
-                </FormLabel>
-              </div>
-            </FormItem>
-          )}
-        />
-
         <article
           className={cn(
-            "flex flex-col gap-2 rounded-lg bg-muted px-3 py-1 transition-all",
+            "col-span-2 flex w-max flex-col gap-2 rounded-lg bg-muted px-3 py-1 transition-all",
             !hasCompanyLogo && "pointer-events-none hidden h-0 opacity-0",
           )}
         >
@@ -198,7 +162,7 @@ export const OptionsSelector = () => {
               "relative flex h-[140px] flex-col justify-center bg-contain bg-center bg-no-repeat",
             )}
             style={{
-              backgroundImage: `url(${logoURL})`,
+              backgroundImage: logoURL ? `url(${logoURL})` : undefined,
             }}
           >
             <UploadDropzone
@@ -237,7 +201,7 @@ export const OptionsSelector = () => {
           </Button>
         </article>
 
-        <div />
+        {!hasCompanyLogo && <div />}
 
         <FormField
           control={form.control}
@@ -260,41 +224,6 @@ export const OptionsSelector = () => {
         />
 
         <FormField
-          name="nameOnFront"
-          control={form.control}
-          render={({ field }) => (
-            <FormItem
-              className={cn(
-                hasName && selectedTemplate === "edge-to-edge" ? "opacity-100" : "opacity-0",
-              )}
-            >
-              <div className={cn("flex items-center gap-3")}>
-                <FormLabel
-                  className={cn("transition-opacity", !field.value ? "opacity-100" : "opacity-0")}
-                >
-                  {t("details.back")}
-                </FormLabel>
-
-                <FormControl>
-                  <Switch
-                    disabled={!hasName}
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                    className="data-[state=unchecked]:bg-purple-500"
-                  />
-                </FormControl>
-
-                <FormLabel
-                  className={cn("transition-opacity", !!field.value ? "opacity-100" : "opacity-0")}
-                >
-                  {t("details.front")}
-                </FormLabel>
-              </div>
-            </FormItem>
-          )}
-        />
-
-        <FormField
           name="showJobTitle"
           control={form.control}
           render={({ field }) => (
@@ -309,41 +238,6 @@ export const OptionsSelector = () => {
                 </FormControl>
 
                 <FormLabel className="text-base">{t("details.jobTitle")}</FormLabel>
-              </div>
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="jobTitleOnFront"
-          render={({ field }) => (
-            <FormItem
-              className={cn(
-                hasJobTitle && selectedTemplate === "edge-to-edge" ? "opacity-100" : "opacity-0",
-              )}
-            >
-              <div className={cn("flex items-center gap-3")}>
-                <FormLabel
-                  className={cn("transition-opacity", !field.value ? "opacity-100" : "opacity-0")}
-                >
-                  {t("details.back")}
-                </FormLabel>
-
-                <FormControl>
-                  <Switch
-                    disabled={!hasJobTitle}
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                    className="data-[state=unchecked]:bg-purple-500"
-                  />
-                </FormControl>
-
-                <FormLabel
-                  className={cn("transition-opacity", !!field.value ? "opacity-100" : "opacity-0")}
-                >
-                  {t("details.front")}
-                </FormLabel>
               </div>
             </FormItem>
           )}
@@ -371,41 +265,6 @@ export const OptionsSelector = () => {
 
         <FormField
           control={form.control}
-          name="companyNameOnFront"
-          render={({ field }) => (
-            <FormItem
-              className={cn(
-                hasCompanyName && selectedTemplate === "edge-to-edge" ? "opacity-100" : "opacity-0",
-              )}
-            >
-              <div className={cn("flex items-center gap-3")}>
-                <FormLabel
-                  className={cn("transition-opacity", !field.value ? "opacity-100" : "opacity-0")}
-                >
-                  {t("details.back")}
-                </FormLabel>
-
-                <FormControl>
-                  <Switch
-                    disabled={!hasCompanyName}
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                    className="data-[state=unchecked]:bg-purple-500"
-                  />
-                </FormControl>
-
-                <FormLabel
-                  className={cn("transition-opacity", !!field.value ? "opacity-100" : "opacity-0")}
-                >
-                  {t("details.front")}
-                </FormLabel>
-              </div>
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
           name="includeQRCode"
           render={({ field }) => (
             <FormItem>
@@ -418,13 +277,22 @@ export const OptionsSelector = () => {
                   />
                 </FormControl>
 
-                <FormLabel className="text-base">Include QR code</FormLabel>
+                <FormLabel className="text-base">Incluir código QR</FormLabel>
               </div>
             </FormItem>
           )}
         />
 
-        <div />
+        <Divider className="col-span-2 my-3">Colores</Divider>
+
+        <Alert className="col-span-2 mb-2">
+          <PaintBrush className="size-5" />
+          <AlertTitle>Nota</AlertTitle>
+          <AlertDescription>
+            Si no seleccionas ningún color de fondo o color secundario, se utilizarán los colores
+            predefinidos de la plantilla seleccionada.
+          </AlertDescription>
+        </Alert>
 
         <FormField
           control={form.control}
@@ -438,6 +306,7 @@ export const OptionsSelector = () => {
                 hideImages
                 hideGradients
               />
+              <FormDescription>Color de fondo de la parte frontal de tu tarjeta</FormDescription>
             </FormItem>
           )}
         />
@@ -454,6 +323,7 @@ export const OptionsSelector = () => {
                 hideImages
                 hideGradients
               />
+              <FormDescription>Color de fondo de la parte trasera de tu tarjeta</FormDescription>
             </FormItem>
           )}
         />
@@ -470,18 +340,12 @@ export const OptionsSelector = () => {
                 hideImages
                 hideGradients
               />
+              <FormDescription>
+                Bordes, color del texto u otros detalles secundarios
+              </FormDescription>
             </FormItem>
           )}
         />
-
-        <Alert className="col-span-2">
-          <PaintBrush className="size-5" />
-          <AlertTitle>Nota</AlertTitle>
-          <AlertDescription>
-            Si no seleccionas ningún color de fondo o secundario, se utilizarán los colores
-            predefinidos de la plantilla seleccionada.
-          </AlertDescription>
-        </Alert>
       </div>
     </section>
   );

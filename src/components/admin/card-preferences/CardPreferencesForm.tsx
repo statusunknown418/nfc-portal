@@ -40,7 +40,7 @@ export const CardPreferencesForm = () => {
 
   useAutoSaveFormData(200, form, (data) => void handleSubmit(data), []);
 
-  useFormPersist("session:nfc-preferences", {
+  useFormPersist("auto-save:nfc-preferences", {
     ...form,
     storage: typeof window !== "undefined" ? window.localStorage : undefined,
   });

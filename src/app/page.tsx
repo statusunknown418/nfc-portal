@@ -12,6 +12,7 @@ import {
   Share1Icon,
 } from "@radix-ui/react-icons";
 import { useMessages, useTranslations } from "next-intl";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
@@ -41,6 +42,8 @@ import {
 import { Skeleton } from "~/components/ui/skeleton";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "~/components/ui/tooltip";
 import { cn } from "~/lib/utils";
+
+const Spline = dynamic(() => import("@splinetool/react-spline/next"), { ssr: false });
 
 export default function Home() {
   const t = useTranslations("landing");
@@ -123,9 +126,6 @@ export default function Home() {
             <BlurFade>
               <h1 className="text-center text-5xl font-bold tracking-tight sm:text-6xl md:text-7xl">
                 {t("hero.heading")}
-                {/* <span className="bg-gradient-to-r from-indigo-700 via-violet-500 to-purple-400 bg-clip-text text-transparent">
-                    NFC
-                  </span>{" "} */}
               </h1>
             </BlurFade>
 
@@ -164,8 +164,8 @@ export default function Home() {
 
         <article className="w-full max-w-7xl px-4">
           <BlurFade delay={0.25 * 2}>
-            <div className="flex aspect-video w-full items-center justify-center rounded-2xl border border-border/50 bg-white shadow-lg shadow-[hsl(240_37%_90%)]">
-              Video or card animation
+            <div className="flex aspect-video w-full items-center justify-center rounded-2xl bg-white shadow-lg shadow-[hsl(240_37%_90%)]">
+              <Spline scene="https://prod.spline.design/EwcNdSsiNJra4npU/scene.splinecode" />
             </div>
           </BlurFade>
         </article>
@@ -306,13 +306,13 @@ export default function Home() {
                 <span className="transition-all group-hover:text-indigo-400">
                   {t("features.firstGraphic")}
                 </span>{" "}
-                <span className="text-indigo-400 transition-all group-hover:text-inherit">
+                <span className="text-indigo-500 transition-all group-hover:text-inherit">
                   {t("features.secondGraphic")}
                 </span>{" "}
                 <span className="transition-all group-hover:text-indigo-400">
                   {t("features.thirdGraphic")}
-                </span>
-                <span className="text-indigo-400 transition-all group-hover:text-inherit">
+                </span>{" "}
+                <span className="text-indigo-500 transition-all group-hover:text-inherit">
                   {t("features.fourthGraphic")}
                 </span>{" "}
                 <span>{t("features.fifthGraphic")}</span>
@@ -334,27 +334,28 @@ export default function Home() {
 
               <h2 className="text-2xl font-medium">
                 {t("features.sixthGraphic")}{" "}
-                <span className="text-pink-500">{t("features.seventhGraphic")}</span>
+                <span className="text-pink-500">{t("features.seventhGraphic")}</span>{" "}
                 {t("features.eighthGraphic")}{" "}
                 <span className="text-pink-500">{t("features.ninthGraphic")}</span>
               </h2>
             </article>
 
-            <article className="border border-emerald-300 bg-emerald-100 text-emerald-900 lg:col-span-4 lg:row-span-2">
+            <article className="border border-emerald-300 bg-emerald-100/60 text-emerald-900 lg:col-span-4 lg:row-span-2">
               <div>graphic 3</div>
 
               <h2 className="text-2xl font-medium">
-                {t("features.tenthGraphic")}
-                <span className="text-emerald-500">{t("features.eleventhGraphic")}</span>
+                {t("features.tenthGraphic")}{" "}
+                <span className="text-emerald-500">{t("features.eleventhGraphic")}</span>{" "}
                 {t("features.twelfthGraphic")}{" "}
-                <span className="text-emerald-500">{t("features.thirteenthGraphic")}</span>
+                <span className="text-emerald-500">{t("features.thirteenthGraphic")}</span> (si
+                tiene Google Pay entonces es compatible con ConCard!).
               </h2>
             </article>
 
             <article className="border border-neutral-50 bg-primary text-neutral-50 lg:col-span-8 lg:row-span-2">
-              <div>
-                <LockClosedIcon className="size-6" />
-                <HyperText text={t("features.hyperText")} />
+              <div className="flex justify-center gap-2 border border-neutral-500 bg-neutral-800 px-4 py-2">
+                <LockClosedIcon className="mt-1 size-7" />
+                <HyperText text={t("features.hyperText")} className="text-lg" />
               </div>
 
               <h2 className="text-2xl font-medium">
@@ -371,8 +372,8 @@ export default function Home() {
         id="comparison"
         className="-mb-10 flex items-center justify-center rounded-t-[24px] bg-white px-4 py-24 md:min-h-[1000px] md:px-10"
       >
-        <article className="group w-full max-w-7xl space-y-10 rounded-[32px]">
-          <section className="space-y-2">
+        <article className="group flex w-full max-w-7xl flex-col items-center space-y-10 rounded-[32px]">
+          <section className="w-full max-w-prose space-y-2 text-center">
             <p className="font-medium text-blue-600">{t("comparison.compare")}</p>
             <h2 className="text-4xl font-semibold tracking-tight">
               {t("comparison.before")}{" "}
@@ -381,7 +382,9 @@ export default function Home() {
               </span>
             </h2>
 
-            <p className="max-w-prose text-lg text-muted-foreground">{t("comparison.text")}</p>
+            <p className="mx-auto text-center text-lg text-muted-foreground">
+              {t("comparison.text")}
+            </p>
           </section>
 
           <section className="grid grid-cols-1 gap-4 pb-10 md:grid-cols-2 md:gap-10">
@@ -519,7 +522,7 @@ export default function Home() {
                 <p className="text-muted-foreground">{t("pricing.startingFrom")}</p>
 
                 <div className="flex items-center gap-2">
-                  <p className="text-xl font-light text-green-600 line-through">S/. 69.90</p>
+                  <p className="text-xl font-light text-green-500 line-through">S/. 69.90</p>
 
                   <TooltipProvider delayDuration={0}>
                     <Tooltip>
@@ -533,10 +536,13 @@ export default function Home() {
                     </Tooltip>
                   </TooltipProvider>
                 </div>
-                <CardTitle className="text-2xl font-medium tabular-nums text-green-400">
+
+                <CardTitle className="text-2xl font-semibold tabular-nums tracking-tight text-green-400">
                   S/. 49.90 PEN
                 </CardTitle>
+
                 <CardTitle className="text-2xl">{t("pricing.planName")}</CardTitle>
+
                 <CardDescription className="text-base">
                   {t("pricing.planDescription")}
                 </CardDescription>
