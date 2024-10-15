@@ -13,13 +13,13 @@ importers:
         version: 0.35.3
       '@clerk/elements':
         specifier: ^0.15.10
-        version: 0.15.10(@clerk/shared@2.9.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react-dom@18.3.1)(@types/react@18.3.11)(next@14.2.15(@babel/core@7.24.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 0.15.10(@clerk/shared@2.9.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react-dom@18.3.1)(@types/react@18.3.11)(next@14.2.15(@babel/core@7.24.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@clerk/nextjs':
         specifier: ^5.7.2
-        version: 5.7.2(next@14.2.15(@babel/core@7.24.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 5.7.3(next@14.2.15(@babel/core@7.24.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@clerk/themes':
         specifier: ^2.1.35
-        version: 2.1.35
+        version: 2.1.36
       '@dnd-kit/core':
         specifier: ^6.1.0
         version: 6.1.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -289,7 +289,7 @@ importers:
         version: 1.37.0
       tailwind-merge:
         specifier: ^2.5.3
-        version: 2.5.3
+        version: 2.5.4
       tailwindcss-animate:
         specifier: ^1.0.7
         version: 1.0.7(tailwindcss@3.4.13)
@@ -337,7 +337,7 @@ importers:
         specifier: ^7.18.0
         version: 7.18.0(eslint@8.57.1)(typescript@5.6.3)
       drizzle-kit:
-        specifier: ^0.24.2
+        specifier: ^0.24.0
         version: 0.24.2
       drizzle-zod:
         specifier: ^0.5.1
@@ -512,12 +512,12 @@ packages:
     resolution: {integrity: sha512-JWtuCu8VQsMladxVz/P4HzHUGCAwpuqacmowgXFs5XjxIgKuNjnLokQzuVjlTvIzODaDmpjT3oxcC48vyk9EWg==}
     engines: {node: '>=6.9.0'}
 
-  '@clerk/backend@1.13.9':
-    resolution: {integrity: sha512-WW5IyCsaKHld1lNKQ+XSifUJ75CJ2EFJMPcx+R04icexE90EQzktwT5jeHr3brN7YVR9+PJREzlePrt7eIF/uw==}
+  '@clerk/backend@1.13.10':
+    resolution: {integrity: sha512-1pastJJ+LpEPxKynseJVsZhOwn4bO8Mg+ekCeoDbQC4b4jxSM4kOGriYAXy8xe4q2K+pufe/pTPeKxQT/jkxtg==}
     engines: {node: '>=18.17.0'}
 
-  '@clerk/clerk-react@5.11.0':
-    resolution: {integrity: sha512-JPvDxSPMV1Rrnh5k1ULxeemvUW+F5YdVUQAUhPPl/iZ6MHO6vXr5jn66xe0hM+wrw/snGlsrD9ePyy6tK8EDKw==}
+  '@clerk/clerk-react@5.11.1':
+    resolution: {integrity: sha512-m7x681y6MasiXsfNaTbo5c8JQKtWlZMbDRKf75Cmoo7naDbccWBZNPY1OYbK0uxpnxY24zi/2xfKWTufW8q5RA==}
     engines: {node: '>=18.17.0'}
     peerDependencies:
       react: '>=18 || >=19.0.0-beta'
@@ -535,16 +535,16 @@ packages:
       next:
         optional: true
 
-  '@clerk/nextjs@5.7.2':
-    resolution: {integrity: sha512-G2ilYV0RyOrwc6gI6qmKAsML+7YLiVX/VFlkuvh3vk+qJ6ka8RDaoaILcmREEs4AOaQXBHYQCfiCrYMUeEUJFg==}
+  '@clerk/nextjs@5.7.3':
+    resolution: {integrity: sha512-9HwiK43waReG4q9ADbG0k3IzFwV3+pSB8i1p3fieM6wf5iOpbrWQAbNtStx0rRqZ/x9WJTp3xavqStmETgeUqQ==}
     engines: {node: '>=18.17.0'}
     peerDependencies:
       next: ^13.5.4 || ^14.0.3 || >=15.0.0-rc
       react: '>=18 || >=19.0.0-beta'
       react-dom: '>=18 || >=19.0.0-beta'
 
-  '@clerk/shared@2.9.0':
-    resolution: {integrity: sha512-DAqxJbmQ3QnQXZepG2InLC7Hdq+4T9/+A/kwtMQtAyQcsZoDwZ1TqVJkrqZ55lJIAkR97HEn3/g+g1ySspdEfA==}
+  '@clerk/shared@2.9.1':
+    resolution: {integrity: sha512-NOO6gLRKvEMmz/3pjDiG/rE7ZSmLbZFaU1yTyx94Wb33v0sAaF4v8uypbXSswgAsPWVKu+fgkWmmbhBJP5Us7A==}
     engines: {node: '>=18.17.0'}
     peerDependencies:
       react: '>=18 || >=19.0.0-beta'
@@ -555,12 +555,12 @@ packages:
       react-dom:
         optional: true
 
-  '@clerk/themes@2.1.35':
-    resolution: {integrity: sha512-woISi7Li+hUrFRQofELgpjr0gYOMK39m+ljW6EcOLiGWmJPJiUqOADS1gPY3kzH/qnO+6jJYWtu4bn8NsSH+Sw==}
+  '@clerk/themes@2.1.36':
+    resolution: {integrity: sha512-fHqgW0pxllmBEUD7kMU6eLYBgN/AWi/OL6R2zVbpjBGBe0O+xkEG2RZTAevGFC73hWT8c+A/cRgtACrozMhDNA==}
     engines: {node: '>=18.17.0'}
 
-  '@clerk/types@4.25.0':
-    resolution: {integrity: sha512-p2IyJ0q5WF1e976L1pS1J6Mb5ducfkUC31DR1EvMjPwJkrlWJdAMCPc+zqRRAePVy/JBVK2gEKbUVtJ6/jrpag==}
+  '@clerk/types@4.25.1':
+    resolution: {integrity: sha512-ILvR2YXz6BSGXDoozBAd2BGj8ZF/FQrfWQd0FtLz1JXt1vurkgRncAhEcC427OiXNRnq5R2Pn++urfFEa0PqYA==}
     engines: {node: '>=18.17.0'}
 
   '@dnd-kit/accessibility@3.1.0':
@@ -3326,8 +3326,8 @@ packages:
   effect@3.4.8:
     resolution: {integrity: sha512-qOQNrSSN3ITuAtARtN2Ldq6E5f42splY9VV18LqpKOXMwQCCEWkXdns4by3D2CJnDXQD2KCE0iGcRR2KowiQIA==}
 
-  electron-to-chromium@1.5.36:
-    resolution: {integrity: sha512-HYTX8tKge/VNp6FGO+f/uVDmUkq+cEfcxYhKf15Akc4M5yxt5YmorwlAitKWjWhWQnKcDRBAQKXkhqqXMqcrjw==}
+  electron-to-chromium@1.5.37:
+    resolution: {integrity: sha512-u7000ZB/X0K78TaQqXZ5ktoR7J79B9US7IkE4zyvcILYwOGY2Tx9GRPYstn7HmuPcMxZ+BDGqIsyLpZQi9ufPw==}
 
   embla-carousel-react@8.3.0:
     resolution: {integrity: sha512-P1FlinFDcIvggcErRjNuVqnUR8anyo8vLMIH8Rthgofw7Nj8qTguCa2QjFAbzxAUTQTPNNjNL7yt0BGGinVdFw==}
@@ -4037,6 +4037,7 @@ packages:
 
   libsql@0.3.19:
     resolution: {integrity: sha512-Aj5cQ5uk/6fHdmeW0TiXK42FqUlwx7ytmMLPSaUQPin5HKKKuUPD62MAbN4OEweGBBI7q1BekoEN4gPUEL6MZA==}
+    cpu: [x64, arm64, wasm32]
     os: [darwin, linux, win32]
 
   lilconfig@2.1.0:
@@ -4951,8 +4952,8 @@ packages:
     peerDependencies:
       react: ^16.11.0 || ^17.0.0 || ^18.0.0
 
-  tailwind-merge@2.5.3:
-    resolution: {integrity: sha512-d9ZolCAIzom1nf/5p4LdD5zvjmgSxY0BGgdSvmXIoMYAiPdAW/dSpP7joCDYFY7r/HkEa2qmPtkgsu0xjQeQtw==}
+  tailwind-merge@2.5.4:
+    resolution: {integrity: sha512-0q8cfZHMu9nuYP/b5Shb7Y7Sh1B7Nnl5GqNr1U+n2p6+mybvRtayrQ+0042Z5byvTA8ihjlP8Odo8/VnHbZu4Q==}
 
   tailwindcss-animate@1.0.7:
     resolution: {integrity: sha512-bl6mpH3T7I3UFxuvDEXLxy/VuFxBk5bbzplh7tXI68mwMokNYd1t9qPBHlnyTwfa4JGC4zP516I1hYYtQ/vspA==}
@@ -5474,10 +5475,10 @@ snapshots:
       '@babel/helper-validator-identifier': 7.25.7
       to-fast-properties: 2.0.0
 
-  '@clerk/backend@1.13.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@clerk/backend@1.13.10(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@clerk/shared': 2.9.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@clerk/types': 4.25.0
+      '@clerk/shared': 2.9.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@clerk/types': 4.25.1
       cookie: 0.7.0
       snakecase-keys: 5.4.4
       tslib: 2.4.1
@@ -5485,18 +5486,18 @@ snapshots:
       - react
       - react-dom
 
-  '@clerk/clerk-react@5.11.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@clerk/clerk-react@5.11.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@clerk/shared': 2.9.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@clerk/types': 4.25.0
+      '@clerk/shared': 2.9.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@clerk/types': 4.25.1
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       tslib: 2.4.1
 
-  '@clerk/elements@0.15.10(@clerk/shared@2.9.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react-dom@18.3.1)(@types/react@18.3.11)(next@14.2.15(@babel/core@7.24.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@clerk/elements@0.15.10(@clerk/shared@2.9.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react-dom@18.3.1)(@types/react@18.3.11)(next@14.2.15(@babel/core@7.24.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@clerk/shared': 2.9.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@clerk/types': 4.25.0
+      '@clerk/shared': 2.9.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@clerk/types': 4.25.1
       '@radix-ui/react-form': 0.1.0(@types/react-dom@18.3.1)(@types/react@18.3.11)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-slot': 1.1.0(@types/react@18.3.11)(react@18.3.1)
       '@xstate/react': 4.1.3(@types/react@18.3.11)(react@18.3.1)(xstate@5.18.2)
@@ -5510,12 +5511,12 @@ snapshots:
       - '@types/react'
       - '@types/react-dom'
 
-  '@clerk/nextjs@5.7.2(next@14.2.15(@babel/core@7.24.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@clerk/nextjs@5.7.3(next@14.2.15(@babel/core@7.24.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@clerk/backend': 1.13.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@clerk/clerk-react': 5.11.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@clerk/shared': 2.9.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@clerk/types': 4.25.0
+      '@clerk/backend': 1.13.10(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@clerk/clerk-react': 5.11.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@clerk/shared': 2.9.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@clerk/types': 4.25.1
       crypto-js: 4.2.0
       next: 14.2.15(@babel/core@7.24.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1
@@ -5523,9 +5524,9 @@ snapshots:
       server-only: 0.0.1
       tslib: 2.4.1
 
-  '@clerk/shared@2.9.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@clerk/shared@2.9.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@clerk/types': 4.25.0
+      '@clerk/types': 4.25.1
       glob-to-regexp: 0.4.1
       js-cookie: 3.0.5
       std-env: 3.7.0
@@ -5534,12 +5535,12 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@clerk/themes@2.1.35':
+  '@clerk/themes@2.1.36':
     dependencies:
-      '@clerk/types': 4.25.0
+      '@clerk/types': 4.25.1
       tslib: 2.4.1
 
-  '@clerk/types@4.25.0':
+  '@clerk/types@4.25.1':
     dependencies:
       csstype: 3.1.1
 
@@ -7483,7 +7484,7 @@ snapshots:
       '@uploadthing/shared': 6.7.9
       file-selector: 0.6.0
       react: 18.3.1
-      tailwind-merge: 2.5.3
+      tailwind-merge: 2.5.4
       uploadthing: 6.13.3(next@14.2.15(@babel/core@7.24.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(tailwindcss@3.4.13)
     optionalDependencies:
       next: 14.2.15(@babel/core@7.24.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -7677,7 +7678,7 @@ snapshots:
   browserslist@4.24.0:
     dependencies:
       caniuse-lite: 1.0.30001668
-      electron-to-chromium: 1.5.36
+      electron-to-chromium: 1.5.37
       node-releases: 2.0.18
       update-browserslist-db: 1.1.1(browserslist@4.24.0)
 
@@ -8035,7 +8036,7 @@ snapshots:
 
   effect@3.4.8: {}
 
-  electron-to-chromium@1.5.36: {}
+  electron-to-chromium@1.5.37: {}
 
   embla-carousel-react@8.3.0(react@18.3.1):
     dependencies:
@@ -9917,7 +9918,7 @@ snapshots:
       react: 18.3.1
       use-sync-external-store: 1.2.2(react@18.3.1)
 
-  tailwind-merge@2.5.3: {}
+  tailwind-merge@2.5.4: {}
 
   tailwindcss-animate@1.0.7(tailwindcss@3.4.13):
     dependencies:

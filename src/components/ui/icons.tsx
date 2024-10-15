@@ -1,3 +1,17 @@
+import {
+  FacebookLogo,
+  GithubLogo,
+  InstagramLogo,
+  LinkedinLogo,
+  PatreonLogo,
+  SpotifyLogo,
+  TelegramLogo,
+  TiktokLogo,
+  TwitterLogo,
+  YoutubeLogo,
+} from "@phosphor-icons/react";
+import { type SocialLinkType } from "~/server/db/schema";
+
 export type IconProps = React.HTMLAttributes<SVGElement>;
 
 export const Icons = {
@@ -285,4 +299,62 @@ export const Icons = {
       />
     </svg>
   ),
+};
+
+export const OutlinedSocialIcons = (props: IconProps & { type: SocialLinkType }) => {
+  const { type, ...rest } = props;
+
+  switch (type) {
+    case "twitter":
+      return <TwitterLogo {...rest} />;
+    case "linkedin":
+      return <LinkedinLogo {...rest} />;
+    case "facebook":
+      return <FacebookLogo {...rest} />;
+    case "instagram":
+      return <InstagramLogo {...rest} />;
+    case "github":
+      return <GithubLogo {...rest} />;
+    case "tiktok":
+      return <TiktokLogo {...rest} />;
+    case "youtube":
+      return <YoutubeLogo {...rest} />;
+    case "telegram":
+      return <TelegramLogo {...rest} />;
+    case "patreon":
+      return <PatreonLogo {...rest} />;
+    case "spotify":
+      return <SpotifyLogo {...rest} />;
+    default:
+      return <TwitterLogo {...rest} />;
+  }
+};
+
+export const PrettySocialIcons = (props: IconProps & { type: SocialLinkType }) => {
+  const { type, ...rest } = props;
+
+  switch (type) {
+    case "twitter":
+      return <Icons.twitter {...rest} />;
+    case "linkedin":
+      return <Icons.linkedin {...rest} />;
+    case "facebook":
+      return <Icons.facebook {...rest} />;
+    case "instagram":
+      return <Icons.instagram {...rest} />;
+    case "github":
+      return <Icons.gitHub {...rest} />;
+    case "tiktok":
+      return <Icons.tikTok {...rest} />;
+    case "youtube":
+      return <Icons.youtube {...rest} />;
+    case "telegram":
+      return <Icons.telegram {...rest} />;
+    case "patreon":
+      return <Icons.patreon {...rest} />;
+    case "spotify":
+      return <Icons.spotify {...rest} />;
+    default:
+      return <Icons.twitter {...rest} />;
+  }
 };

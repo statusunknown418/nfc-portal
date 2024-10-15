@@ -1,20 +1,7 @@
-import {
-  FacebookLogo,
-  GithubLogo,
-  InstagramLogo,
-  LinkedinLogo,
-  PatreonLogo,
-  SpotifyLogo,
-  TelegramLogo,
-  TiktokLogo,
-  TwitterLogo,
-  YoutubeLogo,
-} from "@phosphor-icons/react/dist/ssr";
-import { type ClassValue, clsx } from "clsx";
+import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { Icons, type IconProps } from "~/components/ui/icons";
 import { type CardTemplatesType } from "~/server/api/schemas.zod";
-import { type CardShippingStatus, type SocialLinkType, type ThemeType } from "~/server/db/schema";
+import { type CardShippingStatus, type ThemeType } from "~/server/db/schema";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -266,64 +253,6 @@ export const PORTAL_KEY = "portal-password";
 export const PORTAL_QUERY = "ktp";
 export const INCOMING_URL = "x-current-url";
 export const LOCALE_KEY = "NEXT_LOCALE";
-
-export const OutlinedSocialIcons = (props: IconProps & { type: SocialLinkType }) => {
-  const { type, ...rest } = props;
-
-  switch (type) {
-    case "twitter":
-      return <TwitterLogo {...rest} />;
-    case "linkedin":
-      return <LinkedinLogo {...rest} />;
-    case "facebook":
-      return <FacebookLogo {...rest} />;
-    case "instagram":
-      return <InstagramLogo {...rest} />;
-    case "github":
-      return <GithubLogo {...rest} />;
-    case "tiktok":
-      return <TiktokLogo {...rest} />;
-    case "youtube":
-      return <YoutubeLogo {...rest} />;
-    case "telegram":
-      return <TelegramLogo {...rest} />;
-    case "patreon":
-      return <PatreonLogo {...rest} />;
-    case "spotify":
-      return <SpotifyLogo {...rest} />;
-    default:
-      return <TwitterLogo {...rest} />;
-  }
-};
-
-export const PrettySocialIcons = (props: IconProps & { type: SocialLinkType }) => {
-  const { type, ...rest } = props;
-
-  switch (type) {
-    case "twitter":
-      return <Icons.twitter {...rest} />;
-    case "linkedin":
-      return <Icons.linkedin {...rest} />;
-    case "facebook":
-      return <Icons.facebook {...rest} />;
-    case "instagram":
-      return <Icons.instagram {...rest} />;
-    case "github":
-      return <Icons.gitHub {...rest} />;
-    case "tiktok":
-      return <Icons.tikTok {...rest} />;
-    case "youtube":
-      return <Icons.youtube {...rest} />;
-    case "telegram":
-      return <Icons.telegram {...rest} />;
-    case "patreon":
-      return <Icons.patreon {...rest} />;
-    case "spotify":
-      return <Icons.spotify {...rest} />;
-    default:
-      return <Icons.twitter {...rest} />;
-  }
-};
 
 export const computeInitials = (text: string) => {
   const initials = text
