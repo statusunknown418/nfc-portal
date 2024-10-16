@@ -12,7 +12,6 @@ import {
   Share1Icon,
 } from "@radix-ui/react-icons";
 import { useMessages, useTranslations } from "next-intl";
-import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
@@ -42,8 +41,6 @@ import {
 import { Skeleton } from "~/components/ui/skeleton";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "~/components/ui/tooltip";
 import { cn } from "~/lib/utils";
-
-const Spline = dynamic(() => import("@splinetool/react-spline/next"), { ssr: false });
 
 export default function Home() {
   const t = useTranslations("landing");
@@ -165,7 +162,7 @@ export default function Home() {
         <article className="w-full max-w-7xl px-4">
           <BlurFade delay={0.25 * 2}>
             <div className="flex aspect-video w-full items-center justify-center rounded-2xl bg-white shadow-lg shadow-[hsl(240_37%_90%)]">
-              <Spline scene="https://prod.spline.design/EwcNdSsiNJra4npU/scene.splinecode" />
+              Video or animation
             </div>
           </BlurFade>
         </article>
