@@ -71,9 +71,9 @@ export const WorkInfo = ({ initialData }: { initialData: RouterOutputs["vCard"][
   return (
     <>
       <article className="w-full">
-        <h3 className="text-2xl font-semibold tracking-wide">What do you do for work?</h3>
+        <h3 className="text-2xl font-semibold tracking-wide">A qué te dedicas?</h3>
         <p className="mt-1 text-muted-foreground">
-          You can add a position, company name and department.
+          Puedes añadir un cargo, nombre de tu empresa y área en la que trabajas.
         </p>
       </article>
 
