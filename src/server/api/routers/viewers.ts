@@ -1,6 +1,6 @@
 import { createId } from "@paralleldrive/cuid2";
 import { z } from "zod";
-import { links, users } from "~/server/db/schema";
+import { links, onboardingKeys, users } from "~/server/db/schema";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { and, eq } from "drizzle-orm";
 import sharp from "sharp";
@@ -46,9 +46,7 @@ export const viewersRouter = createTRPCRouter({
   setOnboardingStep: protectedProcedure
     .input(
       z.object({
-        step: z
-          .enum(["start", "contact", "portal", "nfc-card", "purchase", "finale"])
-          .default("start"),
+        step: z.enum(onboardingKeys).default("start"),
         forceCompleted: z.boolean().optional().default(false),
       }),
     )

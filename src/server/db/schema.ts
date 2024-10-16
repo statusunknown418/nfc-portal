@@ -28,12 +28,7 @@ export type ThemeType = {
   };
   buttons: {
     variant: "pill" | "rounded" | "square" | "small-radius";
-    textColor: string;
-    background: string;
     rounding: `${number}px`;
-    borderColor?: string;
-    borderStyle: "solid" | "dashed" | "dotted" | "double";
-    fontStyle: "normal" | "italic";
     fontWeight:
       | "normal"
       | "bold"
@@ -46,6 +41,22 @@ export type ThemeType = {
       | "700"
       | "800"
       | "900";
+    fontStyle: "normal" | "italic";
+    socialLinks: {
+      strokeColor: string;
+    };
+    regularLinks: {
+      textColor: string;
+      background: string;
+      borderColor?: string;
+      borderStyle: "solid" | "dashed" | "dotted" | "double";
+    };
+    saveContactButton: {
+      textColor: string;
+      background: string;
+      borderColor?: string;
+      borderStyle: "solid" | "dashed" | "dotted" | "double";
+    };
   };
 };
 
@@ -159,15 +170,17 @@ export const cardShippingStatusTypes = [
   "failed",
 ] as const;
 
-export const onboardingStepTypes = [
+export const onboardingKeys = [
   "start",
   "contact",
+  "work",
+  "addresses",
   "portal",
   "nfc-card",
   "purchase",
   "finale",
 ] as const;
-export type OnboardingStep = (typeof onboardingStepTypes)[number];
+export type OnboardingStep = (typeof onboardingKeys)[number];
 
 export type CardShippingStatus = (typeof cardShippingStatusTypes)[number];
 
@@ -193,7 +206,7 @@ export const users = sqliteTable("user", {
   }).default(false),
   hasPurchasedCard: int("has_purchased_card", { mode: "boolean" }).default(false),
   hasCompletedOnboarding: int("has_completed_onboarding", { mode: "boolean" }).default(false),
-  onboardingStep: text("onboarding_step", { enum: onboardingStepTypes }).default("contact"),
+  onboardingStep: text("onboarding_step", { enum: onboardingKeys }).default("contact"),
   pageHashKey: text("page_hash_key").$defaultFn(() => createId()),
   metaTitle: text("meta_title", { length: 255 }),
   metaDescription: text("meta_description"),

@@ -3,6 +3,7 @@ import { type ThemeType } from "../db/schema";
 
 export const editViewerContactSchema = z.object({
   profileHeader: z.string().optional(),
+  bio: z.string().optional(),
   url: z.string().optional(),
   jobTitle: z.string().optional(),
   notes: z.string().optional(),
@@ -102,10 +103,6 @@ export const themeSchema: z.ZodType<ThemeType> = z.object({
   }),
   buttons: z.object({
     variant: z.enum(["pill", "rounded", "square", "small-radius"]),
-    textColor: z.string(),
-    background: z.string(),
-    borderColor: z.string().optional(),
-    borderStyle: z.enum(["solid", "dashed", "dotted", "double"]),
     rounding: z.custom<`${number}px`>(),
     fontStyle: z.enum(["normal", "italic"]),
     fontWeight: z.enum([
@@ -121,6 +118,21 @@ export const themeSchema: z.ZodType<ThemeType> = z.object({
       "800",
       "900",
     ]),
+    regularLinks: z.object({
+      textColor: z.string(),
+      background: z.string(),
+      borderColor: z.string().optional(),
+      borderStyle: z.enum(["solid", "dashed", "dotted", "double"]),
+    }),
+    socialLinks: z.object({
+      strokeColor: z.string(),
+    }),
+    saveContactButton: z.object({
+      background: z.string(),
+      textColor: z.string(),
+      borderStyle: z.enum(["solid", "dashed", "dotted", "double"]),
+      borderColor: z.string(),
+    }),
   }),
 });
 

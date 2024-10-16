@@ -43,6 +43,7 @@ export const vCardsRouter = createTRPCRouter({
           hasContactInfoLocked: true,
           profileHeader: true,
           image: true,
+          bio: true,
         },
       });
 
