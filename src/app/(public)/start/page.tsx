@@ -2,6 +2,7 @@ import { ArrowDown, ShoppingCartSimple, Sparkle, Truck } from "@phosphor-icons/r
 import { type Metadata, type Viewport } from "next";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import BlurFade from "~/components/magicui/blur-fade";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import FlickeringGrid from "~/components/ui/flickering-grid";
@@ -23,69 +24,87 @@ export default function StartNowPage() {
   const t = useTranslations("landing");
 
   return (
-    <main className="relative grid h-full grid-cols-1 text-foreground">
-      <section className="relative flex h-svh flex-col items-center justify-center bg-neutral-900">
+    <main className="relative grid h-full w-full grid-cols-1 text-foreground">
+      <section className="dark relative flex h-svh w-full flex-col items-center justify-center bg-neutral-900">
         <FlickeringGrid
-          className="absolute inset-0 z-0 bg-neutral-900"
-          flickerChance={0.8}
+          className="absolute inset-0 z-0 w-full bg-neutral-950"
+          flickerChance={0.4}
           squareSize={7}
           gridGap={8}
-          color="#3730a3"
+          color="#374151"
         />
 
-        <article className="z-10 mx-auto flex w-full max-w-6xl flex-col items-center gap-6 px-4 text-center sm:px-6 md:gap-10 lg:px-8">
-          <Badge variant="secondary" className="dark border border-neutral-700">
-            <Truck className="size-5" weight="duotone" />
-            Envío gratis a todo Lima
-          </Badge>
+        <article className="z-10 mx-auto flex w-full max-w-6xl flex-col items-center gap-6 px-4 text-center sm:px-6 md:gap-14 lg:px-8">
+          <BlurFade delay={0.4}>
+            <div className="flex flex-col items-center gap-4">
+              <Badge variant="secondary" size="md" className="dark w-max border border-neutral-700">
+                <Truck className="size-5" weight="duotone" />
+                Envío gratis a todo Lima
+              </Badge>
 
-          <Badge variant="indigo" className="-mt-4" size="lg">
-            <Sparkle className="size-5" weight="duotone" />
-            Aprovecha la oferta de S/. 49.90 PEN por tiempo limitado! <sup>1</sup>
-          </Badge>
+              <Badge variant="indigo" className="w-max" size="md">
+                <Sparkle className="size-5" weight="duotone" />
+                Aprovecha la oferta de S/. 49.90 PEN por tiempo limitado! <sup>1</sup>
+              </Badge>
+            </div>
+          </BlurFade>
 
-          <h1 className="dark text-balance text-6xl font-light tracking-tight text-foreground">
-            <span className="italic">Mejora</span> tu manera de realizar{" "}
-            <span className="bg-gradient-to-b from-foreground to-indigo-300 bg-clip-text font-semibold text-transparent">
-              Networking
-            </span>
-            , y destaca entre la competencia gracias a{" "}
-            <span className="bg-gradient-to-b from-foreground to-indigo-300 bg-clip-text font-semibold text-transparent">
-              ConCard
-            </span>
-            .
-          </h1>
+          <BlurFade>
+            <h1 className="dark text-balance text-6xl font-light tracking-tight text-foreground">
+              <span className="bg-gradient-to-b from-foreground to-indigo-500 bg-clip-text font-semibold italic text-transparent">
+                Mejora
+              </span>{" "}
+              tu manera de hacer{" "}
+              <span className="bg-gradient-to-b from-foreground to-indigo-500 bg-clip-text font-semibold italic text-transparent">
+                Networking
+              </span>
+              , y{" "}
+              <span className="bg-gradient-to-b from-foreground to-indigo-500 bg-clip-text font-semibold italic text-transparent">
+                destaca
+              </span>{" "}
+              entre la competencia.{" "}
+            </h1>
+          </BlurFade>
 
-          <p className="-mt-4 text-balance text-xl text-neutral-400">
-            Únete a los miles de profesionales y empresarios que confían en ConCard
-          </p>
+          <BlurFade delay={0.3}>
+            <p className="-mt-8 text-balance text-xl text-neutral-400">
+              Únete a los miles de profesionales y empresarios que confían en{" "}
+              <span className="font-semibold">ConCard</span>
+            </p>
+          </BlurFade>
 
-          <Button size="lg" className="dark h-14 rounded-full" asChild>
-            <Link href="/onboarding">
-              <ShoppingCartSimple className="size-6" />
-              Empieza ya!
-            </Link>
-          </Button>
+          <BlurFade delay={0.5}>
+            <div className="flex flex-col items-center gap-4">
+              <Button
+                size="lg"
+                variant="primary"
+                className="dark h-14 rounded-full uppercase shadow-md transition-all hover:shadow-lg"
+                asChild
+              >
+                <Link href="/onboarding">
+                  <ShoppingCartSimple className="size-6" />
+                  Empieza ya!
+                </Link>
+              </Button>
+
+              <Button asChild variant="iOSGhost" size="lg" className="rounded-full">
+                <Link href="#how-it-works">
+                  Descubre como funciona
+                  <ArrowDown className="size-5" />
+                </Link>
+              </Button>
+            </div>
+          </BlurFade>
         </article>
 
-        <Button
-          asChild
-          variant="iOSGhost"
-          className="dark absolute bottom-20 right-1/2 z-10 translate-x-1/2 rounded-full border-indigo-600"
-          size="sm"
-        >
-          <Link href="#how-it-works">
-            <ArrowDown className="size-5" />
-            Descubre como funciona
-          </Link>
-        </Button>
-
-        <p className="absolute inset-x-4 bottom-8 z-10 text-center text-xs text-muted-foreground">
-          <sup>1</sup> La oferta incluye una tarjeta NFC personalizable a través de la plataforma
-          ConCard. El ENVÍO ES GRATIS a todo Lima (Perú); para provincias es necesario un abono
-          adicional de S/. 17.90 PEN. Para envíos internacionales, por favor contáctenos para
-          obtener la mejor cotización.
-        </p>
+        <BlurFade delay={0.7} className="absolute inset-x-4 bottom-8 z-10 w-full">
+          <p className="text-center text-xs text-muted-foreground">
+            <sup>1</sup> La oferta incluye una tarjeta NFC personalizable a través de la plataforma
+            ConCard. El ENVÍO ES GRATIS a todo Lima (Perú); para provincias es necesario un abono
+            adicional de S/. 17.90 PEN. Para envíos internacionales, por favor contáctenos para
+            obtener la mejor cotización.
+          </p>
+        </BlurFade>
       </section>
 
       <div className="flex items-center bg-gradient-to-br from-neutral-950 via-neutral-800 to-neutral-950 p-4 py-20 text-neutral-200">

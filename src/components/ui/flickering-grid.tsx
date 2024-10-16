@@ -1,12 +1,6 @@
 "use client";
 
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 interface FlickeringGridProps {
   squareSize?: number;
@@ -51,8 +45,8 @@ const FlickeringGrid: React.FC<FlickeringGridProps> = ({
 
   const setupCanvas = useCallback(
     (canvas: HTMLCanvasElement) => {
-      const canvasWidth = width || canvas.clientWidth;
-      const canvasHeight = height || canvas.clientHeight;
+      const canvasWidth = width ?? canvas.clientWidth;
+      const canvasHeight = height ?? canvas.clientHeight;
       const dpr = window.devicePixelRatio || 1;
       canvas.width = canvasWidth * dpr;
       canvas.height = canvasHeight * dpr;
@@ -147,7 +141,7 @@ const FlickeringGrid: React.FC<FlickeringGridProps> = ({
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setIsInView(entry.isIntersecting);
+        setIsInView(entry?.isIntersecting ?? false);
       },
       { threshold: 0 },
     );
@@ -170,10 +164,10 @@ const FlickeringGrid: React.FC<FlickeringGridProps> = ({
   return (
     <canvas
       ref={canvasRef}
-      className={`size-full pointer-events-none ${className}`}
+      className={`pointer-events-none size-full ${className}`}
       style={{
-        width: width || "100%",
-        height: height || "100%",
+        width: width ?? "100%",
+        height: height ?? "100%",
       }}
       width={width}
       height={height}
