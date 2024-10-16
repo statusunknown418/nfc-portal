@@ -53,6 +53,7 @@ export const PersonalInfoForm = ({
     resolver: zodResolver(editViewerContactSchema),
     defaultValues: data?.contactJSON
       ? {
+          ...data.contactJSON,
           name: {
             first: data.contactJSON.name.first ?? "",
             last: data.contactJSON.name.last ?? "",

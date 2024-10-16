@@ -73,13 +73,14 @@ export const vCardsRouter = createTRPCRouter({
     }),
   edit: protectedProcedure
     .input(editViewerContactSchema)
-    .mutation(async ({ ctx, input: { profileHeader, ...contact } }) => {
+    .mutation(async ({ ctx, input: { profileHeader, bio, ...contact } }) => {
       const [updatedContact] = await Promise.all([
         ctx.db
           .update(users)
           .set({
             contactJSON: contact,
             profileHeader,
+            bio,
           })
           .where(eq(users.id, ctx.userId))
           .returning(),
