@@ -60,15 +60,6 @@ export default async function AdminPage() {
             )}
           </Suspense>
         </section>
-
-        <div className="fixed inset-0 -z-10">
-          {/* <GridPattern
-            className={cn(
-              "[mask-image:radial-gradient(600px_circle_at_center,white,transparent)]",
-              "size-full skew-y-12",
-            )}
-          /> */}
-        </div>
       </aside>
     </section>
   );

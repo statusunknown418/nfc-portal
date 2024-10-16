@@ -6,6 +6,7 @@ import {
   PortalPreviewWrapperLoader,
   PortalPreviewWrapperRSC,
 } from "~/components/admin/portal-preview";
+import { MobilePreview } from "~/components/admin/portal-preview/MobilePreview";
 import { VisualWrapper, VisualWrapperLoader } from "~/components/admin/visual/visual-wrapper";
 import GridPattern from "~/components/magicui/grid-pattern";
 import {
@@ -30,7 +31,7 @@ export default async function VisualCustomizationPage() {
   }
 
   return (
-    <section className="relative grid w-full grid-cols-1 gap-4 lg:grid-cols-2 xl:gap-10">
+    <section className="relative grid w-full grid-cols-1 gap-4 pb-10 md:pb-0 lg:grid-cols-2 xl:gap-10">
       <section className="flex w-full flex-col gap-4">
         <Breadcrumb className="self-start">
           <BreadcrumbList>
@@ -49,6 +50,16 @@ export default async function VisualCustomizationPage() {
           <VisualWrapper />
         </Suspense>
       </section>
+
+      <MobilePreview>
+        <Suspense>
+          {!!sessionClaims.username && (
+            <Suspense fallback={<PortalPreviewWrapperLoader />}>
+              <PortalPreviewWrapperRSC username={sessionClaims.username} />
+            </Suspense>
+          )}
+        </Suspense>
+      </MobilePreview>
 
       <aside className="hidden flex-grow gap-4 py-6 ring-0 lg:sticky lg:inset-0 lg:block lg:h-[calc(100vh-64px)]">
         <section className="relative flex h-full flex-col items-center justify-center gap-4">
