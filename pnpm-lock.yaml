@@ -15,7 +15,7 @@ importers:
         specifier: ^0.15.10
         version: 0.15.10(@clerk/shared@2.9.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react-dom@18.3.1)(@types/react@18.3.11)(next@14.2.15(@babel/core@7.24.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@clerk/nextjs':
-        specifier: ^5.7.2
+        specifier: ^5.7.3
         version: 5.7.3(next@14.2.15(@babel/core@7.24.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@clerk/themes':
         specifier: ^2.1.35

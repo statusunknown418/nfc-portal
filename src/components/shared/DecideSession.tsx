@@ -21,7 +21,7 @@ export const DecideSession = () => {
   }
 
   return (
-    <Button className="rounded-full">
+    <Button className="rounded-full" asChild>
       <Link href="/onboarding/start">
         {t("navbar.joinNow")} <ArrowRightIcon />
       </Link>

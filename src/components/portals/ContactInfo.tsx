@@ -67,7 +67,7 @@ export const ContactInfo = ({
     data.company?.name && vCard.addCompany(data.company?.name, data.company?.department);
     data.jobTitle && vCard.addJobtitle(data.jobTitle);
     data.phoneNumbers?.forEach((phone) => vCard.addPhoneNumber(phone.number, phone.type));
-    data.email?.forEach((email) => vCard.addEmail(email.link, email.type));
+    data.email?.forEach((email) => !!email.link && vCard.addEmail(email.link, email.type));
     data.address?.forEach(
       (address) =>
         address.street &&
