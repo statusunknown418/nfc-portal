@@ -155,8 +155,8 @@ export type ContactVCardType = {
     type?: "DOM" | "INTL" | "POSTAL" | "PARCEL" | "HOME" | "WORK";
   }[];
   email?: {
-    link: string;
-    type: "PREF" | "WORK" | "HOME";
+    link?: string;
+    type?: "PREF" | "WORK" | "HOME";
   }[];
 };
 

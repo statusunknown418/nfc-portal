@@ -1,10 +1,10 @@
 "use client";
 
-import { SignUpButton, useAuth } from "@clerk/nextjs";
-import { Button } from "../ui/button";
-import Link from "next/link";
+import { useAuth } from "@clerk/nextjs";
 import { ArrowRightIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
+import { Button } from "../ui/button";
 
 export const DecideSession = () => {
   const auth = useAuth();
@@ -21,10 +21,10 @@ export const DecideSession = () => {
   }
 
   return (
-    <SignUpButton signInFallbackRedirectUrl={"/admin"}>
-      <Button className="rounded-full">
+    <Button className="rounded-full">
+      <Link href="/onboarding/start">
         {t("navbar.joinNow")} <ArrowRightIcon />
-      </Button>
-    </SignUpButton>
+      </Link>
+    </Button>
   );
 };
