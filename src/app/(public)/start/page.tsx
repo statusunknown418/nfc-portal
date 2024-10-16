@@ -35,7 +35,7 @@ export default function StartNowPage() {
         />
 
         <article className="z-10 mx-auto flex w-full max-w-6xl flex-col items-center gap-6 px-4 text-center sm:px-6 md:gap-14 lg:px-8">
-          <BlurFade delay={0.4}>
+          <BlurFade delay={0.5}>
             <div className="flex flex-col items-center gap-4">
               <Badge variant="secondary" size="md" className="dark w-max border border-neutral-700">
                 <Truck className="size-5" weight="duotone" />
@@ -73,8 +73,8 @@ export default function StartNowPage() {
             </p>
           </BlurFade>
 
-          <BlurFade delay={0.5}>
-            <div className="flex flex-col items-center gap-4">
+          <BlurFade delay={0.7}>
+            <div className="flex flex-col items-center gap-6">
               <Button
                 size="lg"
                 variant="primary"
@@ -89,7 +89,7 @@ export default function StartNowPage() {
 
               <Button asChild variant="iOSGhost" size="lg" className="rounded-full">
                 <Link href="#how-it-works">
-                  Descubre como funciona
+                  O descubre como funciona
                   <ArrowDown className="size-5" />
                 </Link>
               </Button>
