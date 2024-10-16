@@ -189,13 +189,13 @@
       "answerTwoPart2": "empieza aquí",
       "answerTwoPart3": "y solo sigue los pasos de registro. Es rápido y sencillo, puedes completarlo en menos de 10 minutos.",
       "questionThree": "¿Qué dispositivos son compatibles?",
-      "answerThree": "ConCard es compatible con todos los dispositivos iOS y la mayoría de teléfonos Android (a partir de 2020 en adelante aproximadamente, los dispositivos que soporten Apple Pay y Google Pay SON compatibles con ConCard). Si el dispositivo no es compatible, aún puedes compartir tu información de contacto y links escaneando el código QR.",
-      "questionFour": "¿Cómo lo uso?",
+      "answerThree": "ConCard es compatible con todos los dispositivos iOS y la mayoría de teléfonos Android (los dispositivos que soporten Google Pay y/o Apple Pay SON compatibles con ConCard). Si el dispositivo no es compatible o tienes dudas, aún puedes compartir tu información de contacto y links al escanear un código QR que puedes añadir a tu tarjeta.",
+      "questionFour": "¿Cómo se uso?",
       "answerFour": "ConCard te permite compartir tu información de contacto sin que otros necesiten instalar aplicaciones. Simplemente acerca tu tarjeta al teléfono de alguien y comparte tu página, incluida tu información de contacto!",
       "questionFive": "¿Qué pasa si alguien encuentra mi perfil por accidente?",
-      "answerFive": "No te preocupes, tomamos muy en serio tu privacidad. Hemos diseñado un sistema robusto para proteger tu información. Todas las páginas están encriptadas y solo son accesibles cuando tú permites que lo hagan al acercar tu tarjeta.",
-      "questionSix": "A que partes del Perú tienen envíos disponibles?",
-      "answerSix": "Realizamos envíos GRATIS a todo Lima, para provincias el envío es gratis por compras mayores a S/. 100 PEN. Finalmente ofrecemos envíos a todo Latinoamérica, pero el costo depende el proveedor, para más información y cotizaciones no dudes en contactarnos. "
+      "answerFive": "No te preocupes, tomamos muy en serio tu privacidad. Hemos diseñado un sistema de seguridad para proteger tu información. Tu información de contacto está encriptada y solo es accesibles cuando tú permites que lo hagan, esto es al acercar tu tarjeta.",
+      "questionSix": "¿A que partes del Perú realizan envíos?",
+      "answerSix": "Realizamos envíos GRATIS a todo Lima, para provincias el envío es gratis por compras mayores a S/. 100 PEN. También ofrecemos envíos a todo Latinoamérica, pero el costo depende el proveedor y el destino, para más información y cotizaciones no dudes en contactarnos. "
     },
     "footer": {
       "getStarted": "Empieza aquí",

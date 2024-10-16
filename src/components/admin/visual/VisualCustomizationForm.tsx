@@ -4,21 +4,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FontBoldIcon, FontFamilyIcon, FontItalicIcon, FontRomanIcon } from "@radix-ui/react-icons";
 import { RadioGroupItem as RadixRadioGroupItem } from "@radix-ui/react-radio-group";
 import { useTranslations } from "next-intl";
-import Image from "next/image";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
-import { Button } from "~/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "~/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel } from "~/components/ui/form";
 import { GradientPicker } from "~/components/ui/gradient-picker";
 import { Label } from "~/components/ui/label";
 import { RadioGroup } from "~/components/ui/radio-group";
@@ -29,9 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "~/components/ui/select";
-import { Textarea } from "~/components/ui/textarea";
 import { useAutoSaveFormData } from "~/lib/hooks/use-auto-save";
-import { UploadDropzone } from "~/lib/uploadthing";
 import { cn } from "~/lib/utils";
 import {
   editVisualCustomizationSchema,
@@ -54,7 +42,6 @@ export const VisualCustomizationForm = ({
     resolver: zodResolver(editVisualCustomizationSchema),
   });
 
-  const bioCharacters = form.watch("bio")?.length ?? 0;
   const utils = api.useUtils();
   const t = useTranslations("admin.onboarding.steps.portal");
 
@@ -66,8 +53,6 @@ export const VisualCustomizationForm = ({
   });
 
   const [enableCustom] = useState(defaultValues?.theme.themeKey === "custom" || false);
-  const [avatar, setAvatar] = useState(defaultValues?.image);
-  const [avatarShape] = useState(defaultValues?.avatarShape);
 
   const handleSubmit = async (data: EditVisualCustomizationSchema) => {
     toast.promise(mutate.mutateAsync(data), {
@@ -88,103 +73,7 @@ export const VisualCustomizationForm = ({
           <AlertDescription>{t("themesMessage")}</AlertDescription>
         </Alert>
 
-        <section className="flex flex-col justify-between gap-6 rounded-lg border px-6 *:py-6 md:flex-row md:gap-8">
-          <article className="flex flex-col gap-4 rounded-lg">
-            <h2 className="text-lg font-semibold">Avatar</h2>
-
-            <section className="relative flex h-[200px] w-[200px] justify-center gap-2">
-              {avatar && (
-                <div
-                  className={cn(
-                    "absolute z-0 h-[200px] w-[200px] overflow-hidden rounded-lg border",
-                    {
-                      "self-center rounded-full": avatarShape === "circle",
-                      "self-center rounded-none": avatarShape === "square",
-                    },
-                  )}
-                >
-                  <Image fill className="object-cover" alt={`profile-avatar`} src={avatar} />
-                </div>
-              )}
-
-              <UploadDropzone
-                endpoint="avatars"
-                className={cn(
-                  "z-10 mt-0 w-full space-y-2 bg-transparent p-4 transition-all ut-button:h-9 ut-button:w-max ut-button:rounded-md ut-button:px-4 ut-button:text-sm ut-allowed-content:hidden ut-label:font-medium ut-label:text-foreground",
-                  avatar
-                    ? "opacity-0 backdrop-blur-lg backdrop-filter duration-300 hover:opacity-100 ut-uploading:bg-indigo-50/50 ut-uploading:opacity-100"
-                    : "opacity-100 hover:bg-indigo-50",
-                )}
-                onClientUploadComplete={(files) => {
-                  files.map((f) => {
-                    setAvatar(f.url);
-                  });
-
-                  void utils.viewer.previewPortal.invalidate();
-                }}
-                config={{
-                  mode: "auto",
-                }}
-                content={{
-                  label: () => (
-                    <span className="cursor-default rounded-sm bg-muted px-3 py-0.5 text-sm">
-                      {t("avatarUpload")}
-                    </span>
-                  ),
-                }}
-              />
-            </section>
-
-            <ul className="flex w-full flex-col gap-2">
-              <Button variant="outline" type="button" className="w-full">
-                {t("generated")}
-              </Button>
-
-              <Button
-                variant="destructive_ghost"
-                type="button"
-                className="w-full border-destructive/50 bg-destructive/10 hover:bg-destructive/20"
-              >
-                {t("remove")}
-              </Button>
-            </ul>
-          </article>
-
-          <article className="flex flex-grow flex-col gap-4">
-            <FormField
-              control={form.control}
-              name="bio"
-              render={({ field }) => (
-                <FormItem className="w-full">
-                  <FormLabel className="text-lg font-semibold">{t("bio")}</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      {...field}
-                      rows={3}
-                      value={field.value ?? ""}
-                      className="resize-none"
-                      placeholder="I try to build cool stuff without breaking it..."
-                    />
-                  </FormControl>
-
-                  <FormDescription>
-                    {t("bioDescription")}
-                    <span
-                      className={cn(
-                        "ml-1 text-foreground",
-                        bioCharacters > 100 && "text-destructive",
-                      )}
-                    >
-                      ({bioCharacters}/100 characters max.)
-                    </span>
-                  </FormDescription>
-
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </article>
-        </section>
+        {/*  */}
 
         <section
           className={cn(
@@ -196,7 +85,7 @@ export const VisualCustomizationForm = ({
         >
           <h2 className="text-lg font-semibold">{t("themeCustomization.colors.title")}</h2>
 
-          <article className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <article className="grid grid-cols-1 gap-x-5 gap-y-8 md:grid-cols-2">
             <FormField
               control={form.control}
               name="theme.colors.background"
@@ -220,30 +109,6 @@ export const VisualCustomizationForm = ({
                 </FormItem>
               )}
             />
-
-            <FormField
-              control={form.control}
-              name="theme.colors.subtle"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t("themeCustomization.colors.accent")}</FormLabel>
-
-                  <GradientPicker background={field.value} setBackground={field.onChange} />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="theme.colors.border"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t("themeCustomization.colors.border")}</FormLabel>
-
-                  <GradientPicker background={field.value} setBackground={field.onChange} />
-                </FormItem>
-              )}
-            />
           </article>
         </section>
 
@@ -255,12 +120,12 @@ export const VisualCustomizationForm = ({
             },
           )}
         >
-          <h2 className="text-lg font-semibold">{t("themeCustomization.buttons.title")}</h2>
+          <h2 className="text-lg font-semibold">Botón principal [Guardar contacto]</h2>
 
-          <section className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <section className="grid grid-cols-1 gap-x-8 gap-y-5 md:grid-cols-2">
             <FormField
               control={form.control}
-              name="theme.buttons.background"
+              name="theme.buttons.saveContactButton.background"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>{t("themeCustomization.buttons.background")}</FormLabel>
@@ -272,7 +137,7 @@ export const VisualCustomizationForm = ({
 
             <FormField
               control={form.control}
-              name="theme.buttons.textColor"
+              name="theme.buttons.saveContactButton.textColor"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>{t("themeCustomization.buttons.textColor")}</FormLabel>
@@ -284,7 +149,7 @@ export const VisualCustomizationForm = ({
 
             <FormField
               control={form.control}
-              name="theme.buttons.borderColor"
+              name="theme.buttons.saveContactButton.borderColor"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>{t("themeCustomization.buttons.borderColor")}</FormLabel>
@@ -296,9 +161,9 @@ export const VisualCustomizationForm = ({
 
             <FormField
               control={form.control}
-              name="theme.buttons.borderStyle"
+              name="theme.buttons.saveContactButton.borderStyle"
               render={({ field }) => (
-                <FormItem className="max-w-[240px]">
+                <FormItem>
                   <FormLabel>{t("themeCustomization.buttons.borderStyle")}</FormLabel>
 
                   <Select value={field.value} onValueChange={field.onChange}>
@@ -322,13 +187,127 @@ export const VisualCustomizationForm = ({
               )}
             />
           </section>
+        </section>
+
+        <section
+          className={cn(
+            "flex translate-y-0 flex-col gap-4 rounded-lg border p-6 transition-transform duration-300",
+            {
+              "h-0 translate-y-10 opacity-0": !enableCustom,
+            },
+          )}
+        >
+          <h2 className="text-lg font-semibold">Redes sociales</h2>
+
+          <section className="grid grid-cols-1 gap-x-8 gap-y-5 md:grid-cols-2">
+            <FormField
+              control={form.control}
+              name="theme.buttons.socialLinks.strokeColor"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Color de los íconos</FormLabel>
+
+                  <GradientPicker background={field.value} setBackground={field.onChange} />
+                </FormItem>
+              )}
+            />
+          </section>
+        </section>
+
+        <section
+          className={cn(
+            "flex translate-y-0 flex-col gap-4 rounded-lg border p-6 transition-transform duration-300",
+            {
+              "h-0 translate-y-10 opacity-0": !enableCustom,
+            },
+          )}
+        >
+          <h2 className="text-lg font-semibold">Links</h2>
+
+          <section className="grid grid-cols-1 gap-x-8 gap-y-5 md:grid-cols-2">
+            <FormField
+              control={form.control}
+              name="theme.buttons.regularLinks.background"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t("themeCustomization.colors.background")}</FormLabel>
+
+                  <GradientPicker background={field.value} setBackground={field.onChange} />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="theme.buttons.regularLinks.textColor"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t("themeCustomization.buttons.textColor")}</FormLabel>
+
+                  <GradientPicker background={field.value} setBackground={field.onChange} />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="theme.buttons.regularLinks.borderColor"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t("themeCustomization.buttons.borderColor")}</FormLabel>
+
+                  <GradientPicker background={field.value ?? ""} setBackground={field.onChange} />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="theme.buttons.regularLinks.borderStyle"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t("themeCustomization.buttons.borderStyle")}</FormLabel>
+
+                  <Select value={field.value} onValueChange={field.onChange}>
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+
+                    <SelectContent>
+                      <SelectItem value="solid">
+                        {t("themeCustomization.buttons.styles.solid")}
+                      </SelectItem>
+                      <SelectItem value="dashed">
+                        {t("themeCustomization.buttons.styles.dashed")}
+                      </SelectItem>
+                      <SelectItem value="dotted">
+                        {t("themeCustomization.buttons.styles.dotted")}
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormItem>
+              )}
+            />
+          </section>
+        </section>
+
+        <section
+          className={cn(
+            "flex translate-y-0 flex-col gap-4 rounded-lg border p-6 transition-transform duration-300",
+            {
+              "h-0 translate-y-10 opacity-0": !enableCustom,
+            },
+          )}
+        >
+          <h2 className="text-lg font-semibold">
+            Ambos tipos de botones [Guardar contacto, Links]
+          </h2>
 
           <article className="grid grid-cols-1 gap-4 lg:grid-cols-2">
             <FormField
               control={form.control}
               name="theme.buttons.fontWeight"
               render={({ field }) => (
-                <FormItem className="max-w-[240px]">
+                <FormItem>
                   <Label>{t("themeCustomization.fonts.weight")}</Label>
 
                   <Select value={field.value} onValueChange={field.onChange}>
@@ -375,7 +354,7 @@ export const VisualCustomizationForm = ({
               control={form.control}
               name="theme.buttons.fontStyle"
               render={({ field }) => (
-                <FormItem className="max-w-[240px]">
+                <FormItem>
                   <Label>{t("themeCustomization.fonts.style")}</Label>
 
                   <Select value={field.value} onValueChange={field.onChange}>

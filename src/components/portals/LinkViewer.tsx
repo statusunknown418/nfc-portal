@@ -40,15 +40,16 @@ export const LinkViewer = ({
   const commonProps: Pick<ComponentProps<"div">, "className" | "style"> = {
     style: {
       borderWidth: "1px",
-      borderColor: styles.buttons.borderColor ?? "transparent",
-      borderStyle: styles.buttons.borderStyle,
-      background: styles.colors.subtle,
+      borderColor: styles.buttons.regularLinks.borderColor ?? "transparent",
+      borderStyle: styles.buttons.regularLinks.borderStyle,
+      background: styles.buttons.regularLinks.background,
     },
     className: cn(
       "flex h-14 w-full transition-all hover:scale-105 items-center cursor-pointer justify-between gap-2 text-sm active:ring active:ring-ring active:ring-offset-1 sm:text-base md:h-20 md:px-4 lg:px-6",
       styles.buttons.variant === "square" && "rounded-none px-2",
       styles.buttons.variant === "pill" && "rounded-[34px] px-2.5",
       styles.buttons.variant === "rounded" && "rounded-lg px-2",
+      styles.buttons.variant === "small-radius" && "rounded-md px-2",
     ),
   };
 
@@ -121,7 +122,7 @@ export const LinkViewer = ({
       <div
         className="flex flex-grow justify-center text-center"
         style={{
-          color: styles.buttons.textColor,
+          color: styles.buttons.regularLinks.textColor,
           fontStyle: styles.buttons.fontStyle,
           fontWeight: styles.buttons.fontWeight,
         }}
@@ -133,9 +134,12 @@ export const LinkViewer = ({
         <DrawerTrigger asChild>
           <Button
             onClick={preventBackdropClick}
-            variant="ghost"
+            variant="iOSGhost"
             size="icon"
-            className={cn("min-w-9 hover:border-primary hover:bg-black/20 hover:text-white")}
+            className={cn("min-w-9")}
+            style={{
+              color: styles.buttons.regularLinks.textColor,
+            }}
           >
             <HamburgerMenuIcon />
           </Button>

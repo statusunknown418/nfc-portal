@@ -2,6 +2,7 @@ import { useQRCode } from "next-qrcode";
 import Image from "next/image";
 import { Divider } from "~/components/ui/separator";
 import { nfcPreferencesStore } from "~/lib/stores/nfcPreferences";
+import { computeInitials } from "~/lib/utils";
 import { type RouterOutputs } from "~/trpc/react";
 
 export const MinimalLogosVariantFront = ({
@@ -27,7 +28,11 @@ export const MinimalLogosVariantFront = ({
       }}
     >
       <div className="flex flex-col items-center justify-center">
-        <h2 className="text-[84px]/[72px] font-light">DB</h2>
+        <h2 className="text-[84px]/[72px] font-light">
+          {computeInitials(
+            `${cardData?.contactJSON?.name.first} ${cardData?.contactJSON?.name.last}`,
+          )}
+        </h2>
 
         <header className="flex flex-col items-center gap-0">
           {preferences.showName && (

@@ -100,11 +100,9 @@ export const ContactInfo = ({
       });
 
     vCard.addNote("---\nPowered by Concard - https://concard.app");
-
     newProfilePicture && vCard.addPhoto(newProfilePicture, "jpeg");
 
     const fullVCard = vCard.buildVCard();
-    console.log(newProfilePicture);
 
     const blob = new Blob([fullVCard], {
       type: "text/vcard",
@@ -142,16 +140,18 @@ export const ContactInfo = ({
       <button
         onClick={handleImport}
         className={cn(
-          "flex h-14 w-full items-center justify-center gap-3 self-center rounded-lg bg-gradient-to-r px-5 text-sm font-semibold uppercase tracking-tight",
-          // theme.buttons.variant === "pill" && "rounded-[34px]",
-          // theme.buttons.variant === "rounded" && "rounded-lg",
-          // theme.buttons.variant === "square" && "rounded-none",
-          // theme.buttons.variant === "small-radius" && "rounded-sm",
+          "flex h-14 w-full items-center justify-center gap-3 self-center bg-gradient-to-r px-5 text-sm font-semibold uppercase tracking-tight",
+          theme.buttons.variant === "pill" && "rounded-[34px]",
+          theme.buttons.variant === "rounded" && "rounded-lg",
+          theme.buttons.variant === "square" && "rounded-none",
+          theme.buttons.variant === "small-radius" && "rounded-md",
         )}
         style={{
-          color: theme.buttons.textColor,
+          color: theme.buttons.saveContactButton.textColor,
+          background: theme.buttons.saveContactButton.background,
+          border: `1px ${theme.buttons.saveContactButton.borderStyle} ${theme.buttons.saveContactButton.borderColor}`,
           fontStyle: theme.buttons.fontStyle,
-          background: theme.buttons.background,
+          fontWeight: theme.buttons.fontWeight,
         }}
       >
         {isLoading || exporting ? (

@@ -163,7 +163,7 @@ export const PortalContent = ({
                 rel="external"
                 className="flex h-8 w-10 items-center justify-center overflow-hidden rounded-md transition-all active:scale-95"
                 style={{
-                  color: portal.data.theme.colors.border,
+                  color: portal.data.theme.buttons.socialLinks.strokeColor,
                 }}
                 href={{ pathname: link.url }}
                 key={link.id}
