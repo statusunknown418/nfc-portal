@@ -1,8 +1,9 @@
+"use client";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Spinner } from "@phosphor-icons/react";
-import { ArrowLeftIcon } from "@radix-ui/react-icons";
+import { FloppyDisk } from "@phosphor-icons/react/dist/ssr";
 import { useTranslations } from "next-intl";
-import { useQueryStates } from "nuqs";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { type z } from "zod";
@@ -11,15 +12,10 @@ import { editViewerContactSchema } from "~/server/api/schemas.zod";
 import { api, type RouterOutputs } from "~/trpc/react";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { Badge } from "../ui/badge";
-import { Button } from "../ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "../ui/form";
 import { Input } from "../ui/input";
-import { contactStepParsers } from "./contactStep.parsers";
-import { FloppyDisk } from "@phosphor-icons/react/dist/ssr";
 
-export const WorkInfo = ({ initialData }: { initialData: RouterOutputs["vCard"]["get"] }) => {
-  const [_, update] = useQueryStates(contactStepParsers, { history: "push" });
-
+export const AddressesInfo = ({ initialData }: { initialData: RouterOutputs["vCard"]["get"] }) => {
   const { data } = api.vCard.get.useQuery(undefined, { initialData });
 
   const form = useForm<z.infer<typeof editViewerContactSchema>>({
@@ -174,21 +170,6 @@ export const WorkInfo = ({ initialData }: { initialData: RouterOutputs["vCard"][
               </FormItem>
             )}
           />
-
-          <Button
-            variant="ghost"
-            type="button"
-            className="mt-2 w-max self-center rounded-full"
-            onClick={() => void update({ step: "work" })}
-          >
-            <ArrowLeftIcon className="h-5 w-5" />
-            Back
-          </Button>
-
-          <p className="text-center text-sm text-muted-foreground">
-            All done, you can now continue on to customizing your portal page, or go back to edit
-            your contact information.
-          </p>
         </form>
       </Form>
     </>

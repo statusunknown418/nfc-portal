@@ -3,19 +3,19 @@
 import { useTranslations } from "next-intl";
 import { api } from "~/trpc/react";
 import { Button } from "../ui/button";
-import { onboardingKeys, type OnboardingKeys } from "./onboarding.parsers";
 import { useSelectedLayoutSegment } from "next/navigation";
 import Link from "next/link";
 import { ArrowRightIcon, ChevronLeftIcon } from "@radix-ui/react-icons";
+import { onboardingKeys, type OnboardingStep } from "~/server/db/schema";
 
 export const ForwardRewindButtons = () => {
-  const selectedSegment = useSelectedLayoutSegment() as OnboardingKeys;
+  const selectedSegment = useSelectedLayoutSegment() as OnboardingStep;
   const utils = api.useUtils();
   const { mutate } = api.viewer.setOnboardingStep.useMutation();
 
   const t = useTranslations("admin.onboarding");
 
-  const getPrev = (): OnboardingKeys => {
+  const getPrev = (): OnboardingStep => {
     if (selectedSegment === "start") {
       return "start";
     }
@@ -23,7 +23,7 @@ export const ForwardRewindButtons = () => {
     return onboardingKeys[onboardingKeys.indexOf(selectedSegment) - 1]!;
   };
 
-  const getNext = (): OnboardingKeys => {
+  const getNext = (): OnboardingStep => {
     if (selectedSegment === "finale") {
       return "finale";
     }

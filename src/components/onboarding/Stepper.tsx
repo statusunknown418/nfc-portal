@@ -10,15 +10,15 @@ import {
 import { useTranslations } from "next-intl";
 import { useSelectedLayoutSegment } from "next/navigation";
 import { cn } from "~/lib/utils";
-import { type OnboardingKeys } from "./onboarding.parsers";
 import { ShoppingCart } from "@phosphor-icons/react";
+import { type OnboardingStep } from "~/server/db/schema";
 
 export const Stepper = () => {
-  const step = useSelectedLayoutSegment() as OnboardingKeys;
+  const step = useSelectedLayoutSegment() as OnboardingStep;
   const t = useTranslations("admin.onboarding.stepper");
 
   const stepsItems: {
-    key: OnboardingKeys;
+    key: OnboardingStep;
     Selector: React.FC<{ className?: string }>;
     RenderIcon: React.FC<{ className?: string }>;
   }[] = [
@@ -98,6 +98,7 @@ export const Stepper = () => {
           className={cn(
             "flex w-full flex-col items-center gap-2 opacity-35",
             step === key && "opacity-100",
+            (step === "addresses" || step === "work") && key === "contact" && "opacity-100",
             stepsItems.findIndex((i) => i.key === step) > idx && "opacity-90",
           )}
         >
@@ -106,14 +107,26 @@ export const Stepper = () => {
               "flex aspect-square w-12 flex-col items-center justify-center gap-1 rounded-full border sm:w-16",
               step !== key && "bg-muted",
               step === key && "border-indigo-500 bg-indigo-50",
+              (step === "addresses" || step === "work") &&
+                key === "contact" &&
+                "border-indigo-500 bg-indigo-50",
               stepsItems.findIndex((i) => i.key === step) > idx && "border-border/50 bg-white",
             )}
           >
-            <RenderIcon className={cn(step === key && "text-indigo-600")} />
+            <RenderIcon
+              className={cn(
+                step === key && "text-indigo-600",
+                (step === "addresses" || step === "work") && key === "contact" && "text-indigo-600",
+              )}
+            />
           </div>
 
           <Selector
-            className={cn("hidden text-center sm:block", step === key && "text-indigo-600")}
+            className={cn(
+              "hidden text-center sm:block",
+              step === key && "text-indigo-600",
+              (step === "addresses" || step === "work") && key === "contact" && "text-indigo-600",
+            )}
           />
         </li>
       ))}

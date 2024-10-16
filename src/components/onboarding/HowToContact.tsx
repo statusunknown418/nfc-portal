@@ -1,12 +1,14 @@
+"use client";
+
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowRight, Spinner } from "@phosphor-icons/react";
-import { ArrowLeftIcon, Cross2Icon, PlusIcon } from "@radix-ui/react-icons";
+import { Spinner } from "@phosphor-icons/react";
+import { FloppyDisk } from "@phosphor-icons/react/dist/ssr";
+import { Cross2Icon, PlusIcon } from "@radix-ui/react-icons";
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
-import { useQueryStates } from "nuqs";
 import { useFieldArray, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { type z } from "zod";
+import { useAutoSaveFormData } from "~/lib/hooks/use-auto-save";
 import { editViewerContactSchema } from "~/server/api/schemas.zod";
 import { api, type RouterOutputs } from "~/trpc/react";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
@@ -14,11 +16,8 @@ import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "../ui/form";
 import { Input } from "../ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
-import { contactStepParsers } from "./contactStep.parsers";
-import { useAutoSaveFormData } from "~/lib/hooks/use-auto-save";
 import { Label } from "../ui/label";
-import { FloppyDisk } from "@phosphor-icons/react/dist/ssr";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 
 export const HowToContact = ({
   initialData,
@@ -27,9 +26,6 @@ export const HowToContact = ({
   initialData: RouterOutputs["vCard"]["get"];
   user: CustomJwtSessionClaims;
 }) => {
-  const [_, update] = useQueryStates(contactStepParsers, { history: "push" });
-  const router = useRouter();
-
   const { data } = api.vCard.get.useQuery(undefined, { initialData });
 
   const form = useForm<z.infer<typeof editViewerContactSchema>>({
@@ -276,34 +272,6 @@ export const HowToContact = ({
               </div>
             ))}
           </FormItem>
-
-          <article className="mt-2 flex w-full flex-col justify-center gap-4 sm:flex-row">
-            <Button
-              className="rounded-full"
-              variant="ghost"
-              type="button"
-              onClick={() => {
-                void update({ step: "personal" });
-                router.refresh();
-              }}
-            >
-              <ArrowLeftIcon className="h-5 w-5" />
-              Back
-            </Button>
-
-            <Button
-              type="button"
-              className="aspect-square w-auto self-center rounded-full"
-              variant="secondary_ghost"
-              onClick={() => {
-                void update({ step: "addresses" });
-                router.refresh();
-              }}
-            >
-              {t("professionalInfo")}
-              <ArrowRight className="h-5 w-5" />
-            </Button>
-          </article>
         </form>
       </Form>
     </>

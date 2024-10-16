@@ -36,7 +36,7 @@ export default function OnboardingLayout({ children }: { children: React.ReactNo
       </nav>
 
       {/* This specific div needs to know the height of the navbar to prevent a sh****ty double scrolling */}
-      <div className="relative mx-auto flex h-[calc(100svh-3.5rem)] w-full max-w-[1500px] flex-col items-center gap-8 overflow-auto py-4 md:py-6">
+      <div className="relative mx-auto flex h-[calc(100svh-3.5rem)] w-full max-w-[1500px] flex-col items-center gap-4 overflow-auto py-4 md:py-6">
         <Stepper />
 
         <section className="w-full max-w-7xl px-4 md:px-0 md:py-6">{children}</section>
