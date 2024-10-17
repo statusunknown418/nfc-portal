@@ -25,9 +25,9 @@ export default function StartNowPage() {
 
   return (
     <main className="relative grid h-full w-full grid-cols-1 text-foreground">
-      <section className="dark relative flex h-svh w-full flex-col items-center justify-center bg-neutral-900">
+      <section className="dark relative flex h-svh max-w-full flex-col items-center justify-center bg-neutral-900">
         <FlickeringGrid
-          className="absolute inset-0 z-0 w-full bg-neutral-950"
+          className="absolute inset-0 z-0 size-full bg-neutral-950"
           flickerChance={0.4}
           squareSize={7}
           gridGap={8}
@@ -97,11 +97,11 @@ export default function StartNowPage() {
           </BlurFade>
         </article>
 
-        <BlurFade delay={0.7} className="absolute inset-x-4 bottom-8 z-10 w-full">
-          <p className="text-center text-xs text-muted-foreground">
+        <BlurFade delay={0.7} className="absolute inset-x-4 bottom-8 z-10">
+          <p className="mx-auto max-w-7xl text-center text-xs text-muted-foreground">
             <sup>1</sup> La oferta incluye una tarjeta NFC personalizable a través de la plataforma
             ConCard. El ENVÍO ES GRATIS a todo Lima (Perú); para provincias es necesario un abono
-            adicional de S/. 17.90 PEN. Para envíos internacionales, por favor contáctenos para
+            adicional de S/. 9.90 PEN. Para envíos internacionales, por favor contáctenos para
             obtener la mejor cotización.
           </p>
         </BlurFade>
