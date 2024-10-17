@@ -142,7 +142,7 @@ export const PortalContent = ({
           )}
         </header>
 
-        <div className="w-full px-4">
+        <div className="mt-8 w-full px-4">
           {!portal.data.hasContactInfoLocked && (
             <ContactInfo
               allLinks={portal.data.links}
@@ -157,6 +157,7 @@ export const PortalContent = ({
         <article className="flex w-full max-w-[75%] flex-wrap justify-center gap-4">
           {portal.data.links
             .filter((item) => item.socialType)
+            .sort((a, b) => a.position - b.position)
             .map((link) => (
               <Link
                 target="_blank"
@@ -195,7 +196,9 @@ export const PortalContent = ({
               </Alert>
             )}
 
-            <Divider className="mb-4 mt-2 text-xs">Otros links</Divider>
+            {!!portal.data.links.filter((item) => !item.socialType).length && (
+              <Divider className="mb-4 mt-2 text-xs">Otros links</Divider>
+            )}
 
             {portal.data.links
               .filter((item) => !item.socialType)

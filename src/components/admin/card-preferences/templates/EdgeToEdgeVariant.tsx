@@ -10,7 +10,7 @@ export const EdgeToEdgeTemplateFront = ({
 }) => {
   const preferences = nfcPreferencesStore((s) => s.preferencesData);
   const colorFront = !!preferences.cardColorFront ? preferences.cardColorFront : "#0D0D0D";
-  const accent = !!preferences.accentColor ? preferences.accentColor : "#000000";
+  const accent = !!preferences.accentColor ? preferences.accentColor : "#ffffff";
 
   if (preferences.cardVariant !== "basic" || preferences.cardTemplate !== "edge-to-edge") {
     return;
@@ -46,7 +46,7 @@ export const EdgeToEdgeTemplateBack = ({
 }) => {
   const preferences = nfcPreferencesStore((s) => s.preferencesData);
   const colorFront = !!preferences.cardColorBack ? preferences.cardColorBack : "#0D0D0D";
-  const accent = !!preferences.accentColor ? preferences.accentColor : "#000000";
+  const accent = !!preferences.accentColor ? preferences.accentColor : "#ffffff";
 
   if (preferences.cardVariant !== "basic" || preferences.cardTemplate !== "edge-to-edge") {
     return;

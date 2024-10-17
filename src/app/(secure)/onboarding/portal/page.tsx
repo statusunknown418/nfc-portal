@@ -20,11 +20,13 @@ export default function PortalPage() {
     <section className="relative flex flex-col gap-4 px-4 xl:px-0">
       <Alert variant="success" className="break-words pl-8">
         <CheckFat weight="duotone" className="size-8" />
-        <AlertTitle className="text-base/4">Siempre puedes cambiar estas opciones!</AlertTitle>
+        <AlertTitle className="text-base/4">
+          Siempre puedes seguir personalizando tu portal!
+        </AlertTitle>
         <AlertDescription className="break-words">
           No te preocupes si parecen ser muchas opciones, una vez que completes los pasos del
-          onboarding te redirigiremos al <kbd>dashboard</kbd> donde podrás seguir personalizando tu
-          portal si así lo deseas!
+          onboarding te redirigiremos al <kbd>dashboard</kbd> el cual contiene más opciones para
+          seguir personalizando tu portal si así lo deseas!
         </AlertDescription>
       </Alert>
 
@@ -33,7 +35,7 @@ export default function PortalPage() {
         <p className="mt-1 text-muted-foreground">{t("description")}</p>
       </article>
 
-      <article className="flex flex-col gap-4 overflow-auto lg:flex-row lg:gap-12">
+      <article className="flex flex-col gap-4 overflow-auto lg:flex-row lg:gap-20">
         <div className="lg:w-2/3">
           <VisualWrapper />
         </div>

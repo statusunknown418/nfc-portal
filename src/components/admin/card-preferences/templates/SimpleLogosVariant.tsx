@@ -110,6 +110,7 @@ export const SimpleLogosVariantBack = ({
               width: 90,
               color: {
                 light: colorBack ?? "#d6d6d6",
+                dark: accent,
               },
             }}
           />

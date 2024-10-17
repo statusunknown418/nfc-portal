@@ -82,7 +82,12 @@ export const HowToContact = ({
   });
 
   const onSubmit = async (data: z.infer<typeof editViewerContactSchema>) => {
-    mutate(data);
+    const validEmails = data.email?.filter((email) => !!email.link);
+
+    mutate({
+      ...data,
+      email: validEmails,
+    });
   };
 
   const {

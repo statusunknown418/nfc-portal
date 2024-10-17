@@ -55,7 +55,7 @@ export const CardPreferencesForm = () => {
           control={form.control}
           render={({ field }) => (
             <RadioGroupRadix value={field.value} onValueChange={field.onChange}>
-              <div className="flex gap-4">
+              <div className="flex flex-wrap gap-4">
                 <DefaultCard />
                 <CustomCard />
                 <MetallicCard />

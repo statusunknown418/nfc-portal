@@ -101,6 +101,12 @@ export const CardPreview = ({
                 backgroundPosition: "center",
                 backgroundSize: "cover",
                 backgroundRepeat: "no-repeat",
+                backgroundImage:
+                  preferences.cardVariant === "custom"
+                    ? `url(${preferences.cardImageBack})`
+                    : !!preferences.cardTemplate
+                      ? preferences.cardColorBack
+                      : undefined,
               }}
             >
               <>

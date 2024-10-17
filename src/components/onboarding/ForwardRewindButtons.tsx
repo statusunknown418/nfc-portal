@@ -1,12 +1,12 @@
 "use client";
 
+import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
+import { useSelectedLayoutSegment } from "next/navigation";
+import { onboardingKeys, type OnboardingStep } from "~/server/db/schema";
 import { api } from "~/trpc/react";
 import { Button } from "../ui/button";
-import { useSelectedLayoutSegment } from "next/navigation";
-import Link from "next/link";
-import { ArrowRightIcon, ChevronLeftIcon } from "@radix-ui/react-icons";
-import { onboardingKeys, type OnboardingStep } from "~/server/db/schema";
 
 export const ForwardRewindButtons = () => {
   const selectedSegment = useSelectedLayoutSegment() as OnboardingStep;
@@ -51,7 +51,7 @@ export const ForwardRewindButtons = () => {
   }
 
   return (
-    <footer className="mx-auto flex w-full max-w-3xl items-center justify-between rounded-3xl border bg-white p-4">
+    <footer className="fixed bottom-4 z-20 mx-auto flex w-full max-w-3xl items-center justify-between rounded-full border bg-white/60 p-4 backdrop-blur backdrop-filter">
       <Button asChild onClick={handleRewind} variant="ghost">
         <Link href={`/onboarding/${getPrev()}`}>
           <ChevronLeftIcon />
@@ -59,10 +59,10 @@ export const ForwardRewindButtons = () => {
         </Link>
       </Button>
 
-      <Button asChild onClick={handleForward} variant="primary_ghost">
+      <Button asChild onClick={handleForward} variant="iOSGhost" className="text-indigo-600">
         <Link href={`/onboarding/${getNext()}`}>
           {t("nextButton")}
-          <ArrowRightIcon />
+          <ChevronRightIcon />
         </Link>
       </Button>
     </footer>

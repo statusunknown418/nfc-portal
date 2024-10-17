@@ -263,25 +263,27 @@ export const OptionsSelector = () => {
           )}
         />
 
-        <FormField
-          control={form.control}
-          name="includeQRCode"
-          render={({ field }) => (
-            <FormItem>
-              <div className="flex items-center gap-3">
-                <FormControl>
-                  <Checkbox
-                    className="h-5 w-5"
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                  />
-                </FormControl>
+        {selectedTemplate !== "edge-to-edge" && (
+          <FormField
+            control={form.control}
+            name="includeQRCode"
+            render={({ field }) => (
+              <FormItem>
+                <div className="flex items-center gap-3">
+                  <FormControl>
+                    <Checkbox
+                      className="h-5 w-5"
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
 
-                <FormLabel className="text-base">Incluir código QR</FormLabel>
-              </div>
-            </FormItem>
-          )}
-        />
+                  <FormLabel className="text-base">Incluir código QR</FormLabel>
+                </div>
+              </FormItem>
+            )}
+          />
+        )}
 
         <Divider className="col-span-2 my-3">Colores</Divider>
 

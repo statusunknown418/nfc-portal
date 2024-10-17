@@ -220,8 +220,14 @@ export default function Home() {
                 <p className="text-muted-foreground">{t("stepByStep.stepOneDescription")}</p>
               </section>
 
-              <div className="flex h-52 w-full items-center justify-center bg-neutral-700">
-                add graphic
+              <div className="relative -mt-10 h-[250px] w-full rounded-xl bg-center object-center">
+                <Image
+                  width={600}
+                  height={300}
+                  className="h-[300px] object-contain"
+                  alt="select-username"
+                  src="/landing/select-username.png"
+                />
               </div>
             </article>
 
@@ -233,8 +239,14 @@ export default function Home() {
                 <p className="text-muted-foreground">{t("stepByStep.stepTwoDescription")}</p>
               </section>
 
-              <div className="flex h-52 w-full items-center justify-center bg-neutral-700">
-                add graphic
+              <div className="relative h-[250px] w-full rounded-xl bg-center object-center pb-10">
+                <Image
+                  width={600}
+                  height={300}
+                  className="h-[300px] object-contain"
+                  alt="add-contact-info"
+                  src="/landing/contact-info.png"
+                />
               </div>
             </article>
 
@@ -246,8 +258,14 @@ export default function Home() {
                 <p className="text-muted-foreground">{t("stepByStep.stepThreeDescription")}</p>
               </section>
 
-              <div className="flex h-52 w-full items-center justify-center bg-neutral-700">
-                add graphic
+              <div className="relative h-[250px] w-full rounded-xl bg-center object-center pb-10">
+                <Image
+                  width={600}
+                  height={300}
+                  className="h-[300px] object-contain"
+                  alt="add-contact-info"
+                  src="/landing/portal-custom.png"
+                />
               </div>
             </article>
 
@@ -259,8 +277,14 @@ export default function Home() {
                 <p className="text-muted-foreground">{t("stepByStep.stepFourDescription")}</p>
               </section>
 
-              <div className="flex h-52 w-full items-center justify-center bg-neutral-700">
-                add graphic
+              <div className="relative h-[250px] w-full rounded-xl bg-center object-center pb-10">
+                <Image
+                  width={600}
+                  height={300}
+                  className="h-[300px] object-contain"
+                  alt="add-contact-info"
+                  src="/landing/contact-info.png"
+                />
               </div>
             </article>
 
@@ -274,9 +298,14 @@ export default function Home() {
                 </p>
               </section>
 
-              <div className="flex h-52 w-full items-center justify-center bg-neutral-700">
-                add graphic
-              </div>
+              <div
+                className="relative h-[250px] w-full rounded-xl bg-contain bg-center pb-10"
+                style={{
+                  backgroundImage: `url(/landing/last-step.png)`,
+                  backgroundPosition: "top",
+                  backgroundRepeat: "repeat-x",
+                }}
+              ></div>
             </article>
           </div>
         </section>
@@ -650,7 +679,7 @@ export default function Home() {
             </p>
           </header>
 
-          <Accordion type="single" collapsible className="mt-8 w-full">
+          <Accordion type="single" collapsible className="mt-8 w-full text-left">
             <AccordionItem value="explain-nfc">
               <AccordionTrigger className="h-20 text-2xl font-medium md:h-20">
                 {t("faq.questionOne")}
@@ -719,7 +748,7 @@ export default function Home() {
         </section>
       </article>
 
-      <footer className="mt-20 flex flex-col justify-end gap-10 rounded-t-[32px] bg-neutral-900 px-4 py-8 text-center text-neutral-400 shadow-xl md:px-10">
+      <footer className="mt-20 flex flex-col justify-end gap-8 rounded-t-[32px] bg-neutral-900 px-4 py-8 text-center text-neutral-400 shadow-xl md:px-10">
         <section className="flex w-full flex-wrap items-center justify-center gap-5">
           <Button asChild variant="link" className="group text-base hover:text-primary-foreground">
             <Link href="/admin">
@@ -758,6 +787,8 @@ export default function Home() {
             Stackk Studios <OpenInNewWindowIcon />
           </Link>
         </div>
+
+        <p className="text-xs text-muted-foreground">Images designed by FreePik</p>
       </footer>
     </main>
   );

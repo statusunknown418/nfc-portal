@@ -23,15 +23,12 @@ export const GetYours = ({
   }
 
   return (
-    <div className="mt-4 px-4">
+    <div className="mt-10 px-4">
       <SignUpButton>
         <button
-          className="flex w-full flex-col items-center justify-center border p-3 text-sm font-medium"
+          className="flex w-full flex-col items-center justify-center p-3 text-sm font-medium"
           style={{
-            border: `1px dashed ${colors?.theme.buttons.regularLinks.borderColor}`,
-            borderRadius: "9999px",
-            background: colors?.theme.buttons.regularLinks.background,
-            color: colors?.theme.buttons.regularLinks.textColor,
+            color: colors?.theme.colors.foreground,
           }}
         >
           🚀 Únete a ConCard!

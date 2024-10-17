@@ -27,6 +27,7 @@ import { api, type RouterOutputs } from "~/trpc/react";
 import { SortableItem } from "../../SortableItem";
 import { LinkItem } from "../LinkItem";
 import { SocialLinkItem } from "../SocialLinkItem";
+import { Empty } from "@phosphor-icons/react";
 
 export const LinksSortableList = ({
   initialData,
@@ -123,6 +124,12 @@ export const LinksSortableList = ({
   return (
     <>
       <Divider>Redes sociales</Divider>
+      {!allLinks.filter((item) => !!item.socialType).length && (
+        <div className="flex w-full flex-col items-center justify-center gap-4 text-muted-foreground">
+          <Empty className="size-8" />
+          No has añadido este tipo de links aún
+        </div>
+      )}
 
       <DndContext
         id="links-sortable-context"
@@ -158,6 +165,13 @@ export const LinksSortableList = ({
       </DndContext>
 
       <Divider>Otros links</Divider>
+
+      {!allLinks.filter((item) => !item.socialType).length && (
+        <div className="flex w-full flex-col items-center justify-center gap-4 text-muted-foreground">
+          <Empty className="size-8" />
+          No has añadido este tipo de links aún
+        </div>
+      )}
 
       <DndContext
         id="links-sortable-context"

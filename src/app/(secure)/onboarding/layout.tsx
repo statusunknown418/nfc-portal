@@ -39,7 +39,7 @@ export default function OnboardingLayout({ children }: { children: React.ReactNo
       <div className="relative mx-auto flex h-[calc(100svh-3.5rem)] w-full max-w-[1500px] flex-col items-center gap-4 overflow-auto py-4 md:py-6">
         <Stepper />
 
-        <section className="w-full max-w-7xl px-4 md:px-0 md:py-6">{children}</section>
+        <section className="w-full max-w-7xl px-4 pb-24 md:px-0 md:pt-6">{children}</section>
 
         <ForwardRewindButtons />
       </div>

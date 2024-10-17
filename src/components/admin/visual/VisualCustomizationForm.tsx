@@ -1,7 +1,6 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FontBoldIcon, FontFamilyIcon, FontItalicIcon, FontRomanIcon } from "@radix-ui/react-icons";
 import { RadioGroupItem as RadixRadioGroupItem } from "@radix-ui/react-radio-group";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
@@ -110,6 +109,67 @@ export const VisualCustomizationForm = ({
               )}
             />
           </article>
+        </section>
+
+        <section
+          className={cn(
+            "flex translate-y-0 flex-col gap-4 rounded-lg border p-6 transition-transform duration-300",
+            {
+              "h-0 translate-y-10 opacity-0": !enableCustom,
+            },
+          )}
+        >
+          <h2 className="text-lg font-semibold">Estilos para todos los botones</h2>
+
+          <FormField
+            control={form.control}
+            name="theme.buttons.variant"
+            render={({ field }) => (
+              <FormItem>
+                <Label>{t("themeCustomization.buttons.shape.label")}</Label>
+
+                <RadioGroup
+                  className="flex flex-wrap items-center gap-4 pt-2"
+                  value={field.value}
+                  onValueChange={field.onChange}
+                >
+                  <RadixRadioGroupItem
+                    value="pill"
+                    className="flex h-10 items-center justify-center gap-2 rounded-full border bg-muted px-8 text-sm ring-offset-2 transition-all duration-200 data-[state=checked]:ring data-[state=checked]:ring-ring"
+                  >
+                    {t("themeCustomization.buttons.shape.pill")}
+                  </RadixRadioGroupItem>
+
+                  <FormControl>
+                    <RadixRadioGroupItem
+                      value="rounded"
+                      className="flex h-10 items-center justify-center gap-2 rounded-xl border bg-muted px-8 text-sm ring-offset-2 transition-all duration-200 data-[state=checked]:ring data-[state=checked]:ring-ring"
+                    >
+                      {t("themeCustomization.buttons.shape.rounded")}
+                    </RadixRadioGroupItem>
+                  </FormControl>
+
+                  <FormControl>
+                    <RadixRadioGroupItem
+                      value="small-radius"
+                      className="flex h-10 items-center justify-center gap-2 rounded-sm border bg-muted px-8 text-sm ring-offset-2 transition-all duration-200 data-[state=checked]:ring data-[state=checked]:ring-ring"
+                    >
+                      {t("themeCustomization.buttons.shape.small")}
+                    </RadixRadioGroupItem>
+                  </FormControl>
+
+                  <FormControl>
+                    <RadixRadioGroupItem
+                      value="square"
+                      className="flex h-10 items-center justify-center gap-2 border bg-muted px-8 text-sm ring-offset-2 transition-all duration-200 data-[state=checked]:ring data-[state=checked]:ring-ring"
+                    >
+                      {t("themeCustomization.buttons.shape.square")}
+                    </RadixRadioGroupItem>
+                  </FormControl>
+                </RadioGroup>
+              </FormItem>
+            )}
+          />
         </section>
 
         <section
@@ -288,148 +348,6 @@ export const VisualCustomizationForm = ({
               )}
             />
           </section>
-        </section>
-
-        <section
-          className={cn(
-            "flex translate-y-0 flex-col gap-4 rounded-lg border p-6 transition-transform duration-300",
-            {
-              "h-0 translate-y-10 opacity-0": !enableCustom,
-            },
-          )}
-        >
-          <h2 className="text-lg font-semibold">
-            Ambos tipos de botones [Guardar contacto, Links]
-          </h2>
-
-          <article className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-            <FormField
-              control={form.control}
-              name="theme.buttons.fontWeight"
-              render={({ field }) => (
-                <FormItem>
-                  <Label>{t("themeCustomization.fonts.weight")}</Label>
-
-                  <Select value={field.value} onValueChange={field.onChange}>
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-
-                    <SelectContent>
-                      <SelectItem value="100">
-                        <FontFamilyIcon />
-                        {t("themeCustomization.fonts.weights.thin")}
-                      </SelectItem>
-                      <SelectItem value="300">
-                        <FontFamilyIcon />
-                        {t("themeCustomization.fonts.weights.light")}
-                      </SelectItem>
-
-                      <SelectItem value="normal">
-                        <FontFamilyIcon />
-                        {t("themeCustomization.fonts.weights.normal")}
-                      </SelectItem>
-
-                      <SelectItem value="500">
-                        <FontBoldIcon />
-                        {t("themeCustomization.fonts.weights.medium")}
-                      </SelectItem>
-
-                      <SelectItem value="bold">
-                        <FontBoldIcon />
-                        {t("themeCustomization.fonts.weights.bold")}
-                      </SelectItem>
-
-                      <SelectItem value="900">
-                        <FontBoldIcon />
-                        {t("themeCustomization.fonts.weights.black")}
-                      </SelectItem>
-                    </SelectContent>
-                  </Select>
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="theme.buttons.fontStyle"
-              render={({ field }) => (
-                <FormItem>
-                  <Label>{t("themeCustomization.fonts.style")}</Label>
-
-                  <Select value={field.value} onValueChange={field.onChange}>
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-
-                    <SelectContent>
-                      <SelectItem value="normal">
-                        <FontRomanIcon />
-                        {t("themeCustomization.fonts.styles.normal")}
-                      </SelectItem>
-
-                      <SelectItem value="italic">
-                        <FontItalicIcon />
-                        {t("themeCustomization.fonts.styles.italic")}
-                      </SelectItem>
-                    </SelectContent>
-                  </Select>
-                </FormItem>
-              )}
-            />
-          </article>
-
-          <FormField
-            control={form.control}
-            name="theme.buttons.variant"
-            render={({ field }) => (
-              <FormItem>
-                <Label>{t("themeCustomization.buttons.shape.label")}</Label>
-
-                <RadioGroup
-                  className="flex flex-wrap items-center gap-4 pt-2"
-                  value={field.value}
-                  onValueChange={field.onChange}
-                >
-                  <RadixRadioGroupItem
-                    value="pill"
-                    className="flex h-10 items-center justify-center gap-2 rounded-full border bg-muted px-8 text-sm ring-offset-2 transition-all duration-200 data-[state=checked]:ring data-[state=checked]:ring-ring"
-                  >
-                    {t("themeCustomization.buttons.shape.pill")}
-                  </RadixRadioGroupItem>
-
-                  <FormControl>
-                    <RadixRadioGroupItem
-                      value="rounded"
-                      className="flex h-10 items-center justify-center gap-2 rounded-xl border bg-muted px-8 text-sm ring-offset-2 transition-all duration-200 data-[state=checked]:ring data-[state=checked]:ring-ring"
-                    >
-                      {t("themeCustomization.buttons.shape.rounded")}
-                    </RadixRadioGroupItem>
-                  </FormControl>
-
-                  <FormControl>
-                    <RadixRadioGroupItem
-                      value="small-radius"
-                      className="flex h-10 items-center justify-center gap-2 rounded-sm border bg-muted px-8 text-sm ring-offset-2 transition-all duration-200 data-[state=checked]:ring data-[state=checked]:ring-ring"
-                    >
-                      {t("themeCustomization.buttons.shape.small")}
-                    </RadixRadioGroupItem>
-                  </FormControl>
-
-                  <p className="text-muted-foreground">or</p>
-
-                  <FormControl>
-                    <RadixRadioGroupItem
-                      value="square"
-                      className="flex h-10 items-center justify-center gap-2 border bg-muted px-8 text-sm ring-offset-2 transition-all duration-200 data-[state=checked]:ring data-[state=checked]:ring-ring"
-                    >
-                      {t("themeCustomization.buttons.shape.square")}
-                    </RadixRadioGroupItem>
-                  </FormControl>
-                </RadioGroup>
-              </FormItem>
-            )}
-          />
         </section>
       </form>
     </Form>

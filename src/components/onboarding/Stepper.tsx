@@ -1,16 +1,16 @@
 "use client";
 
+import { ShoppingCart, UserCircleDashed } from "@phosphor-icons/react";
 import {
   EnterIcon,
+  ExternalLinkIcon,
   IdCardIcon,
   LightningBoltIcon,
-  PersonIcon,
   RulerHorizontalIcon,
 } from "@radix-ui/react-icons";
 import { useTranslations } from "next-intl";
 import { useSelectedLayoutSegment } from "next/navigation";
 import { cn } from "~/lib/utils";
-import { ShoppingCart } from "@phosphor-icons/react";
 import { type OnboardingStep } from "~/server/db/schema";
 
 export const Stepper = () => {
@@ -35,12 +35,19 @@ export const Stepper = () => {
     },
     {
       key: "contact",
-      Selector: ({ className }) => (
-        <h2 className={cn("font-medium", className)}>{t("contact.title")}</h2>
-      ),
+      Selector: ({ className }) => <h2 className={cn("font-medium", className)}>Tu contacto</h2>,
       RenderIcon: ({ className }) => (
         <section className={cn("py-2", className)}>
-          <PersonIcon className="size-5 md:size-7" />
+          <UserCircleDashed className="size-5 md:size-8" />
+        </section>
+      ),
+    },
+    {
+      key: "links",
+      Selector: ({ className }) => <h2 className={cn("font-medium", className)}>Links</h2>,
+      RenderIcon: ({ className }) => (
+        <section className={cn("py-2", className)}>
+          <ExternalLinkIcon className="size-5 md:size-7" />
         </section>
       ),
     },
@@ -91,7 +98,7 @@ export const Stepper = () => {
   ];
 
   return (
-    <ul className="mx-auto grid w-full max-w-4xl grid-cols-6 justify-center gap-1 px-4 md:px-0">
+    <ul className="mx-auto grid w-full max-w-4xl grid-cols-7 justify-center gap-1 px-4 md:px-0">
       {stepsItems.map(({ key, RenderIcon, Selector }, idx) => (
         <li
           key={key}

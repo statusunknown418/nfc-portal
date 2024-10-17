@@ -17,7 +17,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
-import { OutlinedSocialIcons } from "~/components/ui/icons";
+import { PrettySocialIcons } from "~/components/ui/icons";
 import { cn } from "~/lib/utils";
 import { api, type RouterOutputs } from "~/trpc/react";
 import { EditSocialLink } from "./social-links/EditSocialLink";
@@ -72,10 +72,10 @@ export const SocialLinkItem = forwardRef<
       <section
         ref={ref}
         className={cn(
-          "flex cursor-pointer items-center justify-between gap-5 rounded-lg border bg-white p-2 pl-0 transition-all hover:shadow-lg",
+          "flex cursor-pointer items-center justify-between gap-5 rounded-lg border bg-white p-2 py-4 pl-0 transition-all hover:shadow-lg",
           data.socialType === "twitter" && "bg-neutral-100",
-          data.socialType === "linkedin" && "bg-cyan-50",
-          data.socialType === "facebook" && "bg-sky-50",
+          data.socialType === "linkedin" && "bg-sky-50",
+          data.socialType === "facebook" && "bg-blue-50",
           data.socialType === "instagram" && "bg-pink-50",
           data.socialType === "github" && "bg-gray-50",
           data.socialType === "tiktok" && "bg-violet-50",
@@ -91,8 +91,8 @@ export const SocialLinkItem = forwardRef<
           <DragHandleDots2Icon />
         </Button>
 
-        <div className="flex flex-col items-center gap-2">
-          <OutlinedSocialIcons type={data.socialType!} className="size-8" />
+        <div className="flex items-center gap-4">
+          <PrettySocialIcons type={data.socialType!} className="size-6" />
 
           <h2 className="flex-grow text-sm font-medium">{data.displayText}</h2>
         </div>

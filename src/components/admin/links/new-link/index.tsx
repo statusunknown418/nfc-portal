@@ -35,7 +35,7 @@ export function NewLinkDrawer({ username }: { username: string }) {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <Button variant="secondary_ghost" size="lg" className="h-14 text-sm">
-            <PlusIcon className="size-5" /> Other links
+            <PlusIcon className="size-5" /> Otros links
           </Button>
         </DialogTrigger>
 
@@ -57,7 +57,7 @@ export function NewLinkDrawer({ username }: { username: string }) {
     <Drawer open={open} onOpenChange={setOpen} shouldScaleBackground={false}>
       <DrawerTrigger asChild>
         <Button size={"lg"} variant="secondary_ghost" className="h-14 text-sm">
-          <PlusIcon className="size-5" /> Other links
+          <PlusIcon className="size-5" /> Otros links
         </Button>
       </DrawerTrigger>
 

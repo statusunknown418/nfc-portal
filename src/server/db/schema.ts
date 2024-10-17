@@ -175,6 +175,7 @@ export const onboardingKeys = [
   "contact",
   "work",
   "addresses",
+  "links",
   "portal",
   "nfc-card",
   "purchase",

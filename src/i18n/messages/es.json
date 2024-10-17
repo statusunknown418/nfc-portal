@@ -154,7 +154,7 @@
       "stepOneTitle": "Regístrate y elige tu nombre de usuario",
       "stepOneDescription": "Puedes registrarte usando un correo electrónico o una cuenta de redes sociales.",
       "stepTwoTitle": "Agrega tu información de contacto",
-      "stepTwoDescription": "Cualquier cosa que quieras compartir con tus contactos.",
+      "stepTwoDescription": "Puedes añadir cualquier dato personal o público que quieras compartir con tus contactos o potenciales clientes.",
       "stepThreeTitle": "Personaliza tu página",
       "stepThreeDescription": "Puedes agregar tyu propio contenido y personalizar tu página.",
       "stepFourTitle": "Personaliza tu tarjeta",
@@ -211,7 +211,7 @@
       "topText": "Vamos a alistar todo",
       "return": "Regresar a la app",
       "previousButton": "Paso anterior",
-      "nextButton": "Siguiente paso",
+      "nextButton": "Continuar",
       "completeOnboarding": "Completar el onboarding",
       "stepper": {
         "welcome": {

@@ -73,7 +73,12 @@ export const editViewerContactSchema = z.object({
   email: z
     .array(
       z.object({
-        link: z.string().email().optional(),
+        link: z
+          .string()
+          .email({
+            message: "Añade un email válido",
+          })
+          .optional(),
         type: z.enum(["PREF", "WORK", "HOME"]),
       }),
     )
