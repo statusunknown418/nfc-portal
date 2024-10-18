@@ -14,14 +14,12 @@ import {
 import { useMessages, useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
-import { Suspense } from "react";
 import AnimatedGridPattern from "~/components/magicui/animated-grid-pattern";
 import BlurFade from "~/components/magicui/blur-fade";
 import { BorderBeam } from "~/components/magicui/border-beam";
 import HyperText from "~/components/magicui/hyper-text";
 import Marquee from "~/components/magicui/marquee";
 import { DecideSession } from "~/components/shared/DecideSession";
-import { LocaleSwitcherWrapper } from "~/components/shared/locale-switcher";
 import {
   Accordion,
   AccordionContent,
@@ -41,6 +39,11 @@ import {
 import { Skeleton } from "~/components/ui/skeleton";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "~/components/ui/tooltip";
 import { cn } from "~/lib/utils";
+import contactInfo from "../../../public/landing/contact-info.png";
+import lastStep from "../../../public/landing/last-step.png";
+import portalCustom from "../../../public/landing/portal-custom.png";
+import selectUsername from "../../../public/landing/select-username.png";
+import cardCustom from "../../../public/landing/card-custom.png";
 
 export default function Home() {
   const t = useTranslations("landing");
@@ -61,6 +64,7 @@ export default function Home() {
         <header className="flex h-12 w-full max-w-7xl items-center justify-between rounded-full border border-border/50 bg-white px-2 py-2 backdrop-blur-lg backdrop-filter">
           <Link href={"/"} className="flex items-center gap-2 font-medium">
             <Image
+              priority
               src="/logo-light.png"
               alt="concard-logo"
               width={32}
@@ -83,9 +87,9 @@ export default function Home() {
               <Link href={"#pricing"}>{t("navbar.pricing")}</Link>
             </Button>
 
-            <Suspense>
-              <LocaleSwitcherWrapper />
-            </Suspense>
+            <Button asChild variant="ghost">
+              <Link href={"#faq"}>Preguntas frecuentes</Link>
+            </Button>
           </ul>
 
           <div className="flex w-28 max-w-28 justify-end">
@@ -100,12 +104,9 @@ export default function Home() {
 
       <AnimatedGridPattern
         duration={2}
-        repeatDelay={0.5}
+        repeatDelay={0}
         numSquares={50}
-        className={cn(
-          "[mask-image:radial-gradient(800px_circle_at_center,white,transparent)]",
-          "absolute inset-0 -z-10 h-svh w-svw fill-indigo-500 opacity-30",
-        )}
+        className={cn("absolute inset-0 -z-10 h-svh w-svw fill-indigo-500 opacity-30")}
       />
 
       <div
@@ -121,7 +122,7 @@ export default function Home() {
             </BlurFade>
 
             <BlurFade>
-              <h1 className="text-center text-5xl font-bold tracking-tight sm:text-6xl md:text-7xl">
+              <h1 className="text-center text-5xl font-extrabold tracking-tight sm:text-6xl md:text-7xl">
                 {t("hero.heading")}
               </h1>
             </BlurFade>
@@ -167,9 +168,11 @@ export default function Home() {
           </BlurFade>
         </article>
 
-        <Button variant="ghost">
-          <ArrowDownIcon />
-          {t("hero.learnMore")}
+        <Button variant="ghost" asChild>
+          <Link href={"#customers"}>
+            <ArrowDownIcon />
+            {t("hero.learnMore")}
+          </Link>
         </Button>
       </div>
 
@@ -179,13 +182,13 @@ export default function Home() {
             {t("testimonials.heading")}
           </h3>
 
-          <Marquee pauseOnHover className="mt-5 [--duration:30s]">
+          <Marquee pauseOnHover className="mt-5 [--duration:50s]">
             {firstRow.map((review) => (
               <ReviewCard key={review.username} {...review} />
             ))}
           </Marquee>
 
-          <Marquee reverse pauseOnHover className="[--duration:30s]">
+          <Marquee reverse pauseOnHover className="[--duration:50s]">
             {secondRow.map((review) => (
               <ReviewCard key={review.username} {...review} />
             ))}
@@ -200,7 +203,7 @@ export default function Home() {
         </article>
       </section>
 
-      <div className="-mt-10 flex min-h-screen items-center rounded-t-[24px] bg-gradient-to-br from-neutral-950 via-neutral-800 to-neutral-950 p-4 py-20 text-neutral-200">
+      <div className="-mt-10 flex min-h-screen items-center rounded-t-[24px] bg-gradient-to-br from-neutral-950 via-neutral-800 to-neutral-950 p-4 pb-8 pt-20 text-neutral-200">
         <section
           id="how-it-works"
           className="mx-auto flex w-full max-w-7xl flex-col gap-10 md:gap-14"
@@ -224,9 +227,10 @@ export default function Home() {
                 <Image
                   width={600}
                   height={300}
+                  placeholder="blur"
                   className="h-[300px] object-contain"
                   alt="select-username"
-                  src="/landing/select-username.png"
+                  src={selectUsername}
                 />
               </div>
             </article>
@@ -243,9 +247,10 @@ export default function Home() {
                 <Image
                   width={600}
                   height={300}
+                  placeholder="blur"
                   className="h-[300px] object-contain"
                   alt="add-contact-info"
-                  src="/landing/contact-info.png"
+                  src={contactInfo}
                 />
               </div>
             </article>
@@ -262,9 +267,10 @@ export default function Home() {
                 <Image
                   width={600}
                   height={300}
+                  placeholder="blur"
                   className="h-[300px] object-contain"
                   alt="add-contact-info"
-                  src="/landing/portal-custom.png"
+                  src={portalCustom}
                 />
               </div>
             </article>
@@ -281,14 +287,15 @@ export default function Home() {
                 <Image
                   width={600}
                   height={300}
+                  placeholder="blur"
                   className="h-[300px] object-contain"
-                  alt="add-contact-info"
-                  src="/landing/contact-info.png"
+                  alt="customize-card"
+                  src={cardCustom}
                 />
               </div>
             </article>
 
-            <article className="border-none md:col-span-2">
+            <article className="flex flex-col items-center border-none text-center md:col-span-2">
               <Badge variant="secondary">5</Badge>
 
               <section>
@@ -298,14 +305,15 @@ export default function Home() {
                 </p>
               </section>
 
-              <div
-                className="relative h-[250px] w-full rounded-xl bg-contain bg-center pb-10"
-                style={{
-                  backgroundImage: `url(/landing/last-step.png)`,
-                  backgroundPosition: "top",
-                  backgroundRepeat: "repeat-x",
-                }}
-              ></div>
+              <div className="relative h-[300px] w-full rounded-xl">
+                <Image
+                  fill
+                  placeholder="blur"
+                  className="h-[300px] w-full object-contain"
+                  alt="last-step"
+                  src={lastStep}
+                />
+              </div>
             </article>
           </div>
         </section>
@@ -313,10 +321,10 @@ export default function Home() {
 
       <section
         id="features"
-        className="flex items-center justify-center px-4 py-10 md:px-10 md:pb-20"
+        className="flex items-center justify-center px-4 py-10 md:px-10 md:py-24"
       >
-        <article className="w-full max-w-7xl space-y-8 rounded-[32px]">
-          <div className="space-y-2">
+        <article className="w-full max-w-7xl space-y-10 rounded-[32px]">
+          <div className="flex flex-col items-center gap-2 text-center">
             <p className="font-semibold text-indigo-600">{t("features.subheading")}</p>
 
             <h2 className="text-4xl font-semibold tracking-tight">{t("features.heading")}</h2>
@@ -324,7 +332,9 @@ export default function Home() {
             <p className="max-w-prose text-lg text-muted-foreground">{t("features.description")}</p>
           </div>
 
-          <section className="grid min-h-[800px] grid-cols-1 gap-4 *:flex *:flex-col *:gap-6 *:rounded-[24px] *:p-6 lg:grid-cols-12 lg:grid-rows-4">
+          <SuperGrid />
+
+          {/* <section className="grid min-h-[800px] grid-cols-1 gap-4 *:flex *:flex-col *:gap-6 *:rounded-[24px] *:p-6 lg:grid-cols-12 lg:grid-rows-4">
             <article className="group border border-indigo-300 bg-indigo-100 text-indigo-900 lg:col-span-8 lg:row-span-2">
               <div>graphic 1</div>
 
@@ -390,7 +400,7 @@ export default function Home() {
                 <span>{t("features.sixteenthGraphic")}</span>
               </h2>
             </article>
-          </section>
+          </section> */}
         </article>
       </section>
 
@@ -495,7 +505,7 @@ export default function Home() {
 
       <section
         id="pricing"
-        className="-mt-10 flex items-center justify-center bg-white bg-gradient-to-t px-4 py-10 md:min-h-[950px] md:px-10 md:pb-20"
+        className="-mt-10 flex items-center justify-center bg-white bg-gradient-to-t px-4 py-12 md:min-h-[950px] md:px-10 md:pb-24 md:pt-4"
       >
         <article className="w-full max-w-7xl space-y-14 rounded-[32px]">
           <div className="flex flex-col items-center justify-center space-y-2 text-center">
@@ -679,7 +689,7 @@ export default function Home() {
             </p>
           </header>
 
-          <Accordion type="single" collapsible className="mt-8 w-full text-left">
+          <Accordion type="single" collapsible className="mt-8 w-full !text-left">
             <AccordionItem value="explain-nfc">
               <AccordionTrigger className="h-20 text-2xl font-medium md:h-20">
                 {t("faq.questionOne")}
@@ -825,5 +835,124 @@ const ReviewCard = ({
 
       <blockquote className="mt-3 text-sm">{body}</blockquote>
     </figure>
+  );
+};
+
+const SuperGrid = () => {
+  return (
+    <section className="mx-auto grid max-w-2xl gap-4 sm:mt-16 lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-2">
+      <article className="relative lg:row-span-2">
+        <div className="absolute inset-px rounded-lg bg-white lg:rounded-l-[2rem]"></div>
+
+        <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] p-1 lg:rounded-l-[calc(2rem+1px)]">
+          <header className="px-6 pb-3 pt-8 sm:px-10 sm:pb-0">
+            <p className="mt-2 text-xl font-semibold max-lg:text-center">
+              No se necesitan aplicaciones
+            </p>
+
+            <p className="mt-2 max-w-lg text-base/6 text-gray-600 max-lg:text-center">
+              ConCard funciona con todos los dispositivos iOS y la mayoría de los dispositivos
+              Android (los dispositivos que soporten Google Pay y/o Apple Pay SON compatibles con
+              ConCard).
+            </p>
+          </header>
+
+          <div className="relative min-h-[30rem] w-full grow [container-type:inline-size] max-lg:mx-auto max-lg:max-w-sm">
+            <div className="absolute inset-x-8 bottom-0 top-10 overflow-hidden rounded-t-[12cqw] border-x-[3cqw] border-t-[3cqw] border-gray-700 bg-gray-900 shadow-2xl">
+              <img
+                className="size-full object-cover object-top"
+                src="https://tailwindui.com/plus/img/component-images/bento-03-mobile-friendly.png"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+        <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 lg:rounded-l-[2rem]"></div>
+      </article>
+
+      <article className="relative max-lg:row-start-1">
+        <div className="absolute inset-px rounded-lg bg-white max-lg:rounded-t-[2rem]"></div>
+
+        <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] p-1 max-lg:rounded-t-[calc(2rem+1px)]">
+          <header className="px-6 pb-3 pt-8 sm:px-10 sm:pb-0">
+            <p className="mt-2 text-xl font-semibold max-lg:text-center">
+              Altamente personalizable
+            </p>
+
+            <p className="mt-2 max-w-lg text-base/6 text-gray-600 max-lg:text-center">
+              Ofrecemos una amplia gama de opciones para que tu portal y tarjeta de presentación
+              sean verdaderamente tuyos y únicos.
+            </p>
+          </header>
+
+          <div className="flex flex-1 items-center justify-center px-8 max-lg:pb-12 max-lg:pt-10 sm:px-10 lg:pb-2">
+            <img
+              className="w-full max-lg:max-w-xs"
+              src="https://tailwindui.com/plus/img/component-images/bento-03-performance.png"
+              alt=""
+            />
+          </div>
+        </div>
+
+        <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 max-lg:rounded-t-[2rem]"></div>
+      </article>
+
+      <article className="relative max-lg:row-start-3 lg:col-start-2 lg:row-start-2">
+        <div className="absolute inset-px rounded-lg bg-white"></div>
+        <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] p-1">
+          <header className="px-6 pb-3 pt-8 sm:px-10 sm:pb-0">
+            <HyperText className="mt-2 text-xl font-semibold max-lg:text-center" text="Seguridad" />
+
+            <p className="mt-2 max-w-lg text-base/6 text-gray-600 max-lg:text-center">
+              Tu información personal está asegurada, nadie podrá ver tu contacto a menos que
+              acerques una de tus tarjetas a su teléfono.
+            </p>
+          </header>
+
+          <div className="flex flex-1 items-center [container-type:inline-size] max-lg:py-6 lg:pb-2">
+            <img
+              className="h-[min(152px,40cqw)] object-cover object-center"
+              src="https://tailwindui.com/plus/img/component-images/bento-03-security.png"
+              alt=""
+            />
+          </div>
+        </div>
+
+        <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5"></div>
+      </article>
+
+      <article className="relative lg:row-span-2">
+        <div className="absolute inset-px rounded-lg bg-white max-lg:rounded-b-[2rem] lg:rounded-r-[2rem]"></div>
+
+        <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] p-1 max-lg:rounded-b-[calc(2rem+1px)] lg:rounded-r-[calc(2rem+1px)]">
+          <header className="px-6 pb-3 pt-8 sm:px-10 sm:pb-0">
+            <p className="mt-2 text-xl font-semibold max-lg:text-center">
+              Extremadamente fácil de usar
+            </p>
+
+            <p className="mt-2 max-w-lg text-base/6 text-gray-600 max-lg:text-center">
+              Configura tu portal y tarjeta en pocos minutos y destaca entre la competencia al
+              mostrarte de una forma única y profesional, puedes compartir tu URL de ConCard donde
+              quieras!
+            </p>
+          </header>
+
+          <div className="relative min-h-[30rem] w-full grow">
+            <div className="absolute bottom-0 left-10 right-0 top-10 overflow-hidden rounded-tl-xl bg-gray-900 shadow-2xl">
+              <div className="flex bg-gray-800/40 ring-1 ring-white/5">
+                <div className="-mb-px flex text-sm font-medium leading-6 text-gray-400">
+                  <div className="border-b border-r border-b-white/20 border-r-white/10 bg-white/5 px-4 py-2 text-white">
+                    NotificationSetting.jsx
+                  </div>
+                  <div className="border-r border-gray-600/10 px-4 py-2">App.jsx</div>
+                </div>
+              </div>
+              <div className="px-6 pb-14 pt-6">{/* Your code example */}</div>
+            </div>
+          </div>
+        </div>
+        <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 max-lg:rounded-b-[2rem] lg:rounded-r-[2rem]"></div>
+      </article>
+    </section>
   );
 };
