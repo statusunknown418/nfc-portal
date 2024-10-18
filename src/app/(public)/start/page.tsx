@@ -6,6 +6,12 @@ import BlurFade from "~/components/magicui/blur-fade";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import FlickeringGrid from "~/components/ui/flickering-grid";
+import contactInfo from "../../../../public/landing/contact-info.png";
+import lastStep from "../../../../public/landing/last-step.png";
+import portalCustom from "../../../../public/landing/portal-custom.png";
+import selectUsername from "../../../../public/landing/select-username.png";
+import cardCustom from "../../../../public/landing/card-custom.png";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Start - ConCard",
@@ -107,13 +113,13 @@ export default function StartNowPage() {
         </BlurFade>
       </section>
 
-      <div className="flex items-center bg-gradient-to-br from-neutral-950 via-neutral-800 to-neutral-950 p-4 py-20 text-neutral-200">
+      <div className="flex items-center bg-gradient-to-br from-neutral-950 via-neutral-800 to-neutral-950 p-4 pt-20 text-neutral-200">
         <section
           id="how-it-works"
-          className="mx-auto flex w-full max-w-7xl flex-col items-center gap-10 text-center md:gap-14"
+          className="mx-auto flex w-full max-w-7xl flex-col gap-10 md:gap-14"
         >
           <header className="space-y-2 px-4 md:px-6">
-            <p className="font-medium text-violet-400">{t("stepByStep.title")}</p>
+            <p className="font-medium text-emerald-400">{t("stepByStep.title")}</p>
             <h2 className="text-4xl font-semibold tracking-tight">{t("stepByStep.subtitle")}</h2>
             <p className="text-lg text-muted-foreground">{t("stepByStep.subheading")}</p>
           </header>
@@ -127,8 +133,15 @@ export default function StartNowPage() {
                 <p className="text-muted-foreground">{t("stepByStep.stepOneDescription")}</p>
               </section>
 
-              <div className="flex h-52 w-full items-center justify-center bg-neutral-700">
-                add graphic
+              <div className="relative -mt-10 h-[250px] w-full rounded-xl bg-center object-center">
+                <Image
+                  width={600}
+                  height={300}
+                  placeholder="blur"
+                  className="h-[300px] object-contain"
+                  alt="select-username"
+                  src={selectUsername}
+                />
               </div>
             </article>
 
@@ -140,8 +153,15 @@ export default function StartNowPage() {
                 <p className="text-muted-foreground">{t("stepByStep.stepTwoDescription")}</p>
               </section>
 
-              <div className="flex h-52 w-full items-center justify-center bg-neutral-700">
-                add graphic
+              <div className="relative h-[250px] w-full rounded-xl bg-center object-center pb-10">
+                <Image
+                  width={600}
+                  height={300}
+                  placeholder="blur"
+                  className="h-[300px] object-contain"
+                  alt="add-contact-info"
+                  src={contactInfo}
+                />
               </div>
             </article>
 
@@ -153,8 +173,15 @@ export default function StartNowPage() {
                 <p className="text-muted-foreground">{t("stepByStep.stepThreeDescription")}</p>
               </section>
 
-              <div className="flex h-52 w-full items-center justify-center bg-neutral-700">
-                add graphic
+              <div className="relative h-[250px] w-full rounded-xl bg-center object-center pb-10">
+                <Image
+                  width={600}
+                  height={300}
+                  placeholder="blur"
+                  className="h-[300px] object-contain"
+                  alt="add-contact-info"
+                  src={portalCustom}
+                />
               </div>
             </article>
 
@@ -166,8 +193,15 @@ export default function StartNowPage() {
                 <p className="text-muted-foreground">{t("stepByStep.stepFourDescription")}</p>
               </section>
 
-              <div className="flex h-52 w-full items-center justify-center bg-neutral-700">
-                add graphic
+              <div className="relative h-[250px] w-full rounded-xl bg-center object-center pb-10">
+                <Image
+                  width={600}
+                  height={300}
+                  placeholder="blur"
+                  className="h-[300px] object-contain"
+                  alt="customize-card"
+                  src={cardCustom}
+                />
               </div>
             </article>
 
@@ -176,11 +210,19 @@ export default function StartNowPage() {
 
               <section>
                 <h3 className="text-lg font-medium">{t("stepByStep.stepFiveTitle")}</h3>
-                <p className="text-muted-foreground">{t("stepByStep.stepFiveDescription")}</p>
+                <p className="max-w-prose text-muted-foreground">
+                  {t("stepByStep.stepFiveDescription")}
+                </p>
               </section>
 
-              <div className="flex h-52 w-full items-center justify-center bg-neutral-700">
-                add graphic
+              <div className="relative h-[300px] w-full rounded-xl">
+                <Image
+                  fill
+                  placeholder="blur"
+                  className="h-[300px] w-full object-contain"
+                  alt="last-step"
+                  src={lastStep}
+                />
               </div>
             </article>
           </div>

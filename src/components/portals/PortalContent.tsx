@@ -106,7 +106,7 @@ export const PortalContent = ({
         >
           <Image
             fill
-            loading="eager"
+            priority
             src={portal.data.image ?? ""}
             alt="portal-avatar"
             className="object-cover"
